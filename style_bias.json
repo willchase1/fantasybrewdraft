@@ -1,0 +1,30 @@
+{
+  "Belgian": {
+    "styles": [
+      "Belgian Blonde / Tripel",
+      "Bi\u00e8re de Garde",
+      "Belgian Dubbel",
+      "Belgian Dark Strong",
+      "Saison"
+    ],
+    "weight": 1.5
+  },
+  "British": {
+    "styles": [
+      "Best Bitter / ESB",
+      "British Brown / Mild",
+      "British Strong Ale",
+      "Robust Porter"
+    ],
+    "weight": 1.3
+  },
+  "Ringer": {
+    "styles": [
+      "Specialty Belgian",
+      "Specialty British",
+      "Experimental / Fruit",
+      "Wood-aged Specialty"
+    ],
+    "weight": 1.2
+  }
+}

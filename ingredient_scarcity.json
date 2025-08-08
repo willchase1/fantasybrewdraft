@@ -1,0 +1,582 @@
+[
+  {
+    "Ingredient": "Brown Sugar",
+    "Style Coverage": 1,
+    "Scarcity Score": 1.0
+  },
+  {
+    "Ingredient": "Candi Sugar, Amber",
+    "Style Coverage": 1,
+    "Scarcity Score": 1.0
+  },
+  {
+    "Ingredient": "Candi Sugar, Clear",
+    "Style Coverage": 1,
+    "Scarcity Score": 1.0
+  },
+  {
+    "Ingredient": "Candi Sugar, Dark",
+    "Style Coverage": 1,
+    "Scarcity Score": 1.0
+  },
+  {
+    "Ingredient": "Cane (or Beet) Sugar",
+    "Style Coverage": 1,
+    "Scarcity Score": 1.0
+  },
+  {
+    "Ingredient": "Corn Sugar (Dextrose)",
+    "Style Coverage": 1,
+    "Scarcity Score": 1.0
+  },
+  {
+    "Ingredient": "Dememera Sugar",
+    "Style Coverage": 1,
+    "Scarcity Score": 1.0
+  },
+  {
+    "Ingredient": "Honey",
+    "Style Coverage": 1,
+    "Scarcity Score": 1.0
+  },
+  {
+    "Ingredient": "Lyle's Golden Syrup (Invert Sugar)",
+    "Style Coverage": 1,
+    "Scarcity Score": 1.0
+  },
+  {
+    "Ingredient": "Milk Sugar (Lactose)",
+    "Style Coverage": 1,
+    "Scarcity Score": 1.0
+  },
+  {
+    "Ingredient": "Turbinado Sugar",
+    "Style Coverage": 1,
+    "Scarcity Score": 1.0
+  },
+  {
+    "Ingredient": "Amber Malt Extract",
+    "Style Coverage": 1,
+    "Scarcity Score": 1.0
+  },
+  {
+    "Ingredient": "Dark Malt Extract",
+    "Style Coverage": 1,
+    "Scarcity Score": 1.0
+  },
+  {
+    "Ingredient": "Extra Light/Pils Malt Extract",
+    "Style Coverage": 1,
+    "Scarcity Score": 1.0
+  },
+  {
+    "Ingredient": "Golden Malt Extract",
+    "Style Coverage": 1,
+    "Scarcity Score": 1.0
+  },
+  {
+    "Ingredient": "Golden Promise",
+    "Style Coverage": 1,
+    "Scarcity Score": 1.0
+  },
+  {
+    "Ingredient": "Light Malt Extract",
+    "Style Coverage": 1,
+    "Scarcity Score": 1.0
+  },
+  {
+    "Ingredient": "Marris Otter",
+    "Style Coverage": 1,
+    "Scarcity Score": 1.0
+  },
+  {
+    "Ingredient": "Munich, Dark",
+    "Style Coverage": 1,
+    "Scarcity Score": 1.0
+  },
+  {
+    "Ingredient": "Munich Malt Extract",
+    "Style Coverage": 1,
+    "Scarcity Score": 1.0
+  },
+  {
+    "Ingredient": "Munich, Light",
+    "Style Coverage": 1,
+    "Scarcity Score": 1.0
+  },
+  {
+    "Ingredient": "Red X",
+    "Style Coverage": 1,
+    "Scarcity Score": 1.0
+  },
+  {
+    "Ingredient": "Barley, Roasted",
+    "Style Coverage": 1,
+    "Scarcity Score": 1.0
+  },
+  {
+    "Ingredient": "Black Malt",
+    "Style Coverage": 1,
+    "Scarcity Score": 1.0
+  },
+  {
+    "Ingredient": "Blackprinze Malt",
+    "Style Coverage": 1,
+    "Scarcity Score": 1.0
+  },
+  {
+    "Ingredient": "Chocolate Malt",
+    "Style Coverage": 1,
+    "Scarcity Score": 1.0
+  },
+  {
+    "Ingredient": "Alt (WLP023, WY1007, G02)",
+    "Style Coverage": 1,
+    "Scarcity Score": 1.0
+  },
+  {
+    "Ingredient": "Conan (WLP095, OYL-052, A04, LalBrew New England [Dry])",
+    "Style Coverage": 1,
+    "Scarcity Score": 1.0
+  },
+  {
+    "Ingredient": "Farmhouse (WY3726, OYL-217, Dry)",
+    "Style Coverage": 1,
+    "Scarcity Score": 1.0
+  },
+  {
+    "Ingredient": "Hefewiezen (WLP300, WY3068, G01)",
+    "Style Coverage": 1,
+    "Scarcity Score": 1.0
+  },
+  {
+    "Ingredient": "Hornindal Kveik (WLP521, OYL-091)",
+    "Style Coverage": 1,
+    "Scarcity Score": 1.0
+  },
+  {
+    "Ingredient": "Kolsch (WLP029, WY2565, G03, K-97)",
+    "Style Coverage": 1,
+    "Scarcity Score": 1.0
+  },
+  {
+    "Ingredient": "London III (WLP013, A38, WY1318)",
+    "Style Coverage": 1,
+    "Scarcity Score": 1.0
+  },
+  {
+    "Ingredient": "Lutra Kveik (OYL-071, OYL-071DRY)",
+    "Style Coverage": 1,
+    "Scarcity Score": 1.0
+  },
+  {
+    "Ingredient": "Pomona (Lalbrew Y067) (Dry)",
+    "Style Coverage": 1,
+    "Scarcity Score": 1.0
+  },
+  {
+    "Ingredient": "Philly Sour or Sourvisiae (Dry)",
+    "Style Coverage": 1,
+    "Scarcity Score": 1.0
+  },
+  {
+    "Ingredient": "Saison (WLP565, WY3724)",
+    "Style Coverage": 1,
+    "Scarcity Score": 1.0
+  },
+  {
+    "Ingredient": "Verdant IPA (Dry)",
+    "Style Coverage": 1,
+    "Scarcity Score": 1.0
+  },
+  {
+    "Ingredient": "Voss Kveik (A43, OYL-061, Dry)",
+    "Style Coverage": 1,
+    "Scarcity Score": 1.0
+  },
+  {
+    "Ingredient": "Apricots",
+    "Style Coverage": 1,
+    "Scarcity Score": 1.0
+  },
+  {
+    "Ingredient": "Blackberries",
+    "Style Coverage": 1,
+    "Scarcity Score": 1.0
+  },
+  {
+    "Ingredient": "Blueberries",
+    "Style Coverage": 1,
+    "Scarcity Score": 1.0
+  },
+  {
+    "Ingredient": "Raspberries",
+    "Style Coverage": 1,
+    "Scarcity Score": 1.0
+  },
+  {
+    "Ingredient": "Czech Lager (WLP802, WY2001, L28)",
+    "Style Coverage": 2,
+    "Scarcity Score": 0.5
+  },
+  {
+    "Ingredient": "German Lager (WLP830, WY2124, L13, 34/70)",
+    "Style Coverage": 2,
+    "Scarcity Score": 0.5
+  },
+  {
+    "Ingredient": "Mexican Lager (WLP940, OYL-113, L09)",
+    "Style Coverage": 2,
+    "Scarcity Score": 0.5
+  },
+  {
+    "Ingredient": "Munich Lager (WLP838, WY2308, Dry)",
+    "Style Coverage": 2,
+    "Scarcity Score": 0.5
+  },
+  {
+    "Ingredient": "NovaLager (Lalbrew Y055) (Dry)",
+    "Style Coverage": 2,
+    "Scarcity Score": 0.5
+  },
+  {
+    "Ingredient": "San Fran Lager (WLP810, L05, WY2112)",
+    "Style Coverage": 2,
+    "Scarcity Score": 0.5
+  },
+  {
+    "Ingredient": "Amarillo",
+    "Style Coverage": 2,
+    "Scarcity Score": 0.5
+  },
+  {
+    "Ingredient": "Ariana",
+    "Style Coverage": 2,
+    "Scarcity Score": 0.5
+  },
+  {
+    "Ingredient": "Azacca",
+    "Style Coverage": 2,
+    "Scarcity Score": 0.5
+  },
+  {
+    "Ingredient": "BRU-1",
+    "Style Coverage": 2,
+    "Scarcity Score": 0.5
+  },
+  {
+    "Ingredient": "Calista",
+    "Style Coverage": 2,
+    "Scarcity Score": 0.5
+  },
+  {
+    "Ingredient": "Cascade",
+    "Style Coverage": 2,
+    "Scarcity Score": 0.5
+  },
+  {
+    "Ingredient": "Centennial",
+    "Style Coverage": 2,
+    "Scarcity Score": 0.5
+  },
+  {
+    "Ingredient": "Challenger",
+    "Style Coverage": 2,
+    "Scarcity Score": 0.5
+  },
+  {
+    "Ingredient": "Citra",
+    "Style Coverage": 2,
+    "Scarcity Score": 0.5
+  },
+  {
+    "Ingredient": "East Kent Goldings",
+    "Style Coverage": 2,
+    "Scarcity Score": 0.5
+  },
+  {
+    "Ingredient": "El Dorado",
+    "Style Coverage": 2,
+    "Scarcity Score": 0.5
+  },
+  {
+    "Ingredient": "Ella",
+    "Style Coverage": 2,
+    "Scarcity Score": 0.5
+  },
+  {
+    "Ingredient": "Fuggle",
+    "Style Coverage": 2,
+    "Scarcity Score": 0.5
+  },
+  {
+    "Ingredient": "Galaxy",
+    "Style Coverage": 2,
+    "Scarcity Score": 0.5
+  },
+  {
+    "Ingredient": "Hallertau Mittelfrueh",
+    "Style Coverage": 2,
+    "Scarcity Score": 0.5
+  },
+  {
+    "Ingredient": "Hallertau Tradition",
+    "Style Coverage": 2,
+    "Scarcity Score": 0.5
+  },
+  {
+    "Ingredient": "Idaho 7",
+    "Style Coverage": 2,
+    "Scarcity Score": 0.5
+  },
+  {
+    "Ingredient": "Krush (HBC 586)",
+    "Style Coverage": 2,
+    "Scarcity Score": 0.5
+  },
+  {
+    "Ingredient": "Kohatu",
+    "Style Coverage": 2,
+    "Scarcity Score": 0.5
+  },
+  {
+    "Ingredient": "Lemondrop",
+    "Style Coverage": 2,
+    "Scarcity Score": 0.5
+  },
+  {
+    "Ingredient": "Liberty",
+    "Style Coverage": 2,
+    "Scarcity Score": 0.5
+  },
+  {
+    "Ingredient": "Loral",
+    "Style Coverage": 2,
+    "Scarcity Score": 0.5
+  },
+  {
+    "Ingredient": "Lotus",
+    "Style Coverage": 2,
+    "Scarcity Score": 0.5
+  },
+  {
+    "Ingredient": "Magnum",
+    "Style Coverage": 2,
+    "Scarcity Score": 0.5
+  },
+  {
+    "Ingredient": "Mosaic",
+    "Style Coverage": 2,
+    "Scarcity Score": 0.5
+  },
+  {
+    "Ingredient": "Motueka",
+    "Style Coverage": 2,
+    "Scarcity Score": 0.5
+  },
+  {
+    "Ingredient": "Nectaron",
+    "Style Coverage": 2,
+    "Scarcity Score": 0.5
+  },
+  {
+    "Ingredient": "Nelson Sauvin",
+    "Style Coverage": 2,
+    "Scarcity Score": 0.5
+  },
+  {
+    "Ingredient": "Progress",
+    "Style Coverage": 2,
+    "Scarcity Score": 0.5
+  },
+  {
+    "Ingredient": "Rakau",
+    "Style Coverage": 2,
+    "Scarcity Score": 0.5
+  },
+  {
+    "Ingredient": "Riwaka",
+    "Style Coverage": 2,
+    "Scarcity Score": 0.5
+  },
+  {
+    "Ingredient": "Sabro",
+    "Style Coverage": 2,
+    "Scarcity Score": 0.5
+  },
+  {
+    "Ingredient": "Saphir",
+    "Style Coverage": 2,
+    "Scarcity Score": 0.5
+  },
+  {
+    "Ingredient": "Simcoe",
+    "Style Coverage": 2,
+    "Scarcity Score": 0.5
+  },
+  {
+    "Ingredient": "Sorachi Ace",
+    "Style Coverage": 2,
+    "Scarcity Score": 0.5
+  },
+  {
+    "Ingredient": "Strata",
+    "Style Coverage": 2,
+    "Scarcity Score": 0.5
+  },
+  {
+    "Ingredient": "Strisselspalt",
+    "Style Coverage": 2,
+    "Scarcity Score": 0.5
+  },
+  {
+    "Ingredient": "Styrian Goldings",
+    "Style Coverage": 2,
+    "Scarcity Score": 0.5
+  },
+  {
+    "Ingredient": "Tettnang / Tettnanger",
+    "Style Coverage": 2,
+    "Scarcity Score": 0.5
+  },
+  {
+    "Ingredient": "Topaz",
+    "Style Coverage": 2,
+    "Scarcity Score": 0.5
+  },
+  {
+    "Ingredient": "Triumph",
+    "Style Coverage": 2,
+    "Scarcity Score": 0.5
+  },
+  {
+    "Ingredient": "Belgian Ardennes (WY3522, B45)",
+    "Style Coverage": 2,
+    "Scarcity Score": 0.5
+  },
+  {
+    "Ingredient": "Wheat Malt Extract",
+    "Style Coverage": 2,
+    "Scarcity Score": 0.5
+  },
+  {
+    "Ingredient": "White Wheat",
+    "Style Coverage": 2,
+    "Scarcity Score": 0.5
+  },
+  {
+    "Ingredient": "Abbey Ale (WLP540, EY1762, BE-256)",
+    "Style Coverage": 2,
+    "Scarcity Score": 0.5
+  },
+  {
+    "Ingredient": "Dry English Ale (WLP007, WY1098, A10)",
+    "Style Coverage": 2,
+    "Scarcity Score": 0.5
+  },
+  {
+    "Ingredient": "East Coast Ale (WLP008, A15)",
+    "Style Coverage": 2,
+    "Scarcity Score": 0.5
+  },
+  {
+    "Ingredient": "English Ale (WLP002, WY1968, S-04, A09)",
+    "Style Coverage": 2,
+    "Scarcity Score": 0.5
+  },
+  {
+    "Ingredient": "Scottish Ale (WLP028, WY1728, A31)",
+    "Style Coverage": 2,
+    "Scarcity Score": 0.5
+  },
+  {
+    "Ingredient": "Trappist Ale (WLP500, WY1214, B48)",
+    "Style Coverage": 2,
+    "Scarcity Score": 0.5
+  },
+  {
+    "Ingredient": "American (or North American) Vienna",
+    "Style Coverage": 3,
+    "Scarcity Score": 0.3333333333333333
+  },
+  {
+    "Ingredient": "German Vienna",
+    "Style Coverage": 3,
+    "Scarcity Score": 0.3333333333333333
+  },
+  {
+    "Ingredient": "Perle",
+    "Style Coverage": 3,
+    "Scarcity Score": 0.3333333333333333
+  },
+  {
+    "Ingredient": "German Ale (WY1007, G02)",
+    "Style Coverage": 3,
+    "Scarcity Score": 0.3333333333333333
+  },
+  {
+    "Ingredient": "American Ale (WLP001 [liquid or dry], WY1056, US-05, A07)",
+    "Style Coverage": 3,
+    "Scarcity Score": 0.3333333333333333
+  },
+  {
+    "Ingredient": "Belgian Ale (WLP570, WY1388)",
+    "Style Coverage": 3,
+    "Scarcity Score": 0.3333333333333333
+  },
+  {
+    "Ingredient": "American (or North American) Pilsner",
+    "Style Coverage": 4,
+    "Scarcity Score": 0.25
+  },
+  {
+    "Ingredient": "Belgian Pale",
+    "Style Coverage": 4,
+    "Scarcity Score": 0.25
+  },
+  {
+    "Ingredient": "Belgian Pilsner",
+    "Style Coverage": 4,
+    "Scarcity Score": 0.25
+  },
+  {
+    "Ingredient": "English Pale Ale",
+    "Style Coverage": 4,
+    "Scarcity Score": 0.25
+  },
+  {
+    "Ingredient": "Floor Malted Pilsner",
+    "Style Coverage": 4,
+    "Scarcity Score": 0.25
+  },
+  {
+    "Ingredient": "German Pale Ale",
+    "Style Coverage": 4,
+    "Scarcity Score": 0.25
+  },
+  {
+    "Ingredient": "German Pilsner",
+    "Style Coverage": 4,
+    "Scarcity Score": 0.25
+  },
+  {
+    "Ingredient": "Pale Malt Extract",
+    "Style Coverage": 4,
+    "Scarcity Score": 0.25
+  },
+  {
+    "Ingredient": "Pale Malt (2 Row)",
+    "Style Coverage": 4,
+    "Scarcity Score": 0.25
+  },
+  {
+    "Ingredient": "Pale Malt (6 Row)",
+    "Style Coverage": 4,
+    "Scarcity Score": 0.25
+  },
+  {
+    "Ingredient": "Saaz",
+    "Style Coverage": 4,
+    "Scarcity Score": 0.25
+  }
+]

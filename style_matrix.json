@@ -1,0 +1,485 @@
+{
+  "German Pils / Helles": {
+    "Base Malt": [
+      "American (or North American) Pilsner",
+      "American (or North American) Vienna",
+      "Belgian Pale",
+      "Belgian Pilsner",
+      "English Pale Ale",
+      "Floor Malted Pilsner",
+      "German Pale Ale",
+      "German Pilsner",
+      "German Vienna",
+      "Pale Malt (2 Row)",
+      "Pale Malt (6 Row)",
+      "Pale Malt Extract"
+    ],
+    "Hop": [
+      "Perle",
+      "Saaz"
+    ],
+    "Yeast": [
+      "Czech Lager (WLP802, WY2001, L28)",
+      "German Ale (WY1007, G02)",
+      "German Lager (WLP830, WY2124, L13, 34/70)",
+      "Mexican Lager (WLP940, OYL-113, L09)",
+      "Munich Lager (WLP838, WY2308, Dry)",
+      "NovaLager (Lalbrew Y055) (Dry)",
+      "San Fran Lager (WLP810, L05, WY2112)"
+    ],
+    "Adjunct": [],
+    "Specialty": []
+  },
+  "American IPA / Pale": {
+    "Base Malt": [
+      "American (or North American) Vienna",
+      "Belgian Pale",
+      "English Pale Ale",
+      "German Pale Ale",
+      "German Vienna",
+      "Pale Malt (2 Row)",
+      "Pale Malt (6 Row)",
+      "Pale Malt Extract"
+    ],
+    "Hop": [
+      "Amarillo",
+      "Ariana",
+      "Azacca",
+      "BRU-1",
+      "Calista",
+      "Cascade",
+      "Centennial",
+      "Challenger",
+      "Citra",
+      "East Kent Goldings",
+      "El Dorado",
+      "Ella",
+      "Fuggle",
+      "Galaxy",
+      "Hallertau Mittelfrueh",
+      "Hallertau Tradition",
+      "Idaho 7",
+      "Kohatu",
+      "Krush (HBC 586)",
+      "Lemondrop",
+      "Liberty",
+      "Loral",
+      "Lotus",
+      "Magnum",
+      "Mosaic",
+      "Motueka",
+      "Nectaron",
+      "Nelson Sauvin",
+      "Perle",
+      "Progress",
+      "Rakau",
+      "Riwaka",
+      "Sabro",
+      "Saphir",
+      "Simcoe",
+      "Sorachi Ace",
+      "Strata",
+      "Strisselspalt",
+      "Styrian Goldings",
+      "Tettnang / Tettnanger",
+      "Topaz",
+      "Triumph"
+    ],
+    "Yeast": [
+      "American Ale (WLP001 [liquid or dry], WY1056, US-05, A07)"
+    ],
+    "Adjunct": [],
+    "Specialty": []
+  },
+  "Belgian Blonde / Tripel": {
+    "Base Malt": [
+      "American (or North American) Pilsner",
+      "Belgian Pale",
+      "Belgian Pilsner",
+      "English Pale Ale",
+      "Floor Malted Pilsner",
+      "German Pale Ale",
+      "German Pilsner",
+      "Pale Malt (2 Row)",
+      "Pale Malt (6 Row)",
+      "Pale Malt Extract"
+    ],
+    "Hop": [
+      "Saaz"
+    ],
+    "Yeast": [
+      "Belgian Ale (WLP570, WY1388)",
+      "Belgian Ardennes (WY3522, B45)",
+      "Trappist Ale (WLP500, WY1214, B48)"
+    ],
+    "Adjunct": [
+      "Brown Sugar",
+      "Candi Sugar, Amber",
+      "Candi Sugar, Clear",
+      "Candi Sugar, Dark",
+      "Cane (or Beet) Sugar",
+      "Corn Sugar (Dextrose)",
+      "Dememera Sugar",
+      "Honey",
+      "Lyle's Golden Syrup (Invert Sugar)",
+      "Milk Sugar (Lactose)",
+      "Turbinado Sugar"
+    ],
+    "Specialty": []
+  },
+  "Stout / Porter": {
+    "Base Malt": [
+      "Amber Malt Extract",
+      "American (or North American) Pilsner",
+      "American (or North American) Vienna",
+      "Belgian Pale",
+      "Belgian Pilsner",
+      "Dark Malt Extract",
+      "English Pale Ale",
+      "Extra Light/Pils Malt Extract",
+      "Floor Malted Pilsner",
+      "German Pale Ale",
+      "German Pilsner",
+      "German Vienna",
+      "Golden Malt Extract",
+      "Golden Promise",
+      "Light Malt Extract",
+      "Marris Otter",
+      "Munich Malt Extract",
+      "Munich, Dark",
+      "Munich, Light",
+      "Pale Malt (2 Row)",
+      "Pale Malt (6 Row)",
+      "Pale Malt Extract",
+      "Red X",
+      "Wheat Malt Extract",
+      "White Wheat"
+    ],
+    "Hop": [
+      "Amarillo",
+      "Ariana",
+      "Azacca",
+      "BRU-1",
+      "Calista",
+      "Cascade",
+      "Centennial",
+      "Challenger",
+      "Citra",
+      "East Kent Goldings",
+      "El Dorado",
+      "Ella",
+      "Fuggle",
+      "Galaxy",
+      "Hallertau Mittelfrueh",
+      "Hallertau Tradition",
+      "Idaho 7",
+      "Kohatu",
+      "Krush (HBC 586)",
+      "Lemondrop",
+      "Liberty",
+      "Loral",
+      "Lotus",
+      "Magnum",
+      "Mosaic",
+      "Motueka",
+      "Nectaron",
+      "Nelson Sauvin",
+      "Perle",
+      "Progress",
+      "Rakau",
+      "Riwaka",
+      "Saaz",
+      "Sabro",
+      "Saphir",
+      "Simcoe",
+      "Sorachi Ace",
+      "Strata",
+      "Strisselspalt",
+      "Styrian Goldings",
+      "Tettnang / Tettnanger",
+      "Topaz",
+      "Triumph"
+    ],
+    "Yeast": [
+      "Abbey Ale (WLP540, EY1762, BE-256)",
+      "American Ale (WLP001 [liquid or dry], WY1056, US-05, A07)",
+      "Belgian Ale (WLP570, WY1388)",
+      "Dry English Ale (WLP007, WY1098, A10)",
+      "East Coast Ale (WLP008, A15)",
+      "English Ale (WLP002, WY1968, S-04, A09)",
+      "German Ale (WY1007, G02)",
+      "Scottish Ale (WLP028, WY1728, A31)",
+      "Trappist Ale (WLP500, WY1214, B48)"
+    ],
+    "Adjunct": [],
+    "Specialty": [
+      "Barley, Roasted",
+      "Black Malt",
+      "Blackprinze Malt",
+      "Chocolate Malt"
+    ]
+  },
+  "Fruit Wheat / Sour": {
+    "Base Malt": [
+      "American (or North American) Pilsner",
+      "Belgian Pilsner",
+      "Floor Malted Pilsner",
+      "German Pilsner",
+      "Wheat Malt Extract",
+      "White Wheat"
+    ],
+    "Hop": [
+      "Saaz"
+    ],
+    "Yeast": [
+      "Abbey Ale (WLP540, EY1762, BE-256)",
+      "Alt (WLP023, WY1007, G02)",
+      "American Ale (WLP001 [liquid or dry], WY1056, US-05, A07)",
+      "Belgian Ale (WLP570, WY1388)",
+      "Belgian Ardennes (WY3522, B45)",
+      "Conan (WLP095, OYL-052, A04, LalBrew New England [Dry])",
+      "Czech Lager (WLP802, WY2001, L28)",
+      "Dry English Ale (WLP007, WY1098, A10)",
+      "East Coast Ale (WLP008, A15)",
+      "English Ale (WLP002, WY1968, S-04, A09)",
+      "Farmhouse (WY3726, OYL-217, Dry)",
+      "German Ale (WY1007, G02)",
+      "German Lager (WLP830, WY2124, L13, 34/70)",
+      "Hefewiezen (WLP300, WY3068, G01)",
+      "Hornindal Kveik (WLP521, OYL-091)",
+      "Kolsch (WLP029, WY2565, G03, K-97)",
+      "London III (WLP013, A38, WY1318)",
+      "Lutra Kveik (OYL-071, OYL-071DRY)",
+      "Mexican Lager (WLP940, OYL-113, L09)",
+      "Munich Lager (WLP838, WY2308, Dry)",
+      "NovaLager (Lalbrew Y055) (Dry)",
+      "Philly Sour or Sourvisiae (Dry)",
+      "Pomona (Lalbrew Y067) (Dry)",
+      "Saison (WLP565, WY3724)",
+      "San Fran Lager (WLP810, L05, WY2112)",
+      "Scottish Ale (WLP028, WY1728, A31)",
+      "Trappist Ale (WLP500, WY1214, B48)",
+      "Verdant IPA (Dry)",
+      "Voss Kveik (A43, OYL-061, Dry)"
+    ],
+    "Adjunct": [
+      "Apricots",
+      "Blackberries",
+      "Blueberries",
+      "Raspberries"
+    ],
+    "Specialty": []
+  },
+  "Specialty Belgian": {
+    "Base Malt": [],
+    "Hop": [],
+    "Yeast": [],
+    "Adjunct": [
+      "Apricots",
+      "Blackberries",
+      "Blueberries",
+      "Coconut",
+      "Coffee",
+      "Coriander",
+      "Lemon Peel",
+      "Orange Peel, Sweet"
+    ],
+    "Specialty": [
+      "Chocolate Malt",
+      "Pale Chocolate Malt",
+      "Roasted Barley",
+      "Special B"
+    ]
+  },
+  "Specialty British": {
+    "Base Malt": [],
+    "Hop": [],
+    "Yeast": [],
+    "Adjunct": [
+      "Apricots",
+      "Blackberries",
+      "Blueberries",
+      "Coconut",
+      "Coffee",
+      "Coriander",
+      "Lemon Peel",
+      "Orange Peel, Sweet"
+    ],
+    "Specialty": [
+      "Chocolate Malt",
+      "Pale Chocolate Malt",
+      "Roasted Barley",
+      "Special B"
+    ]
+  },
+  "Experimental / Fruit": {
+    "Base Malt": [],
+    "Hop": [],
+    "Yeast": [],
+    "Adjunct": [
+      "Apricots",
+      "Blackberries",
+      "Blueberries",
+      "Coconut",
+      "Coffee",
+      "Coriander",
+      "Lemon Peel",
+      "Orange Peel, Sweet"
+    ],
+    "Specialty": [
+      "Chocolate Malt",
+      "Pale Chocolate Malt",
+      "Roasted Barley",
+      "Special B"
+    ]
+  },
+  "Wood-aged Specialty": {
+    "Base Malt": [],
+    "Hop": [],
+    "Yeast": [],
+    "Adjunct": [
+      "Apricots",
+      "Blackberries",
+      "Blueberries",
+      "Coconut",
+      "Coffee",
+      "Coriander",
+      "Lemon Peel",
+      "Orange Peel, Sweet"
+    ],
+    "Specialty": [
+      "Chocolate Malt",
+      "Pale Chocolate Malt",
+      "Roasted Barley",
+      "Special B"
+    ]
+  },
+  "Bi\u00e8re de Garde": {
+    "Base Malt": [],
+    "Hop": [],
+    "Yeast": [
+      "Belgian Ale (WLP570, WY1388)",
+      "Belgian Ardennes (WY3522, B45)",
+      "Trappist Ale (WLP500, WY1214, B48)"
+    ],
+    "Adjunct": [
+      "Brown Sugar",
+      "Candi Sugar, Amber",
+      "Candi Sugar, Clear",
+      "Candi Sugar, Dark",
+      "Turbinado Sugar"
+    ],
+    "Specialty": []
+  },
+  "Belgian Dubbel": {
+    "Base Malt": [],
+    "Hop": [],
+    "Yeast": [
+      "Belgian Ale (WLP570, WY1388)",
+      "Belgian Ardennes (WY3522, B45)",
+      "Trappist Ale (WLP500, WY1214, B48)"
+    ],
+    "Adjunct": [
+      "Brown Sugar",
+      "Candi Sugar, Amber",
+      "Candi Sugar, Clear",
+      "Candi Sugar, Dark",
+      "Turbinado Sugar"
+    ],
+    "Specialty": []
+  },
+  "Belgian Dark Strong": {
+    "Base Malt": [],
+    "Hop": [],
+    "Yeast": [
+      "Belgian Ale (WLP570, WY1388)",
+      "Belgian Ardennes (WY3522, B45)",
+      "Trappist Ale (WLP500, WY1214, B48)"
+    ],
+    "Adjunct": [
+      "Brown Sugar",
+      "Candi Sugar, Amber",
+      "Candi Sugar, Clear",
+      "Candi Sugar, Dark",
+      "Turbinado Sugar"
+    ],
+    "Specialty": []
+  },
+  "Saison": {
+    "Base Malt": [],
+    "Hop": [],
+    "Yeast": [
+      "Belgian Ale (WLP570, WY1388)",
+      "Belgian Ardennes (WY3522, B45)",
+      "Trappist Ale (WLP500, WY1214, B48)"
+    ],
+    "Adjunct": [
+      "Brown Sugar",
+      "Candi Sugar, Amber",
+      "Candi Sugar, Clear",
+      "Candi Sugar, Dark",
+      "Turbinado Sugar"
+    ],
+    "Specialty": []
+  },
+  "Best Bitter / ESB": {
+    "Base Malt": [
+      "English Pale Ale",
+      "Golden Promise",
+      "Maris Otter"
+    ],
+    "Hop": [],
+    "Yeast": [
+      "Dry English Ale (WLP007, WY1098, A10)",
+      "London III (WLP013, A38, WY1318)",
+      "Scottish Ale (WLP028, WY1728, A31)"
+    ],
+    "Adjunct": [],
+    "Specialty": []
+  },
+  "British Brown / Mild": {
+    "Base Malt": [
+      "English Pale Ale",
+      "Golden Promise",
+      "Maris Otter"
+    ],
+    "Hop": [],
+    "Yeast": [
+      "Dry English Ale (WLP007, WY1098, A10)",
+      "London III (WLP013, A38, WY1318)",
+      "Scottish Ale (WLP028, WY1728, A31)"
+    ],
+    "Adjunct": [],
+    "Specialty": []
+  },
+  "British Strong Ale": {
+    "Base Malt": [
+      "English Pale Ale",
+      "Golden Promise",
+      "Maris Otter"
+    ],
+    "Hop": [],
+    "Yeast": [
+      "Dry English Ale (WLP007, WY1098, A10)",
+      "London III (WLP013, A38, WY1318)",
+      "Scottish Ale (WLP028, WY1728, A31)"
+    ],
+    "Adjunct": [],
+    "Specialty": []
+  },
+  "Robust Porter": {
+    "Base Malt": [
+      "English Pale Ale",
+      "Golden Promise",
+      "Maris Otter"
+    ],
+    "Hop": [],
+    "Yeast": [
+      "Dry English Ale (WLP007, WY1098, A10)",
+      "London III (WLP013, A38, WY1318)",
+      "Scottish Ale (WLP028, WY1728, A31)"
+    ],
+    "Adjunct": [],
+    "Specialty": []
+  }
+}

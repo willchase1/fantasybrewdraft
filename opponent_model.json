@@ -1,0 +1,2504 @@
+{
+  "ingredient_popularity": [
+    {
+      "Category": "Flex",
+      "Ingredient": "Oats, Flaked",
+      "Picks": 3,
+      "Avg_Slot": 1.3333333333333333,
+      "First_Year": 2022,
+      "Last_Year": 2024,
+      "Early_Score": 2.249998312501266
+    },
+    {
+      "Category": "Flex",
+      "Ingredient": "Aromatic",
+      "Picks": 3,
+      "Avg_Slot": 7.333333333333333,
+      "First_Year": 2022,
+      "Last_Year": 2024,
+      "Early_Score": 0.40909085330579276
+    },
+    {
+      "Category": "Malt",
+      "Ingredient": "German Pilsner",
+      "Picks": 3,
+      "Avg_Slot": 3.0,
+      "First_Year": 2022,
+      "Last_Year": 2024,
+      "Early_Score": 0.9999996666667778
+    },
+    {
+      "Category": "Flex",
+      "Ingredient": "Munich, Dark",
+      "Picks": 3,
+      "Avg_Slot": 4.0,
+      "First_Year": 2022,
+      "Last_Year": 2024,
+      "Early_Score": 0.7499998125000469
+    },
+    {
+      "Category": "Flex",
+      "Ingredient": "Caramel/Crystal Malt - 60L",
+      "Picks": 3,
+      "Avg_Slot": 3.0,
+      "First_Year": 2022,
+      "Last_Year": 2024,
+      "Early_Score": 0.9999996666667778
+    },
+    {
+      "Category": "Malt",
+      "Ingredient": "Golden Promise",
+      "Picks": 3,
+      "Avg_Slot": 3.0,
+      "First_Year": 2022,
+      "Last_Year": 2024,
+      "Early_Score": 0.9999996666667778
+    },
+    {
+      "Category": "Adjunct",
+      "Ingredient": "Corn Sugar (Dextrose)",
+      "Picks": 3,
+      "Avg_Slot": 3.0,
+      "First_Year": 2022,
+      "Last_Year": 2024,
+      "Early_Score": 0.9999996666667778
+    },
+    {
+      "Category": "Hops",
+      "Ingredient": "East Kent Goldings",
+      "Picks": 3,
+      "Avg_Slot": 5.0,
+      "First_Year": 2022,
+      "Last_Year": 2024,
+      "Early_Score": 0.599999880000024
+    },
+    {
+      "Category": "Flex",
+      "Ingredient": "Chocolate Malt",
+      "Picks": 3,
+      "Avg_Slot": 5.666666666666667,
+      "First_Year": 2022,
+      "Last_Year": 2024,
+      "Early_Score": 0.5294116712802933
+    },
+    {
+      "Category": "Flex",
+      "Ingredient": "Caramel/Crystal Malt - 80L",
+      "Picks": 2,
+      "Avg_Slot": 4.5,
+      "First_Year": 2022,
+      "Last_Year": 2024,
+      "Early_Score": 0.4444443456790343
+    },
+    {
+      "Category": "Adjunct",
+      "Ingredient": "Candi Sugar, Clear",
+      "Picks": 2,
+      "Avg_Slot": 6.5,
+      "First_Year": 2022,
+      "Last_Year": 2023,
+      "Early_Score": 0.3076922603550369
+    },
+    {
+      "Category": "Yeast",
+      "Ingredient": "American Ale (WLP001,WY1056, US-05, A07)",
+      "Picks": 2,
+      "Avg_Slot": 7.5,
+      "First_Year": 2023,
+      "Last_Year": 2024,
+      "Early_Score": 0.2666666311111158
+    },
+    {
+      "Category": "Flex",
+      "Ingredient": "Carapils/Dextrine/Carafoam",
+      "Picks": 2,
+      "Avg_Slot": 4.5,
+      "First_Year": 2023,
+      "Last_Year": 2024,
+      "Early_Score": 0.4444443456790343
+    },
+    {
+      "Category": "Flex",
+      "Ingredient": "Caravienne",
+      "Picks": 2,
+      "Avg_Slot": 4.5,
+      "First_Year": 2022,
+      "Last_Year": 2023,
+      "Early_Score": 0.4444443456790343
+    },
+    {
+      "Category": "Flex",
+      "Ingredient": "Centennial",
+      "Picks": 2,
+      "Avg_Slot": 3.5,
+      "First_Year": 2022,
+      "Last_Year": 2024,
+      "Early_Score": 0.571428408163312
+    },
+    {
+      "Category": "Hops",
+      "Ingredient": "Saaz",
+      "Picks": 2,
+      "Avg_Slot": 4.5,
+      "First_Year": 2022,
+      "Last_Year": 2023,
+      "Early_Score": 0.4444443456790343
+    },
+    {
+      "Category": "Flex",
+      "Ingredient": "Rye Malt",
+      "Picks": 2,
+      "Avg_Slot": 6.5,
+      "First_Year": 2022,
+      "Last_Year": 2024,
+      "Early_Score": 0.3076922603550369
+    },
+    {
+      "Category": "Flex",
+      "Ingredient": "Coffee",
+      "Picks": 2,
+      "Avg_Slot": 5.0,
+      "First_Year": 2023,
+      "Last_Year": 2024,
+      "Early_Score": 0.399999920000016
+    },
+    {
+      "Category": "Flex",
+      "Ingredient": "Corn, Flaked",
+      "Picks": 2,
+      "Avg_Slot": 8.5,
+      "First_Year": 2023,
+      "Last_Year": 2024,
+      "Early_Score": 0.2352940899654012
+    },
+    {
+      "Category": "Flex",
+      "Ingredient": "Caramel/Crystal Malt - 30L",
+      "Picks": 2,
+      "Avg_Slot": 3.0,
+      "First_Year": 2022,
+      "Last_Year": 2024,
+      "Early_Score": 0.6666664444445185
+    },
+    {
+      "Category": "Malt",
+      "Ingredient": "American Vienna",
+      "Picks": 2,
+      "Avg_Slot": 3.5,
+      "First_Year": 2022,
+      "Last_Year": 2024,
+      "Early_Score": 0.571428408163312
+    },
+    {
+      "Category": "Malt",
+      "Ingredient": "Pale Malt (2 Row)",
+      "Picks": 2,
+      "Avg_Slot": 4.0,
+      "First_Year": 2023,
+      "Last_Year": 2024,
+      "Early_Score": 0.49999987500003124
+    },
+    {
+      "Category": "Malt",
+      "Ingredient": "Belgian Pilsner",
+      "Picks": 2,
+      "Avg_Slot": 2.0,
+      "First_Year": 2022,
+      "Last_Year": 2023,
+      "Early_Score": 0.99999950000025
+    },
+    {
+      "Category": "Flex",
+      "Ingredient": "Idaho 7",
+      "Picks": 2,
+      "Avg_Slot": 5.0,
+      "First_Year": 2023,
+      "Last_Year": 2024,
+      "Early_Score": 0.399999920000016
+    },
+    {
+      "Category": "Malt",
+      "Ingredient": "Marris Otter",
+      "Picks": 2,
+      "Avg_Slot": 6.0,
+      "First_Year": 2023,
+      "Last_Year": 2024,
+      "Early_Score": 0.33333327777778704
+    },
+    {
+      "Category": "Malt",
+      "Ingredient": "English Pale Ale",
+      "Picks": 2,
+      "Avg_Slot": 4.5,
+      "First_Year": 2023,
+      "Last_Year": 2024,
+      "Early_Score": 0.4444443456790343
+    },
+    {
+      "Category": "Flex",
+      "Ingredient": "Melanoiden Malt",
+      "Picks": 2,
+      "Avg_Slot": 6.5,
+      "First_Year": 2023,
+      "Last_Year": 2024,
+      "Early_Score": 0.3076922603550369
+    },
+    {
+      "Category": "Malt",
+      "Ingredient": "Floor Malted Pilsner",
+      "Picks": 2,
+      "Avg_Slot": 6.5,
+      "First_Year": 2023,
+      "Last_Year": 2024,
+      "Early_Score": 0.3076922603550369
+    },
+    {
+      "Category": "Flex",
+      "Ingredient": "Special B",
+      "Picks": 2,
+      "Avg_Slot": 4.5,
+      "First_Year": 2022,
+      "Last_Year": 2023,
+      "Early_Score": 0.4444443456790343
+    },
+    {
+      "Category": "Adjunct",
+      "Ingredient": "Candi Sugar, Amber",
+      "Picks": 2,
+      "Avg_Slot": 4.5,
+      "First_Year": 2022,
+      "Last_Year": 2024,
+      "Early_Score": 0.4444443456790343
+    },
+    {
+      "Category": "Adjunct",
+      "Ingredient": "Turbinado Sugar",
+      "Picks": 2,
+      "Avg_Slot": 6.0,
+      "First_Year": 2022,
+      "Last_Year": 2024,
+      "Early_Score": 0.33333327777778704
+    },
+    {
+      "Category": "Yeast",
+      "Ingredient": "London III (WLP013, A38, WY1318)",
+      "Picks": 2,
+      "Avg_Slot": 2.0,
+      "First_Year": 2023,
+      "Last_Year": 2024,
+      "Early_Score": 0.99999950000025
+    },
+    {
+      "Category": "Hops",
+      "Ingredient": "Motueka",
+      "Picks": 2,
+      "Avg_Slot": 8.5,
+      "First_Year": 2023,
+      "Last_Year": 2024,
+      "Early_Score": 0.2352940899654012
+    },
+    {
+      "Category": "Adjunct",
+      "Ingredient": "Coconut",
+      "Picks": 2,
+      "Avg_Slot": 4.5,
+      "First_Year": 2022,
+      "Last_Year": 2024,
+      "Early_Score": 0.4444443456790343
+    },
+    {
+      "Category": "Adjunct",
+      "Ingredient": "Coriander",
+      "Picks": 2,
+      "Avg_Slot": 5.5,
+      "First_Year": 2023,
+      "Last_Year": 2024,
+      "Early_Score": 0.36363629752067317
+    },
+    {
+      "Category": "Adjunct",
+      "Ingredient": "Honey",
+      "Picks": 2,
+      "Avg_Slot": 5.5,
+      "First_Year": 2022,
+      "Last_Year": 2024,
+      "Early_Score": 0.36363629752067317
+    },
+    {
+      "Category": "Adjunct",
+      "Ingredient": "Lyle's Golden (Invert Sugar)",
+      "Picks": 2,
+      "Avg_Slot": 3.0,
+      "First_Year": 2023,
+      "Last_Year": 2024,
+      "Early_Score": 0.6666664444445185
+    },
+    {
+      "Category": "Adjunct",
+      "Ingredient": "Molasses",
+      "Picks": 2,
+      "Avg_Slot": 4.0,
+      "First_Year": 2022,
+      "Last_Year": 2024,
+      "Early_Score": 0.49999987500003124
+    },
+    {
+      "Category": "Adjunct",
+      "Ingredient": "Oak",
+      "Picks": 2,
+      "Avg_Slot": 5.0,
+      "First_Year": 2022,
+      "Last_Year": 2023,
+      "Early_Score": 0.399999920000016
+    },
+    {
+      "Category": "Hops",
+      "Ingredient": "Hallertau Mittelfrueh",
+      "Picks": 2,
+      "Avg_Slot": 5.5,
+      "First_Year": 2022,
+      "Last_Year": 2024,
+      "Early_Score": 0.36363629752067317
+    },
+    {
+      "Category": "Yeast",
+      "Ingredient": "Mexican Lager (WLP940, OYL-113, L09)",
+      "Picks": 2,
+      "Avg_Slot": 7.0,
+      "First_Year": 2023,
+      "Last_Year": 2024,
+      "Early_Score": 0.285714244897965
+    },
+    {
+      "Category": "Hops",
+      "Ingredient": "Tettnang / Tettnanger",
+      "Picks": 2,
+      "Avg_Slot": 8.0,
+      "First_Year": 2022,
+      "Last_Year": 2024,
+      "Early_Score": 0.24999996875000394
+    },
+    {
+      "Category": "Hops",
+      "Ingredient": "Galaxy",
+      "Picks": 2,
+      "Avg_Slot": 4.0,
+      "First_Year": 2023,
+      "Last_Year": 2024,
+      "Early_Score": 0.49999987500003124
+    },
+    {
+      "Category": "Hops",
+      "Ingredient": "Fuggle",
+      "Picks": 2,
+      "Avg_Slot": 2.0,
+      "First_Year": 2023,
+      "Last_Year": 2024,
+      "Early_Score": 0.99999950000025
+    },
+    {
+      "Category": "Flex",
+      "Ingredient": "Barley, Roasted",
+      "Picks": 2,
+      "Avg_Slot": 8.0,
+      "First_Year": 2022,
+      "Last_Year": 2023,
+      "Early_Score": 0.24999996875000394
+    },
+    {
+      "Category": "Yeast",
+      "Ingredient": "German Lager (WLP830, WY2124, L13, 34/70)",
+      "Picks": 2,
+      "Avg_Slot": 7.0,
+      "First_Year": 2023,
+      "Last_Year": 2024,
+      "Early_Score": 0.285714244897965
+    },
+    {
+      "Category": "Hops",
+      "Ingredient": "Citra",
+      "Picks": 2,
+      "Avg_Slot": 2.0,
+      "First_Year": 2022,
+      "Last_Year": 2023,
+      "Early_Score": 0.99999950000025
+    },
+    {
+      "Category": "Flex",
+      "Ingredient": "White Wheat",
+      "Picks": 2,
+      "Avg_Slot": 7.0,
+      "First_Year": 2023,
+      "Last_Year": 2024,
+      "Early_Score": 0.285714244897965
+    },
+    {
+      "Category": "Flex",
+      "Ingredient": "Wheat, Red",
+      "Picks": 2,
+      "Avg_Slot": 8.5,
+      "First_Year": 2023,
+      "Last_Year": 2024,
+      "Early_Score": 0.2352940899654012
+    },
+    {
+      "Category": "Flex",
+      "Ingredient": "Wheat, Flaked",
+      "Picks": 2,
+      "Avg_Slot": 2.0,
+      "First_Year": 2023,
+      "Last_Year": 2024,
+      "Early_Score": 0.99999950000025
+    },
+    {
+      "Category": "Hops",
+      "Ingredient": "Styrian Goldings",
+      "Picks": 1,
+      "Avg_Slot": 3.0,
+      "First_Year": 2024,
+      "Last_Year": 2024,
+      "Early_Score": 0.33333322222225925
+    },
+    {
+      "Category": "Malt",
+      "Ingredient": "American Standard 2 Row",
+      "Picks": 1,
+      "Avg_Slot": 7.0,
+      "First_Year": 2022,
+      "Last_Year": 2022,
+      "Early_Score": 0.1428571224489825
+    },
+    {
+      "Category": "Malt",
+      "Ingredient": "American Pilsner",
+      "Picks": 1,
+      "Avg_Slot": 5.0,
+      "First_Year": 2022,
+      "Last_Year": 2022,
+      "Early_Score": 0.199999960000008
+    },
+    {
+      "Category": "Hops",
+      "Ingredient": "Strisselspalt",
+      "Picks": 1,
+      "Avg_Slot": 2.0,
+      "First_Year": 2022,
+      "Last_Year": 2022,
+      "Early_Score": 0.499999750000125
+    },
+    {
+      "Category": "Hops",
+      "Ingredient": "Sorachi Ace",
+      "Picks": 1,
+      "Avg_Slot": 1.0,
+      "First_Year": 2023,
+      "Last_Year": 2023,
+      "Early_Score": 0.9999990000010001
+    },
+    {
+      "Category": "Hops",
+      "Ingredient": "Simcoe",
+      "Picks": 1,
+      "Avg_Slot": 6.0,
+      "First_Year": 2024,
+      "Last_Year": 2024,
+      "Early_Score": 0.16666663888889352
+    },
+    {
+      "Category": "Malt",
+      "Ingredient": "German Pale Ale",
+      "Picks": 1,
+      "Avg_Slot": 6.0,
+      "First_Year": 2023,
+      "Last_Year": 2023,
+      "Early_Score": 0.16666663888889352
+    },
+    {
+      "Category": "Malt",
+      "Ingredient": "Stout Malt",
+      "Picks": 1,
+      "Avg_Slot": 8.0,
+      "First_Year": 2022,
+      "Last_Year": 2022,
+      "Early_Score": 0.12499998437500197
+    },
+    {
+      "Category": "Malt",
+      "Ingredient": "German Vienna",
+      "Picks": 1,
+      "Avg_Slot": 10.0,
+      "First_Year": 2024,
+      "Last_Year": 2024,
+      "Early_Score": 0.09999999000000101
+    },
+    {
+      "Category": "Malt",
+      "Ingredient": "Maris Otter",
+      "Picks": 1,
+      "Avg_Slot": 4.0,
+      "First_Year": 2022,
+      "Last_Year": 2022,
+      "Early_Score": 0.24999993750001562
+    },
+    {
+      "Category": "Yeast",
+      "Ingredient": "Verdant IPA (Dry)",
+      "Picks": 1,
+      "Avg_Slot": 4.0,
+      "First_Year": 2024,
+      "Last_Year": 2024,
+      "Early_Score": 0.24999993750001562
+    },
+    {
+      "Category": "Yeast",
+      "Ingredient": "Trappist Ale (WLP500, WY1214, B48)",
+      "Picks": 1,
+      "Avg_Slot": 3.0,
+      "First_Year": 2024,
+      "Last_Year": 2024,
+      "Early_Score": 0.33333322222225925
+    },
+    {
+      "Category": "Yeast",
+      "Ingredient": "Trappist Ale (500, 1214, B48)",
+      "Picks": 1,
+      "Avg_Slot": 7.0,
+      "First_Year": 2022,
+      "Last_Year": 2022,
+      "Early_Score": 0.1428571224489825
+    },
+    {
+      "Category": "Yeast",
+      "Ingredient": "Scottish Ale (WLP028, WY1728, A31)",
+      "Picks": 1,
+      "Avg_Slot": 2.0,
+      "First_Year": 2023,
+      "Last_Year": 2023,
+      "Early_Score": 0.499999750000125
+    },
+    {
+      "Category": "Yeast",
+      "Ingredient": "Munich Lager (WLP838, WY2308, Dry)",
+      "Picks": 1,
+      "Avg_Slot": 5.0,
+      "First_Year": 2024,
+      "Last_Year": 2024,
+      "Early_Score": 0.199999960000008
+    },
+    {
+      "Category": "Yeast",
+      "Ingredient": "London III (013, A38, 1318)",
+      "Picks": 1,
+      "Avg_Slot": 8.0,
+      "First_Year": 2022,
+      "Last_Year": 2022,
+      "Early_Score": 0.12499998437500197
+    },
+    {
+      "Category": "Yeast",
+      "Ingredient": "Hefewiezen (WLP300, WY3068, G01)",
+      "Picks": 1,
+      "Avg_Slot": 8.0,
+      "First_Year": 2024,
+      "Last_Year": 2024,
+      "Early_Score": 0.12499998437500197
+    },
+    {
+      "Category": "Yeast",
+      "Ingredient": "German Lager (830, 2124, L13, 34/70)",
+      "Picks": 1,
+      "Avg_Slot": 4.0,
+      "First_Year": 2022,
+      "Last_Year": 2022,
+      "Early_Score": 0.24999993750001562
+    },
+    {
+      "Category": "Yeast",
+      "Ingredient": "German Ale (WY1007, G02)",
+      "Picks": 1,
+      "Avg_Slot": 9.0,
+      "First_Year": 2024,
+      "Last_Year": 2024,
+      "Early_Score": 0.11111109876543349
+    },
+    {
+      "Category": "Yeast",
+      "Ingredient": "English Ale (WLP002, WY1968, S-04, A09)",
+      "Picks": 1,
+      "Avg_Slot": 8.0,
+      "First_Year": 2023,
+      "Last_Year": 2023,
+      "Early_Score": 0.12499998437500197
+    },
+    {
+      "Category": "Yeast",
+      "Ingredient": "Dry English Ale (WLP007, WY1098, A10)",
+      "Picks": 1,
+      "Avg_Slot": 2.0,
+      "First_Year": 2024,
+      "Last_Year": 2024,
+      "Early_Score": 0.499999750000125
+    },
+    {
+      "Category": "Yeast",
+      "Ingredient": "Czech Lager (WLP802, WY2001, L28)",
+      "Picks": 1,
+      "Avg_Slot": 5.0,
+      "First_Year": 2023,
+      "Last_Year": 2023,
+      "Early_Score": 0.199999960000008
+    },
+    {
+      "Category": "Yeast",
+      "Ingredient": "Czech Lager (802, 2001, L28)",
+      "Picks": 1,
+      "Avg_Slot": 5.0,
+      "First_Year": 2022,
+      "Last_Year": 2022,
+      "Early_Score": 0.199999960000008
+    },
+    {
+      "Category": "Yeast",
+      "Ingredient": "Belgian Ardennes (WY3522, B45)",
+      "Picks": 1,
+      "Avg_Slot": 1.0,
+      "First_Year": 2023,
+      "Last_Year": 2023,
+      "Early_Score": 0.9999990000010001
+    },
+    {
+      "Category": "Yeast",
+      "Ingredient": "Belgian Ardennes (3522, B45)",
+      "Picks": 1,
+      "Avg_Slot": 3.0,
+      "First_Year": 2022,
+      "Last_Year": 2022,
+      "Early_Score": 0.33333322222225925
+    },
+    {
+      "Category": "Yeast",
+      "Ingredient": "Belgian Ale (570, 1388)",
+      "Picks": 1,
+      "Avg_Slot": 2.0,
+      "First_Year": 2022,
+      "Last_Year": 2022,
+      "Early_Score": 0.499999750000125
+    },
+    {
+      "Category": "Yeast",
+      "Ingredient": "American Ale (001,1056, US-05, A07)",
+      "Picks": 1,
+      "Avg_Slot": 1.0,
+      "First_Year": 2022,
+      "Last_Year": 2022,
+      "Early_Score": 0.9999990000010001
+    },
+    {
+      "Category": "Yeast",
+      "Ingredient": "Abbey Ale (WLP540, EY1762, BE-256)",
+      "Picks": 1,
+      "Avg_Slot": 6.0,
+      "First_Year": 2023,
+      "Last_Year": 2023,
+      "Early_Score": 0.16666663888889352
+    },
+    {
+      "Category": "Malt",
+      "Ingredient": "Red X",
+      "Picks": 1,
+      "Avg_Slot": 9.0,
+      "First_Year": 2024,
+      "Last_Year": 2024,
+      "Early_Score": 0.11111109876543349
+    },
+    {
+      "Category": "Malt",
+      "Ingredient": "Pale Malt (6 Row)",
+      "Picks": 1,
+      "Avg_Slot": 9.0,
+      "First_Year": 2023,
+      "Last_Year": 2023,
+      "Early_Score": 0.11111109876543349
+    },
+    {
+      "Category": "Malt",
+      "Ingredient": "Munich, Light",
+      "Picks": 1,
+      "Avg_Slot": 7.0,
+      "First_Year": 2024,
+      "Last_Year": 2024,
+      "Early_Score": 0.1428571224489825
+    },
+    {
+      "Category": "Hops",
+      "Ingredient": "Sabro",
+      "Picks": 1,
+      "Avg_Slot": 9.0,
+      "First_Year": 2023,
+      "Last_Year": 2023,
+      "Early_Score": 0.11111109876543349
+    },
+    {
+      "Category": "Flex",
+      "Ingredient": "Smoked Malt",
+      "Picks": 1,
+      "Avg_Slot": 4.0,
+      "First_Year": 2022,
+      "Last_Year": 2022,
+      "Early_Score": 0.24999993750001562
+    },
+    {
+      "Category": "Hops",
+      "Ingredient": "Progress",
+      "Picks": 1,
+      "Avg_Slot": 8.0,
+      "First_Year": 2023,
+      "Last_Year": 2023,
+      "Early_Score": 0.12499998437500197
+    },
+    {
+      "Category": "Flex",
+      "Ingredient": "Black Malt",
+      "Picks": 1,
+      "Avg_Slot": 5.0,
+      "First_Year": 2024,
+      "Last_Year": 2024,
+      "Early_Score": 0.199999960000008
+    },
+    {
+      "Category": "Flex",
+      "Ingredient": "Caramunich I",
+      "Picks": 1,
+      "Avg_Slot": 2.0,
+      "First_Year": 2022,
+      "Last_Year": 2022,
+      "Early_Score": 0.499999750000125
+    },
+    {
+      "Category": "Flex",
+      "Ingredient": "Caramel/Crystal Malt -120L",
+      "Picks": 1,
+      "Avg_Slot": 10.0,
+      "First_Year": 2024,
+      "Last_Year": 2024,
+      "Early_Score": 0.09999999000000101
+    },
+    {
+      "Category": "Flex",
+      "Ingredient": "Caramel/Crystal Malt - 40L",
+      "Picks": 1,
+      "Avg_Slot": 9.0,
+      "First_Year": 2023,
+      "Last_Year": 2023,
+      "Early_Score": 0.11111109876543349
+    },
+    {
+      "Category": "Flex",
+      "Ingredient": "Carahell",
+      "Picks": 1,
+      "Avg_Slot": 3.0,
+      "First_Year": 2024,
+      "Last_Year": 2024,
+      "Early_Score": 0.33333322222225925
+    },
+    {
+      "Category": "Flex",
+      "Ingredient": "Carafoam",
+      "Picks": 1,
+      "Avg_Slot": 3.0,
+      "First_Year": 2023,
+      "Last_Year": 2023,
+      "Early_Score": 0.33333322222225925
+    },
+    {
+      "Category": "Flex",
+      "Ingredient": "Carafa III",
+      "Picks": 1,
+      "Avg_Slot": 3.0,
+      "First_Year": 2022,
+      "Last_Year": 2022,
+      "Early_Score": 0.33333322222225925
+    },
+    {
+      "Category": "Flex",
+      "Ingredient": "Carafa II",
+      "Picks": 1,
+      "Avg_Slot": 9.0,
+      "First_Year": 2024,
+      "Last_Year": 2024,
+      "Early_Score": 0.11111109876543349
+    },
+    {
+      "Category": "Flex",
+      "Ingredient": "Carafa I",
+      "Picks": 1,
+      "Avg_Slot": 6.0,
+      "First_Year": 2022,
+      "Last_Year": 2022,
+      "Early_Score": 0.16666663888889352
+    },
+    {
+      "Category": "Flex",
+      "Ingredient": "Candi Sugar, Dark",
+      "Picks": 1,
+      "Avg_Slot": 7.0,
+      "First_Year": 2022,
+      "Last_Year": 2022,
+      "Early_Score": 0.1428571224489825
+    },
+    {
+      "Category": "Flex",
+      "Ingredient": "Biscuit Malt",
+      "Picks": 1,
+      "Avg_Slot": 6.0,
+      "First_Year": 2022,
+      "Last_Year": 2022,
+      "Early_Score": 0.16666663888889352
+    },
+    {
+      "Category": "Flex",
+      "Ingredient": "Cascade",
+      "Picks": 1,
+      "Avg_Slot": 3.0,
+      "First_Year": 2023,
+      "Last_Year": 2023,
+      "Early_Score": 0.33333322222225925
+    },
+    {
+      "Category": "Flex",
+      "Ingredient": "BRU-1",
+      "Picks": 1,
+      "Avg_Slot": 4.0,
+      "First_Year": 2023,
+      "Last_Year": 2023,
+      "Early_Score": 0.24999993750001562
+    },
+    {
+      "Category": "Flex",
+      "Ingredient": "Azacca",
+      "Picks": 1,
+      "Avg_Slot": 7.0,
+      "First_Year": 2023,
+      "Last_Year": 2023,
+      "Early_Score": 0.1428571224489825
+    },
+    {
+      "Category": "Flex",
+      "Ingredient": "Acidulated Malt",
+      "Picks": 1,
+      "Avg_Slot": 8.0,
+      "First_Year": 2024,
+      "Last_Year": 2024,
+      "Early_Score": 0.12499998437500197
+    },
+    {
+      "Category": "Adjunct",
+      "Ingredient": "Peaches",
+      "Picks": 1,
+      "Avg_Slot": 9.0,
+      "First_Year": 2023,
+      "Last_Year": 2023,
+      "Early_Score": 0.11111109876543349
+    },
+    {
+      "Category": "Adjunct",
+      "Ingredient": "Orange Peel, Sweet",
+      "Picks": 1,
+      "Avg_Slot": 3.0,
+      "First_Year": 2023,
+      "Last_Year": 2023,
+      "Early_Score": 0.33333322222225925
+    },
+    {
+      "Category": "Adjunct",
+      "Ingredient": "Juniper",
+      "Picks": 1,
+      "Avg_Slot": 6.0,
+      "First_Year": 2024,
+      "Last_Year": 2024,
+      "Early_Score": 0.16666663888889352
+    },
+    {
+      "Category": "Adjunct",
+      "Ingredient": "Dememera Sugar",
+      "Picks": 1,
+      "Avg_Slot": 5.0,
+      "First_Year": 2024,
+      "Last_Year": 2024,
+      "Early_Score": 0.199999960000008
+    },
+    {
+      "Category": "Adjunct",
+      "Ingredient": "Chili Peppers",
+      "Picks": 1,
+      "Avg_Slot": 7.0,
+      "First_Year": 2023,
+      "Last_Year": 2023,
+      "Early_Score": 0.1428571224489825
+    },
+    {
+      "Category": "Adjunct",
+      "Ingredient": "Caramel/Crystal Malt - 80L",
+      "Picks": 1,
+      "Avg_Slot": 8.0,
+      "First_Year": 2023,
+      "Last_Year": 2023,
+      "Early_Score": 0.12499998437500197
+    },
+    {
+      "Category": "Flex",
+      "Ingredient": "Carared",
+      "Picks": 1,
+      "Avg_Slot": 2.0,
+      "First_Year": 2022,
+      "Last_Year": 2022,
+      "Early_Score": 0.499999750000125
+    },
+    {
+      "Category": "Flex",
+      "Ingredient": "Citra",
+      "Picks": 1,
+      "Avg_Slot": 4.0,
+      "First_Year": 2024,
+      "Last_Year": 2024,
+      "Early_Score": 0.24999993750001562
+    },
+    {
+      "Category": "Hops",
+      "Ingredient": "Perle",
+      "Picks": 1,
+      "Avg_Slot": 7.0,
+      "First_Year": 2024,
+      "Last_Year": 2024,
+      "Early_Score": 0.1428571224489825
+    },
+    {
+      "Category": "Flex",
+      "Ingredient": "Pale Malt (6 Row)",
+      "Picks": 1,
+      "Avg_Slot": 7.0,
+      "First_Year": 2024,
+      "Last_Year": 2024,
+      "Early_Score": 0.1428571224489825
+    },
+    {
+      "Category": "Hops",
+      "Ingredient": "Loral",
+      "Picks": 1,
+      "Avg_Slot": 6.0,
+      "First_Year": 2022,
+      "Last_Year": 2022,
+      "Early_Score": 0.16666663888889352
+    },
+    {
+      "Category": "Hops",
+      "Ingredient": "Kohatu",
+      "Picks": 1,
+      "Avg_Slot": 5.0,
+      "First_Year": 2022,
+      "Last_Year": 2022,
+      "Early_Score": 0.199999960000008
+    },
+    {
+      "Category": "Hops",
+      "Ingredient": "Hallertau Tradition",
+      "Picks": 1,
+      "Avg_Slot": 5.0,
+      "First_Year": 2024,
+      "Last_Year": 2024,
+      "Early_Score": 0.199999960000008
+    },
+    {
+      "Category": "Flex",
+      "Ingredient": "Tettnang / Tettnanger",
+      "Picks": 1,
+      "Avg_Slot": 5.0,
+      "First_Year": 2023,
+      "Last_Year": 2023,
+      "Early_Score": 0.199999960000008
+    },
+    {
+      "Category": "Flex",
+      "Ingredient": "Special Roast",
+      "Picks": 1,
+      "Avg_Slot": 1.0,
+      "First_Year": 2024,
+      "Last_Year": 2024,
+      "Early_Score": 0.9999990000010001
+    },
+    {
+      "Category": "Flex",
+      "Ingredient": "Simcoe",
+      "Picks": 1,
+      "Avg_Slot": 9.0,
+      "First_Year": 2023,
+      "Last_Year": 2023,
+      "Early_Score": 0.11111109876543349
+    },
+    {
+      "Category": "Flex",
+      "Ingredient": "Saaz",
+      "Picks": 1,
+      "Avg_Slot": 3.0,
+      "First_Year": 2024,
+      "Last_Year": 2024,
+      "Early_Score": 0.33333322222225925
+    },
+    {
+      "Category": "Flex",
+      "Ingredient": "Rice, Flaked",
+      "Picks": 1,
+      "Avg_Slot": 4.0,
+      "First_Year": 2023,
+      "Last_Year": 2023,
+      "Early_Score": 0.24999993750001562
+    },
+    {
+      "Category": "Flex",
+      "Ingredient": "Red X",
+      "Picks": 1,
+      "Avg_Slot": 2.0,
+      "First_Year": 2022,
+      "Last_Year": 2022,
+      "Early_Score": 0.499999750000125
+    },
+    {
+      "Category": "Flex",
+      "Ingredient": "Pale Chocolate Malt",
+      "Picks": 1,
+      "Avg_Slot": 1.0,
+      "First_Year": 2024,
+      "Last_Year": 2024,
+      "Early_Score": 0.9999990000010001
+    },
+    {
+      "Category": "Flex",
+      "Ingredient": "English Ale (002,1968, S-04, A09)",
+      "Picks": 1,
+      "Avg_Slot": 6.0,
+      "First_Year": 2022,
+      "Last_Year": 2022,
+      "Early_Score": 0.16666663888889352
+    },
+    {
+      "Category": "Flex",
+      "Ingredient": "Orange Peel, Sweet",
+      "Picks": 1,
+      "Avg_Slot": 5.0,
+      "First_Year": 2022,
+      "Last_Year": 2022,
+      "Early_Score": 0.199999960000008
+    },
+    {
+      "Category": "Flex",
+      "Ingredient": "Munich, Light",
+      "Picks": 1,
+      "Avg_Slot": 5.0,
+      "First_Year": 2022,
+      "Last_Year": 2022,
+      "Early_Score": 0.199999960000008
+    },
+    {
+      "Category": "Flex",
+      "Ingredient": "Motueka",
+      "Picks": 1,
+      "Avg_Slot": 5.0,
+      "First_Year": 2022,
+      "Last_Year": 2022,
+      "Early_Score": 0.199999960000008
+    },
+    {
+      "Category": "Flex",
+      "Ingredient": "Mosaic",
+      "Picks": 1,
+      "Avg_Slot": 4.0,
+      "First_Year": 2024,
+      "Last_Year": 2024,
+      "Early_Score": 0.24999993750001562
+    },
+    {
+      "Category": "Flex",
+      "Ingredient": "Magnum",
+      "Picks": 1,
+      "Avg_Slot": 10.0,
+      "First_Year": 2024,
+      "Last_Year": 2024,
+      "Early_Score": 0.09999999000000101
+    },
+    {
+      "Category": "Flex",
+      "Ingredient": "Lemon Peel",
+      "Picks": 1,
+      "Avg_Slot": 1.0,
+      "First_Year": 2023,
+      "Last_Year": 2023,
+      "Early_Score": 0.9999990000010001
+    },
+    {
+      "Category": "Flex",
+      "Ingredient": "German Vienna",
+      "Picks": 1,
+      "Avg_Slot": 7.0,
+      "First_Year": 2023,
+      "Last_Year": 2023,
+      "Early_Score": 0.1428571224489825
+    },
+    {
+      "Category": "Flex",
+      "Ingredient": "Extract, Munich",
+      "Picks": 1,
+      "Avg_Slot": 5.0,
+      "First_Year": 2024,
+      "Last_Year": 2024,
+      "Early_Score": 0.199999960000008
+    },
+    {
+      "Category": "Flex",
+      "Ingredient": "Extra Light/Pils Extract",
+      "Picks": 1,
+      "Avg_Slot": 6.0,
+      "First_Year": 2023,
+      "Last_Year": 2023,
+      "Early_Score": 0.16666663888889352
+    },
+    {
+      "Category": "Yeast",
+      "Ingredient": "Voss Kveik (A43, OYL-061, Dry)",
+      "Picks": 1,
+      "Avg_Slot": 6.0,
+      "First_Year": 2022,
+      "Last_Year": 2022,
+      "Early_Score": 0.16666663888889352
+    }
+  ],
+  "category_avg_slot": [
+    {
+      "Category": "Adjunct",
+      "Avg Slot": 5.037037037037037
+    },
+    {
+      "Category": "Flex",
+      "Avg Slot": 5.037037037037037
+    },
+    {
+      "Category": "Hops",
+      "Avg Slot": 5.037037037037037
+    },
+    {
+      "Category": "Malt",
+      "Avg Slot": 5.037037037037037
+    },
+    {
+      "Category": "Yeast",
+      "Avg Slot": 5.037037037037037
+    }
+  ],
+  "top_pairs": [
+    {
+      "A": "Corn Sugar (Dextrose)",
+      "B": "German Pilsner",
+      "PairCount": 3
+    },
+    {
+      "A": "Corn, Flaked",
+      "B": "German Vienna",
+      "PairCount": 2
+    },
+    {
+      "A": "Barley, Roasted",
+      "B": "Caramel/Crystal Malt - 80L",
+      "PairCount": 2
+    },
+    {
+      "A": "Caramel/Crystal Malt - 80L",
+      "B": "East Kent Goldings",
+      "PairCount": 2
+    },
+    {
+      "A": "American Vienna",
+      "B": "Centennial",
+      "PairCount": 2
+    },
+    {
+      "A": "Caramel/Crystal Malt - 80L",
+      "B": "Coconut",
+      "PairCount": 2
+    },
+    {
+      "A": "Floor Malted Pilsner",
+      "B": "Melanoiden Malt",
+      "PairCount": 2
+    },
+    {
+      "A": "Chocolate Malt",
+      "B": "Munich, Dark",
+      "PairCount": 2
+    },
+    {
+      "A": "German Vienna",
+      "B": "Motueka",
+      "PairCount": 2
+    },
+    {
+      "A": "Corn, Flaked",
+      "B": "Motueka",
+      "PairCount": 2
+    },
+    {
+      "A": "Coconut",
+      "B": "East Kent Goldings",
+      "PairCount": 2
+    },
+    {
+      "A": "American Ale (WLP001,WY1056, US-05, A07)",
+      "B": "Simcoe",
+      "PairCount": 2
+    },
+    {
+      "A": "Aromatic",
+      "B": "Tettnang / Tettnanger",
+      "PairCount": 2
+    },
+    {
+      "A": "Aromatic",
+      "B": "Candi Sugar, Clear",
+      "PairCount": 2
+    },
+    {
+      "A": "English Pale Ale",
+      "B": "Oats, Flaked",
+      "PairCount": 1
+    },
+    {
+      "A": "Extra Light/Pils Extract",
+      "B": "German Pale Ale",
+      "PairCount": 1
+    },
+    {
+      "A": "Floor Malted Pilsner",
+      "B": "Hallertau Mittelfrueh",
+      "PairCount": 1
+    },
+    {
+      "A": "Extract, Munich",
+      "B": "Hallertau Tradition",
+      "PairCount": 1
+    },
+    {
+      "A": "Extract, Munich",
+      "B": "Munich Lager (WLP838, WY2308, Dry)",
+      "PairCount": 1
+    },
+    {
+      "A": "Extract, Munich",
+      "B": "Pale Malt (2 Row)",
+      "PairCount": 1
+    },
+    {
+      "A": "English Pale Ale",
+      "B": "Molasses",
+      "PairCount": 1
+    },
+    {
+      "A": "Floor Malted Pilsner",
+      "B": "Hefewiezen (WLP300, WY3068, G01)",
+      "PairCount": 1
+    },
+    {
+      "A": "English Pale Ale",
+      "B": "Motueka",
+      "PairCount": 1
+    },
+    {
+      "A": "English Pale Ale",
+      "B": "Fuggle",
+      "PairCount": 1
+    },
+    {
+      "A": "English Pale Ale",
+      "B": "Mexican Lager (WLP940, OYL-113, L09)",
+      "PairCount": 1
+    },
+    {
+      "A": "English Pale Ale",
+      "B": "German Vienna",
+      "PairCount": 1
+    },
+    {
+      "A": "Floor Malted Pilsner",
+      "B": "Saaz",
+      "PairCount": 1
+    },
+    {
+      "A": "English Ale (WLP002, WY1968, S-04, A09)",
+      "B": "White Wheat",
+      "PairCount": 1
+    },
+    {
+      "A": "English Ale (WLP002, WY1968, S-04, A09)",
+      "B": "Progress",
+      "PairCount": 1
+    },
+    {
+      "A": "English Ale (WLP002, WY1968, S-04, A09)",
+      "B": "Marris Otter",
+      "PairCount": 1
+    },
+    {
+      "A": "English Ale (002,1968, S-04, A09)",
+      "B": "Voss Kveik (A43, OYL-061, Dry)",
+      "PairCount": 1
+    },
+    {
+      "A": "English Ale (002,1968, S-04, A09)",
+      "B": "Molasses",
+      "PairCount": 1
+    },
+    {
+      "A": "English Ale (002,1968, S-04, A09)",
+      "B": "Loral",
+      "PairCount": 1
+    },
+    {
+      "A": "English Ale (002,1968, S-04, A09)",
+      "B": "Golden Promise",
+      "PairCount": 1
+    },
+    {
+      "A": "East Kent Goldings",
+      "B": "Stout Malt",
+      "PairCount": 1
+    },
+    {
+      "A": "East Kent Goldings",
+      "B": "Special Roast",
+      "PairCount": 1
+    },
+    {
+      "A": "East Kent Goldings",
+      "B": "Pale Chocolate Malt",
+      "PairCount": 1
+    },
+    {
+      "A": "East Kent Goldings",
+      "B": "London III (WLP013, A38, WY1318)",
+      "PairCount": 1
+    },
+    {
+      "A": "East Kent Goldings",
+      "B": "London III (013, A38, 1318)",
+      "PairCount": 1
+    },
+    {
+      "A": "Floor Malted Pilsner",
+      "B": "Oak",
+      "PairCount": 1
+    },
+    {
+      "A": "Abbey Ale (WLP540, EY1762, BE-256)",
+      "B": "Aromatic",
+      "PairCount": 1
+    },
+    {
+      "A": "Floor Malted Pilsner",
+      "B": "Tettnang / Tettnanger",
+      "PairCount": 1
+    },
+    {
+      "A": "German Lager (WLP830, WY2124, L13, 34/70)",
+      "B": "German Pilsner",
+      "PairCount": 1
+    },
+    {
+      "A": "German Ale (WY1007, G02)",
+      "B": "Turbinado Sugar",
+      "PairCount": 1
+    },
+    {
+      "A": "German Lager (830, 2124, L13, 34/70)",
+      "B": "Honey",
+      "PairCount": 1
+    },
+    {
+      "A": "German Lager (830, 2124, L13, 34/70)",
+      "B": "Maris Otter",
+      "PairCount": 1
+    },
+    {
+      "A": "German Lager (830, 2124, L13, 34/70)",
+      "B": "Rye Malt",
+      "PairCount": 1
+    },
+    {
+      "A": "German Lager (830, 2124, L13, 34/70)",
+      "B": "Saaz",
+      "PairCount": 1
+    },
+    {
+      "A": "German Lager (830, 2124, L13, 34/70)",
+      "B": "Smoked Malt",
+      "PairCount": 1
+    },
+    {
+      "A": "German Lager (WLP830, WY2124, L13, 34/70)",
+      "B": "German Vienna",
+      "PairCount": 1
+    },
+    {
+      "A": "German Ale (WY1007, G02)",
+      "B": "Rye Malt",
+      "PairCount": 1
+    },
+    {
+      "A": "German Lager (WLP830, WY2124, L13, 34/70)",
+      "B": "Idaho 7",
+      "PairCount": 1
+    },
+    {
+      "A": "German Lager (WLP830, WY2124, L13, 34/70)",
+      "B": "Magnum",
+      "PairCount": 1
+    },
+    {
+      "A": "German Lager (WLP830, WY2124, L13, 34/70)",
+      "B": "Motueka",
+      "PairCount": 1
+    },
+    {
+      "A": "German Lager (WLP830, WY2124, L13, 34/70)",
+      "B": "Rice, Flaked",
+      "PairCount": 1
+    },
+    {
+      "A": "German Pilsner",
+      "B": "Idaho 7",
+      "PairCount": 1
+    },
+    {
+      "A": "German Pilsner",
+      "B": "Red X",
+      "PairCount": 1
+    },
+    {
+      "A": "German Ale (WY1007, G02)",
+      "B": "Tettnang / Tettnanger",
+      "PairCount": 1
+    },
+    {
+      "A": "German Ale (WY1007, G02)",
+      "B": "Red X",
+      "PairCount": 1
+    },
+    {
+      "A": "Floor Malted Pilsner",
+      "B": "Wheat, Red",
+      "PairCount": 1
+    },
+    {
+      "A": "Fuggle",
+      "B": "Special B",
+      "PairCount": 1
+    },
+    {
+      "A": "Fuggle",
+      "B": "Golden Promise",
+      "PairCount": 1
+    },
+    {
+      "A": "Fuggle",
+      "B": "Lyle's Golden (Invert Sugar)",
+      "PairCount": 1
+    },
+    {
+      "A": "Fuggle",
+      "B": "Molasses",
+      "PairCount": 1
+    },
+    {
+      "A": "Fuggle",
+      "B": "Munich, Dark",
+      "PairCount": 1
+    },
+    {
+      "A": "Fuggle",
+      "B": "Oats, Flaked",
+      "PairCount": 1
+    },
+    {
+      "A": "Fuggle",
+      "B": "Scottish Ale (WLP028, WY1728, A31)",
+      "PairCount": 1
+    },
+    {
+      "A": "Galaxy",
+      "B": "German Lager (WLP830, WY2124, L13, 34/70)",
+      "PairCount": 1
+    },
+    {
+      "A": "Galaxy",
+      "B": "Verdant IPA (Dry)",
+      "PairCount": 1
+    },
+    {
+      "A": "Galaxy",
+      "B": "German Pilsner",
+      "PairCount": 1
+    },
+    {
+      "A": "Galaxy",
+      "B": "Idaho 7",
+      "PairCount": 1
+    },
+    {
+      "A": "Galaxy",
+      "B": "Lyle's Golden (Invert Sugar)",
+      "PairCount": 1
+    },
+    {
+      "A": "Galaxy",
+      "B": "Marris Otter",
+      "PairCount": 1
+    },
+    {
+      "A": "Galaxy",
+      "B": "Mosaic",
+      "PairCount": 1
+    },
+    {
+      "A": "Galaxy",
+      "B": "Rice, Flaked",
+      "PairCount": 1
+    },
+    {
+      "A": "East Kent Goldings",
+      "B": "Golden Promise",
+      "PairCount": 1
+    },
+    {
+      "A": "Dry English Ale (WLP007, WY1098, A10)",
+      "B": "Fuggle",
+      "PairCount": 1
+    },
+    {
+      "A": "East Kent Goldings",
+      "B": "German Pale Ale",
+      "PairCount": 1
+    },
+    {
+      "A": "Coffee",
+      "B": "English Pale Ale",
+      "PairCount": 1
+    },
+    {
+      "A": "Coriander",
+      "B": "Sorachi Ace",
+      "PairCount": 1
+    },
+    {
+      "A": "Coriander",
+      "B": "Oats, Flaked",
+      "PairCount": 1
+    },
+    {
+      "A": "Coriander",
+      "B": "Motueka",
+      "PairCount": 1
+    },
+    {
+      "A": "Coriander",
+      "B": "Magnum",
+      "PairCount": 1
+    },
+    {
+      "A": "Coriander",
+      "B": "Lemon Peel",
+      "PairCount": 1
+    },
+    {
+      "A": "Coriander",
+      "B": "German Vienna",
+      "PairCount": 1
+    },
+    {
+      "A": "Coriander",
+      "B": "German Lager (WLP830, WY2124, L13, 34/70)",
+      "PairCount": 1
+    },
+    {
+      "A": "Coriander",
+      "B": "Corn, Flaked",
+      "PairCount": 1
+    },
+    {
+      "A": "Coffee",
+      "B": "White Wheat",
+      "PairCount": 1
+    },
+    {
+      "A": "Coffee",
+      "B": "Progress",
+      "PairCount": 1
+    },
+    {
+      "A": "Coffee",
+      "B": "Oats, Flaked",
+      "PairCount": 1
+    },
+    {
+      "A": "Coffee",
+      "B": "Molasses",
+      "PairCount": 1
+    },
+    {
+      "A": "Coffee",
+      "B": "Marris Otter",
+      "PairCount": 1
+    },
+    {
+      "A": "Coffee",
+      "B": "Fuggle",
+      "PairCount": 1
+    },
+    {
+      "A": "Coffee",
+      "B": "English Ale (WLP002, WY1968, S-04, A09)",
+      "PairCount": 1
+    },
+    {
+      "A": "East Kent Goldings",
+      "B": "Extra Light/Pils Extract",
+      "PairCount": 1
+    },
+    {
+      "A": "Coffee",
+      "B": "Dry English Ale (WLP007, WY1098, A10)",
+      "PairCount": 1
+    },
+    {
+      "A": "Coconut",
+      "B": "Stout Malt",
+      "PairCount": 1
+    },
+    {
+      "A": "Coconut",
+      "B": "Special Roast",
+      "PairCount": 1
+    },
+    {
+      "A": "Coconut",
+      "B": "Pale Chocolate Malt",
+      "PairCount": 1
+    },
+    {
+      "A": "Coconut",
+      "B": "London III (WLP013, A38, WY1318)",
+      "PairCount": 1
+    },
+    {
+      "A": "Coconut",
+      "B": "London III (013, A38, 1318)",
+      "PairCount": 1
+    },
+    {
+      "A": "Coconut",
+      "B": "Golden Promise",
+      "PairCount": 1
+    },
+    {
+      "A": "Citra",
+      "B": "Verdant IPA (Dry)",
+      "PairCount": 1
+    },
+    {
+      "A": "Citra",
+      "B": "Pale Malt (2 Row)",
+      "PairCount": 1
+    },
+    {
+      "A": "Citra",
+      "B": "Orange Peel, Sweet",
+      "PairCount": 1
+    },
+    {
+      "A": "Citra",
+      "B": "Oats, Flaked",
+      "PairCount": 1
+    },
+    {
+      "A": "Citra",
+      "B": "Mosaic",
+      "PairCount": 1
+    },
+    {
+      "A": "Citra",
+      "B": "Marris Otter",
+      "PairCount": 1
+    },
+    {
+      "A": "Citra",
+      "B": "Lyle's Golden (Invert Sugar)",
+      "PairCount": 1
+    },
+    {
+      "A": "Coriander",
+      "B": "Wheat, Flaked",
+      "PairCount": 1
+    },
+    {
+      "A": "Corn Sugar (Dextrose)",
+      "B": "Galaxy",
+      "PairCount": 1
+    },
+    {
+      "A": "Corn Sugar (Dextrose)",
+      "B": "German Lager (WLP830, WY2124, L13, 34/70)",
+      "PairCount": 1
+    },
+    {
+      "A": "Corn Sugar (Dextrose)",
+      "B": "Idaho 7",
+      "PairCount": 1
+    },
+    {
+      "A": "Dry English Ale (WLP007, WY1098, A10)",
+      "B": "Oats, Flaked",
+      "PairCount": 1
+    },
+    {
+      "A": "Dry English Ale (WLP007, WY1098, A10)",
+      "B": "Molasses",
+      "PairCount": 1
+    },
+    {
+      "A": "German Pilsner",
+      "B": "Saaz",
+      "PairCount": 1
+    },
+    {
+      "A": "Dry English Ale (WLP007, WY1098, A10)",
+      "B": "English Pale Ale",
+      "PairCount": 1
+    },
+    {
+      "A": "Dememera Sugar",
+      "B": "Pale Malt (2 Row)",
+      "PairCount": 1
+    },
+    {
+      "A": "Dememera Sugar",
+      "B": "Munich Lager (WLP838, WY2308, Dry)",
+      "PairCount": 1
+    },
+    {
+      "A": "Dememera Sugar",
+      "B": "Hallertau Tradition",
+      "PairCount": 1
+    },
+    {
+      "A": "Dememera Sugar",
+      "B": "Extract, Munich",
+      "PairCount": 1
+    },
+    {
+      "A": "Czech Lager (WLP802, WY2001, L28)",
+      "B": "Tettnang / Tettnanger",
+      "PairCount": 1
+    },
+    {
+      "A": "Czech Lager (WLP802, WY2001, L28)",
+      "B": "Saaz",
+      "PairCount": 1
+    },
+    {
+      "A": "Czech Lager (WLP802, WY2001, L28)",
+      "B": "Oak",
+      "PairCount": 1
+    },
+    {
+      "A": "Czech Lager (WLP802, WY2001, L28)",
+      "B": "Melanoiden Malt",
+      "PairCount": 1
+    },
+    {
+      "A": "Czech Lager (WLP802, WY2001, L28)",
+      "B": "Floor Malted Pilsner",
+      "PairCount": 1
+    },
+    {
+      "A": "Czech Lager (802, 2001, L28)",
+      "B": "Orange Peel, Sweet",
+      "PairCount": 1
+    },
+    {
+      "A": "Czech Lager (802, 2001, L28)",
+      "B": "Oak",
+      "PairCount": 1
+    },
+    {
+      "A": "Czech Lager (802, 2001, L28)",
+      "B": "Munich, Light",
+      "PairCount": 1
+    },
+    {
+      "A": "Czech Lager (802, 2001, L28)",
+      "B": "Motueka",
+      "PairCount": 1
+    },
+    {
+      "A": "Czech Lager (802, 2001, L28)",
+      "B": "Kohatu",
+      "PairCount": 1
+    },
+    {
+      "A": "Corn, Flaked",
+      "B": "Mexican Lager (WLP940, OYL-113, L09)",
+      "PairCount": 1
+    },
+    {
+      "A": "Corn, Flaked",
+      "B": "Magnum",
+      "PairCount": 1
+    },
+    {
+      "A": "Corn, Flaked",
+      "B": "German Lager (WLP830, WY2124, L13, 34/70)",
+      "PairCount": 1
+    },
+    {
+      "A": "Corn, Flaked",
+      "B": "English Pale Ale",
+      "PairCount": 1
+    },
+    {
+      "A": "Corn Sugar (Dextrose)",
+      "B": "Wheat, Flaked",
+      "PairCount": 1
+    },
+    {
+      "A": "Corn Sugar (Dextrose)",
+      "B": "Trappist Ale (WLP500, WY1214, B48)",
+      "PairCount": 1
+    },
+    {
+      "A": "Corn Sugar (Dextrose)",
+      "B": "Styrian Goldings",
+      "PairCount": 1
+    },
+    {
+      "A": "Corn Sugar (Dextrose)",
+      "B": "Strisselspalt",
+      "PairCount": 1
+    },
+    {
+      "A": "Corn Sugar (Dextrose)",
+      "B": "Saaz",
+      "PairCount": 1
+    },
+    {
+      "A": "Corn Sugar (Dextrose)",
+      "B": "Rice, Flaked",
+      "PairCount": 1
+    },
+    {
+      "A": "Corn Sugar (Dextrose)",
+      "B": "Red X",
+      "PairCount": 1
+    },
+    {
+      "A": "German Pilsner",
+      "B": "Rice, Flaked",
+      "PairCount": 1
+    },
+    {
+      "A": "German Pilsner",
+      "B": "Trappist Ale (WLP500, WY1214, B48)",
+      "PairCount": 1
+    },
+    {
+      "A": "German Pilsner",
+      "B": "Strisselspalt",
+      "PairCount": 1
+    },
+    {
+      "A": "Munich, Light",
+      "B": "Perle",
+      "PairCount": 1
+    },
+    {
+      "A": "Munich, Dark",
+      "B": "Scottish Ale (WLP028, WY1728, A31)",
+      "PairCount": 1
+    },
+    {
+      "A": "Munich, Dark",
+      "B": "Special B",
+      "PairCount": 1
+    },
+    {
+      "A": "Munich, Dark",
+      "B": "Turbinado Sugar",
+      "PairCount": 1
+    },
+    {
+      "A": "Munich, Light",
+      "B": "Oak",
+      "PairCount": 1
+    },
+    {
+      "A": "Munich, Light",
+      "B": "Orange Peel, Sweet",
+      "PairCount": 1
+    },
+    {
+      "A": "Munich, Light",
+      "B": "Pale Malt (6 Row)",
+      "PairCount": 1
+    },
+    {
+      "A": "Oak",
+      "B": "Orange Peel, Sweet",
+      "PairCount": 1
+    },
+    {
+      "A": "German Pilsner",
+      "B": "Styrian Goldings",
+      "PairCount": 1
+    },
+    {
+      "A": "Oak",
+      "B": "Saaz",
+      "PairCount": 1
+    },
+    {
+      "A": "Oak",
+      "B": "Tettnang / Tettnanger",
+      "PairCount": 1
+    },
+    {
+      "A": "Oats, Flaked",
+      "B": "Sorachi Ace",
+      "PairCount": 1
+    },
+    {
+      "A": "Oats, Flaked",
+      "B": "Wheat, Flaked",
+      "PairCount": 1
+    },
+    {
+      "A": "Orange Peel, Sweet",
+      "B": "Pale Malt (2 Row)",
+      "PairCount": 1
+    },
+    {
+      "A": "Pale Chocolate Malt",
+      "B": "Special Roast",
+      "PairCount": 1
+    },
+    {
+      "A": "Munich, Dark",
+      "B": "Perle",
+      "PairCount": 1
+    },
+    {
+      "A": "Munich, Dark",
+      "B": "Pale Malt (6 Row)",
+      "PairCount": 1
+    },
+    {
+      "A": "Munich, Dark",
+      "B": "Munich, Light",
+      "PairCount": 1
+    },
+    {
+      "A": "Munich Lager (WLP838, WY2308, Dry)",
+      "B": "Pale Malt (2 Row)",
+      "PairCount": 1
+    },
+    {
+      "A": "Motueka",
+      "B": "Orange Peel, Sweet",
+      "PairCount": 1
+    },
+    {
+      "A": "Motueka",
+      "B": "Oak",
+      "PairCount": 1
+    },
+    {
+      "A": "Motueka",
+      "B": "Munich, Light",
+      "PairCount": 1
+    },
+    {
+      "A": "Mosaic",
+      "B": "Verdant IPA (Dry)",
+      "PairCount": 1
+    },
+    {
+      "A": "Molasses",
+      "B": "Voss Kveik (A43, OYL-061, Dry)",
+      "PairCount": 1
+    },
+    {
+      "A": "Molasses",
+      "B": "Oats, Flaked",
+      "PairCount": 1
+    },
+    {
+      "A": "Mexican Lager (WLP940, OYL-113, L09)",
+      "B": "Perle",
+      "PairCount": 1
+    },
+    {
+      "A": "Mexican Lager (WLP940, OYL-113, L09)",
+      "B": "Pale Malt (6 Row)",
+      "PairCount": 1
+    },
+    {
+      "A": "Mexican Lager (WLP940, OYL-113, L09)",
+      "B": "Munich, Light",
+      "PairCount": 1
+    },
+    {
+      "A": "Mexican Lager (WLP940, OYL-113, L09)",
+      "B": "Munich, Dark",
+      "PairCount": 1
+    },
+    {
+      "A": "Mexican Lager (WLP940, OYL-113, L09)",
+      "B": "Motueka",
+      "PairCount": 1
+    },
+    {
+      "A": "Melanoiden Malt",
+      "B": "Wheat, Red",
+      "PairCount": 1
+    },
+    {
+      "A": "Melanoiden Malt",
+      "B": "Tettnang / Tettnanger",
+      "PairCount": 1
+    },
+    {
+      "A": "Pale Malt (6 Row)",
+      "B": "Peaches",
+      "PairCount": 1
+    },
+    {
+      "A": "Pale Malt (6 Row)",
+      "B": "Perle",
+      "PairCount": 1
+    },
+    {
+      "A": "Pale Malt (6 Row)",
+      "B": "Sabro",
+      "PairCount": 1
+    },
+    {
+      "A": "Saaz",
+      "B": "Tettnang / Tettnanger",
+      "PairCount": 1
+    },
+    {
+      "A": "Tettnang / Tettnanger",
+      "B": "Turbinado Sugar",
+      "PairCount": 1
+    },
+    {
+      "A": "Tettnang / Tettnanger",
+      "B": "Trappist Ale (500, 1214, B48)",
+      "PairCount": 1
+    },
+    {
+      "A": "Styrian Goldings",
+      "B": "Wheat, Flaked",
+      "PairCount": 1
+    },
+    {
+      "A": "Styrian Goldings",
+      "B": "Trappist Ale (WLP500, WY1214, B48)",
+      "PairCount": 1
+    },
+    {
+      "A": "Special B",
+      "B": "Trappist Ale (500, 1214, B48)",
+      "PairCount": 1
+    },
+    {
+      "A": "Special B",
+      "B": "Tettnang / Tettnanger",
+      "PairCount": 1
+    },
+    {
+      "A": "Sorachi Ace",
+      "B": "Wheat, Flaked",
+      "PairCount": 1
+    },
+    {
+      "A": "Simcoe",
+      "B": "White Wheat",
+      "PairCount": 1
+    },
+    {
+      "A": "Simcoe",
+      "B": "Wheat, Red",
+      "PairCount": 1
+    },
+    {
+      "A": "Scottish Ale (WLP028, WY1728, A31)",
+      "B": "Special B",
+      "PairCount": 1
+    },
+    {
+      "A": "Sabro",
+      "B": "Wheat, Red",
+      "PairCount": 1
+    },
+    {
+      "A": "Sabro",
+      "B": "Simcoe",
+      "PairCount": 1
+    },
+    {
+      "A": "Saaz",
+      "B": "Wheat, Flaked",
+      "PairCount": 1
+    },
+    {
+      "A": "Saaz",
+      "B": "Trappist Ale (WLP500, WY1214, B48)",
+      "PairCount": 1
+    },
+    {
+      "A": "Saaz",
+      "B": "Styrian Goldings",
+      "PairCount": 1
+    },
+    {
+      "A": "Pale Malt (6 Row)",
+      "B": "Simcoe",
+      "PairCount": 1
+    },
+    {
+      "A": "Saaz",
+      "B": "Smoked Malt",
+      "PairCount": 1
+    },
+    {
+      "A": "Rye Malt",
+      "B": "Turbinado Sugar",
+      "PairCount": 1
+    },
+    {
+      "A": "Rye Malt",
+      "B": "Tettnang / Tettnanger",
+      "PairCount": 1
+    }
+  ],
+  "yeast_malt_pairs": [
+    {
+      "Yeast": "Abbey Ale (WLP540, EY1762, BE-256)",
+      "Malt": "German Pale Ale",
+      "Count": 1
+    },
+    {
+      "Yeast": "American Ale (001,1056, US-05, A07)",
+      "Malt": "American Vienna",
+      "Count": 1
+    },
+    {
+      "Yeast": "American Ale (WLP001,WY1056, US-05, A07)",
+      "Malt": "American Vienna",
+      "Count": 1
+    },
+    {
+      "Yeast": "American Ale (WLP001,WY1056, US-05, A07)",
+      "Malt": "Pale Malt (6 Row)",
+      "Count": 1
+    },
+    {
+      "Yeast": "Belgian Ale (570, 1388)",
+      "Malt": "German Pilsner",
+      "Count": 1
+    },
+    {
+      "Yeast": "Belgian Ardennes (3522, B45)",
+      "Malt": "Belgian Pilsner",
+      "Count": 1
+    },
+    {
+      "Yeast": "Belgian Ardennes (WY3522, B45)",
+      "Malt": "Belgian Pilsner",
+      "Count": 1
+    },
+    {
+      "Yeast": "Czech Lager (802, 2001, L28)",
+      "Malt": "American Pilsner",
+      "Count": 1
+    },
+    {
+      "Yeast": "Czech Lager (WLP802, WY2001, L28)",
+      "Malt": "Floor Malted Pilsner",
+      "Count": 1
+    },
+    {
+      "Yeast": "Dry English Ale (WLP007, WY1098, A10)",
+      "Malt": "English Pale Ale",
+      "Count": 1
+    },
+    {
+      "Yeast": "English Ale (WLP002, WY1968, S-04, A09)",
+      "Malt": "Marris Otter",
+      "Count": 1
+    },
+    {
+      "Yeast": "German Ale (WY1007, G02)",
+      "Malt": "Red X",
+      "Count": 1
+    },
+    {
+      "Yeast": "German Lager (830, 2124, L13, 34/70)",
+      "Malt": "Maris Otter",
+      "Count": 1
+    },
+    {
+      "Yeast": "German Lager (WLP830, WY2124, L13, 34/70)",
+      "Malt": "German Pilsner",
+      "Count": 1
+    },
+    {
+      "Yeast": "German Lager (WLP830, WY2124, L13, 34/70)",
+      "Malt": "German Vienna",
+      "Count": 1
+    },
+    {
+      "Yeast": "Hefewiezen (WLP300, WY3068, G01)",
+      "Malt": "Floor Malted Pilsner",
+      "Count": 1
+    },
+    {
+      "Yeast": "London III (013, A38, 1318)",
+      "Malt": "Stout Malt",
+      "Count": 1
+    },
+    {
+      "Yeast": "London III (WLP013, A38, WY1318)",
+      "Malt": "Golden Promise",
+      "Count": 1
+    },
+    {
+      "Yeast": "London III (WLP013, A38, WY1318)",
+      "Malt": "Pale Malt (2 Row)",
+      "Count": 1
+    },
+    {
+      "Yeast": "Mexican Lager (WLP940, OYL-113, L09)",
+      "Malt": "English Pale Ale",
+      "Count": 1
+    }
+  ],
+  "yeast_hop_pairs": [
+    {
+      "Yeast": "Abbey Ale (WLP540, EY1762, BE-256)",
+      "Hops": "East Kent Goldings",
+      "Count": 1
+    },
+    {
+      "Yeast": "American Ale (001,1056, US-05, A07)",
+      "Hops": "Citra",
+      "Count": 1
+    },
+    {
+      "Yeast": "American Ale (WLP001,WY1056, US-05, A07)",
+      "Hops": "Sabro",
+      "Count": 1
+    },
+    {
+      "Yeast": "American Ale (WLP001,WY1056, US-05, A07)",
+      "Hops": "Simcoe",
+      "Count": 1
+    },
+    {
+      "Yeast": "Belgian Ale (570, 1388)",
+      "Hops": "Strisselspalt",
+      "Count": 1
+    },
+    {
+      "Yeast": "Belgian Ardennes (3522, B45)",
+      "Hops": "Hallertau Mittelfrueh",
+      "Count": 1
+    },
+    {
+      "Yeast": "Belgian Ardennes (WY3522, B45)",
+      "Hops": "Sorachi Ace",
+      "Count": 1
+    },
+    {
+      "Yeast": "Czech Lager (802, 2001, L28)",
+      "Hops": "Kohatu",
+      "Count": 1
+    },
+    {
+      "Yeast": "Czech Lager (WLP802, WY2001, L28)",
+      "Hops": "Saaz",
+      "Count": 1
+    },
+    {
+      "Yeast": "Dry English Ale (WLP007, WY1098, A10)",
+      "Hops": "Fuggle",
+      "Count": 1
+    },
+    {
+      "Yeast": "English Ale (WLP002, WY1968, S-04, A09)",
+      "Hops": "Progress",
+      "Count": 1
+    },
+    {
+      "Yeast": "German Ale (WY1007, G02)",
+      "Hops": "Tettnang / Tettnanger",
+      "Count": 1
+    },
+    {
+      "Yeast": "German Lager (830, 2124, L13, 34/70)",
+      "Hops": "Saaz",
+      "Count": 1
+    },
+    {
+      "Yeast": "German Lager (WLP830, WY2124, L13, 34/70)",
+      "Hops": "Galaxy",
+      "Count": 1
+    },
+    {
+      "Yeast": "German Lager (WLP830, WY2124, L13, 34/70)",
+      "Hops": "Motueka",
+      "Count": 1
+    },
+    {
+      "Yeast": "Hefewiezen (WLP300, WY3068, G01)",
+      "Hops": "Hallertau Mittelfrueh",
+      "Count": 1
+    },
+    {
+      "Yeast": "London III (013, A38, 1318)",
+      "Hops": "East Kent Goldings",
+      "Count": 1
+    },
+    {
+      "Yeast": "London III (WLP013, A38, WY1318)",
+      "Hops": "Citra",
+      "Count": 1
+    },
+    {
+      "Yeast": "London III (WLP013, A38, WY1318)",
+      "Hops": "East Kent Goldings",
+      "Count": 1
+    },
+    {
+      "Yeast": "Mexican Lager (WLP940, OYL-113, L09)",
+      "Hops": "Motueka",
+      "Count": 1
+    }
+  ],
+  "malt_hop_pairs": [
+    {
+      "Malt": "American Pilsner",
+      "Hops": "Kohatu",
+      "Count": 1
+    },
+    {
+      "Malt": "American Standard 2 Row",
+      "Hops": "Tettnang / Tettnanger",
+      "Count": 1
+    },
+    {
+      "Malt": "American Vienna",
+      "Hops": "Citra",
+      "Count": 1
+    },
+    {
+      "Malt": "American Vienna",
+      "Hops": "Simcoe",
+      "Count": 1
+    },
+    {
+      "Malt": "Belgian Pilsner",
+      "Hops": "Hallertau Mittelfrueh",
+      "Count": 1
+    },
+    {
+      "Malt": "Belgian Pilsner",
+      "Hops": "Sorachi Ace",
+      "Count": 1
+    },
+    {
+      "Malt": "English Pale Ale",
+      "Hops": "Fuggle",
+      "Count": 1
+    },
+    {
+      "Malt": "English Pale Ale",
+      "Hops": "Motueka",
+      "Count": 1
+    },
+    {
+      "Malt": "Floor Malted Pilsner",
+      "Hops": "Hallertau Mittelfrueh",
+      "Count": 1
+    },
+    {
+      "Malt": "Floor Malted Pilsner",
+      "Hops": "Saaz",
+      "Count": 1
+    },
+    {
+      "Malt": "German Pale Ale",
+      "Hops": "East Kent Goldings",
+      "Count": 1
+    },
+    {
+      "Malt": "German Pilsner",
+      "Hops": "Galaxy",
+      "Count": 1
+    },
+    {
+      "Malt": "German Pilsner",
+      "Hops": "Strisselspalt",
+      "Count": 1
+    },
+    {
+      "Malt": "German Pilsner",
+      "Hops": "Styrian Goldings",
+      "Count": 1
+    },
+    {
+      "Malt": "German Vienna",
+      "Hops": "Motueka",
+      "Count": 1
+    },
+    {
+      "Malt": "Golden Promise",
+      "Hops": "East Kent Goldings",
+      "Count": 1
+    },
+    {
+      "Malt": "Golden Promise",
+      "Hops": "Fuggle",
+      "Count": 1
+    },
+    {
+      "Malt": "Golden Promise",
+      "Hops": "Loral",
+      "Count": 1
+    },
+    {
+      "Malt": "Maris Otter",
+      "Hops": "Saaz",
+      "Count": 1
+    },
+    {
+      "Malt": "Marris Otter",
+      "Hops": "Galaxy",
+      "Count": 1
+    }
+  ]
+}
