@@ -634,8 +634,35 @@ with tab5:
         st.dataframe(viab_sim, use_container_width=True)
 
 with tab6:
-    st.subheader("Draft Results")
+    st.subheader("Team Summary")
     df_log = pd.DataFrame(st.session_state["draft_log"])
+    summary_rows = []
+    for p in players:
+        slots = {"Malt": "", "Hop": "", "Yeast": "", "Adjunct": "",
+                 "Flex1": "", "Flex2": "", "Flex3": ""}
+        if enable_round8:
+            slots["Round8"] = ""
+        flex_keys = ["Flex1", "Flex2", "Flex3"]
+        flex_idx = 0
+        player_rows = df_log[df_log["Player"] == p]
+        for _, r in player_rows.iterrows():
+            cat = r.get("Category", "")
+            ing = r.get("Ingredient", "")
+            bucket = bucket_for_rules(str(cat))
+            if bucket in ["Malt", "Hop", "Yeast", "Adjunct"] and slots[bucket] == "":
+                slots[bucket] = ing
+            else:
+                if flex_idx < len(flex_keys):
+                    slots[flex_keys[flex_idx]] = ing
+                    flex_idx += 1
+                elif enable_round8:
+                    slots["Round8"] = ing
+        summary_rows.append({"Player": p, **slots})
+    if summary_rows:
+        summary_df = pd.DataFrame(summary_rows)
+        st.dataframe(summary_df, use_container_width=True)
+
+    st.subheader("Draft Results")
     edited = st.data_editor(df_log, num_rows="dynamic", use_container_width=True, key="draft_editor")
     if not edited.equals(df_log):
         st.session_state["draft_log"] = edited.to_dict("records")
