@@ -2,6 +2,8 @@ import streamlit as st
 import pandas as pd
 import json
 import random
+import os
+import io
 from collections import defaultdict, Counter
 
 st.set_page_config(page_title="Fantasy Brewing Draft Advisor", layout="wide")
@@ -40,6 +42,27 @@ def load_data():
     return ingredients, style_matrix, scarcity, opponent_model
 
 ingredients, style_matrix, scarcity_df, opponent_model = load_data()
+
+# --- Persist draft state locally ---
+SAVE_FILE = "draft_autosave.json"
+
+def load_state():
+    """Load draft state from disk if it exists."""
+    if os.path.exists(SAVE_FILE):
+        try:
+            with open(SAVE_FILE) as f:
+                return json.load(f)
+        except Exception:
+            return {}
+    return {}
+
+def save_state(state):
+    """Persist draft state to disk."""
+    try:
+        with open(SAVE_FILE, "w") as f:
+            json.dump(state, f)
+    except Exception:
+        pass
 
 # ---- Availability helper (alias-aware) ----
 def build_available_set(ingredients_df):
@@ -98,7 +121,7 @@ for style, cats in style_matrix.items():
 all_categories = ["Base Malt", "Hop", "Yeast", "Adjunct", "Specialty"]
 
 # --- Rulebook-aware requirements status ---
-TOTAL_PICKS = 7  # 1 malt, 1 hop, 1 yeast, 1 adjunct, plus 3 flex
+DEFAULT_ROUNDS = 7  # base number of rounds before optional round 8
 
 def bucket_for_rules(category_label: str) -> str:
     if category_label == "Base Malt":
@@ -111,7 +134,7 @@ def bucket_for_rules(category_label: str) -> str:
         return "Adjunct"
     return "Flex"  # Specialty/Extra -> Flex only
 
-def compute_rules_status(my_picks, ingredient_to_category):
+def compute_rules_status(my_picks, ingredient_to_category, total_picks):
     counts = {"Malt":0, "Hop":0, "Yeast":0, "Adjunct":0, "Flex":0}
     for ing in my_picks:
         ui_cat = ingredient_to_category.get(ing, "Specialty")
@@ -126,7 +149,7 @@ def compute_rules_status(my_picks, ingredient_to_category):
     flex_used = max(0, len(my_picks) - satisfied_core)
     flex_remaining = max(0, 3 - flex_used)
 
-    picks_remaining = max(0, TOTAL_PICKS - len(my_picks))
+    picks_remaining = max(0, total_picks - len(my_picks))
 
     required_slots_left = sum(required_remaining.values())
     feasible = required_slots_left <= picks_remaining
@@ -145,8 +168,35 @@ def compute_rules_status(my_picks, ingredient_to_category):
 
 # --- Sidebar controls ---
 st.sidebar.header("Draft Setup")
-num_players = st.sidebar.number_input("Number of players", min_value=4, max_value=20, value=10, step=1)
-draft_position = st.sidebar.number_input("Your draft position (Round 1)", min_value=1, max_value=num_players, value=min(num_players, 10), step=1)
+saved_state = load_state()
+if "draft_log" not in st.session_state:
+    st.session_state["draft_log"] = saved_state.get("draft_log", [])
+if "players" not in st.session_state:
+    st.session_state["players"] = saved_state.get("players", [])
+
+existing_players = st.session_state.get("players", [])
+num_players = st.sidebar.number_input(
+    "Number of players", min_value=4, max_value=20,
+    value=len(existing_players) if existing_players else 10, step=1
+)
+
+players = []
+for i in range(int(num_players)):
+    default_name = existing_players[i] if i < len(existing_players) else ""
+    nm = st.sidebar.text_input(f"Seat {i+1}", value=default_name, key=f"player_{i}")
+    players.append(nm.strip() or f"Player {i+1}")
+st.session_state["players"] = players
+save_state({"players": players, "draft_log": st.session_state.get("draft_log", [])})
+
+enable_round8 = st.sidebar.checkbox("Enable optional 8th round", value=False)
+TOTAL_PICKS = DEFAULT_ROUNDS + (1 if enable_round8 else 0)
+
+prev_draft_pos = int(st.session_state.get("draft_pos", 1))
+draft_position = st.sidebar.number_input(
+    "Your draft position (Round 1)", min_value=1, max_value=num_players,
+    value=min(num_players, prev_draft_pos), step=1
+)
+st.session_state["draft_pos"] = int(draft_position)
 st.sidebar.caption("Snake draft: end of round 1 means first pick in round 2.")
 
 st.sidebar.header("Room Bias (opponent behavior)")
@@ -169,17 +219,29 @@ if reload_data:
     st.rerun()
 
 reset = st.sidebar.button("Reset session", type="primary")
+if reset:
+    st.session_state["draft_log"] = []
+    save_state({"players": players, "draft_log": []})
 
-if "my_picks" not in st.session_state or reset:
-    st.session_state["my_picks"] = []
-if "drafted" not in st.session_state or reset:
-    st.session_state["drafted"] = []
+draft_log = st.session_state.get("draft_log", [])
 
-my_picks = st.session_state["my_picks"]
-drafted = st.session_state["drafted"]
+# derive team picks and drafted list
+teams = {p: [] for p in players}
+drafted = []
+for rec in draft_log:
+    plyr = rec.get("Player")
+    ing = rec.get("Ingredient")
+    if plyr in teams:
+        teams[plyr].append(ing)
+    else:
+        teams[plyr] = [ing]
+    drafted.append(ing)
+
+your_name = players[int(draft_position)-1] if players else ""
+my_picks = teams.get(your_name, [])
 
 # --- Live rule status panel ---
-rules = compute_rules_status(my_picks, ingredient_to_category)
+rules = compute_rules_status(my_picks, ingredient_to_category, TOTAL_PICKS)
 
 st.sidebar.header("Your Draft Status")
 colA, colB = st.sidebar.columns(2)
@@ -206,6 +268,14 @@ if not rules["feasible"]:
 else:
     st.sidebar.success(f"Picks remaining: {rules['picks_remaining']}")
 
+# --- Current draft state ---
+total_picks_overall = TOTAL_PICKS * int(num_players)
+overall_pick = len(draft_log) + 1
+current_round = ((overall_pick - 1) // int(num_players)) + 1
+order = list(range(int(num_players))) if current_round % 2 == 1 else list(range(int(num_players)-1, -1, -1))
+idx_in_order = (overall_pick - 1) % int(num_players)
+current_player = players[order[idx_in_order]] if overall_pick <= total_picks_overall else None
+
 # --- Opponent data accessors ---
 ingredient_popularity = {}
 early_signal = {}
@@ -224,11 +294,33 @@ if opponent_model:
             pair_lookup[(b,a)] += c
 
 # --- Tabs ---
-tab1, tab2, tab3, tab4, tab5 = st.tabs(["Draft Board", "Style Viability", "Recommendations", "Blocks (deny-their-build)", "Mock Draft Simulator"])
+tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
+    "Draft Board", "Style Viability", "Recommendations",
+    "Blocks (deny-their-build)", "Mock Draft Simulator",
+    "Results / Export"
+])
 
 # --- Draft Board ---
 with tab1:
     st.subheader("Available Ingredients")
+
+    if current_player:
+        st.info(f"Round {current_round} • Pick {overall_pick} → {current_player}")
+    else:
+        st.success("Draft complete.")
+
+    def add_pick(player, ing, cat):
+        overall = len(st.session_state["draft_log"]) + 1
+        round_no = ((overall - 1) // int(num_players)) + 1
+        st.session_state["draft_log"].append({
+            "Round": round_no,
+            "Overall": overall,
+            "Player": player,
+            "Ingredient": ing,
+            "Category": cat
+        })
+        save_state({"players": players, "draft_log": st.session_state["draft_log"]})
+        st.rerun()
 
     # Build long list of available ingredients by category, based on sheet columns (alias-aware)
     long_rows = []
@@ -272,19 +364,14 @@ with tab1:
             for ing in sorted(sub["Ingredient"].tolist()):
                 with st.container():
                     st.markdown("<div class='hover-row'>", unsafe_allow_html=True)
-                    cols = st.columns([6,1.2,1.6])
+                    cols = st.columns([6,2])
                     label = f"**{ing}**"
                     if ing in ingredient_popularity:
                         rec = ingredient_popularity[ing]
                         label += f"  \n<small>pop: {rec.get('Picks',0)} | avg slot: {round(float(rec.get('Avg_Slot',0)),1)}</small>"
                     cols[0].markdown(label, unsafe_allow_html=True)
-                    if cols[1].button("I drafted", key=f"mine-{cat}-{ing}"):
-                        my_picks.append(ing)
-                        drafted.append(ing)
-                        st.rerun()
-                    if cols[2].button("Someone else", key=f"taken-{cat}-{ing}"):
-                        drafted.append(ing)
-                        st.rerun()
+                    if current_player and cols[1].button("Draft", key=f"draft-{cat}-{ing}"):
+                        add_pick(current_player, ing, cat)
                     st.markdown("</div>", unsafe_allow_html=True)
 
     st.divider()
@@ -404,7 +491,30 @@ def block_picks(drafted, my_picks, top_k=15):
     return df
 
 with tab4:
-    st.subheader("Blocks (based on recent opponent picks)")
+    st.subheader("Blocks and Opponent Predictions")
+
+    # --- Per-player draft summary and predictions ---
+    pred_rows = []
+    for p in players:
+        picks_p = teams.get(p, [])
+        style_guess = "N/A"
+        if picks_p:
+            viab_p = compute_style_status(picks_p, drafted, style_matrix, required, flex_slots)
+            if not viab_p.empty:
+                style_guess = viab_p.iloc[0]["Style"]
+        recs_p = next_best_picks(picks_p, drafted, style_matrix, scarcity_df, required, flex_slots, top_k=3, bias_weight=bias_weight)
+        next_guess = ", ".join(recs_p["Ingredient"].tolist()) if not recs_p.empty else ""
+        pred_rows.append({
+            "Player": p,
+            "Picks": ", ".join(picks_p),
+            "Likely Style": style_guess,
+            "Likely Next Picks": next_guess
+        })
+    pred_df = pd.DataFrame(pred_rows)
+    st.markdown("### Player Tendencies")
+    st.dataframe(pred_df, use_container_width=True)
+
+    st.markdown("### Block Suggestions")
     if opponent_model is None:
         st.info("Add opponent_model.json to enable block suggestions.")
     blocks = block_picks(drafted, my_picks, top_k=15)
@@ -523,11 +633,22 @@ with tab5:
         viab_sim = compute_style_status(my_local, drafted_local, style_matrix, required, flex_slots).head(15)
         st.dataframe(viab_sim, use_container_width=True)
 
-        apply_to_board = st.checkbox("Apply simulation results to current board (overwrite)", value=False, key="apply_sim")
-        if apply_to_board:
-            st.session_state["my_picks"] = my_local
-            st.session_state["drafted"] = drafted_local
-            st.success("Applied simulation results to current board.")
-            st.rerun()
+with tab6:
+    st.subheader("Draft Results")
+    df_log = pd.DataFrame(st.session_state["draft_log"])
+    edited = st.data_editor(df_log, num_rows="dynamic", use_container_width=True, key="draft_editor")
+    if not edited.equals(df_log):
+        st.session_state["draft_log"] = edited.to_dict("records")
+        save_state({"players": players, "draft_log": st.session_state["draft_log"]})
+        st.rerun()
+    if not edited.empty:
+        csv_bytes = edited.to_csv(index=False).encode("utf-8")
+        st.download_button("Download CSV", csv_bytes, file_name="draft_results.csv", mime="text/csv")
+        excel_buf = io.BytesIO()
+        edited.to_excel(excel_buf, index=False)
+        st.download_button(
+            "Download Excel", excel_buf.getvalue(), file_name="draft_results.xlsx",
+            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        )
 
 st.caption("Tip: Toggle Room Bias in the sidebar to lean into opponent tendencies. Blocks tab suggests denial picks based on the last few opponent selections.")
