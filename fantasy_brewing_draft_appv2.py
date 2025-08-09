@@ -491,7 +491,30 @@ def block_picks(drafted, my_picks, top_k=15):
     return df
 
 with tab4:
-    st.subheader("Blocks (based on recent opponent picks)")
+    st.subheader("Blocks and Opponent Predictions")
+
+    # --- Per-player draft summary and predictions ---
+    pred_rows = []
+    for p in players:
+        picks_p = teams.get(p, [])
+        style_guess = "N/A"
+        if picks_p:
+            viab_p = compute_style_status(picks_p, drafted, style_matrix, required, flex_slots)
+            if not viab_p.empty:
+                style_guess = viab_p.iloc[0]["Style"]
+        recs_p = next_best_picks(picks_p, drafted, style_matrix, scarcity_df, required, flex_slots, top_k=3, bias_weight=bias_weight)
+        next_guess = ", ".join(recs_p["Ingredient"].tolist()) if not recs_p.empty else ""
+        pred_rows.append({
+            "Player": p,
+            "Picks": ", ".join(picks_p),
+            "Likely Style": style_guess,
+            "Likely Next Picks": next_guess
+        })
+    pred_df = pd.DataFrame(pred_rows)
+    st.markdown("### Player Tendencies")
+    st.dataframe(pred_df, use_container_width=True)
+
+    st.markdown("### Block Suggestions")
     if opponent_model is None:
         st.info("Add opponent_model.json to enable block suggestions.")
     blocks = block_picks(drafted, my_picks, top_k=15)
