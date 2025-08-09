@@ -635,7 +635,10 @@ with tab5:
 
 with tab6:
     st.subheader("Team Summary")
-    df_log = pd.DataFrame(st.session_state["draft_log"])
+    df_log = pd.DataFrame(
+        st.session_state["draft_log"],
+        columns=["Round", "Overall", "Player", "Ingredient", "Category"],
+    )
     summary_rows = []
     for p in players:
         slots = {"Malt": "", "Hop": "", "Yeast": "", "Adjunct": "",
