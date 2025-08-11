@@ -1,1 +1,3 @@
 fantasydraft
+__pycache__/
+draft_state.json
