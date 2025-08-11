@@ -44,7 +44,7 @@ drafted = state["drafted"]
 st.sidebar.metric("My picks", len(my_picks))
 st.sidebar.metric("Total drafted", len(drafted))
 if st.sidebar.button("Refresh now"):
-    st.experimental_rerun()
+    st.rerun()
 
 required = {"Base Malt": 1, "Hop": 1, "Yeast": 1, "Adjunct": 1}
 flex_slots = 3
@@ -55,12 +55,15 @@ st.dataframe(viab, use_container_width=True)
 
 st.header("Top Recommendations")
 recs = next_best_picks(
-    my_picks,
-    drafted,
-    style_matrix,
-    scarcity_df,
-    required,
-    flex_slots,
+    my_picks=my_picks,
+    drafted=drafted,
+    style_matrix=style_matrix,
+    scarcity_df=scarcity_df,
+    required=required,
+    ingredient_to_category=ingredient_to_category,
+    style_bias=style_bias,
+    flex_slots=flex_slots,
+    ingredients=ingredients,
     top_k=15,
     bias_weight=1.0,
 )
@@ -68,10 +71,10 @@ st.dataframe(recs, use_container_width=True)
 
 st.header("Block Suggestions")
 blocks = block_picks(
-    drafted,
-    my_picks,
-    pair_lookup,
-    ingredients,
+    drafted=drafted,
+    my_picks=my_picks,
+    pair_lookup=pair_lookup,
+    ingredients=ingredients,
     early_signal=early_signal,
     top_k=15,
 )
