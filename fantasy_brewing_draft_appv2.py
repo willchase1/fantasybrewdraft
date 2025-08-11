@@ -5,6 +5,7 @@ import random
 import os
 import io
 from collections import defaultdict, Counter
+from draft_state import save_state as save_shared_state
 
 st.set_page_config(page_title="Fantasy Brewing Draft Advisor", layout="wide")
 
@@ -222,6 +223,7 @@ reset = st.sidebar.button("Reset session", type="primary")
 if reset:
     st.session_state["draft_log"] = []
     save_state({"players": players, "draft_log": []})
+    save_shared_state([], [])
 
 draft_log = st.session_state.get("draft_log", [])
 
@@ -239,6 +241,7 @@ for rec in draft_log:
 
 your_name = players[int(draft_position)-1] if players else ""
 my_picks = teams.get(your_name, [])
+save_shared_state(my_picks, drafted)
 
 # --- Live rule status panel ---
 rules = compute_rules_status(my_picks, ingredient_to_category, TOTAL_PICKS)
