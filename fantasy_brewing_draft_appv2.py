@@ -4,6 +4,7 @@ import json
 import random
 import os
 import io
+import time
 from collections import defaultdict, Counter
 from draft_state import save_state as save_shared_state
 
@@ -242,6 +243,42 @@ for rec in draft_log:
 your_name = players[int(draft_position)-1] if players else ""
 my_picks = teams.get(your_name, [])
 save_shared_state(my_picks, drafted)
+
+# --- Draft Timer ---
+if "timer_duration" not in st.session_state:
+    st.session_state.timer_duration = 120  # seconds
+if "timer_start" not in st.session_state:
+    st.session_state.timer_start = time.time()
+
+def reset_draft_timer():
+    st.session_state.timer_start = time.time()
+
+timer_cols = st.columns([2, 1, 1])
+with timer_cols[0]:
+    remaining = int(
+        st.session_state.timer_duration - (time.time() - st.session_state.timer_start)
+    )
+    remaining = max(0, remaining)
+    color = "red" if remaining <= 10 else "black"
+    st.markdown(
+        f"<div style='text-align:center; font-size:24px; color:{color};'>⏲️ {remaining//60:02d}:{remaining%60:02d}</div>",
+        unsafe_allow_html=True,
+    )
+with timer_cols[1]:
+    minutes = st.number_input(
+        "Minutes",
+        min_value=1,
+        max_value=60,
+        value=int(st.session_state.timer_duration / 60),
+        key="timer_minutes",
+    )
+    if minutes * 60 != st.session_state.timer_duration:
+        st.session_state.timer_duration = minutes * 60
+        st.session_state.timer_start = time.time()
+with timer_cols[2]:
+    st.button("Reset Timer", on_click=reset_draft_timer)
+
+st.divider()
 
 # --- Live rule status panel ---
 rules = compute_rules_status(my_picks, ingredient_to_category, TOTAL_PICKS)
@@ -692,3 +729,7 @@ with tab6:
         )
 
 st.caption("Tip: Toggle Room Bias in the sidebar to lean into opponent tendencies. Blocks tab suggests denial picks based on the last few opponent selections.")
+
+# Keep timer updating
+time.sleep(1)
+st.experimental_rerun()
