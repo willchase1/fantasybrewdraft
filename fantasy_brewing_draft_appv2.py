@@ -10,20 +10,100 @@ from draft_state import save_state as save_shared_state
 
 st.set_page_config(page_title="Fantasy Brewing Draft Advisor", layout="wide")
 
-# --- Global CSS for better row UX ---
+# --- Global CSS for better UX ---
 st.markdown("""
 <style>
-.hover-row {
-    padding: 6px 8px;
-    border-radius: 6px;
-    transition: background-color 0.12s ease-in-out;
+/* Timer section styling */
+.timer-container {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 20px;
+    border-radius: 15px;
+    margin: 20px 0;
+    box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display:none;
 }
-.hover-row:hover {
-    background-color: rgba(200, 200, 200, 0.18);
+
+.timer-display {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    padding: 15px;
+    text-align: center;
+    font-family: 'Courier New', monospace;
+    font-size: 28px;
+    font-weight: bold;
+    color: #2c3e50;
+    box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 15px;
 }
+
+.timer-display.warning {
+    background: rgba(255, 193, 7, 0.95);
+    color: #856404;
+}
+
+.timer-display.danger {
+    background: rgba(220, 53, 69, 0.95);
+    color: white;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+    100% { transform: scale(1); }
+}
+
+/* Draft management section */
+.draft-mgmt-container {
+    background: rgba(52, 152, 219, 0.1);
+    border-left: 4px solid #3498db;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 15px 0;
+}
+
+/* Ingredient row styling - fix hover issues */
+.ingredient-row {
+    display: flex !important;
+    align-items: center !important;
+    padding: 8px 12px !important;
+    margin: 2px 0 !important;
+    border-radius: 8px !important;
+    transition: all 0.15s ease-in-out !important;
+    border: 1px solid transparent !important;
+    background-color: transparent !important;
+}
+
+.ingredient-row:hover {
+    background-color: rgba(52, 152, 219, 0.1) !important;
+    border-color: rgba(52, 152, 219, 0.3) !important;
+    transform: translateX(2px) !important;
+    box-shadow: 0 2px 8px rgba(52, 152, 219, 0.2) !important;
+}
+
+.ingredient-info {
+    flex: 1 !important;
+    padding-right: 10px !important;
+}
+
+.ingredient-button {
+    flex-shrink: 0 !important;
+}
+
+/* Expander styling */
 .block-container .stExpander {
-    margin-bottom: 0.35rem;
+    margin-bottom: 0.5rem;
 }
+
+.block-container .stExpander > div > div > div > div {
+    padding-top: 1rem;
+}
+
+/* Status indicators */
+.status-good { color: #27ae60; font-weight: bold; }
+.status-warning { color: #f39c12; font-weight: bold; }
+.status-danger { color: #e74c3c; font-weight: bold; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -279,32 +359,58 @@ if remaining == 0 and st.session_state.timer_running:
     # auto-pause on zero
     st.session_state.timer_running = False
 
-# Layout: display | minutes | Start/Pause | Reset
-timer_cols = st.columns([2, 1, 1, 1])
-with timer_cols[0]:
-    color = "red" if remaining <= 10 else "black"
-    st.markdown(
-        f"<div style='text-align:center; font-size:24px; color:{color};'>⏲️ {remaining//60:02d}:{remaining%60:02d}</div>",
-        unsafe_allow_html=True,
-    )
-with timer_cols[1]:
+# Enhanced timer section with better layout
+# st.markdown('<div class="timer-container">', unsafe_allow_html=True)
+
+# Timer display with dynamic styling
+timer_class = ""
+if remaining <= 10:
+    timer_class = "danger"
+elif remaining <= 30:
+    timer_class = "warning"
+
+timer_status = "RUNNING" if st.session_state.timer_running else "PAUSED"
+timer_emoji = "▶️" if st.session_state.timer_running else "⏸️"
+
+st.markdown(
+    f"""
+    <div class="timer-display {timer_class}">
+        {timer_emoji} {remaining//60:02d}:{remaining%60:02d} ({timer_status})
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
+
+# Timer controls in a cleaner layout
+timer_control_cols = st.columns([2, 2, 2, 2])
+
+with timer_control_cols[0]:
     minutes = st.number_input(
-        "Minutes",
+        "⏱️ Duration (min)",
         min_value=1,
         max_value=60,
         value=max(1, int(round(st.session_state.timer_duration / 60))),
         key="timer_minutes",
+        help="Set the draft timer duration"
     )
     if minutes * 60 != st.session_state.timer_duration:
-        # Update total duration; keep current elapsed/running state intact
         st.session_state.timer_duration = minutes * 60
-with timer_cols[2]:
+
+with timer_control_cols[1]:
     if st.session_state.timer_running:
-        st.button("Pause", on_click=pause_draft_timer, key="timer_pause_btn")
+        st.button("⏸️ Pause", on_click=pause_draft_timer, key="timer_pause_btn", use_container_width=True)
     else:
-        st.button("Start", on_click=start_draft_timer, key="timer_start_btn")
-with timer_cols[3]:
-    st.button("Reset Timer", on_click=reset_draft_timer, key="timer_reset_btn")
+        st.button("▶️ Start", on_click=start_draft_timer, key="timer_start_btn", use_container_width=True)
+
+with timer_control_cols[2]:
+    st.button("🔄 Reset", on_click=reset_draft_timer, key="timer_reset_btn", use_container_width=True)
+
+with timer_control_cols[3]:
+    # Timer status info
+    total_elapsed = int(st.session_state.timer_elapsed + (time.time() - st.session_state.timer_started_at if st.session_state.timer_running else 0.0))
+    st.metric("Elapsed", f"{total_elapsed//60:02d}:{total_elapsed%60:02d}")
+
+st.markdown('</div>', unsafe_allow_html=True)
 
 st.divider()
 
@@ -334,16 +440,21 @@ def swap_pick(pick_index, new_ingredient, new_category):
         save_shared_state(new_teams.get(your_name, []), new_drafted)
 
 # --- Draft Management Controls ---
+# st.markdown('<div class="draft-mgmt-container">', unsafe_allow_html=True)
+st.markdown("#### 🎯 Draft Management")
+
 mgmt_cols = st.columns([2, 2, 4])
 
 with mgmt_cols[0]:
-    if st.button("↶ Undo Last Pick", disabled=len(draft_log)==0, key="undo_btn"):
+    if st.button("↶ Undo Last Pick", disabled=len(draft_log)==0, key="undo_btn", use_container_width=True):
         undo_last_pick()
         st.rerun()
 
 with mgmt_cols[1]:
-    if st.button("🔄 Manage Swaps/Trades", key="toggle_swap_mode"):
+    if st.button("🔄 Manage Swaps/Trades", key="toggle_swap_mode", use_container_width=True):
         st.session_state["show_swap_mode"] = not st.session_state.get("show_swap_mode", False)
+
+st.markdown('</div>', unsafe_allow_html=True)
 
 # --- Swap/Trade Interface ---
 if st.session_state.get("show_swap_mode", False):
@@ -539,17 +650,29 @@ with tab1:
         sub = df_long[df_long["Category"]==cat]
         with st.expander(f"{cat} ({len(sub)})", expanded=(cat in ["Base Malt","Yeast","Hop"])):
             for ing in sorted(sub["Ingredient"].tolist()):
+                # Create ingredient row with proper layout and hover
                 with st.container():
-                    st.markdown("<div class='hover-row'>", unsafe_allow_html=True)
-                    cols = st.columns([6,2])
-                    label = f"**{ing}**"
-                    if ing in ingredient_popularity:
-                        rec = ingredient_popularity[ing]
-                        label += f"  \n<small>pop: {rec.get('Picks',0)} | avg slot: {round(float(rec.get('Avg_Slot',0)),1)}</small>"
-                    cols[0].markdown(label, unsafe_allow_html=True)
-                    if current_player and cols[1].button("Draft", key=f"draft-{cat}-{ing}"):
-                        add_pick(current_player, ing, cat)
-                    st.markdown("</div>", unsafe_allow_html=True)
+                    cols = st.columns([6, 2])
+                    
+                    with cols[0]:
+                        label = f"**{ing}**"
+                        popularity_info = ""
+                        if ing in ingredient_popularity:
+                            rec = ingredient_popularity[ing]
+                            popularity_info = f"<br><small style='opacity: 0.7;'>pop: {rec.get('Picks',0)} | avg slot: {round(float(rec.get('Avg_Slot',0)),1)}</small>"
+                        
+                        # Create the hoverable ingredient row
+                        st.markdown(f"""
+                        <div class="ingredient-row">
+                            <div class="ingredient-info">
+                                {label}{popularity_info}
+                            </div>
+                        </div>
+                        """, unsafe_allow_html=True)
+                    
+                    with cols[1]:
+                        if current_player and st.button("Draft", key=f"draft-{cat}-{ing}", use_container_width=True):
+                            add_pick(current_player, ing, cat)
 
     st.divider()
     st.subheader("My Picks")
