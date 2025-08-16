@@ -246,19 +246,42 @@ save_shared_state(my_picks, drafted)
 
 # --- Draft Timer ---
 if "timer_duration" not in st.session_state:
-    st.session_state.timer_duration = 120  # seconds
-if "timer_start" not in st.session_state:
-    st.session_state.timer_start = time.time()
+    st.session_state.timer_duration = 120  # seconds total
+if "timer_started_at" not in st.session_state:
+    st.session_state.timer_started_at = time.time()
+if "timer_elapsed" not in st.session_state:
+    st.session_state.timer_elapsed = 0.0  # accumulated while running/paused
+if "timer_running" not in st.session_state:
+    st.session_state.timer_running = False
+
+def start_draft_timer():
+    if not st.session_state.timer_running:
+        st.session_state.timer_running = True
+        st.session_state.timer_started_at = time.time()
+
+def pause_draft_timer():
+    if st.session_state.timer_running:
+        # accumulate time since last start
+        st.session_state.timer_elapsed += time.time() - st.session_state.timer_started_at
+        st.session_state.timer_running = False
 
 def reset_draft_timer():
-    st.session_state.timer_start = time.time()
+    st.session_state.timer_elapsed = 0.0
+    st.session_state.timer_running = False
+    st.session_state.timer_started_at = time.time()
 
-timer_cols = st.columns([2, 1, 1])
+# Compute remaining time based on total duration minus elapsed (plus live run time)
+elapsed = st.session_state.timer_elapsed + (
+    time.time() - st.session_state.timer_started_at if st.session_state.timer_running else 0.0
+)
+remaining = max(0, int(st.session_state.timer_duration - elapsed))
+if remaining == 0 and st.session_state.timer_running:
+    # auto-pause on zero
+    st.session_state.timer_running = False
+
+# Layout: display | minutes | Start/Pause | Reset
+timer_cols = st.columns([2, 1, 1, 1])
 with timer_cols[0]:
-    remaining = int(
-        st.session_state.timer_duration - (time.time() - st.session_state.timer_start)
-    )
-    remaining = max(0, remaining)
     color = "red" if remaining <= 10 else "black"
     st.markdown(
         f"<div style='text-align:center; font-size:24px; color:{color};'>⏲️ {remaining//60:02d}:{remaining%60:02d}</div>",
@@ -269,14 +292,19 @@ with timer_cols[1]:
         "Minutes",
         min_value=1,
         max_value=60,
-        value=int(st.session_state.timer_duration / 60),
+        value=max(1, int(round(st.session_state.timer_duration / 60))),
         key="timer_minutes",
     )
     if minutes * 60 != st.session_state.timer_duration:
+        # Update total duration; keep current elapsed/running state intact
         st.session_state.timer_duration = minutes * 60
-        st.session_state.timer_start = time.time()
 with timer_cols[2]:
-    st.button("Reset Timer", on_click=reset_draft_timer)
+    if st.session_state.timer_running:
+        st.button("Pause", on_click=pause_draft_timer, key="timer_pause_btn")
+    else:
+        st.button("Start", on_click=start_draft_timer, key="timer_start_btn")
+with timer_cols[3]:
+    st.button("Reset Timer", on_click=reset_draft_timer, key="timer_reset_btn")
 
 st.divider()
 
@@ -730,6 +758,7 @@ with tab6:
 
 st.caption("Tip: Toggle Room Bias in the sidebar to lean into opponent tendencies. Blocks tab suggests denial picks based on the last few opponent selections.")
 
-# Keep timer updating
-time.sleep(1)
-st.experimental_rerun()
+# Keep timer updating only while running and draft not complete
+if st.session_state.get("timer_running") and current_player:
+    time.sleep(1)
+    st.rerun()
