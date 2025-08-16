@@ -23,6 +23,9 @@ if st.sidebar.button("Reset draft"):
 st.sidebar.metric("My picks", len(my_picks))
 st.sidebar.metric("Total drafted", len(drafted))
 
+# Quick ingredient name filter
+filter_text = st.text_input("Filter ingredients", "")
+
 # Build long list of available ingredients by category
 base_aliases = ["Base Malt", "Base Malts", "Base Malts and Extracts"]
 hop_aliases = ["Hop", "Hops"]
@@ -53,6 +56,10 @@ df_long = pd.DataFrame(long_rows).drop_duplicates()
 
 # Remove drafted ingredients
 available_df = df_long[~df_long["Ingredient"].isin(drafted)]
+
+# Apply filter if text provided
+if filter_text:
+    available_df = available_df[available_df["Ingredient"].str.contains(filter_text, case=False)]
 
 # Category summary
 all_categories = ["Base Malt", "Hop", "Yeast", "Adjunct", "Specialty", "Extra"]

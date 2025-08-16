@@ -312,6 +312,9 @@ with tab1:
     else:
         st.success("Draft complete.")
 
+    # Allow quick text filtering of ingredients
+    filter_text = st.text_input("Filter ingredients", key="draft-filter")
+
     def add_pick(player, ing, cat):
         overall = len(st.session_state["draft_log"]) + 1
         round_no = ((overall - 1) // int(num_players)) + 1
@@ -355,6 +358,10 @@ with tab1:
 
     # Remove those already drafted
     df_long = df_long[~df_long["Ingredient"].isin(drafted)]
+
+    # Apply text filter if provided
+    if filter_text:
+        df_long = df_long[df_long["Ingredient"].str.contains(filter_text, case=False)]
 
     # Quick availability summary
     avail_summary = df_long.groupby("Category")["Ingredient"].nunique().reindex(all_categories).fillna(0).astype(int)
