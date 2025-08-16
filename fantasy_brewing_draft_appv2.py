@@ -308,6 +308,108 @@ with timer_cols[3]:
 
 st.divider()
 
+# --- Draft Management Functions ---
+def undo_last_pick():
+    """Remove the last pick from the draft log."""
+    if st.session_state.get("draft_log"):
+        st.session_state["draft_log"].pop()
+        save_state({"players": players, "draft_log": st.session_state["draft_log"]})
+        save_shared_state(teams.get(your_name, []), [rec.get("Ingredient") for rec in st.session_state["draft_log"] if rec.get("Ingredient")])
+
+def swap_pick(pick_index, new_ingredient, new_category):
+    """Swap an existing pick with a new ingredient."""
+    if 0 <= pick_index < len(st.session_state["draft_log"]):
+        st.session_state["draft_log"][pick_index]["Ingredient"] = new_ingredient
+        st.session_state["draft_log"][pick_index]["Category"] = new_category
+        save_state({"players": players, "draft_log": st.session_state["draft_log"]})
+        # Update shared state
+        new_teams = {p: [] for p in players}
+        new_drafted = []
+        for rec in st.session_state["draft_log"]:
+            plyr = rec.get("Player")
+            ing = rec.get("Ingredient")
+            if plyr in new_teams:
+                new_teams[plyr].append(ing)
+            new_drafted.append(ing)
+        save_shared_state(new_teams.get(your_name, []), new_drafted)
+
+# --- Draft Management Controls ---
+mgmt_cols = st.columns([2, 2, 4])
+
+with mgmt_cols[0]:
+    if st.button("↶ Undo Last Pick", disabled=len(draft_log)==0, key="undo_btn"):
+        undo_last_pick()
+        st.rerun()
+
+with mgmt_cols[1]:
+    if st.button("🔄 Manage Swaps/Trades", key="toggle_swap_mode"):
+        st.session_state["show_swap_mode"] = not st.session_state.get("show_swap_mode", False)
+
+# --- Swap/Trade Interface ---
+if st.session_state.get("show_swap_mode", False):
+    st.markdown("### 🔄 Swap/Trade Manager")
+    st.caption("Use this to handle trades or optional Round 8 swaps. Select a pick to change and choose a new ingredient.")
+    
+    if draft_log:
+        # Create a dropdown of all picks for swapping
+        pick_options = []
+        for i, rec in enumerate(draft_log):
+            pick_options.append(f"R{rec.get('Round', '?')} Pick {rec.get('Overall', '?')}: {rec.get('Player', '?')} → {rec.get('Ingredient', '?')}")
+        
+        swap_cols = st.columns([3, 3, 2])
+        
+        with swap_cols[0]:
+            selected_pick_idx = st.selectbox(
+                "Select pick to change:",
+                range(len(pick_options)),
+                format_func=lambda x: pick_options[x],
+                key="swap_pick_select"
+            )
+        
+        with swap_cols[1]:
+            # Get available ingredients (not currently drafted, or the one being swapped)
+            current_ingredient = draft_log[selected_pick_idx].get("Ingredient", "")
+            available_ingredients = []
+            
+            # Build available ingredients from all categories
+            for style, cats in style_matrix.items():
+                for cat, ings in cats.items():
+                    for ing in ings:
+                        if ing in build_available_set(ingredients):
+                            if ing not in drafted or ing == current_ingredient:
+                                available_ingredients.append((ing, ingredient_to_category.get(ing, cat)))
+            
+            # Remove duplicates and sort
+            available_ingredients = list(set(available_ingredients))
+            available_ingredients.sort(key=lambda x: (x[1], x[0]))  # Sort by category, then ingredient
+            
+            if available_ingredients:
+                new_ingredient = st.selectbox(
+                    "New ingredient:",
+                    [ing for ing, cat in available_ingredients],
+                    key="swap_ingredient_select"
+                )
+                new_category = next((cat for ing, cat in available_ingredients if ing == new_ingredient), "Unknown")
+            else:
+                st.warning("No ingredients available for swap")
+                new_ingredient = None
+                new_category = None
+        
+        with swap_cols[2]:
+            if new_ingredient and st.button("Execute Swap", key="execute_swap_btn"):
+                swap_pick(selected_pick_idx, new_ingredient, new_category)
+                st.success(f"Swapped to {new_ingredient}")
+                st.rerun()
+        
+        # Show the pick being modified
+        if selected_pick_idx is not None:
+            old_rec = draft_log[selected_pick_idx]
+            st.info(f"**Changing:** {old_rec.get('Player', '?')} • Round {old_rec.get('Round', '?')} • {old_rec.get('Ingredient', '?')} ({old_rec.get('Category', '?')})")
+    else:
+        st.info("No picks to swap yet.")
+
+st.divider()
+
 # --- Live rule status panel ---
 rules = compute_rules_status(my_picks, ingredient_to_category, TOTAL_PICKS)
 
