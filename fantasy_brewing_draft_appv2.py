@@ -768,7 +768,8 @@ def next_best_picks(my_picks, drafted, style_matrix, scarcity_df, required, flex
         need_bonus = cat_need_factor.get(cat, 1.0)
         popularity = float(early_signal.get(ing, 0.0))
         bias_factor = ingredient_style_bias(ing, style_matrix, style_bias)
-        pick_value = (style_cov * 1.0 + scarcity * 2.0 + popularity * bias_weight) * need_bonus * bias_factor
+        # Favor style coverage more heavily than ingredient scarcity
+        pick_value = (style_cov * 2.0 + scarcity * 1.0 + popularity * bias_weight) * need_bonus * bias_factor
         rows.append({
             "Ingredient": ing,
             "Category": cat,
