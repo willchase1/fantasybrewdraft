@@ -125,6 +125,26 @@ def load_data():
 
 ingredients, style_matrix, scarcity_df, opponent_model = load_data()
 
+
+@st.cache_data
+def load_hop_similarity_data():
+    """Load hop similarity resources."""
+    hop_sim = {}
+    sim_matrix = pd.DataFrame()
+    try:
+        with open("hop_similarity.json") as f:
+            hop_sim = json.load(f)
+    except Exception:
+        pass
+    try:
+        sim_matrix = pd.read_csv("hop_similarity_matrix.csv", index_col=0)
+    except Exception:
+        pass
+    return hop_sim, sim_matrix
+
+
+hop_similarity_data, hop_similarity_matrix = load_hop_similarity_data()
+
 # --- Persist draft state locally ---
 SAVE_FILE = "draft_autosave.json"
 
@@ -575,10 +595,10 @@ if opponent_model:
             pair_lookup[(b,a)] += c
 
 # --- Tabs ---
-tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
+tab1, tab2, tab3, tab4, tab5, tab6, tab7 = st.tabs([
     "Draft Board", "Style Viability", "Recommendations",
     "Blocks (deny-their-build)", "Mock Draft Simulator",
-    "Results / Export"
+    "Results / Export", "Hop Finder"
 ])
 
 # --- Draft Board ---
@@ -980,6 +1000,26 @@ with tab6:
             "Download Excel", excel_buf.getvalue(), file_name="draft_results.xlsx",
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         )
+with tab7:
+    st.subheader('Hop Similarity Finder')
+    search = st.text_input('Search hops', key='hop-search')
+    hop_list = sorted(hop_similarity_data.keys())
+    if search:
+        hop_list = [h for h in hop_list if search.lower() in h.lower()]
+
+    for hop in hop_list:
+        label = f'~~{hop}~~' if hop in drafted else hop
+        st.markdown(f'**{label}**')
+        similars = []
+        for rec in hop_similarity_data.get(hop, []):
+            alt = rec.get('hop')
+            alt_label = f'~~{alt}~~' if alt in drafted else alt
+            similars.append(alt_label)
+        if similars:
+            st.caption('Similar: ' + ', '.join(similars))
+        else:
+            st.caption('No similarity data available.')
+
 
 st.caption("Tip: Toggle Room Bias in the sidebar to lean into opponent tendencies. Blocks tab suggests denial picks based on the last few opponent selections.")
 
