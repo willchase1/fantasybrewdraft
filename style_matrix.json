@@ -119,10 +119,9 @@
       "Candi Sugar, Dark",
       "Cane (or Beet) Sugar",
       "Corn Sugar (Dextrose)",
-      "Dememera Sugar",
+      "Demerara Sugar",
       "Honey",
       "Lyle's Golden Syrup (Invert Sugar)",
-      "Milk Sugar (Lactose)",
       "Turbinado Sugar"
     ],
     "Specialty": []
@@ -144,7 +143,7 @@
       "Golden Malt Extract",
       "Golden Promise",
       "Light Malt Extract",
-      "Marris Otter",
+      "Maris Otter",
       "Munich Malt Extract",
       "Munich, Dark",
       "Munich, Light",
@@ -355,8 +354,16 @@
     ]
   },
   "Bi\u00e8re de Garde": {
-    "Base Malt": [],
-    "Hop": [],
+    "Base Malt": [
+      "Belgian Pilsner",
+      "Munich, Light",
+      "Munich, Dark"
+    ],
+    "Hop": [
+      "Hallertau Tradition",
+      "Saaz",
+      "Strisselspalt"
+    ],
     "Yeast": [
       "Belgian Ale (WLP570, WY1388)",
       "Belgian Ardennes (WY3522, B45)",
@@ -372,8 +379,14 @@
     "Specialty": []
   },
   "Belgian Dubbel": {
-    "Base Malt": [],
-    "Hop": [],
+    "Base Malt": [
+      "Belgian Pilsner",
+      "Munich, Light"
+    ],
+    "Hop": [
+      "Saaz",
+      "Styrian Goldings"
+    ],
     "Yeast": [
       "Belgian Ale (WLP570, WY1388)",
       "Belgian Ardennes (WY3522, B45)",
@@ -386,11 +399,20 @@
       "Candi Sugar, Dark",
       "Turbinado Sugar"
     ],
-    "Specialty": []
+    "Specialty": [
+      "Chocolate Malt",
+      "Special B"
+    ]
   },
   "Belgian Dark Strong": {
-    "Base Malt": [],
-    "Hop": [],
+    "Base Malt": [
+      "Belgian Pilsner",
+      "Munich, Dark"
+    ],
+    "Hop": [
+      "Saaz",
+      "Styrian Goldings"
+    ],
     "Yeast": [
       "Belgian Ale (WLP570, WY1388)",
       "Belgian Ardennes (WY3522, B45)",
@@ -403,11 +425,20 @@
       "Candi Sugar, Dark",
       "Turbinado Sugar"
     ],
-    "Specialty": []
+    "Specialty": [
+      "Chocolate Malt",
+      "Special B"
+    ]
   },
   "Saison": {
-    "Base Malt": [],
-    "Hop": [],
+    "Base Malt": [
+      "Belgian Pilsner",
+      "White Wheat"
+    ],
+    "Hop": [
+      "Saaz",
+      "Strisselspalt"
+    ],
     "Yeast": [
       "Belgian Ale (WLP570, WY1388)",
       "Belgian Ardennes (WY3522, B45)",
@@ -428,7 +459,11 @@
       "Golden Promise",
       "Maris Otter"
     ],
-    "Hop": [],
+    "Hop": [
+      "Challenger",
+      "East Kent Goldings",
+      "Fuggle"
+    ],
     "Yeast": [
       "Dry English Ale (WLP007, WY1098, A10)",
       "London III (WLP013, A38, WY1318)",
@@ -443,7 +478,11 @@
       "Golden Promise",
       "Maris Otter"
     ],
-    "Hop": [],
+    "Hop": [
+      "Challenger",
+      "East Kent Goldings",
+      "Fuggle"
+    ],
     "Yeast": [
       "Dry English Ale (WLP007, WY1098, A10)",
       "London III (WLP013, A38, WY1318)",
@@ -458,7 +497,11 @@
       "Golden Promise",
       "Maris Otter"
     ],
-    "Hop": [],
+    "Hop": [
+      "Challenger",
+      "East Kent Goldings",
+      "Fuggle"
+    ],
     "Yeast": [
       "Dry English Ale (WLP007, WY1098, A10)",
       "London III (WLP013, A38, WY1318)",
@@ -473,13 +516,21 @@
       "Golden Promise",
       "Maris Otter"
     ],
-    "Hop": [],
+    "Hop": [
+      "Challenger",
+      "East Kent Goldings",
+      "Fuggle"
+    ],
     "Yeast": [
       "Dry English Ale (WLP007, WY1098, A10)",
       "London III (WLP013, A38, WY1318)",
       "Scottish Ale (WLP028, WY1728, A31)"
     ],
     "Adjunct": [],
-    "Specialty": []
+    "Specialty": [
+      "Black Malt",
+      "Chocolate Malt",
+      "Roasted Barley"
+    ]
   }
 }

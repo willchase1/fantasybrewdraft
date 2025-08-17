@@ -218,7 +218,7 @@
     },
     {
       "Category": "Malt",
-      "Ingredient": "Marris Otter",
+      "Ingredient": "Maris Otter",
       "Picks": 2,
       "Avg_Slot": 6.0,
       "First_Year": 2023,
@@ -920,7 +920,7 @@
     },
     {
       "Category": "Adjunct",
-      "Ingredient": "Dememera Sugar",
+      "Ingredient": "Demerara Sugar",
       "Picks": 1,
       "Avg_Slot": 5.0,
       "First_Year": 2024,
@@ -1341,7 +1341,7 @@
     },
     {
       "A": "English Ale (WLP002, WY1968, S-04, A09)",
-      "B": "Marris Otter",
+      "B": "Maris Otter",
       "PairCount": 1
     },
     {
@@ -1556,7 +1556,7 @@
     },
     {
       "A": "Galaxy",
-      "B": "Marris Otter",
+      "B": "Maris Otter",
       "PairCount": 1
     },
     {
@@ -1651,7 +1651,7 @@
     },
     {
       "A": "Coffee",
-      "B": "Marris Otter",
+      "B": "Maris Otter",
       "PairCount": 1
     },
     {
@@ -1731,7 +1731,7 @@
     },
     {
       "A": "Citra",
-      "B": "Marris Otter",
+      "B": "Maris Otter",
       "PairCount": 1
     },
     {
@@ -1780,22 +1780,22 @@
       "PairCount": 1
     },
     {
-      "A": "Dememera Sugar",
+      "A": "Demerara Sugar",
       "B": "Pale Malt (2 Row)",
       "PairCount": 1
     },
     {
-      "A": "Dememera Sugar",
+      "A": "Demerara Sugar",
       "B": "Munich Lager (WLP838, WY2308, Dry)",
       "PairCount": 1
     },
     {
-      "A": "Dememera Sugar",
+      "A": "Demerara Sugar",
       "B": "Hallertau Tradition",
       "PairCount": 1
     },
     {
-      "A": "Dememera Sugar",
+      "A": "Demerara Sugar",
       "B": "Extract, Munich",
       "PairCount": 1
     },
@@ -2248,7 +2248,7 @@
     },
     {
       "Yeast": "English Ale (WLP002, WY1968, S-04, A09)",
-      "Malt": "Marris Otter",
+      "Malt": "Maris Otter",
       "Count": 1
     },
     {
@@ -2496,7 +2496,7 @@
       "Count": 1
     },
     {
-      "Malt": "Marris Otter",
+      "Malt": "Maris Otter",
       "Hops": "Galaxy",
       "Count": 1
     }
