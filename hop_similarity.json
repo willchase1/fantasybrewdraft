@@ -1,0 +1,1464 @@
+{
+  "Amarillo": [
+    {
+      "hop": "Cascade",
+      "score": 0.657
+    },
+    {
+      "hop": "Lemondrop",
+      "score": 0.551
+    },
+    {
+      "hop": "Triumph",
+      "score": 0.52
+    },
+    {
+      "hop": "Lotus",
+      "score": 0.493
+    },
+    {
+      "hop": "Loral",
+      "score": 0.45
+    },
+    {
+      "hop": "Centennial",
+      "score": 0.45
+    },
+    {
+      "hop": "Saphir",
+      "score": 0.329
+    },
+    {
+      "hop": "Motueka",
+      "score": 0.329
+    }
+  ],
+  "Ariana": [
+    {
+      "hop": "Calista",
+      "score": 0.72
+    },
+    {
+      "hop": "Lotus",
+      "score": 0.54
+    },
+    {
+      "hop": "Kohatu",
+      "score": 0.36
+    },
+    {
+      "hop": "Hallertau Tradition",
+      "score": 0.36
+    },
+    {
+      "hop": "Perle",
+      "score": 0.36
+    },
+    {
+      "hop": "Riwaka",
+      "score": 0.329
+    },
+    {
+      "hop": "Strata",
+      "score": 0.304
+    },
+    {
+      "hop": "Sabro",
+      "score": 0.304
+    }
+  ],
+  "Azacca": [
+    {
+      "hop": "BRU-1",
+      "score": 0.657
+    },
+    {
+      "hop": "Krush (HBC 586)",
+      "score": 0.65
+    },
+    {
+      "hop": "Citra",
+      "score": 0.612
+    },
+    {
+      "hop": "Mosaic",
+      "score": 0.49
+    },
+    {
+      "hop": "Centennial",
+      "score": 0.45
+    },
+    {
+      "hop": "Nectaron",
+      "score": 0.45
+    },
+    {
+      "hop": "Galaxy",
+      "score": 0.45
+    },
+    {
+      "hop": "El Dorado",
+      "score": 0.417
+    }
+  ],
+  "BRU-1": [
+    {
+      "hop": "Azacca",
+      "score": 0.657
+    },
+    {
+      "hop": "El Dorado",
+      "score": 0.609
+    },
+    {
+      "hop": "Mosaic",
+      "score": 0.537
+    },
+    {
+      "hop": "Nectaron",
+      "score": 0.493
+    },
+    {
+      "hop": "Idaho 7",
+      "score": 0.456
+    },
+    {
+      "hop": "Strata",
+      "score": 0.456
+    },
+    {
+      "hop": "Sabro",
+      "score": 0.456
+    },
+    {
+      "hop": "Krush (HBC 586)",
+      "score": 0.427
+    }
+  ],
+  "Calista": [
+    {
+      "hop": "Ariana",
+      "score": 0.72
+    },
+    {
+      "hop": "Riwaka",
+      "score": 0.493
+    },
+    {
+      "hop": "Triumph",
+      "score": 0.427
+    },
+    {
+      "hop": "Mosaic",
+      "score": 0.402
+    },
+    {
+      "hop": "Lemondrop",
+      "score": 0.402
+    },
+    {
+      "hop": "Saphir",
+      "score": 0.36
+    },
+    {
+      "hop": "Cascade",
+      "score": 0.36
+    },
+    {
+      "hop": "Perle",
+      "score": 0.36
+    }
+  ],
+  "Cascade": [
+    {
+      "hop": "Amarillo",
+      "score": 0.657
+    },
+    {
+      "hop": "Centennial",
+      "score": 0.657
+    },
+    {
+      "hop": "Lemondrop",
+      "score": 0.604
+    },
+    {
+      "hop": "Riwaka",
+      "score": 0.493
+    },
+    {
+      "hop": "Loral",
+      "score": 0.493
+    },
+    {
+      "hop": "Triumph",
+      "score": 0.427
+    },
+    {
+      "hop": "Citra",
+      "score": 0.402
+    },
+    {
+      "hop": "Saphir",
+      "score": 0.36
+    }
+  ],
+  "Centennial": [
+    {
+      "hop": "Cascade",
+      "score": 0.657
+    },
+    {
+      "hop": "Idaho 7",
+      "score": 0.555
+    },
+    {
+      "hop": "Citra",
+      "score": 0.49
+    },
+    {
+      "hop": "Mosaic",
+      "score": 0.49
+    },
+    {
+      "hop": "Amarillo",
+      "score": 0.45
+    },
+    {
+      "hop": "Azacca",
+      "score": 0.45
+    },
+    {
+      "hop": "Simcoe",
+      "score": 0.417
+    },
+    {
+      "hop": "Krush (HBC 586)",
+      "score": 0.39
+    }
+  ],
+  "Challenger": [
+    {
+      "hop": "Perle",
+      "score": 0.54
+    },
+    {
+      "hop": "Hallertau Tradition",
+      "score": 0.54
+    },
+    {
+      "hop": "Ella",
+      "score": 0.493
+    },
+    {
+      "hop": "Triumph",
+      "score": 0.427
+    },
+    {
+      "hop": "Tettnang / Tettnanger",
+      "score": 0.36
+    },
+    {
+      "hop": "Strisselspalt",
+      "score": 0.36
+    },
+    {
+      "hop": "Sorachi Ace",
+      "score": 0.36
+    },
+    {
+      "hop": "Saaz",
+      "score": 0.36
+    }
+  ],
+  "Citra": [
+    {
+      "hop": "Krush (HBC 586)",
+      "score": 0.636
+    },
+    {
+      "hop": "Azacca",
+      "score": 0.612
+    },
+    {
+      "hop": "Idaho 7",
+      "score": 0.567
+    },
+    {
+      "hop": "Mosaic",
+      "score": 0.5
+    },
+    {
+      "hop": "Centennial",
+      "score": 0.49
+    },
+    {
+      "hop": "Strata",
+      "score": 0.454
+    },
+    {
+      "hop": "Sabro",
+      "score": 0.454
+    },
+    {
+      "hop": "BRU-1",
+      "score": 0.402
+    }
+  ],
+  "East Kent Goldings": [
+    {
+      "hop": "Progress",
+      "score": 0.822
+    },
+    {
+      "hop": "Styrian Goldings",
+      "score": 0.657
+    },
+    {
+      "hop": "Tettnang / Tettnanger",
+      "score": 0.493
+    },
+    {
+      "hop": "Strisselspalt",
+      "score": 0.493
+    },
+    {
+      "hop": "Saaz",
+      "score": 0.493
+    },
+    {
+      "hop": "Fuggle",
+      "score": 0.493
+    },
+    {
+      "hop": "Liberty",
+      "score": 0.493
+    },
+    {
+      "hop": "Hallertau Mittelfrueh",
+      "score": 0.493
+    }
+  ],
+  "El Dorado": [
+    {
+      "hop": "BRU-1",
+      "score": 0.609
+    },
+    {
+      "hop": "Mosaic",
+      "score": 0.454
+    },
+    {
+      "hop": "Azacca",
+      "score": 0.417
+    },
+    {
+      "hop": "Sabro",
+      "score": 0.386
+    },
+    {
+      "hop": "Idaho 7",
+      "score": 0.386
+    },
+    {
+      "hop": "Strata",
+      "score": 0.386
+    },
+    {
+      "hop": "Krush (HBC 586)",
+      "score": 0.361
+    },
+    {
+      "hop": "Citra",
+      "score": 0.34
+    }
+  ],
+  "Ella": [
+    {
+      "hop": "Hallertau Tradition",
+      "score": 0.657
+    },
+    {
+      "hop": "Tettnang / Tettnanger",
+      "score": 0.493
+    },
+    {
+      "hop": "Strisselspalt",
+      "score": 0.493
+    },
+    {
+      "hop": "Saaz",
+      "score": 0.493
+    },
+    {
+      "hop": "Perle",
+      "score": 0.493
+    },
+    {
+      "hop": "Liberty",
+      "score": 0.493
+    },
+    {
+      "hop": "Challenger",
+      "score": 0.493
+    },
+    {
+      "hop": "Hallertau Mittelfrueh",
+      "score": 0.493
+    }
+  ],
+  "Fuggle": [
+    {
+      "hop": "Progress",
+      "score": 0.54
+    },
+    {
+      "hop": "East Kent Goldings",
+      "score": 0.493
+    },
+    {
+      "hop": "Tettnang / Tettnanger",
+      "score": 0.36
+    },
+    {
+      "hop": "Styrian Goldings",
+      "score": 0.36
+    },
+    {
+      "hop": "Strisselspalt",
+      "score": 0.36
+    },
+    {
+      "hop": "Saaz",
+      "score": 0.36
+    },
+    {
+      "hop": "Challenger",
+      "score": 0.36
+    },
+    {
+      "hop": "Liberty",
+      "score": 0.36
+    }
+  ],
+  "Galaxy": [
+    {
+      "hop": "Nectaron",
+      "score": 0.6
+    },
+    {
+      "hop": "Azacca",
+      "score": 0.45
+    },
+    {
+      "hop": "Riwaka",
+      "score": 0.45
+    },
+    {
+      "hop": "Strata",
+      "score": 0.417
+    },
+    {
+      "hop": "Krush (HBC 586)",
+      "score": 0.39
+    },
+    {
+      "hop": "Mosaic",
+      "score": 0.367
+    },
+    {
+      "hop": "Citra",
+      "score": 0.367
+    },
+    {
+      "hop": "BRU-1",
+      "score": 0.329
+    }
+  ],
+  "Hallertau Mittelfrueh": [
+    {
+      "hop": "Tettnang / Tettnanger",
+      "score": 0.9
+    },
+    {
+      "hop": "Strisselspalt",
+      "score": 0.72
+    },
+    {
+      "hop": "Saaz",
+      "score": 0.72
+    },
+    {
+      "hop": "Liberty",
+      "score": 0.72
+    },
+    {
+      "hop": "Hallertau Tradition",
+      "score": 0.72
+    },
+    {
+      "hop": "Styrian Goldings",
+      "score": 0.54
+    },
+    {
+      "hop": "Saphir",
+      "score": 0.54
+    },
+    {
+      "hop": "Progress",
+      "score": 0.54
+    }
+  ],
+  "Hallertau Tradition": [
+    {
+      "hop": "Tettnang / Tettnanger",
+      "score": 0.72
+    },
+    {
+      "hop": "Perle",
+      "score": 0.72
+    },
+    {
+      "hop": "Hallertau Mittelfrueh",
+      "score": 0.72
+    },
+    {
+      "hop": "Ella",
+      "score": 0.657
+    },
+    {
+      "hop": "Strisselspalt",
+      "score": 0.54
+    },
+    {
+      "hop": "Saaz",
+      "score": 0.54
+    },
+    {
+      "hop": "Liberty",
+      "score": 0.54
+    },
+    {
+      "hop": "Challenger",
+      "score": 0.54
+    }
+  ],
+  "Idaho 7": [
+    {
+      "hop": "Simcoe",
+      "score": 0.643
+    },
+    {
+      "hop": "Mosaic",
+      "score": 0.567
+    },
+    {
+      "hop": "Citra",
+      "score": 0.567
+    },
+    {
+      "hop": "Centennial",
+      "score": 0.555
+    },
+    {
+      "hop": "Strata",
+      "score": 0.514
+    },
+    {
+      "hop": "Krush (HBC 586)",
+      "score": 0.481
+    },
+    {
+      "hop": "BRU-1",
+      "score": 0.456
+    },
+    {
+      "hop": "Topaz",
+      "score": 0.456
+    }
+  ],
+  "Kohatu": [
+    {
+      "hop": "Riwaka",
+      "score": 0.493
+    },
+    {
+      "hop": "Rakau",
+      "score": 0.493
+    },
+    {
+      "hop": "Nectaron",
+      "score": 0.493
+    },
+    {
+      "hop": "Ariana",
+      "score": 0.36
+    },
+    {
+      "hop": "BRU-1",
+      "score": 0.36
+    },
+    {
+      "hop": "Calista",
+      "score": 0.36
+    },
+    {
+      "hop": "Lotus",
+      "score": 0.36
+    },
+    {
+      "hop": "Motueka",
+      "score": 0.36
+    }
+  ],
+  "Krush (HBC 586)": [
+    {
+      "hop": "Azacca",
+      "score": 0.65
+    },
+    {
+      "hop": "Citra",
+      "score": 0.636
+    },
+    {
+      "hop": "Idaho 7",
+      "score": 0.481
+    },
+    {
+      "hop": "Topaz",
+      "score": 0.427
+    },
+    {
+      "hop": "BRU-1",
+      "score": 0.427
+    },
+    {
+      "hop": "Mosaic",
+      "score": 0.424
+    },
+    {
+      "hop": "Centennial",
+      "score": 0.39
+    },
+    {
+      "hop": "Galaxy",
+      "score": 0.39
+    }
+  ],
+  "Lemondrop": [
+    {
+      "hop": "Motueka",
+      "score": 0.604
+    },
+    {
+      "hop": "Cascade",
+      "score": 0.604
+    },
+    {
+      "hop": "Amarillo",
+      "score": 0.551
+    },
+    {
+      "hop": "Loral",
+      "score": 0.551
+    },
+    {
+      "hop": "Triumph",
+      "score": 0.477
+    },
+    {
+      "hop": "Sorachi Ace",
+      "score": 0.402
+    },
+    {
+      "hop": "Calista",
+      "score": 0.402
+    },
+    {
+      "hop": "Lotus",
+      "score": 0.402
+    }
+  ],
+  "Liberty": [
+    {
+      "hop": "Tettnang / Tettnanger",
+      "score": 0.72
+    },
+    {
+      "hop": "Strisselspalt",
+      "score": 0.72
+    },
+    {
+      "hop": "Saaz",
+      "score": 0.72
+    },
+    {
+      "hop": "Hallertau Mittelfrueh",
+      "score": 0.72
+    },
+    {
+      "hop": "Styrian Goldings",
+      "score": 0.54
+    },
+    {
+      "hop": "Progress",
+      "score": 0.54
+    },
+    {
+      "hop": "Hallertau Tradition",
+      "score": 0.54
+    },
+    {
+      "hop": "Loral",
+      "score": 0.493
+    }
+  ],
+  "Loral": [
+    {
+      "hop": "Lemondrop",
+      "score": 0.551
+    },
+    {
+      "hop": "Sorachi Ace",
+      "score": 0.493
+    },
+    {
+      "hop": "Liberty",
+      "score": 0.493
+    },
+    {
+      "hop": "Hallertau Tradition",
+      "score": 0.493
+    },
+    {
+      "hop": "Cascade",
+      "score": 0.493
+    },
+    {
+      "hop": "Ella",
+      "score": 0.45
+    },
+    {
+      "hop": "Amarillo",
+      "score": 0.45
+    },
+    {
+      "hop": "Triumph",
+      "score": 0.39
+    }
+  ],
+  "Lotus": [
+    {
+      "hop": "Ariana",
+      "score": 0.54
+    },
+    {
+      "hop": "Amarillo",
+      "score": 0.493
+    },
+    {
+      "hop": "Sabro",
+      "score": 0.456
+    },
+    {
+      "hop": "Triumph",
+      "score": 0.427
+    },
+    {
+      "hop": "Lemondrop",
+      "score": 0.402
+    },
+    {
+      "hop": "Cascade",
+      "score": 0.36
+    },
+    {
+      "hop": "Calista",
+      "score": 0.36
+    },
+    {
+      "hop": "BRU-1",
+      "score": 0.36
+    }
+  ],
+  "Magnum": [
+    {
+      "hop": "Topaz",
+      "score": 0.18
+    },
+    {
+      "hop": "Saphir",
+      "score": 0.18
+    },
+    {
+      "hop": "Hallertau Tradition",
+      "score": 0.18
+    },
+    {
+      "hop": "Perle",
+      "score": 0.18
+    },
+    {
+      "hop": "Hallertau Mittelfrueh",
+      "score": 0.18
+    },
+    {
+      "hop": "Calista",
+      "score": 0.18
+    },
+    {
+      "hop": "Ariana",
+      "score": 0.18
+    },
+    {
+      "hop": "BRU-1",
+      "score": 0.18
+    }
+  ],
+  "Mosaic": [
+    {
+      "hop": "Strata",
+      "score": 0.567
+    },
+    {
+      "hop": "Idaho 7",
+      "score": 0.567
+    },
+    {
+      "hop": "BRU-1",
+      "score": 0.537
+    },
+    {
+      "hop": "Citra",
+      "score": 0.5
+    },
+    {
+      "hop": "Azacca",
+      "score": 0.49
+    },
+    {
+      "hop": "Centennial",
+      "score": 0.49
+    },
+    {
+      "hop": "Simcoe",
+      "score": 0.454
+    },
+    {
+      "hop": "El Dorado",
+      "score": 0.454
+    }
+  ],
+  "Motueka": [
+    {
+      "hop": "Lemondrop",
+      "score": 0.604
+    },
+    {
+      "hop": "Riwaka",
+      "score": 0.493
+    },
+    {
+      "hop": "Triumph",
+      "score": 0.427
+    },
+    {
+      "hop": "Sorachi Ace",
+      "score": 0.36
+    },
+    {
+      "hop": "Calista",
+      "score": 0.36
+    },
+    {
+      "hop": "Cascade",
+      "score": 0.36
+    },
+    {
+      "hop": "Kohatu",
+      "score": 0.36
+    },
+    {
+      "hop": "Rakau",
+      "score": 0.329
+    }
+  ],
+  "Nectaron": [
+    {
+      "hop": "Galaxy",
+      "score": 0.6
+    },
+    {
+      "hop": "BRU-1",
+      "score": 0.493
+    },
+    {
+      "hop": "Kohatu",
+      "score": 0.493
+    },
+    {
+      "hop": "Rakau",
+      "score": 0.45
+    },
+    {
+      "hop": "Nelson Sauvin",
+      "score": 0.45
+    },
+    {
+      "hop": "Azacca",
+      "score": 0.45
+    },
+    {
+      "hop": "Riwaka",
+      "score": 0.45
+    },
+    {
+      "hop": "Strata",
+      "score": 0.417
+    }
+  ],
+  "Nelson Sauvin": [
+    {
+      "hop": "Nectaron",
+      "score": 0.45
+    },
+    {
+      "hop": "BRU-1",
+      "score": 0.329
+    },
+    {
+      "hop": "Kohatu",
+      "score": 0.329
+    },
+    {
+      "hop": "Azacca",
+      "score": 0.3
+    },
+    {
+      "hop": "Galaxy",
+      "score": 0.3
+    },
+    {
+      "hop": "Riwaka",
+      "score": 0.3
+    },
+    {
+      "hop": "El Dorado",
+      "score": 0.278
+    },
+    {
+      "hop": "Sabro",
+      "score": 0.278
+    }
+  ],
+  "Perle": [
+    {
+      "hop": "Hallertau Tradition",
+      "score": 0.72
+    },
+    {
+      "hop": "Tettnang / Tettnanger",
+      "score": 0.54
+    },
+    {
+      "hop": "Challenger",
+      "score": 0.54
+    },
+    {
+      "hop": "Hallertau Mittelfrueh",
+      "score": 0.54
+    },
+    {
+      "hop": "Ella",
+      "score": 0.493
+    },
+    {
+      "hop": "Triumph",
+      "score": 0.427
+    },
+    {
+      "hop": "Ariana",
+      "score": 0.36
+    },
+    {
+      "hop": "Strisselspalt",
+      "score": 0.36
+    }
+  ],
+  "Progress": [
+    {
+      "hop": "East Kent Goldings",
+      "score": 0.822
+    },
+    {
+      "hop": "Styrian Goldings",
+      "score": 0.72
+    },
+    {
+      "hop": "Tettnang / Tettnanger",
+      "score": 0.54
+    },
+    {
+      "hop": "Strisselspalt",
+      "score": 0.54
+    },
+    {
+      "hop": "Saaz",
+      "score": 0.54
+    },
+    {
+      "hop": "Fuggle",
+      "score": 0.54
+    },
+    {
+      "hop": "Liberty",
+      "score": 0.54
+    },
+    {
+      "hop": "Hallertau Mittelfrueh",
+      "score": 0.54
+    }
+  ],
+  "Rakau": [
+    {
+      "hop": "Kohatu",
+      "score": 0.493
+    },
+    {
+      "hop": "Nectaron",
+      "score": 0.45
+    },
+    {
+      "hop": "BRU-1",
+      "score": 0.329
+    },
+    {
+      "hop": "Motueka",
+      "score": 0.329
+    },
+    {
+      "hop": "Riwaka",
+      "score": 0.3
+    },
+    {
+      "hop": "Amarillo",
+      "score": 0.3
+    },
+    {
+      "hop": "Lemondrop",
+      "score": 0.184
+    },
+    {
+      "hop": "Sorachi Ace",
+      "score": 0.164
+    }
+  ],
+  "Riwaka": [
+    {
+      "hop": "Kohatu",
+      "score": 0.493
+    },
+    {
+      "hop": "Motueka",
+      "score": 0.493
+    },
+    {
+      "hop": "Calista",
+      "score": 0.493
+    },
+    {
+      "hop": "Cascade",
+      "score": 0.493
+    },
+    {
+      "hop": "Galaxy",
+      "score": 0.45
+    },
+    {
+      "hop": "Nectaron",
+      "score": 0.45
+    },
+    {
+      "hop": "Lemondrop",
+      "score": 0.367
+    },
+    {
+      "hop": "Citra",
+      "score": 0.367
+    }
+  ],
+  "Saaz": [
+    {
+      "hop": "Tettnang / Tettnanger",
+      "score": 0.72
+    },
+    {
+      "hop": "Strisselspalt",
+      "score": 0.72
+    },
+    {
+      "hop": "Liberty",
+      "score": 0.72
+    },
+    {
+      "hop": "Hallertau Mittelfrueh",
+      "score": 0.72
+    },
+    {
+      "hop": "Styrian Goldings",
+      "score": 0.54
+    },
+    {
+      "hop": "Progress",
+      "score": 0.54
+    },
+    {
+      "hop": "Hallertau Tradition",
+      "score": 0.54
+    },
+    {
+      "hop": "East Kent Goldings",
+      "score": 0.493
+    }
+  ],
+  "Sabro": [
+    {
+      "hop": "BRU-1",
+      "score": 0.456
+    },
+    {
+      "hop": "Lotus",
+      "score": 0.456
+    },
+    {
+      "hop": "Citra",
+      "score": 0.454
+    },
+    {
+      "hop": "Azacca",
+      "score": 0.417
+    },
+    {
+      "hop": "Idaho 7",
+      "score": 0.386
+    },
+    {
+      "hop": "Strata",
+      "score": 0.386
+    },
+    {
+      "hop": "El Dorado",
+      "score": 0.386
+    },
+    {
+      "hop": "Krush (HBC 586)",
+      "score": 0.361
+    }
+  ],
+  "Saphir": [
+    {
+      "hop": "Tettnang / Tettnanger",
+      "score": 0.54
+    },
+    {
+      "hop": "Hallertau Mittelfrueh",
+      "score": 0.54
+    },
+    {
+      "hop": "Saaz",
+      "score": 0.36
+    },
+    {
+      "hop": "Hallertau Tradition",
+      "score": 0.36
+    },
+    {
+      "hop": "Progress",
+      "score": 0.36
+    },
+    {
+      "hop": "Strisselspalt",
+      "score": 0.36
+    },
+    {
+      "hop": "Liberty",
+      "score": 0.36
+    },
+    {
+      "hop": "Cascade",
+      "score": 0.36
+    }
+  ],
+  "Simcoe": [
+    {
+      "hop": "Idaho 7",
+      "score": 0.643
+    },
+    {
+      "hop": "Strata",
+      "score": 0.514
+    },
+    {
+      "hop": "Topaz",
+      "score": 0.456
+    },
+    {
+      "hop": "Mosaic",
+      "score": 0.454
+    },
+    {
+      "hop": "Centennial",
+      "score": 0.417
+    },
+    {
+      "hop": "Krush (HBC 586)",
+      "score": 0.361
+    },
+    {
+      "hop": "Citra",
+      "score": 0.34
+    },
+    {
+      "hop": "BRU-1",
+      "score": 0.304
+    }
+  ],
+  "Sorachi Ace": [
+    {
+      "hop": "Loral",
+      "score": 0.493
+    },
+    {
+      "hop": "Lemondrop",
+      "score": 0.402
+    },
+    {
+      "hop": "Perle",
+      "score": 0.36
+    },
+    {
+      "hop": "Motueka",
+      "score": 0.36
+    },
+    {
+      "hop": "Hallertau Tradition",
+      "score": 0.36
+    },
+    {
+      "hop": "Challenger",
+      "score": 0.36
+    },
+    {
+      "hop": "Ella",
+      "score": 0.329
+    },
+    {
+      "hop": "Triumph",
+      "score": 0.285
+    }
+  ],
+  "Strata": [
+    {
+      "hop": "Mosaic",
+      "score": 0.567
+    },
+    {
+      "hop": "Simcoe",
+      "score": 0.514
+    },
+    {
+      "hop": "Idaho 7",
+      "score": 0.514
+    },
+    {
+      "hop": "BRU-1",
+      "score": 0.456
+    },
+    {
+      "hop": "Citra",
+      "score": 0.454
+    },
+    {
+      "hop": "Azacca",
+      "score": 0.417
+    },
+    {
+      "hop": "Galaxy",
+      "score": 0.417
+    },
+    {
+      "hop": "Nectaron",
+      "score": 0.417
+    }
+  ],
+  "Strisselspalt": [
+    {
+      "hop": "Tettnang / Tettnanger",
+      "score": 0.72
+    },
+    {
+      "hop": "Saaz",
+      "score": 0.72
+    },
+    {
+      "hop": "Liberty",
+      "score": 0.72
+    },
+    {
+      "hop": "Hallertau Mittelfrueh",
+      "score": 0.72
+    },
+    {
+      "hop": "Styrian Goldings",
+      "score": 0.54
+    },
+    {
+      "hop": "Progress",
+      "score": 0.54
+    },
+    {
+      "hop": "Hallertau Tradition",
+      "score": 0.54
+    },
+    {
+      "hop": "East Kent Goldings",
+      "score": 0.493
+    }
+  ],
+  "Styrian Goldings": [
+    {
+      "hop": "Progress",
+      "score": 0.72
+    },
+    {
+      "hop": "East Kent Goldings",
+      "score": 0.657
+    },
+    {
+      "hop": "Tettnang / Tettnanger",
+      "score": 0.54
+    },
+    {
+      "hop": "Strisselspalt",
+      "score": 0.54
+    },
+    {
+      "hop": "Saaz",
+      "score": 0.54
+    },
+    {
+      "hop": "Liberty",
+      "score": 0.54
+    },
+    {
+      "hop": "Hallertau Mittelfrueh",
+      "score": 0.54
+    },
+    {
+      "hop": "Saphir",
+      "score": 0.36
+    }
+  ],
+  "Tettnang / Tettnanger": [
+    {
+      "hop": "Hallertau Mittelfrueh",
+      "score": 0.9
+    },
+    {
+      "hop": "Strisselspalt",
+      "score": 0.72
+    },
+    {
+      "hop": "Saaz",
+      "score": 0.72
+    },
+    {
+      "hop": "Liberty",
+      "score": 0.72
+    },
+    {
+      "hop": "Hallertau Tradition",
+      "score": 0.72
+    },
+    {
+      "hop": "Styrian Goldings",
+      "score": 0.54
+    },
+    {
+      "hop": "Saphir",
+      "score": 0.54
+    },
+    {
+      "hop": "Progress",
+      "score": 0.54
+    }
+  ],
+  "Topaz": [
+    {
+      "hop": "Idaho 7",
+      "score": 0.456
+    },
+    {
+      "hop": "Simcoe",
+      "score": 0.456
+    },
+    {
+      "hop": "Krush (HBC 586)",
+      "score": 0.427
+    },
+    {
+      "hop": "Galaxy",
+      "score": 0.329
+    },
+    {
+      "hop": "Centennial",
+      "score": 0.329
+    },
+    {
+      "hop": "Mosaic",
+      "score": 0.268
+    },
+    {
+      "hop": "Citra",
+      "score": 0.268
+    },
+    {
+      "hop": "Magnum",
+      "score": 0.18
+    }
+  ],
+  "Triumph": [
+    {
+      "hop": "Amarillo",
+      "score": 0.52
+    },
+    {
+      "hop": "Lemondrop",
+      "score": 0.477
+    },
+    {
+      "hop": "Lotus",
+      "score": 0.427
+    },
+    {
+      "hop": "Perle",
+      "score": 0.427
+    },
+    {
+      "hop": "Calista",
+      "score": 0.427
+    },
+    {
+      "hop": "Cascade",
+      "score": 0.427
+    },
+    {
+      "hop": "Motueka",
+      "score": 0.427
+    },
+    {
+      "hop": "Challenger",
+      "score": 0.427
+    }
+  ]
+}
