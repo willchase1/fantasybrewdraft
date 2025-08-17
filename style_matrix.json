@@ -297,8 +297,19 @@
     "Specialty": []
   },
   "Specialty Belgian": {
-    "Base Malt": [],
-    "Hop": [],
+    "Base Malt": [
+      "Belgian Pilsner",
+      "Belgian Pale",
+      "Floor Malted Pilsner",
+      "Pale Malt (2 Row)"
+    ],
+    "Hop": [
+      "Saaz",
+      "Strisselspalt",
+      "Hallertau Mittelfrueh",
+      "Styrian Goldings",
+      "Perle"
+    ],
     "Yeast": [
       "Saison (WLP565, WY3724)",
       "Belgian Ardennes (WY3522, B45)",
@@ -331,8 +342,18 @@
     ]
   },
   "Specialty British": {
-    "Base Malt": [],
-    "Hop": [],
+    "Base Malt": [
+      "Maris Otter",
+      "Golden Promise",
+      "English Pale Ale",
+      "Pale Malt (2 Row)"
+    ],
+    "Hop": [
+      "East Kent Goldings",
+      "Fuggle",
+      "Challenger",
+      "Progress"
+    ],
     "Yeast": [],
     "Adjunct": [
       "Apricots",
@@ -359,8 +380,19 @@
     ]
   },
   "Experimental / Fruit": {
-    "Base Malt": [],
-    "Hop": [],
+    "Base Malt": [
+      "Pale Malt (2 Row)",
+      "American (or North American) Pilsner",
+      "White Wheat",
+      "Wheat Malt Extract"
+    ],
+    "Hop": [
+      "Saaz",
+      "Liberty",
+      "Cascade",
+      "Hallertau Mittelfrueh",
+      "Perle"
+    ],
     "Yeast": [],
     "Adjunct": [
       "Apricots",
@@ -383,8 +415,19 @@
     ]
   },
   "Wood-aged Specialty": {
-    "Base Malt": [],
-    "Hop": [],
+    "Base Malt": [
+      "Maris Otter",
+      "English Pale Ale",
+      "Belgian Pale",
+      "Munich, Light"
+    ],
+    "Hop": [
+      "East Kent Goldings",
+      "Fuggle",
+      "Hallertau Tradition",
+      "Saaz",
+      "Perle"
+    ],
     "Yeast": [],
     "Adjunct": [
       "Apricots",
