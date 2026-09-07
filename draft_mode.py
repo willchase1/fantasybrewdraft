@@ -5,10 +5,25 @@ import random
 import os
 import io
 import time
-from collections import defaultdict, Counter
-from draft_state import save_state as save_shared_state
+from collections import defaultdict
+import draft_state
+import draft_core
+from config import load_league_config
+from draft_core import (
+    build_available_set,
+    validate_data,
+    ingredient_style_bias,
+    bucket_for_rules,
+    compute_rules_status,
+    compute_style_status,
+    next_best_picks,
+    block_picks,
+    pick_slot,
+)
 
-st.set_page_config(page_title="Fantasy Brewing Draft Advisor", layout="wide")
+# Page config is set by the app.py entry point (st.set_page_config must run
+# once, before any other Streamlit command). This module is a navigation page.
+st.header("🍺 Run a Draft")
 
 # --- Global CSS for better UX ---
 st.markdown("""
@@ -109,21 +124,17 @@ st.markdown("""
 
 @st.cache_data
 def load_data():
-    ingredients = pd.read_csv("ingredients_2025.csv")
-    with open("style_matrix.json") as f:
-        style_matrix = json.load(f)
-    with open("ingredient_scarcity.json") as f:
-        scarcity = pd.DataFrame(json.load(f))
-    # Opponent model is optional
-    opponent_model = None
-    try:
-        with open("opponent_model.json") as f:
-            opponent_model = json.load(f)
-    except Exception:
-        pass
-    return ingredients, style_matrix, scarcity, opponent_model
+    # draft_core is the single source of truth for loading + shaping data.
+    return draft_core.load_data()
 
-ingredients, style_matrix, scarcity_df, opponent_model = load_data()
+(
+    ingredients,
+    style_matrix,
+    scarcity_df,
+    opponent_model,
+    style_bias,
+    ingredient_to_category,
+) = load_data()
 
 
 @st.cache_data
@@ -145,128 +156,24 @@ def load_hop_similarity_data():
 
 hop_similarity_data, hop_similarity_matrix = load_hop_similarity_data()
 
-# --- Persist draft state locally ---
-SAVE_FILE = "draft_autosave.json"
-
+# --- Persist draft state locally (the log is the single source of truth) ---
 def load_state():
-    """Load draft state from disk if it exists."""
-    if os.path.exists(SAVE_FILE):
-        try:
-            with open(SAVE_FILE) as f:
-                return json.load(f)
-        except Exception:
-            return {}
-    return {}
+    """Load persisted draft ({players, draft_log}) via draft_state."""
+    return draft_state.load_draft()
 
 def save_state(state):
-    """Persist draft state to disk."""
-    try:
-        with open(SAVE_FILE, "w") as f:
-            json.dump(state, f)
-    except Exception:
-        pass
+    """Persist the draft ({players, draft_log}) via draft_state."""
+    draft_state.save_draft(state)
 
-# ---- Availability helper (alias-aware) ----
-def build_available_set(ingredients_df):
-    base_aliases = ["Base Malt", "Base Malts", "Base Malts and Extracts"]
-    hop_aliases = ["Hop", "Hops"]
-    yeast_aliases = ["Yeast", "Yeasts"]
-    adjunct_aliases = ["Adjunct", "Adjuncts", "Adjuncts/Spices/Fruits"]
-    specialty_aliases = [
-        "Specialty", "Specialty Malt", "Specialty Malts",
-        "Specialty Malt and Flaked Grains", "Specialty Malts and Flaked Grains",
-        "Flaked Grains", "Flaked/Other Grains"
-    ]
-    extra_aliases = ["Extra", "Extras"]
-
-    def extract(alias_list):
-        vals = []
-        for colname in alias_list:
-            if colname in ingredients_df.columns:
-                vals.extend(ingredients_df[colname].dropna().unique().tolist())
-        return set(vals)
-
-    avail = set()
-    for aliases in [base_aliases, hop_aliases, yeast_aliases, adjunct_aliases, specialty_aliases, extra_aliases]:
-        avail |= extract(aliases)
-    return avail
-
-# ---- Style bias (optional) ----
-style_bias = None
-try:
-    with open("style_bias.json") as f:
-        style_bias = json.load(f)
-except Exception:
-    style_bias = None
-
-def ingredient_style_bias(ingredient, style_matrix, style_bias):
-    if not style_bias:
-        return 1.0
-    bias_factor = 1.0
-    for family, data in style_bias.items():
-        styles = data.get("styles", [])
-        weight = data.get("weight", 1.0)
-        for style in styles:
-            if style in style_matrix:
-                for cat, ings in style_matrix[style].items():
-                    if ingredient in ings:
-                        bias_factor = max(bias_factor, weight)
-    return bias_factor
-
-# --- Helper maps ---
-ingredient_to_category = {}
-for style, cats in style_matrix.items():
-    for cat, ing_list in cats.items():
-        for ing in ing_list:
-            ingredient_to_category[ing] = cat
+# build_available_set, ingredient_style_bias, ingredient_to_category and
+# style_bias now come from draft_core (imported / returned by load_data above).
 
 all_categories = ["Base Malt", "Hop", "Yeast", "Adjunct", "Specialty"]
 
 # --- Rulebook-aware requirements status ---
-DEFAULT_ROUNDS = 7  # base number of rounds before optional round 8
-
-def bucket_for_rules(category_label: str) -> str:
-    if category_label == "Base Malt":
-        return "Malt"
-    if category_label == "Hop":
-        return "Hop"
-    if category_label == "Yeast":
-        return "Yeast"
-    if category_label == "Adjunct":
-        return "Adjunct"
-    return "Flex"  # Specialty/Extra -> Flex only
-
-def compute_rules_status(my_picks, ingredient_to_category, total_picks):
-    counts = {"Malt":0, "Hop":0, "Yeast":0, "Adjunct":0, "Flex":0}
-    for ing in my_picks:
-        ui_cat = ingredient_to_category.get(ing, "Specialty")
-        bucket = bucket_for_rules(ui_cat)
-        counts[bucket] += 1
-
-    required_min = {"Malt":1, "Hop":1, "Yeast":1, "Adjunct":1}
-    required_met = {k: counts[k] >= v for k,v in required_min.items()}
-    required_remaining = {k: max(0, v - counts[k]) for k,v in required_min.items()}
-
-    satisfied_core = sum(min(counts[k], 1) for k in required_min.keys())
-    flex_used = max(0, len(my_picks) - satisfied_core)
-    flex_remaining = max(0, 3 - flex_used)
-
-    picks_remaining = max(0, total_picks - len(my_picks))
-
-    required_slots_left = sum(required_remaining.values())
-    feasible = required_slots_left <= picks_remaining
-
-    status = {
-        "counts": counts,
-        "required_met": required_met,
-        "required_remaining": required_remaining,
-        "flex_used": flex_used,
-        "flex_remaining": flex_remaining,
-        "picks_remaining": picks_remaining,
-        "required_slots_left": required_slots_left,
-        "feasible": feasible
-    }
-    return status
+LEAGUE = load_league_config()
+DEFAULT_ROUNDS = LEAGUE["rounds"]  # base number of rounds before optional round 8
+# bucket_for_rules and compute_rules_status now come from draft_core.
 
 # --- Sidebar controls ---
 st.sidebar.header("Draft Setup")
@@ -308,8 +215,10 @@ if opponent_model is None and bias_choice != "Off":
     st.sidebar.warning("No opponent model file found. Bias effects will be limited.")
 
 st.sidebar.header("Category Requirements")
-required = {"Base Malt": 1, "Hop": 1, "Yeast": 1, "Adjunct": 1}
-flex_slots = st.sidebar.number_input("Flex slots", min_value=0, max_value=5, value=3, step=1)
+required = LEAGUE["required_categories"]
+flex_slots = st.sidebar.number_input(
+    "Flex slots", min_value=0, max_value=5, value=int(LEAGUE["flex_slots"]), step=1
+)
 
 st.sidebar.header("Session")
 reload_data = st.sidebar.button("Reload data files", key="reload_data_btn")
@@ -320,29 +229,29 @@ if reload_data:
         pass
     st.rerun()
 
+# Data health: warn if any style requires an ingredient that isn't draftable.
+_health = validate_data(ingredients, style_matrix, LEAGUE["category_aliases"])
+if _health["in_matrix_not_sheet"]:
+    st.sidebar.warning(
+        f"{len(_health['in_matrix_not_sheet'])} style ingredient(s) are missing "
+        "from the sheet — some styles can't be satisfied."
+    )
+    with st.sidebar.expander("Show data issues"):
+        st.write("Referenced by a style but not draftable:")
+        st.write(_health["in_matrix_not_sheet"])
+
 reset = st.sidebar.button("Reset session", type="primary")
 if reset:
     st.session_state["draft_log"] = []
     save_state({"players": players, "draft_log": []})
-    save_shared_state([], [])
 
 draft_log = st.session_state.get("draft_log", [])
 
-# derive team picks and drafted list
-teams = {p: [] for p in players}
-drafted = []
-for rec in draft_log:
-    plyr = rec.get("Player")
-    ing = rec.get("Ingredient")
-    if plyr in teams:
-        teams[plyr].append(ing)
-    else:
-        teams[plyr] = [ing]
-    drafted.append(ing)
+# derive team picks and drafted list from the log (single source of truth)
+teams, drafted = draft_state.project(draft_log, players)
 
 your_name = players[int(draft_position)-1] if players else ""
 my_picks = teams.get(your_name, [])
-save_shared_state(my_picks, drafted)
 
 # --- Draft Timer ---
 if "timer_duration" not in st.session_state:
@@ -440,7 +349,6 @@ def undo_last_pick():
     if st.session_state.get("draft_log"):
         st.session_state["draft_log"].pop()
         save_state({"players": players, "draft_log": st.session_state["draft_log"]})
-        save_shared_state(teams.get(your_name, []), [rec.get("Ingredient") for rec in st.session_state["draft_log"] if rec.get("Ingredient")])
 
 def swap_pick(pick_index, new_ingredient, new_category):
     """Swap an existing pick with a new ingredient."""
@@ -448,16 +356,6 @@ def swap_pick(pick_index, new_ingredient, new_category):
         st.session_state["draft_log"][pick_index]["Ingredient"] = new_ingredient
         st.session_state["draft_log"][pick_index]["Category"] = new_category
         save_state({"players": players, "draft_log": st.session_state["draft_log"]})
-        # Update shared state
-        new_teams = {p: [] for p in players}
-        new_drafted = []
-        for rec in st.session_state["draft_log"]:
-            plyr = rec.get("Player")
-            ing = rec.get("Ingredient")
-            if plyr in new_teams:
-                new_teams[plyr].append(ing)
-            new_drafted.append(ing)
-        save_shared_state(new_teams.get(your_name, []), new_drafted)
 
 # --- Draft Management Controls ---
 # st.markdown('<div class="draft-mgmt-container">', unsafe_allow_html=True)
@@ -549,7 +447,7 @@ colA, colB = st.sidebar.columns(2)
 with colA:
     st.metric("Picks Used", f"{len(my_picks)}/{TOTAL_PICKS}")
 with colB:
-    st.metric("Flex Left", f"{rules['flex_remaining']}/3")
+    st.metric("Flex Left", f"{rules['flex_remaining']}/{LEAGUE['flex_slots']}")
 
 st.sidebar.caption("Required categories (need 1 each):")
 req_cols = st.sidebar.columns(4)
@@ -572,10 +470,8 @@ else:
 # --- Current draft state ---
 total_picks_overall = TOTAL_PICKS * int(num_players)
 overall_pick = len(draft_log) + 1
-current_round = ((overall_pick - 1) // int(num_players)) + 1
-order = list(range(int(num_players))) if current_round % 2 == 1 else list(range(int(num_players)-1, -1, -1))
-idx_in_order = (overall_pick - 1) % int(num_players)
-current_player = players[order[idx_in_order]] if overall_pick <= total_picks_overall else None
+current_round, current_seat = pick_slot(overall_pick, int(num_players))
+current_player = players[current_seat] if overall_pick <= total_picks_overall else None
 
 # --- Opponent data accessors ---
 ingredient_popularity = {}
@@ -626,18 +522,9 @@ with tab1:
         save_state({"players": players, "draft_log": st.session_state["draft_log"]})
         st.rerun()
 
-    # Build long list of available ingredients by category, based on sheet columns (alias-aware)
+    # Build long list of available ingredients by category, based on sheet
+    # columns (alias-aware). Alias lists come from the league config.
     long_rows = []
-    base_aliases = ["Base Malt", "Base Malts", "Base Malts and Extracts"]
-    hop_aliases = ["Hop", "Hops"]
-    yeast_aliases = ["Yeast", "Yeasts"]
-    adjunct_aliases = ["Adjunct", "Adjuncts", "Adjuncts/Spices/Fruits"]
-    specialty_aliases = [
-        "Specialty", "Specialty Malt", "Specialty Malts",
-        "Specialty Malt and Flaked Grains", "Specialty Malts and Flaked Grains",
-        "Flaked Grains", "Flaked/Other Grains"
-    ]
-    extra_aliases = ["Extra", "Extras"]
 
     def add_from_aliases(alias_list, category_label):
         for colname in alias_list:
@@ -645,12 +532,8 @@ with tab1:
                 for val in ingredients[colname].dropna().unique().tolist():
                     long_rows.append({"Ingredient": str(val), "Category": category_label})
 
-    add_from_aliases(base_aliases, "Base Malt")
-    add_from_aliases(hop_aliases, "Hop")
-    add_from_aliases(yeast_aliases, "Yeast")
-    add_from_aliases(adjunct_aliases, "Adjunct")
-    add_from_aliases(specialty_aliases, "Specialty")
-    add_from_aliases(extra_aliases, "Extra")
+    for category_label, alias_list in LEAGUE["category_aliases"].items():
+        add_from_aliases(alias_list, category_label)
 
     df_long = pd.DataFrame(long_rows).drop_duplicates()
 
@@ -700,116 +583,28 @@ with tab1:
     st.subheader("All Drafted (any team)")
     st.write(drafted if drafted else "Nothing drafted yet.")
 
-# --- Style Viability ---
-def compute_style_status(my_picks, drafted, style_matrix, required, flex_slots):
-    status = []
-    drafted_set = set(drafted)
-    my_set = set(my_picks)
-
-    for style, cats in style_matrix.items():
-        cat_choices_remaining = {}
-        for cat, ing_list in cats.items():
-            remaining_ing = [ing for ing in ing_list if ing not in drafted_set or ing in my_set]
-            cat_choices_remaining[cat] = len(remaining_ing)
-
-        satisfied = sum(any(ing in my_set for ing in ings) for cat, ings in cats.items())
-        options = sum(1 for k,v in cat_choices_remaining.items() if v > 0)
-        score = satisfied*2 + options
-        status.append({
-            "Style": style,
-            "Satisfied Categories": satisfied,
-            "Categories with Options Left": options,
-            "Score": score
-        })
-    df = pd.DataFrame(status).sort_values(by=["Score","Satisfied Categories"], ascending=False)
-    return df
-
+# --- Style Viability (compute_style_status imported from draft_core) ---
 with tab2:
     st.subheader("Viable Styles (live)")
     viab = compute_style_status(my_picks, drafted, style_matrix, required, flex_slots)
     st.dataframe(viab, use_container_width=True)
 
-# --- Recommendations with opponent bias ---
+# --- Recommendations with opponent bias (next_best_picks from draft_core) ---
 
-def next_best_picks(my_picks, drafted, style_matrix, scarcity_df, required, flex_slots, top_k=15, bias_weight=0.0):
-    drafted_set = set(drafted)
-    my_set = set(my_picks)
-    available_set = build_available_set(ingredients)
-
-    cand = []
-    for style, cats in style_matrix.items():
-        for cat, ings in cats.items():
-            for ing in ings:
-                if ing in available_set and ing not in drafted_set:
-                    cand.append((ing, cat, style))
-    if not cand:
-        return pd.DataFrame(columns=["Ingredient","Category","Style Coverage","Scarcity","Popularity","Bias Factor","Pick Value"])
-
-    coverage = defaultdict(set)
-    for ing, cat, style in cand:
-        coverage[ing].add(style)
-
-    sc = scarcity_df.set_index("Ingredient") if not scarcity_df.empty else pd.DataFrame()
-    rows = []
-    have_counts = Counter([ingredient_to_category.get(i, "Unknown") for i in my_set])
-    cat_need_factor = {}
-    for cat in ["Yeast","Hop","Adjunct","Base Malt","Specialty"]:
-        required_min = required.get(cat, 0)
-        have = have_counts.get(cat, 0)
-        cat_need_factor[cat] = 1.5 if have < required_min else 1.0
-
-    for ing, styles in coverage.items():
-        cat = ingredient_to_category.get(ing, "Unknown")
-        style_cov = len(styles)
-        if not sc.empty and ing in sc.index and "Scarcity Score" in sc.columns:
-            scarcity = float(sc.loc[ing]["Scarcity Score"])
-        else:
-            scarcity = 1.0 / max(style_cov, 1)
-        need_bonus = cat_need_factor.get(cat, 1.0)
-        popularity = float(early_signal.get(ing, 0.0))
-        bias_factor = ingredient_style_bias(ing, style_matrix, style_bias)
-        # Favor style coverage more heavily than ingredient scarcity
-        pick_value = (style_cov * 2.0 + scarcity * 1.0 + popularity * bias_weight) * need_bonus * bias_factor
-        rows.append({
-            "Ingredient": ing,
-            "Category": cat,
-            "Style Coverage": style_cov,
-            "Scarcity": round(scarcity, 3),
-            "Popularity": round(popularity, 3),
-            "Bias Factor": round(bias_factor, 2),
-            "Pick Value": round(pick_value, 3)
-        })
-
-    df = pd.DataFrame(rows).sort_values(by=["Pick Value","Bias Factor","Scarcity","Style Coverage"], ascending=[False,False,False,False])
-    return df.head(top_k)
+def recommend(my_picks_arg, drafted_arg, top_k=15):
+    """Thin adapter binding the shared next_best_picks to this app's data."""
+    return next_best_picks(
+        my_picks_arg, drafted_arg, ingredients, style_matrix, scarcity_df,
+        required, flex_slots, ingredient_to_category, style_bias,
+        early_signal=early_signal, bias_weight=bias_weight, top_k=top_k,
+    )
 
 with tab3:
     st.subheader("Best Next Picks (live, opponent-aware)")
-    recs = next_best_picks(my_picks, drafted, style_matrix, scarcity_df, required, flex_slots, bias_weight=bias_weight)
+    recs = recommend(my_picks, drafted)
     st.dataframe(recs, use_container_width=True)
 
-# --- Block Picks (deny their build) ---
-
-def block_picks(drafted, my_picks, top_k=15):
-    available_set = build_available_set(ingredients)
-    opp_picks = [d for d in drafted if d not in set(my_picks)]
-    recent = list(reversed(opp_picks))[:3]
-    suggestions = defaultdict(int)
-
-    for ing in recent:
-        for (a,b), cnt in pair_lookup.items():
-            if a == ing and b in available_set and b not in set(drafted):
-                suggestions[b] += cnt
-
-    remaining = []
-    for ing, score in suggestions.items():
-        remaining.append((ing, score, early_signal.get(ing, 0.0)))
-    if not remaining:
-        return pd.DataFrame(columns=["Ingredient","Block Score","Popularity Cue"])
-
-    df = pd.DataFrame(remaining, columns=["Ingredient","Block Score","Popularity Cue"])
-    df = df.sort_values(["Block Score","Popularity Cue"], ascending=[False,False]).head(top_k)
-    return df
+# --- Block Picks (deny their build) — block_picks imported from draft_core ---
 
 with tab4:
     st.subheader("Blocks and Opponent Predictions")
@@ -823,7 +618,7 @@ with tab4:
             viab_p = compute_style_status(picks_p, drafted, style_matrix, required, flex_slots)
             if not viab_p.empty:
                 style_guess = viab_p.iloc[0]["Style"]
-        recs_p = next_best_picks(picks_p, drafted, style_matrix, scarcity_df, required, flex_slots, top_k=3, bias_weight=bias_weight)
+        recs_p = recommend(picks_p, drafted, top_k=3)
         next_guess = ", ".join(recs_p["Ingredient"].tolist()) if not recs_p.empty else ""
         pred_rows.append({
             "Player": p,
@@ -838,7 +633,7 @@ with tab4:
     st.markdown("### Block Suggestions")
     if opponent_model is None:
         st.info("Add opponent_model.json to enable block suggestions.")
-    blocks = block_picks(drafted, my_picks, top_k=15)
+    blocks = block_picks(drafted, my_picks, pair_lookup, ingredients, early_signal=early_signal, top_k=15)
     st.dataframe(blocks, use_container_width=True)
 
 # --- Mock draft simulation helpers ---
@@ -901,7 +696,7 @@ def simulate_draft(sim_players, sim_rounds, your_pos, base_malt_run, yeast_run, 
             cand_map = sim_available_candidates(style_matrix, ingredients, drafted_local)
 
             if seat == your_pos:
-                recs = next_best_picks(my_local, drafted_local, style_matrix, scarcity_df, required, flex_slots, top_k=10, bias_weight=bias_weight)
+                recs = recommend(my_local, drafted_local, top_k=10)
                 recs = recs[~recs["Ingredient"].isin(drafted_local)]
                 if not recs.empty:
                     row = recs.iloc[0]
@@ -995,12 +790,17 @@ with tab6:
     if not edited.empty:
         csv_bytes = edited.to_csv(index=False).encode("utf-8")
         st.download_button("Download CSV", csv_bytes, file_name="draft_results.csv", mime="text/csv")
-        excel_buf = io.BytesIO()
-        edited.to_excel(excel_buf, index=False)
-        st.download_button(
-            "Download Excel", excel_buf.getvalue(), file_name="draft_results.xlsx",
-            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-        )
+        # Excel export needs the optional openpyxl engine; degrade gracefully
+        # so a missing dependency can't crash the whole Results tab.
+        try:
+            excel_buf = io.BytesIO()
+            edited.to_excel(excel_buf, index=False)
+            st.download_button(
+                "Download Excel", excel_buf.getvalue(), file_name="draft_results.xlsx",
+                mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            )
+        except ImportError:
+            st.caption("Install `openpyxl` to enable Excel export.")
 with tab7:
     st.subheader('Hop Similarity Finder')
     search = st.text_input('Search hops', key='hop-search')

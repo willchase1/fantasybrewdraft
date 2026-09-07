@@ -1,0 +1,22 @@
+{
+  "rounds": 7,
+  "flex_slots": 3,
+  "required_categories": {
+    "Base Malt": 1,
+    "Hop": 1,
+    "Yeast": 1,
+    "Adjunct": 1
+  },
+  "category_aliases": {
+    "Base Malt": ["Base Malt", "Base Malts", "Base Malts and Extracts"],
+    "Hop": ["Hop", "Hops"],
+    "Yeast": ["Yeast", "Yeasts"],
+    "Adjunct": ["Adjunct", "Adjuncts", "Adjuncts/Spices/Fruits"],
+    "Specialty": [
+      "Specialty", "Specialty Malt", "Specialty Malts",
+      "Specialty Malt and Flaked Grains", "Specialty Malts and Flaked Grains",
+      "Flaked Grains", "Flaked/Other Grains"
+    ],
+    "Extra": ["Extra", "Extras"]
+  }
+}

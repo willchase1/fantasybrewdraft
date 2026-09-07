@@ -3,6 +3,7 @@ from collections import defaultdict
 
 import pandas as pd
 
+from config import load_league_config
 from draft_core import (
     load_data,
     compute_style_status,
@@ -52,8 +53,9 @@ def main():
     my_picks = [x.strip() for x in args.my_picks.split(",") if x.strip()]
     drafted = [x.strip() for x in args.drafted.split(",") if x.strip()] or my_picks.copy()
 
-    required = {"Base Malt": 1, "Hop": 1, "Yeast": 1, "Adjunct": 1}
-    flex_slots = 3
+    league = load_league_config()
+    required = league["required_categories"]
+    flex_slots = league["flex_slots"]
 
     style_df = compute_style_status(
         my_picks, drafted, style_matrix, required, flex_slots

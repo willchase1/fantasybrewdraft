@@ -1,10 +1,20 @@
 # 🍺 Fantasy Brewing Draft Advisor
 
-A comprehensive draft tool for fantasy brewing competitions, featuring real-time draft tracking, style recommendations, opponent analytics, and trade management.
+A tool for fantasy brewing competitions with **two modes** that share one engine:
+
+- **🍺 Run a Draft** — the live, single-commissioner draft board: real-time
+  tracking, style recommendations, opponent analytics, timer, and export.
+- **🧪 My Brewery** — a personal sandbox, decoupled from any live draft: pick
+  ingredients freely to see which styles become viable, what to add next, and
+  hop substitutions.
 
 ## 🎯 Overview
 
-The Fantasy Brewing Draft Advisor helps participants in fantasy brewing leagues manage their ingredient drafts strategically. Players draft ingredients over multiple rounds to build competitive brewing teams, with the app providing intelligent recommendations, opponent analysis, and real-time draft management.
+The Run a Draft mode helps a commissioner run a live snake draft where players
+draft ingredients over multiple rounds to build competitive brewing teams, with
+intelligent recommendations, opponent analysis, and real-time management. The My
+Brewery mode reuses the same scoring for personal recipe exploration and pre-draft
+prep. Both modes are served from a single entry point (`app.py`).
 
 ### Draft Rules
 - **7 rounds** (+ optional 8th "Oh Sh*t" round for swaps)
@@ -29,17 +39,22 @@ The Fantasy Brewing Draft Advisor helps participants in fantasy brewing leagues 
 
 2. **Install dependencies**
    ```bash
-   pip install streamlit pandas
+   pip install -r requirements.txt        # runtime
+   pip install -r requirements-dev.txt    # + pytest, to run the test suite
    ```
 
 3. **Run the application**
    ```bash
-   streamlit run fantasy_brewing_draft_appv2.py
+   streamlit run app.py
    ```
+   Use the sidebar to switch between **Run a Draft** and **My Brewery**.
 
-4. **Open your browser**
-   - The app will automatically open at `http://localhost:8501`
-   - If not, navigate to the URL shown in your terminal
+   - The app opens at `http://localhost:8501` (or the URL shown in your terminal).
+
+4. **Run the tests**
+   ```bash
+   pytest
+   ```
 
 ## 📊 Data Files
 
@@ -227,16 +242,23 @@ Create `opponent_model.json` with historical data:
 
 ```
 fantasybrewdraft/
-├── fantasy_brewing_draft_appv2.py    # Main application
-├── draft_state.py                    # State management utilities
-├── Rules:.md.markdown                # Draft rules reference
-├── ingredients_2025.csv              # Available ingredients
-├── style_matrix.json                 # Beer style definitions
-├── ingredient_scarcity.json          # Scarcity scoring
-├── opponent_model.json               # Opponent patterns (optional)
-├── style_bias.json                   # Style preferences (optional)
-├── draft_autosave.json               # Auto-saved draft state
-└── README.md                         # This file
+├── app.py                    # Entry point — mode switch (streamlit run app.py)
+├── draft_mode.py             # "Run a Draft" — live draft board (page)
+├── brewery_mode.py           # "My Brewery" — personal sandbox (page)
+├── draft_core.py             # Shared engine: scoring, rules, validation
+├── draft_state.py            # Draft-log persistence + projections
+├── config.py                 # Loads league_config.json
+├── league_config.json        # Rounds, flex slots, required categories, aliases
+├── pythonista_tool.py        # Offline CLI advisor (same engine)
+├── tests/                    # pytest suite (characterization + smoke)
+├── ingredients_2025.csv      # Available ingredients
+├── style_matrix.json         # Beer style definitions
+├── ingredient_scarcity.json  # Scarcity scoring
+├── opponent_model.json       # Opponent patterns (optional)
+├── style_bias.json           # Style preferences (optional)
+├── hop_similarity.json       # Hop substitutions (optional)
+├── draft_autosave.json       # Auto-saved draft state (the source of truth)
+└── README.md                 # This file
 ```
 
 ## 🤝 Contributing
