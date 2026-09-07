@@ -62,9 +62,9 @@ def test_draft_mode_renders_roster_strip():
         assert label in md
 
 
-def test_draft_mode_recommendation_panel_and_draft_buttons():
-    """An in-progress draft renders the inline recommendation panel with
-    one-click Draft buttons (the unified board+recs cockpit)."""
+def test_draft_mode_draft_central_panel_and_buttons():
+    """An in-progress draft renders the Draft Central panel (team selector +
+    best-available) with one-click Draft buttons alongside the board."""
     at = AppTest.from_file(DRAFT, default_timeout=30)
     at.session_state["players"] = ["Alice", "Bob", "Cara", "Dan"]
     at.session_state["draft_log"] = [
@@ -74,10 +74,12 @@ def test_draft_mode_recommendation_panel_and_draft_buttons():
     at.run()
     assert not at.exception, at.exception
     keys = [b.key for b in at.button]
-    # One-click draft buttons exist for both the board rows and the inline
-    # recommendation panel (the unified cockpit).
-    assert any(k and k.startswith("rec-draft-") for k in keys)
+    # One-click draft buttons exist for both the board rows and the Draft
+    # Central "best available" list.
+    assert any(k and k.startswith("dc-draft-") for k in keys)
     assert any(k and k.startswith("draft-") for k in keys)
+    # The team selector for scouting is present.
+    assert any(s.key == "dc_focus_player" for s in at.selectbox)
 
 
 def test_draft_mode_mock_simulator_runs():

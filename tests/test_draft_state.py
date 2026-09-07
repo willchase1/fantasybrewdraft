@@ -12,7 +12,9 @@ HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 def _log_2025():
-    with open(os.path.join(HERE, "draft_autosave.json")) as f:
+    # Read-only fixture, decoupled from the app's volatile draft_autosave.json.
+    fixtures = os.path.join(os.path.dirname(os.path.abspath(__file__)), "fixtures")
+    with open(os.path.join(fixtures, "draft_2025.json")) as f:
         return json.load(f)
 
 

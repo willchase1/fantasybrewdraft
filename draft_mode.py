@@ -19,6 +19,8 @@ from draft_core import (
     roster_slots,
     compute_style_status,
     next_best_picks,
+    best_available,
+    team_context,
     block_picks,
     pick_slot,
 )
@@ -593,20 +595,78 @@ def render_board(df_long):
                     add_pick(current_player, ing, cat)
 
 
-def render_recs():
-    st.caption("Ranked for your roster & the live board. ⭐ = fills a needed slot.")
-    recs = recommend(my_picks, drafted, top_k=12)
-    if recs.empty:
-        st.info("No candidates to recommend.")
-        return
-    for _, r in recs.iterrows():
-        ing, cat = r["Ingredient"], r["Category"]
-        cols = st.columns([6, 2])
-        cols[0].markdown(f"{_needed_badge(cat)}**{ing}**  ·  _{cat}_")
-        cols[0].caption(f"{r['Why']}  ·  value {r['Pick Value']:.2f}")
-        if current_player and cols[1].button(
-                "Draft", key=f"rec-draft-{ing}", use_container_width=True):
-            add_pick(current_player, ing, board_category_of.get(ing, cat))
+_BUCKET_SHORT = {"Base Malt": "Malt", "Hop": "Hop", "Yeast": "Yeast",
+                 "Adjunct": "Adjunct", "Specialty": "Specialty"}
+
+
+def render_draft_central():
+    """NFL-broadcast-style panel: for the focused team (default: on the clock),
+    show their roster, top needs, and the best available ingredients."""
+    # 1. Team selector — defaults to whoever is on the clock; lets you scout.
+    default_idx = players.index(current_player) if current_player in players else 0
+    focus_player = st.selectbox("Team", players, index=default_idx,
+                                key="dc_focus_player")
+    focus_records = [r for r in draft_log if r.get("Player") == focus_player]
+    focus_picks = teams.get(focus_player, [])
+    ctx = team_context(focus_records, focus_picks, drafted, style_matrix,
+                       required, flex_slots, enable_round8=enable_round8)
+    focus_needed = ctx["needed_buckets"]
+
+    # 2. Drafted roster for the focused team.
+    st.markdown("**Drafted**")
+    slot_line = []
+    for s in ctx["slots"]:
+        if s["filled"]:
+            slot_line.append(f"✅ {s['label']}: {_short(s['filled'], 18)}")
+        elif s["required"]:
+            slot_line.append(f"🔴 {s['label']}")
+        else:
+            slot_line.append(f"⬜ {s['label']}")
+    st.caption("  ·  ".join(slot_line))
+
+    # 3. Top needs — rules (unfilled required buckets) + leaning style.
+    st.markdown("**Top needs**")
+    if focus_needed:
+        st.caption("🔴 " + "  ".join(sorted(focus_needed))
+                   + f"   ·   flex left: {ctx['flex_remaining']}"
+                   + f"   ·   leaning: _{ctx['likely_style']}_")
+    else:
+        st.caption(f"All required slots filled · flex left: {ctx['flex_remaining']}"
+                   f"   ·   leaning: _{ctx['likely_style']}_")
+
+    # 4. Best available — global board ranking, ⭐ = fills the focused team's need.
+    st.markdown("**Best available**")
+    fcols = st.columns([2, 1])
+    cat_filter = fcols[0].selectbox(
+        "Category", ["All"] + all_categories, key="dc_cat_filter",
+        label_visibility="collapsed")
+    needs_only = fcols[1].toggle("Needs only", key="dc_needs_only")
+
+    ba = best_available(drafted, ingredients, style_matrix, scarcity_df, required,
+                        flex_slots, ingredient_to_category, style_bias,
+                        early_signal=early_signal, hop_similarity=hop_similarity_data,
+                        num_players=int(num_players), top_k=40)
+    if cat_filter != "All":
+        ba = ba[ba["Category"] == cat_filter]
+    if needs_only:
+        ba = ba[ba["Category"].map(lambda c: bucket_for_rules(c) in focus_needed)]
+    ba = ba.head(12)
+
+    if ba.empty:
+        st.info("No matching ingredients on the board.")
+    else:
+        for _, r in ba.iterrows():
+            ing, cat = r["Ingredient"], r["Category"]
+            star = "⭐ " if bucket_for_rules(cat) in focus_needed else ""
+            cols = st.columns([6, 2])
+            cols[0].markdown(f"{star}**{ing}**  ·  _{cat}_")
+            cols[0].caption(f"value {r['Pick Value']:.2f}  ·  {r['Why']}")
+            if current_player and cols[1].button(
+                    "Draft", key=f"dc-draft-{ing}", use_container_width=True):
+                add_pick(current_player, ing, board_category_of.get(ing, cat))
+
+    if current_player and focus_player != current_player:
+        st.caption(f"👆 Drafting acts for **{current_player}** (on the clock).")
 
 
 with tab1:
@@ -626,11 +686,12 @@ with tab1:
         df_long = df_long[df_long["Ingredient"].str.contains(filter_text, case=False)]
 
     if compact:
-        # Single-column: switch between board and recs (no side-by-side scroll).
-        view = st.radio("View", ["🎯 Recommended", "📋 Board"], horizontal=True,
+        # Single-column: switch between the board and the draft-central panel
+        # (no side-by-side horizontal scroll on a phone).
+        view = st.radio("View", ["🎯 Draft Central", "📋 Board"], horizontal=True,
                         label_visibility="collapsed")
-        if view.endswith("Recommended"):
-            render_recs()
+        if view.endswith("Draft Central"):
+            render_draft_central()
         else:
             render_board(df_long)
     else:
@@ -639,8 +700,8 @@ with tab1:
             st.subheader("Available Ingredients")
             render_board(df_long)
         with rec_col:
-            st.subheader("Recommended for you")
-            render_recs()
+            st.subheader("Draft Central")
+            render_draft_central()
 
     st.divider()
     with st.expander("My picks & everything drafted", expanded=False):

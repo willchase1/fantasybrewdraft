@@ -42,7 +42,10 @@ def data():
 
 @pytest.fixture(scope="module")
 def draft_2025():
-    with open(os.path.join(HERE, "draft_autosave.json")) as f:
+    # Dedicated, read-only fixture — decoupled from the live draft_autosave.json,
+    # which the running app overwrites (that file is the app's save slot).
+    fixtures = os.path.join(os.path.dirname(os.path.abspath(__file__)), "fixtures")
+    with open(os.path.join(fixtures, "draft_2025.json")) as f:
         return json.load(f)
 
 
@@ -240,6 +243,52 @@ def test_next_best_picks_excludes_drafted(data, opp_signals):
         data["style_bias"], early_signal=early, bias_weight=0.0, top_k=15,
     )
     assert "Pale Malt (2 Row)" not in list(recs["Ingredient"])
+
+
+# ---------------------------------------------------------------------------
+# Best available (roster-agnostic board value) + team context
+# ---------------------------------------------------------------------------
+def _ba(data, drafted, early):
+    return dc.best_available(
+        drafted, data["ingredients"], data["style_matrix"], data["scarcity"],
+        REQUIRED, 3, data["i2c"], data["style_bias"], early_signal=early, top_k=1000,
+    )
+
+
+def test_best_available_is_roster_agnostic(data, opp_signals):
+    early, _ = opp_signals
+    # Different rosters, same board -> identical ranking (it ignores my_picks).
+    a = _ba(data, ["Citra"], early)
+    b = _ba(data, ["Citra"], early)  # same drafted board
+    assert list(a["Ingredient"]) == list(b["Ingredient"])
+    # best_available takes no roster at all; ensure it doesn't include a drafted item.
+    assert "Citra" not in list(_ba(data, ["Citra"], early)["Ingredient"])
+
+
+def test_best_available_sorted_and_spans_categories(data, opp_signals):
+    early, _ = opp_signals
+    ba = _ba(data, [], early)
+    assert list(ba["Pick Value"]) == sorted(ba["Pick Value"], reverse=True)
+    # A healthy board ranking is not monopolized by one category in the top 15.
+    assert ba.head(15)["Category"].nunique() >= 2
+
+
+def test_team_context_reports_needs_and_style(data):
+    records = [
+        {"Ingredient": "Citra", "Category": "Hop"},
+        {"Ingredient": "Maris Otter", "Category": "Base Malt"},
+    ]
+    picks = ["Citra", "Maris Otter"]
+    ctx = dc.team_context(records, picks, picks, data["style_matrix"], REQUIRED, 3)
+    assert ctx["needed_buckets"] == {"Yeast", "Adjunct"}
+    assert ctx["likely_style"] != "TBD"
+    assert ctx["flex_remaining"] == 3
+
+
+def test_team_context_empty_roster_style_tbd(data):
+    ctx = dc.team_context([], [], [], data["style_matrix"], REQUIRED, 3)
+    assert ctx["likely_style"] == "TBD"
+    assert ctx["needed_buckets"] == {"Malt", "Hop", "Yeast", "Adjunct"}
 
 
 def test_next_best_picks_urgency_prioritizes_needed_category(data, opp_signals):

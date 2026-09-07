@@ -571,6 +571,66 @@ def explain_pick(contrib, threshold=0.02, top_n=2):
     return " · ".join(parts) if parts else "balanced value"
 
 
+# Roster-agnostic "best available" board value: intrinsic worth of an ingredient
+# still on the board — versatility (fit), how fast it's drying up (scarce), and
+# historical popularity — with the personalized terms (need/synergy/denial)
+# switched off. This is the "best player available" ranking, not "best for you".
+BOARD_VALUE_WEIGHTS = {
+    "fit": 0.5, "scarce": 0.3, "need": 0.0, "syn": 0.0, "deny": 0.0, "pop": 0.2,
+}
+
+
+def best_available(drafted, ingredients, style_matrix, scarcity_df, required,
+                   flex_slots, ingredient_to_category, style_bias,
+                   early_signal=None, hop_similarity=None, num_players=8,
+                   top_k=15):
+    """Rank the best ingredients left on the board, independent of any roster.
+
+    A thin wrapper over next_best_picks with an empty roster and the board-value
+    weight preset, so the result reflects intrinsic ingredient worth rather than
+    a particular team's needs. Same DataFrame shape as next_best_picks.
+    """
+    return next_best_picks(
+        [], drafted, ingredients, style_matrix, scarcity_df, required, flex_slots,
+        ingredient_to_category, style_bias, early_signal=early_signal,
+        hop_similarity=hop_similarity, num_players=num_players,
+        weights=BOARD_VALUE_WEIGHTS, top_k=top_k,
+    )
+
+
+def team_context(records, my_picks, drafted, style_matrix, required, flex_slots,
+                 enable_round8=False, config=None):
+    """Broadcast-style context for one team: roster, needs, and leaning style.
+
+    Composes the existing roster/rules/style helpers so the UI stays thin and the
+    needs logic is unit-testable. Returns:
+      slots            - ordered roster_slots() model (filled/empty per slot)
+      needed_buckets   - set of unmet required rule buckets (Malt/Hop/Yeast/Adjunct)
+      likely_style     - top style the roster is trending toward ("TBD" if no picks)
+      flex_remaining, picks_remaining - from the rules status
+    """
+    if config is None:
+        config = load_league_config()
+    total_picks = config.get("rounds", 7) + (1 if enable_round8 else 0)
+    slots = roster_slots(records, enable_round8=enable_round8, flex_slots=flex_slots)
+    status = compute_rules_status_from_records(records, total_picks, config)
+    needed_buckets = {b for b, rem in status["required_remaining"].items() if rem > 0}
+
+    likely_style = "TBD"
+    if my_picks:
+        viab = compute_style_status(my_picks, drafted, style_matrix, required, flex_slots)
+        if not viab.empty:
+            likely_style = viab.iloc[0]["Style"]
+
+    return {
+        "slots": slots,
+        "needed_buckets": needed_buckets,
+        "likely_style": likely_style,
+        "flex_remaining": status["flex_remaining"],
+        "picks_remaining": status["picks_remaining"],
+    }
+
+
 def block_picks(
     drafted,
     my_picks,
