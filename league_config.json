@@ -9,6 +9,9 @@
     "Yeast": 1,
     "Adjunct": 1
   },
+  "single_pick_categories": [
+    "Yeast"
+  ],
   "category_aliases": {
     "Base Malt": [
       "Base Malt",

@@ -85,7 +85,9 @@ a `--check` mode that fails if the committed output has drifted.
 
 ### Scoring configuration
 `league_config.json` may override the engine's weights and shape constants
-(`pick_weights`, `board_value_weights`, `squash`); see `docs/CALIBRATION.md`
+(`pick_weights`, `board_value_weights`, `squash`) and names the
+`single_pick_categories` (default `["Yeast"]`) whose second pick the recommender
+demotes as redundant; see `docs/CALIBRATION.md`
 and `scripts/calibrate_weights.py` for how they were tuned against the 2025
 draft and how to re-tune next season.
 

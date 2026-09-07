@@ -315,6 +315,7 @@ def recommend(picks_arg, drafted_arg, top_k=15, seat_index=None, overall=None):
         overall_pick=overall if overall is not None else overall_pick,
         your_seat_index=seat_index if seat_index is not None else (int(draft_position) - 1),
         weights=PICK_WEIGHTS, squash=SQUASH,
+        single_pick_categories=LEAGUE.get("single_pick_categories", []),
     )
 
 
@@ -368,6 +369,7 @@ def sim_agent_pick(roster, drafted_local, weights, sim_players, overall, seat_in
         pair_lookup=pair_lookup, num_players=sim_players, overall_pick=overall,
         your_seat_index=seat_index, weights={**PICK_WEIGHTS, **(weights or {})},
         squash=SQUASH, top_k=top_k,
+        single_pick_categories=LEAGUE.get("single_pick_categories", []),
     )
     recs = recs[~recs["Ingredient"].isin(drafted_local)]
     if recs.empty:

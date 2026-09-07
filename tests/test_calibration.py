@@ -214,3 +214,53 @@ def test_adjunct_coverage_stays_narrow(ctx26):
     assert worst[1] <= 9, worst
     for sugar in ["Corn Sugar (Dextrose)", "Honey", "Cane (or Beet) Sugar"]:
         assert cov[sugar] <= 7, (sugar, cov[sugar])
+
+
+# ---------------------------------------------------------------------------
+# Single-pick categories: no second yeast floating back up in the flex phase
+# ---------------------------------------------------------------------------
+FULL_ROSTER = ["Maris Otter", "East Kent Goldings",
+               "English Ale (WLP002, WY1968, S-04, A09)",
+               "Lyle's Golden Syrup (Invert Sugar)"]  # every required slot filled
+
+
+def test_second_yeast_is_demoted_not_hidden(ctx26):
+    r = _recs(ctx26, FULL_ROSTER, single_pick_categories=["Yeast"]).reset_index()
+    top40 = r.head(40)
+    assert (top40["Category"] != "Yeast").all(), top40[top40["Category"] == "Yeast"]["Ingredient"].tolist()
+    yeasts = r[r["Category"] == "Yeast"]
+    assert len(yeasts) > 20                       # still listed (co-pitching is legal)
+    assert yeasts["Why"].str.startswith("redundant").all()
+    # Other categories are untouched by the rule.
+    assert not r[r["Category"] != "Yeast"]["Why"].str.startswith("redundant").any()
+
+
+def test_redundancy_only_applies_once_the_slot_is_filled(ctx26):
+    # No yeast on the roster yet -> yeasts compete normally (and lead: unmet
+    # required slot).
+    r = _recs(ctx26, ["Maris Otter", "East Kent Goldings"], single_pick_categories=["Yeast"])
+    assert "Yeast" in set(r.head(5)["Category"])
+    assert not r["Why"].str.startswith("redundant").any()
+
+
+def test_redundancy_knob_is_tunable_and_config_driven(ctx26):
+    off = _recs(ctx26, FULL_ROSTER, single_pick_categories=["Yeast"],
+                squash={"redundant_mult": 1.0})
+    assert "Yeast" in set(off.head(10)["Category"])   # knob at 1.0 == old behaviour
+    none = _recs(ctx26, FULL_ROSTER, single_pick_categories=[])
+    assert "Yeast" in set(none.head(10)["Category"])  # empty config list == off
+    # Default (None) reads league_config.json, which names Yeast.
+    cwd = os.getcwd()
+    os.chdir(HERE)
+    try:
+        default = _recs(ctx26, FULL_ROSTER)
+    finally:
+        os.chdir(cwd)
+    assert (default.head(40)["Category"] != "Yeast").all()
+    assert "redundant_mult" in dc.scoring_params({})[2]
+
+
+def test_config_defaults_name_single_pick_categories():
+    from config import DEFAULTS, load_league_config
+    assert DEFAULTS["single_pick_categories"] == ["Yeast"]
+    assert load_league_config(os.path.join(HERE, "league_config.json"))["single_pick_categories"] == ["Yeast"]

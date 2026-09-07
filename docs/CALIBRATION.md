@@ -26,6 +26,7 @@ the 2025 draft is a clean holdout.
 | New matrix + similarity, old engine, old weights | 0.10 | 0.24 | 0.37 | 0.191 | 27 | 0 |
 | New matrix + similarity, new engine, calibrated defaults | 0.13 | 0.30 | 0.37 | 0.213 | 26 | 0 |
 | **After** — + Sep-2026 sheet additions, narrow adjunct lists, adjunct-neutral signature | 0.13 | 0.30 | 0.38 | 0.220 | 26 | 0 |
+| **After** — + single-pick redundancy demotion (second yeast) | 0.13 | 0.30 | 0.38 | 0.223 | 22 | 0 |
 | (rejected) coordinate-ascent optimum, in-sample | 0.17 | 0.32 | 0.40 | 0.248 | 23 | 0 |
 
 "Unlisted" = picks the model could not even rank because no style contained
@@ -74,8 +75,20 @@ from `league_config.json` (`pick_weights`, `board_value_weights`, `squash`);
 | Substitute discount | hops only, 0.15 per close analog | all categories, `scarce_sub` (**0 = off**) | at any strength the discount lowered every metric (0.204 → 0.158 at 0.15): drafters take the mainstream ingredient that *has* many analogs. Hop-blend **synergy** from the similarity files is kept (+0.003 MRR) |
 | Fit signature for adjuncts | as other categories | **neutral (0.5)** | Sep 2026: short filler adjunct lists (a Pils lists two sugars) made dextrose look "defining" (Fit 0.74 vs 0.67 for German Pilsner) and it ranked #2 on an empty board. Adjunct lists describe tolerance, not identity; with narrow sugar membership in the matrix as well, the first adjunct now appears at #52 and MRR rose 0.213 → 0.220. Guarded by `test_sugars_do_not_lead_an_empty_board` |
 
+| Redundancy (single-pick categories) | — | Pick Value × `redundant_mult` (**0.25**) for a candidate whose bucket is in `league_config.single_pick_categories` (`["Yeast"]`) and already filled | Flex phase: with every required slot met, `need` is flat and mainstream yeasts floated back to #2/#6 on Fit + popularity. A second yeast is co-pitching — legal but rare — so it is demoted, not hidden (`Why` = "redundant · already have a yeast"; first yeast now #181 of 213). No 2025 roster took a second yeast, so the replay only improves: MRR 0.220 → 0.223, median rank 26 → 22. Guarded by `test_second_yeast_is_demoted_not_hidden` |
+
 `compute_style_status` also gained *Picks Matched* and *Match* tie-breaks (see
 `docs/STYLE_MATRIX.md`).
+
+### Single-pick categories (Sep 2026)
+
+`league_config.json` → `"single_pick_categories": ["Yeast"]` (also in
+`config.DEFAULTS`). `next_best_picks(..., single_pick_categories=...)` reads it
+from config when not passed; `draft_mode.py` passes it explicitly. The strength
+lives with the other shape constants (`squash.redundant_mult`, 1.0 = off) so it
+is overridable per season and shows up in `scoring_params()`. Generalising to a
+per-category "max useful count" (e.g. soft-capping a third base malt) is a
+small extension of the same hook if the club ever wants it.
 
 ### Sugar over-counting (Sep 2026)
 

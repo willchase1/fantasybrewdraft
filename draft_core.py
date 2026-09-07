@@ -387,6 +387,11 @@ DEFAULT_SQUASH = {
     # the mainstream ingredient that *has* many analogs -- Citra, Crystal 40L,
     # Maris Otter -- rather than waiting on it). See docs/CALIBRATION.md.
     "scarce_sub": 0.0,
+    # Redundancy: once the roster already holds a pick from a category in
+    # league_config "single_pick_categories" (Yeast), a second one has its Pick
+    # Value multiplied by this. Demotes co-pitching to the tail of the list
+    # without hiding it (it is legal, just rare). 1.0 disables.
+    "redundant_mult": 0.25,
 }
 
 
@@ -598,6 +603,7 @@ def next_best_picks(
     weights=None,
     squash=None,
     available_set=None,
+    single_pick_categories=None,
 ):
     """Rank available ingredients by a normalized, weighted, explainable score.
 
@@ -609,6 +615,12 @@ def next_best_picks(
 
     ``scarcity_df`` is accepted for backward compatibility and ignored: scarcity
     is computed live from the board (``compute_dynamic_scarcity``).
+
+    ``single_pick_categories`` (default: league config, e.g. ``["Yeast"]``):
+    once the roster satisfies such a category, further candidates from it are
+    *redundant* -- their Pick Value is scaled by ``squash["redundant_mult"]``
+    and their ``Why`` says so. They stay in the frame (filter to the category
+    and they are still there), just far down.
 
     ``similarity`` (from ``load_similarity``) covers hops, yeasts and malts. It
     feeds the substitute discount in Scarcity for every category, but the
@@ -622,6 +634,9 @@ def next_best_picks(
         similarity = {**hop_similarity, **similarity}
     weights = {**DEFAULT_PICK_WEIGHTS, **(weights or {})}
     squash = {**DEFAULT_SQUASH, **(squash or {})}
+    if single_pick_categories is None:
+        single_pick_categories = load_league_config().get("single_pick_categories") or []
+    single_pick_buckets = {bucket_for_rules(c) for c in single_pick_categories}
     drafted_set = set(drafted)
     my_set = set(my_picks)
     if available_set is None:
@@ -667,12 +682,16 @@ def next_best_picks(
     have_counts = Counter(bucket_for_rules(cat_of_cand.get(i) or
                           ingredient_to_category.get(i, "Specialty")) for i in my_set)
     required_slots_left = 0
+    filled_buckets = set()
     for cat, n in required.items():
         b = bucket_for_rules(cat)
         short = n - have_counts.get(b, 0)
         if short > 0:
             needed_buckets.add(b)
             required_slots_left += short
+        else:
+            filled_buckets.add(b)
+    redundant_buckets = single_pick_buckets & filled_buckets
     total_picks = sum(required.values()) + flex_slots
     picks_remaining = max(0, total_picks - len(my_set))
     # Spare picks after reserving one for every unmet required slot. With
@@ -767,6 +786,11 @@ def next_best_picks(
             "pop": weights["pop"] * pop,
         }
         pick_value = sum(contrib.values())
+        why = explain_pick(contrib)
+        if bucket in redundant_buckets:
+            # Already holding one from a single-pick category: demote, don't hide.
+            pick_value *= squash["redundant_mult"]
+            why = f"redundant · already have a {bucket.lower()}"
         rows.append({
             "Ingredient": ing,
             "Category": cat,
@@ -779,7 +803,7 @@ def next_best_picks(
             "Synergy": round(synergy, 3),
             "Denial": round(denial, 3),
             "Pick Value": round(pick_value, 4),
-            "Why": explain_pick(contrib),
+            "Why": why,
         })
 
     df = pd.DataFrame(rows).sort_values(
