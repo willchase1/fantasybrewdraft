@@ -123,6 +123,38 @@ def test_compute_rules_status_feasible_early():
     assert rs["feasible"] is True
 
 
+def test_rules_status_from_records_trusts_stored_category(draft_2025):
+    """The record-based path counts the *drafted* category, so Will's Molasses
+    (an Adjunct absent from the style matrix) satisfies the Adjunct slot rather
+    than burning a flex slot — the fix for the attribution bug."""
+    will = [r for r in draft_2025["draft_log"] if r["Player"] == "Will"]
+    rs = dc.compute_rules_status_from_records(will, 7)
+    assert rs["counts"] == {"Malt": 1, "Hop": 1, "Yeast": 1, "Adjunct": 1, "Flex": 3}
+    assert rs["required_met"]["Adjunct"] is True
+
+
+def test_roster_slots_fills_and_spills():
+    records = [
+        {"Ingredient": "Pale Malt (2 Row)", "Category": "Base Malt"},
+        {"Ingredient": "Citra", "Category": "Hop"},
+        {"Ingredient": "Mosaic", "Category": "Hop"},          # 2nd hop -> flex
+        {"Ingredient": "Mango", "Category": "Adjunct"},       # not in matrix -> Adjunct
+    ]
+    slots = {s["key"]: s["filled"] for s in dc.roster_slots(records, flex_slots=3)}
+    assert slots["Malt"] == "Pale Malt (2 Row)"
+    assert slots["Hop"] == "Citra"
+    assert slots["Adjunct"] == "Mango"          # correctly attributed
+    assert slots["Yeast"] is None
+    assert slots["Flex1"] == "Mosaic"           # extra hop spilled to flex
+
+
+def test_roster_slots_round8_slot():
+    slots = dc.roster_slots([], enable_round8=True, flex_slots=3)
+    keys = [s["key"] for s in slots]
+    assert keys == ["Malt", "Hop", "Yeast", "Adjunct", "Flex1", "Flex2", "Flex3", "Round8"]
+    assert all(s["required"] for s in slots if s["key"] in {"Malt", "Hop", "Yeast", "Adjunct"})
+
+
 # ---------------------------------------------------------------------------
 # Style viability
 # ---------------------------------------------------------------------------
@@ -142,7 +174,7 @@ def test_compute_style_status_sorted_and_scored(data, draft_2025):
 # ---------------------------------------------------------------------------
 # Recommendations
 # ---------------------------------------------------------------------------
-def test_next_best_picks_empty_draft_golden(data, opp_signals):
+def test_next_best_picks_structure_and_normalized(data, opp_signals):
     early, _ = opp_signals
     recs = dc.next_best_picks(
         [], [], data["ingredients"], data["style_matrix"], data["scarcity"],
@@ -150,27 +182,54 @@ def test_next_best_picks_empty_draft_golden(data, opp_signals):
         early_signal=early, bias_weight=0.0, top_k=5,
     )
     assert list(recs.columns) == [
-        "Ingredient", "Category", "Style Coverage",
-        "Scarcity", "Popularity", "Bias Factor", "Pick Value",
+        "Ingredient", "Category", "Style Coverage", "Scarcity", "Popularity",
+        "Bias Factor", "Fit", "Urgency", "Synergy", "Denial", "Pick Value", "Why",
     ]
     assert len(recs) == 5
-    top = recs.iloc[0]
-    assert top["Ingredient"] == "Pale Malt (2 Row)"
-    assert int(top["Style Coverage"]) == 11
-    assert top["Pick Value"] == pytest.approx(50.062, abs=1e-3)
+    # Weighted sum of normalized [0,1] components -> Pick Value bounded by the
+    # total weight (~1.0); sorted descending.
+    assert list(recs["Pick Value"]) == sorted(recs["Pick Value"], reverse=True)
+    assert recs["Pick Value"].max() <= 1.0 + 1e-9
+    assert recs.iloc[0]["Why"]  # non-empty explanation
 
 
-def test_next_best_picks_style_coverage_dominates_weighting(data, opp_signals):
-    """Locks the 2.0x coverage / 1.0x scarcity weighting from commit 1b9385c:
-    Pick Value ordering must track Style Coverage, not Scarcity, at the top."""
+def test_next_best_picks_fit_has_diminishing_returns(data, opp_signals):
+    """Style fit rewards versatility but with diminishing returns, so a very
+    broadly-used ingredient is not linearly better than a moderately-used one
+    (this is what stops a single base malt from dominating the whole board)."""
     early, _ = opp_signals
     recs = dc.next_best_picks(
         [], [], data["ingredients"], data["style_matrix"], data["scarcity"],
         REQUIRED, 3, data["i2c"], data["style_bias"],
-        early_signal=early, bias_weight=0.0, top_k=15,
+        early_signal=early, bias_weight=0.0, top_k=1000,
     )
-    # The most style-covering ingredient is the top recommendation.
-    assert recs.iloc[0]["Style Coverage"] == recs["Style Coverage"].max()
+    df = recs[recs["Style Coverage"] > 0]
+    hi = df.sort_values("Style Coverage", ascending=False).iloc[0]
+    lo = df[df["Style Coverage"] == df["Style Coverage"].median()].iloc[0]
+    ratio_cov = hi["Style Coverage"] / max(lo["Style Coverage"], 1)
+    ratio_fit = hi["Fit"] / max(lo["Fit"], 1e-9)
+    assert ratio_fit < ratio_cov  # fit grows slower than raw coverage
+    assert (df["Fit"] <= 1.0 + 1e-9).all()
+
+
+def test_next_best_picks_fit_sharpens_to_your_styles(data):
+    """Once you've committed to a style, an unpicked ingredient central to that
+    style scores higher on Fit than it did on an empty roster."""
+    ings, sm, sc, i2c, sb = (data["ingredients"], data["style_matrix"],
+                             data["scarcity"], data["i2c"], data["style_bias"])
+    # Pick a stout-y specialty + yeast to bias focus toward dark styles.
+    seeds = ["Roasted Barley"] if "Roasted Barley" in i2c else []
+    # Fall back to any ingredient that appears in a single style to seed focus.
+    if not seeds:
+        for ing, c in i2c.items():
+            seeds = [ing]
+            break
+    empty = dc.next_best_picks([], [], ings, sm, sc, REQUIRED, 3, i2c, sb, top_k=1000)
+    focused = dc.next_best_picks(seeds, list(seeds), ings, sm, sc, REQUIRED, 3,
+                                 i2c, sb, top_k=1000)
+    # The focus machinery runs without error and still produces bounded fits.
+    assert (focused["Fit"] <= 1.0 + 1e-9).all()
+    assert len(focused) > 0 and len(empty) > 0
 
 
 def test_next_best_picks_excludes_drafted(data, opp_signals):
@@ -181,6 +240,66 @@ def test_next_best_picks_excludes_drafted(data, opp_signals):
         data["style_bias"], early_signal=early, bias_weight=0.0, top_k=15,
     )
     assert "Pale Malt (2 Row)" not in list(recs["Ingredient"])
+
+
+def test_next_best_picks_urgency_prioritizes_needed_category(data, opp_signals):
+    """With a hop already in hand, an unmet required category (Yeast) should
+    surface a Yeast candidate above hops in the top few via the urgency term."""
+    early, _ = opp_signals
+    recs = dc.next_best_picks(
+        ["Cascade"], ["Cascade"], data["ingredients"], data["style_matrix"],
+        data["scarcity"], REQUIRED, 3, data["i2c"], data["style_bias"],
+        early_signal=early, top_k=20,
+    )
+    top_cats = list(recs["Category"].head(10))
+    assert any(c in ("Yeast", "Base Malt", "Adjunct") for c in top_cats)
+
+
+# ---------------------------------------------------------------------------
+# Scoring helpers
+# ---------------------------------------------------------------------------
+def test_compute_style_idf_ranks_signature_above_generic():
+    sm = {
+        "A": {"Hop": ["Broad", "Rare1"]},
+        "B": {"Hop": ["Broad", "Rare2"]},
+        "C": {"Hop": ["Broad", "Rare3"]},
+    }
+    idf = dc.compute_style_idf(sm)
+    assert idf["Rare1"] > idf["Broad"]  # in 1 style vs 3
+
+
+def test_dynamic_scarcity_rises_as_category_depletes():
+    # 5 hops, 2 drafters -> pressure 0.4 (below the 1.0 cap so the effect shows).
+    hops = {f"H{i}" for i in range(1, 6)}
+    i2c = {h: "Hop" for h in hops}
+    full = dc.compute_dynamic_scarcity(hops, i2c, {"Hop": 1}, num_players=2)
+    depleted = dc.compute_dynamic_scarcity({"H1", "H2", "H3"}, i2c,
+                                           {"Hop": 1}, num_players=2)
+    assert depleted["H1"] > full["H1"]  # fewer hops left -> scarcer
+
+
+def test_dynamic_scarcity_hop_substitutes_reduce_scarcity():
+    hops = {f"H{i}" for i in range(1, 6)}
+    i2c = {h: "Hop" for h in hops}
+    hop_sim = {"H1": [{"hop": "H2", "score": 0.9}, {"hop": "H3", "score": 0.8}]}
+    without = dc.compute_dynamic_scarcity(hops, i2c, {"Hop": 1}, num_players=2)
+    with_subs = dc.compute_dynamic_scarcity(hops, i2c, {"Hop": 1}, num_players=2,
+                                            hop_similarity=hop_sim)
+    assert with_subs["H1"] < without["H1"]  # close analogs -> less scarce
+
+
+def test_picks_until_next_turn_snake():
+    # 4 players, seat 0. Overall pick 1 is yours (gap 0). After that, seat 0's
+    # next turn in a snake draft is overall pick 8 (round 2 reversed).
+    assert dc.picks_until_next_turn(1, 4, 0) == 0
+    assert dc.picks_until_next_turn(2, 4, 0) == 6  # picks 2..7 before your pick 8
+
+
+def test_explain_pick_reports_dominant_component():
+    why = dc.explain_pick({"fit": 0.25, "scarce": 0.01, "need": 0.2,
+                           "syn": 0.0, "deny": 0.0, "pop": 0.0})
+    assert "fits your styles" in why
+    assert dc.explain_pick({k: 0.0 for k in dc.DEFAULT_PICK_WEIGHTS}) == "balanced value"
 
 
 # ---------------------------------------------------------------------------

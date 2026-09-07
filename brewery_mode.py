@@ -23,7 +23,7 @@ LEAGUE = load_league_config()
 
 @st.cache_data
 def _load():
-    return draft_core.load_data()
+    return draft_core.load_data(ingredients_path=LEAGUE["ingredients_path"])
 
 
 @st.cache_data

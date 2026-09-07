@@ -1,6 +1,8 @@
 {
   "rounds": 7,
   "flex_slots": 3,
+  "ingredient_year": 2026,
+  "ingredients_path": "ingredients_2026.csv",
   "required_categories": {
     "Base Malt": 1,
     "Hop": 1,

@@ -15,6 +15,8 @@ from draft_core import (
     ingredient_style_bias,
     bucket_for_rules,
     compute_rules_status,
+    compute_rules_status_from_records,
+    roster_slots,
     compute_style_status,
     next_best_picks,
     block_picks,
@@ -29,16 +31,6 @@ st.header("🍺 Run a Draft")
 st.markdown("""
 <style>
 /* Timer section styling */
-.timer-container {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    padding: 20px;
-    border-radius: 15px;
-    margin: 20px 0;
-    box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    display:none;
-}
-
 .timer-display {
     background: rgba(255, 255, 255, 0.95);
     border-radius: 12px;
@@ -125,7 +117,9 @@ st.markdown("""
 @st.cache_data
 def load_data():
     # draft_core is the single source of truth for loading + shaping data.
-    return draft_core.load_data()
+    # The ingredient set (year) comes from league config, not a hardcoded path.
+    cfg = load_league_config()
+    return draft_core.load_data(ingredients_path=cfg["ingredients_path"])
 
 (
     ingredients,
@@ -252,6 +246,9 @@ teams, drafted = draft_state.project(draft_log, players)
 
 your_name = players[int(draft_position)-1] if players else ""
 my_picks = teams.get(your_name, [])
+# Full pick records for your seat (keep the stored Category, which the rules
+# logic trusts) — ordered as drafted.
+my_records = [r for r in draft_log if r.get("Player") == your_name]
 
 # --- Draft Timer ---
 if "timer_duration" not in st.session_state:
@@ -287,9 +284,6 @@ remaining = max(0, int(st.session_state.timer_duration - elapsed))
 if remaining == 0 and st.session_state.timer_running:
     # auto-pause on zero
     st.session_state.timer_running = False
-
-# Enhanced timer section with better layout
-# st.markdown('<div class="timer-container">', unsafe_allow_html=True)
 
 # Timer display with dynamic styling
 timer_class = ""
@@ -339,8 +333,6 @@ with timer_control_cols[3]:
     total_elapsed = int(st.session_state.timer_elapsed + (time.time() - st.session_state.timer_started_at if st.session_state.timer_running else 0.0))
     st.metric("Elapsed", f"{total_elapsed//60:02d}:{total_elapsed%60:02d}")
 
-st.markdown('</div>', unsafe_allow_html=True)
-
 st.divider()
 
 # --- Draft Management Functions ---
@@ -358,26 +350,19 @@ def swap_pick(pick_index, new_ingredient, new_category):
         save_state({"players": players, "draft_log": st.session_state["draft_log"]})
 
 # --- Draft Management Controls ---
-# st.markdown('<div class="draft-mgmt-container">', unsafe_allow_html=True)
 st.markdown("#### 🎯 Draft Management")
 
-mgmt_cols = st.columns([2, 2, 4])
-
+mgmt_cols = st.columns([2, 4])
 with mgmt_cols[0]:
-    if st.button("↶ Undo Last Pick", disabled=len(draft_log)==0, key="undo_btn", use_container_width=True):
+    if st.button("↶ Undo Last Pick", disabled=len(draft_log) == 0, key="undo_btn", use_container_width=True):
         undo_last_pick()
         st.rerun()
-
 with mgmt_cols[1]:
-    if st.button("🔄 Manage Swaps/Trades", key="toggle_swap_mode", use_container_width=True):
-        st.session_state["show_swap_mode"] = not st.session_state.get("show_swap_mode", False)
+    st.caption("Undo removes the most recent pick (press repeatedly to step back).")
 
-st.markdown('</div>', unsafe_allow_html=True)
-
-# --- Swap/Trade Interface ---
-if st.session_state.get("show_swap_mode", False):
-    st.markdown("### 🔄 Swap/Trade Manager")
-    st.caption("Use this to handle trades or optional Round 8 swaps. Select a pick to change and choose a new ingredient.")
+# --- Swap/Trade Interface (always discoverable, collapsed by default) ---
+with st.expander("🔄 Swaps / Trades / Round 8 swap", expanded=False):
+    st.caption("Handle trades or the optional Round 8 swap. Select a pick to change and choose a new ingredient.")
     
     if draft_log:
         # Create a dropdown of all picks for swapping
@@ -440,7 +425,9 @@ if st.session_state.get("show_swap_mode", False):
 st.divider()
 
 # --- Live rule status panel ---
-rules = compute_rules_status(my_picks, ingredient_to_category, TOTAL_PICKS)
+# Trust the drafted category (record-based) so adjuncts not modeled in the
+# style matrix still satisfy the Adjunct requirement rather than a flex slot.
+rules = compute_rules_status_from_records(my_records, TOTAL_PICKS)
 
 st.sidebar.header("Your Draft Status")
 colA, colB = st.sidebar.columns(2)
@@ -490,6 +477,44 @@ if opponent_model:
             pair_lookup[(a,b)] += c
             pair_lookup[(b,a)] += c
 
+# --- Whose turn + always-visible roster slot strip ---------------------------
+# Visible regardless of active tab so, during a fast live draft, you can always
+# see whose pick it is and which of your slots still need filling.
+if current_player:
+    on_the_clock = "🟢 **YOUR PICK**" if current_player == your_name else f"On the clock: **{current_player}**"
+    st.markdown(f"### Round {current_round} · Pick {overall_pick} — {on_the_clock}")
+else:
+    st.markdown("### Draft complete")
+
+
+def _short(name, n=22):
+    name = str(name)
+    return name if len(name) <= n else name[: n - 1] + "…"
+
+
+my_slots = roster_slots(my_records, enable_round8=enable_round8,
+                        flex_slots=LEAGUE["flex_slots"])
+# Track which required buckets are still open — reused by the board/rec badges.
+needed_buckets = {s["key"] for s in my_slots if s["required"] and not s["filled"]}
+
+st.caption(f"Your roster — {your_name}" if your_name else "Your roster")
+slot_cols = st.columns(len(my_slots))
+for col, s in zip(slot_cols, my_slots):
+    with col:
+        box = st.container(border=True)
+        if s["filled"]:
+            box.markdown(f"✅ **{s['label']}**")
+            box.caption(_short(s["filled"]), help=s["filled"])
+        elif s["required"]:
+            box.markdown(f"🔴 **{s['label']}**")
+            box.caption("needed")
+        else:
+            box.markdown(f"⬜ {s['label']}")
+            box.caption("open")
+
+if not rules["feasible"]:
+    st.error("⚠️ Not enough picks remaining to fill all required categories.")
+
 # --- Tabs ---
 tab1, tab2, tab3, tab4, tab5, tab6, tab7 = st.tabs([
     "Draft Board", "Style Viability", "Recommendations",
@@ -498,106 +523,135 @@ tab1, tab2, tab3, tab4, tab5, tab6, tab7 = st.tabs([
 ])
 
 # --- Draft Board ---
-with tab1:
-    st.subheader("Available Ingredients")
+def add_pick(player, ing, cat):
+    overall = len(st.session_state["draft_log"]) + 1
+    round_no = ((overall - 1) // int(num_players)) + 1
+    st.session_state["draft_log"].append({
+        "Round": round_no,
+        "Overall": overall,
+        "Player": player,
+        "Ingredient": ing,
+        "Category": cat,
+    })
+    save_state({"players": players, "draft_log": st.session_state["draft_log"]})
+    st.rerun()
 
+
+# Long list of available ingredients by sheet category (alias-aware). Built once
+# so both the board and the recommendation panel resolve the *true* board
+# category (not the style-matrix one) when a pick is made.
+long_rows = []
+for category_label, alias_list in LEAGUE["category_aliases"].items():
+    for colname in alias_list:
+        if colname in ingredients.columns:
+            for val in ingredients[colname].dropna().unique().tolist():
+                long_rows.append({"Ingredient": str(val), "Category": category_label})
+df_long_all = pd.DataFrame(long_rows).drop_duplicates()
+board_category_of = dict(zip(df_long_all["Ingredient"], df_long_all["Category"]))
+
+
+def recommend(my_picks_arg, drafted_arg, top_k=15, seat_index=None, overall=None):
+    """Thin adapter binding the shared next_best_picks to this app's data.
+
+    Passes the live opponent/snake context so the scarcity, urgency, synergy
+    and denial components are active (they degrade gracefully if data is off).
+    """
+    return next_best_picks(
+        my_picks_arg, drafted_arg, ingredients, style_matrix, scarcity_df,
+        required, flex_slots, ingredient_to_category, style_bias,
+        early_signal=early_signal, bias_weight=bias_weight, top_k=top_k,
+        hop_similarity=hop_similarity_data, pair_lookup=pair_lookup,
+        num_players=int(num_players),
+        overall_pick=overall if overall is not None else overall_pick,
+        your_seat_index=seat_index if seat_index is not None else (int(draft_position) - 1),
+    )
+
+
+def _needed_badge(cat):
+    return "⭐ " if bucket_for_rules(cat) in needed_buckets else ""
+
+
+def render_board(df_long):
+    avail = (df_long.groupby("Category")["Ingredient"].nunique()
+             .reindex(all_categories).fillna(0).astype(int))
+    st.caption("Available now → " + " | ".join(
+        f"{cat}: {avail.loc[cat]}" for cat in all_categories))
+    for cat in all_categories:
+        sub = df_long[df_long["Category"] == cat]
+        star = "⭐ " if bucket_for_rules(cat) in needed_buckets else ""
+        with st.expander(f"{star}{cat} ({len(sub)})",
+                         expanded=(cat in ["Base Malt", "Yeast", "Hop"])):
+            for ing in sorted(sub["Ingredient"].tolist()):
+                cols = st.columns([6, 2])
+                pop = ""
+                if ing in ingredient_popularity:
+                    rec = ingredient_popularity[ing]
+                    pop = f"  ·  pop {rec.get('Picks', 0)}, avg slot {round(float(rec.get('Avg_Slot', 0)), 1)}"
+                cols[0].markdown(f"{_needed_badge(cat)}**{ing}**{pop}")
+                if current_player and cols[1].button(
+                        "Draft", key=f"draft-{cat}-{ing}", use_container_width=True):
+                    add_pick(current_player, ing, cat)
+
+
+def render_recs():
+    st.caption("Ranked for your roster & the live board. ⭐ = fills a needed slot.")
+    recs = recommend(my_picks, drafted, top_k=12)
+    if recs.empty:
+        st.info("No candidates to recommend.")
+        return
+    for _, r in recs.iterrows():
+        ing, cat = r["Ingredient"], r["Category"]
+        cols = st.columns([6, 2])
+        cols[0].markdown(f"{_needed_badge(cat)}**{ing}**  ·  _{cat}_")
+        cols[0].caption(f"{r['Why']}  ·  value {r['Pick Value']:.2f}")
+        if current_player and cols[1].button(
+                "Draft", key=f"rec-draft-{ing}", use_container_width=True):
+            add_pick(current_player, ing, board_category_of.get(ing, cat))
+
+
+with tab1:
     if current_player:
         st.info(f"Round {current_round} • Pick {overall_pick} → {current_player}")
     else:
         st.success("Draft complete.")
 
-    # Allow quick text filtering of ingredients
-    filter_text = st.text_input("Filter ingredients", key="draft-filter")
+    top = st.columns([2, 2, 1])
+    filter_text = top[0].text_input("Filter ingredients", key="draft-filter",
+                                    label_visibility="collapsed", placeholder="Filter ingredients…")
+    compact = top[2].toggle("Phone", key="compact_mode",
+                            help="Stacked single-column layout for phones/tablets")
 
-    def add_pick(player, ing, cat):
-        overall = len(st.session_state["draft_log"]) + 1
-        round_no = ((overall - 1) // int(num_players)) + 1
-        st.session_state["draft_log"].append({
-            "Round": round_no,
-            "Overall": overall,
-            "Player": player,
-            "Ingredient": ing,
-            "Category": cat
-        })
-        save_state({"players": players, "draft_log": st.session_state["draft_log"]})
-        st.rerun()
-
-    # Build long list of available ingredients by category, based on sheet
-    # columns (alias-aware). Alias lists come from the league config.
-    long_rows = []
-
-    def add_from_aliases(alias_list, category_label):
-        for colname in alias_list:
-            if colname in ingredients.columns:
-                for val in ingredients[colname].dropna().unique().tolist():
-                    long_rows.append({"Ingredient": str(val), "Category": category_label})
-
-    for category_label, alias_list in LEAGUE["category_aliases"].items():
-        add_from_aliases(alias_list, category_label)
-
-    df_long = pd.DataFrame(long_rows).drop_duplicates()
-
-    # Remove those already drafted
-    df_long = df_long[~df_long["Ingredient"].isin(drafted)]
-
-    # Apply text filter if provided
+    df_long = df_long_all[~df_long_all["Ingredient"].isin(drafted)]
     if filter_text:
         df_long = df_long[df_long["Ingredient"].str.contains(filter_text, case=False)]
 
-    # Quick availability summary
-    avail_summary = df_long.groupby("Category")["Ingredient"].nunique().reindex(all_categories).fillna(0).astype(int)
-    st.caption("Available now → " + " | ".join([f"{cat}: {avail_summary.loc[cat]}" for cat in all_categories]))
-
-    # Show by category — keep Base Malt, Yeast, Hop open by default
-    for cat in all_categories:
-        sub = df_long[df_long["Category"]==cat]
-        with st.expander(f"{cat} ({len(sub)})", expanded=(cat in ["Base Malt","Yeast","Hop"])):
-            for ing in sorted(sub["Ingredient"].tolist()):
-                # Create ingredient row with proper layout and hover
-                with st.container():
-                    cols = st.columns([6, 2])
-                    
-                    with cols[0]:
-                        label = f"**{ing}**"
-                        popularity_info = ""
-                        if ing in ingredient_popularity:
-                            rec = ingredient_popularity[ing]
-                            popularity_info = f"<br><small style='opacity: 0.7;'>pop: {rec.get('Picks',0)} | avg slot: {round(float(rec.get('Avg_Slot',0)),1)}</small>"
-                        
-                        # Create the hoverable ingredient row
-                        st.markdown(f"""
-                        <div class="ingredient-row">
-                            <div class="ingredient-info">
-                                {label}{popularity_info}
-                            </div>
-                        </div>
-                        """, unsafe_allow_html=True)
-                    
-                    with cols[1]:
-                        if current_player and st.button("Draft", key=f"draft-{cat}-{ing}", use_container_width=True):
-                            add_pick(current_player, ing, cat)
+    if compact:
+        # Single-column: switch between board and recs (no side-by-side scroll).
+        view = st.radio("View", ["🎯 Recommended", "📋 Board"], horizontal=True,
+                        label_visibility="collapsed")
+        if view.endswith("Recommended"):
+            render_recs()
+        else:
+            render_board(df_long)
+    else:
+        board_col, rec_col = st.columns([3, 2], gap="large")
+        with board_col:
+            st.subheader("Available Ingredients")
+            render_board(df_long)
+        with rec_col:
+            st.subheader("Recommended for you")
+            render_recs()
 
     st.divider()
-    st.subheader("My Picks")
-    st.write(my_picks if my_picks else "No picks yet.")
-    st.subheader("All Drafted (any team)")
-    st.write(drafted if drafted else "Nothing drafted yet.")
+    with st.expander("My picks & everything drafted", expanded=False):
+        st.markdown("**My Picks:** " + (", ".join(my_picks) if my_picks else "_none yet_"))
+        st.markdown("**All Drafted:** " + (", ".join(drafted) if drafted else "_nothing yet_"))
 
 # --- Style Viability (compute_style_status imported from draft_core) ---
 with tab2:
     st.subheader("Viable Styles (live)")
     viab = compute_style_status(my_picks, drafted, style_matrix, required, flex_slots)
     st.dataframe(viab, use_container_width=True)
-
-# --- Recommendations with opponent bias (next_best_picks from draft_core) ---
-
-def recommend(my_picks_arg, drafted_arg, top_k=15):
-    """Thin adapter binding the shared next_best_picks to this app's data."""
-    return next_best_picks(
-        my_picks_arg, drafted_arg, ingredients, style_matrix, scarcity_df,
-        required, flex_slots, ingredient_to_category, style_bias,
-        early_signal=early_signal, bias_weight=bias_weight, top_k=top_k,
-    )
 
 with tab3:
     st.subheader("Best Next Picks (live, opponent-aware)")
@@ -650,94 +704,118 @@ def sim_available_candidates(style_matrix, ingredients, drafted):
                     cand.setdefault(ing, ingredient_to_category.get(ing, cat))
     return cand
 
-def sim_opponent_pick(round_idx, cand_map, early_signal, base_malt_run=False, yeast_run=False):
-    """Choose an opponent pick based on historical early signal and simple scenario toggles."""
-    if not cand_map:
-        return None, None
+# Opponent archetypes as weight overrides on the shared scoring model. Each
+# simulated opponent drafts with the SAME engine you do, just tuned differently,
+# and tracks its own roster — so runs stress-test your strategy realistically
+# instead of replaying a scripted "base malt run".
+OPPONENT_PERSONAS = {
+    "Value":      {},                                    # balanced default
+    "Hop-head":   {"syn": 0.30, "fit": 0.22, "scarce": 0.20},
+    "Chalk":      {"pop": 0.20, "fit": 0.25, "need": 0.18},
+    "Needs-first": {"need": 0.40, "fit": 0.22, "scarce": 0.18},
+}
+_PERSONA_NAMES = list(OPPONENT_PERSONAS)
 
-    items = list(cand_map.items())
-    weights = []
-    for ing, cat in items:
-        w = 1.0 + float(early_signal.get(ing, 0.0))
-        if round_idx == 1 and base_malt_run and cat == "Base Malt":
-            w *= 2.0
-        if round_idx == 2 and yeast_run and cat == "Yeast":
-            w *= 1.8
-        if round_idx <= 2 and cat == "Specialty":
-            w *= 0.6
-        weights.append(max(w, 0.01))
 
-    total = sum(weights)
-    if total <= 0:
-        weights = [1.0 for _ in weights]
-        total = sum(weights)
-    probs = [w/total for w in weights]
-    idx = random.choices(range(len(items)), weights=probs, k=1)[0]
-    ing, cat = items[idx]
-    return ing, cat
+def _softmax_choice(values, temperature=8.0):
+    """Index sampled from a softmax over values (higher = more likely)."""
+    import math
+    if not values:
+        return 0
+    m = max(values)
+    exps = [math.exp((v - m) * temperature) for v in values]
+    total = sum(exps) or 1.0
+    probs = [e / total for e in exps]
+    return random.choices(range(len(values)), weights=probs, k=1)[0]
 
-def simulate_draft(sim_players, sim_rounds, your_pos, base_malt_run, yeast_run, bias_weight):
+
+def sim_agent_pick(roster, drafted_local, weights, sim_players, overall, seat_index,
+                   top_k=8, greedy=False):
+    """One pick from the shared recommender for a given roster + persona weights.
+
+    Opponents softmax-sample from the top candidates (realistic variation); you
+    can pass greedy=True to always take the top pick.
     """
-    Run a full snake draft simulation:
-    - Opponents pick based on early_signal + scenario
-    - Your picks use the next_best_picks ranking (opponent-aware, bias-weighted)
-    Returns: log (list of dict), my_picks_end, drafted_end
+    recs = next_best_picks(
+        roster, drafted_local, ingredients, style_matrix, scarcity_df,
+        required, flex_slots, ingredient_to_category, style_bias,
+        early_signal=early_signal, hop_similarity=hop_similarity_data,
+        pair_lookup=pair_lookup, num_players=sim_players, overall_pick=overall,
+        your_seat_index=seat_index, weights=weights, top_k=top_k,
+    )
+    recs = recs[~recs["Ingredient"].isin(drafted_local)]
+    if recs.empty:
+        cand_map = sim_available_candidates(style_matrix, ingredients, drafted_local)
+        if not cand_map:
+            return None, None
+        return random.choice(list(cand_map.items()))
+    idx = 0 if greedy else _softmax_choice(recs["Pick Value"].tolist())
+    row = recs.iloc[idx]
+    return row["Ingredient"], row["Category"]
+
+
+def simulate_draft(sim_players, sim_rounds, your_pos, bias_weight, my_weights=None):
+    """Run a full snake draft where every seat uses the shared engine.
+
+    You draft greedily from your recommendations; each opponent seat is assigned
+    a persona (weight profile) and softmax-samples its pick from its own
+    roster-aware recommendations. Returns (log, your_picks, drafted).
     """
     drafted_local = list(drafted)
+    rosters = {seat: [] for seat in range(1, sim_players + 1)}
     my_local = list(my_picks)
+    rosters[your_pos] = my_local
+    # Deterministic persona per opponent seat (seed set by caller).
+    seat_persona = {seat: _PERSONA_NAMES[(seat - 1) % len(_PERSONA_NAMES)]
+                    for seat in range(1, sim_players + 1)}
 
     log = []
     overall = 0
-
-    for rnd in range(1, sim_rounds+1):
-        order = list(range(1, sim_players+1)) if (rnd % 2 == 1) else list(range(sim_players, 0, -1))
+    for rnd in range(1, sim_rounds + 1):
+        order = (list(range(1, sim_players + 1)) if rnd % 2 == 1
+                 else list(range(sim_players, 0, -1)))
         for seat in order:
             overall += 1
-            cand_map = sim_available_candidates(style_matrix, ingredients, drafted_local)
-
             if seat == your_pos:
-                recs = recommend(my_local, drafted_local, top_k=10)
-                recs = recs[~recs["Ingredient"].isin(drafted_local)]
-                if not recs.empty:
-                    row = recs.iloc[0]
-                    ing = row["Ingredient"]
-                    cat = row["Category"]
-                    reason = "your_top_pick"
-                else:
-                    if not cand_map:
-                        break
-                    ing, cat = random.choice(list(cand_map.items()))
-                    reason = "fallback_random"
-                my_local.append(ing)
-                drafted_local.append(ing)
-                log.append({"Round": rnd, "Overall": overall, "Seat": seat, "Team": "You", "Ingredient": ing, "Category": cat, "Reason": reason})
+                ing, cat = sim_agent_pick(my_local, drafted_local, my_weights,
+                                          sim_players, overall, seat - 1, greedy=True)
+                reason = "your_top_pick"
+                team = "You"
             else:
-                ing, cat = sim_opponent_pick(rnd, cand_map, early_signal, base_malt_run, yeast_run)
-                if ing is None:
-                    continue
-                drafted_local.append(ing)
-                log.append({"Round": rnd, "Overall": overall, "Seat": seat, "Team": f"Opp {seat}", "Ingredient": ing, "Category": cat, "Reason": "opp_weighted"})
+                persona = seat_persona[seat]
+                ing, cat = sim_agent_pick(rosters[seat], drafted_local,
+                                          OPPONENT_PERSONAS[persona], sim_players,
+                                          overall, seat - 1)
+                reason = f"persona:{persona}"
+                team = f"Opp {seat}"
+            if ing is None:
+                continue
+            rosters[seat].append(ing)
+            drafted_local.append(ing)
+            log.append({"Round": rnd, "Overall": overall, "Seat": seat,
+                        "Team": team, "Ingredient": ing, "Category": cat,
+                        "Reason": reason})
 
     return log, my_local, drafted_local
 
 with tab5:
     st.subheader("Mock Draft Simulator")
-    st.caption("Simulates a full snake draft using your current settings. Opponents pick via history/scenarios; your picks use the 'Best Next Picks' logic.")
+    st.caption("Simulates a full snake draft where every seat uses the shared engine. "
+               "Opponents are assigned personas (Value / Hop-head / Chalk / Needs-first) "
+               "and roster-aware; you draft greedily from your recommendations.")
 
     c1, c2, c3 = st.columns(3)
     sim_players = c1.number_input("Players", min_value=4, max_value=20, value=int(num_players), step=1, key="sim_players")
     sim_rounds = c2.number_input("Rounds", min_value=1, max_value=10, value=7, step=1, key="sim_rounds")
     your_pos_sim = c3.number_input("Your position", min_value=1, max_value=int(sim_players), value=int(draft_position), step=1, key="sim_your_pos")
 
-    c4, c5, c6 = st.columns(3)
-    scen_base_malt = c4.checkbox("Round 1 base malt run", value=True, key="scen_base_malt")
-    scen_yeast = c5.checkbox("Round 2 yeast run", value=True, key="scen_yeast")
-    sim_seed = c6.number_input("Random seed", min_value=0, max_value=10**9, value=42, step=1, key="sim_seed")
+    sim_seed = st.number_input("Random seed", min_value=0, max_value=10**9, value=42, step=1, key="sim_seed")
 
     run = st.button("Run mock draft", key="run_mock")
     if run:
         random.seed(int(sim_seed))
-        log, my_local, drafted_local = simulate_draft(int(sim_players), int(sim_rounds), int(your_pos_sim), scen_base_malt, scen_yeast, bias_weight)
+        log, my_local, drafted_local = simulate_draft(
+            int(sim_players), int(sim_rounds), int(your_pos_sim), bias_weight)
 
         st.markdown("#### Simulation Results")
         st.write(f"**Your picks ({len(my_local)}):** " + ", ".join(my_local))
@@ -757,25 +835,13 @@ with tab6:
     )
     summary_rows = []
     for p in players:
-        slots = {"Malt": "", "Hop": "", "Yeast": "", "Adjunct": "",
-                 "Flex1": "", "Flex2": "", "Flex3": ""}
-        if enable_round8:
-            slots["Round8"] = ""
-        flex_keys = ["Flex1", "Flex2", "Flex3"]
-        flex_idx = 0
-        player_rows = df_log[df_log["Player"] == p]
-        for _, r in player_rows.iterrows():
-            cat = r.get("Category", "")
-            ing = r.get("Ingredient", "")
-            bucket = bucket_for_rules(str(cat))
-            if bucket in ["Malt", "Hop", "Yeast", "Adjunct"] and slots[bucket] == "":
-                slots[bucket] = ing
-            else:
-                if flex_idx < len(flex_keys):
-                    slots[flex_keys[flex_idx]] = ing
-                    flex_idx += 1
-                elif enable_round8:
-                    slots["Round8"] = ing
+        player_records = [r for r in st.session_state["draft_log"]
+                          if r.get("Player") == p]
+        # Single source of truth for slot attribution (shared with the roster
+        # strip); trusts the stored Category so adjuncts land in the right slot.
+        slots = {s["label"]: (s["filled"] or "")
+                 for s in roster_slots(player_records, enable_round8=enable_round8,
+                                       flex_slots=LEAGUE["flex_slots"])}
         summary_rows.append({"Player": p, **slots})
     if summary_rows:
         summary_df = pd.DataFrame(summary_rows)

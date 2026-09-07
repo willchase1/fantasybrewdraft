@@ -25,6 +25,7 @@ def main():
     )
     args = parser.parse_args()
 
+    league = load_league_config()
     (
         ingredients,
         style_matrix,
@@ -32,7 +33,7 @@ def main():
         opponent_model,
         style_bias,
         ingredient_to_category,
-    ) = load_data()
+    ) = load_data(ingredients_path=league["ingredients_path"])
 
     # Build opponent cues if model is available
     early_signal = {}
@@ -53,7 +54,6 @@ def main():
     my_picks = [x.strip() for x in args.my_picks.split(",") if x.strip()]
     drafted = [x.strip() for x in args.drafted.split(",") if x.strip()] or my_picks.copy()
 
-    league = load_league_config()
     required = league["required_categories"]
     flex_slots = league["flex_slots"]
 

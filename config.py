@@ -14,6 +14,12 @@ import os
 DEFAULTS = {
     "rounds": 7,
     "flex_slots": 3,
+    # The ingredient set to draft from. ``ingredients_path`` is authoritative;
+    # ``ingredient_year`` is for display/labeling. Defaults mirror historical
+    # behavior (2025); the checked-in league_config.json points at the current
+    # season so the live app uses it while golden tests keep reading 2025.
+    "ingredient_year": 2025,
+    "ingredients_path": "ingredients_2025.csv",
     "required_categories": {"Base Malt": 1, "Hop": 1, "Yeast": 1, "Adjunct": 1},
     "category_aliases": {
         "Base Malt": ["Base Malt", "Base Malts", "Base Malts and Extracts"],
