@@ -137,13 +137,7 @@ save_state({"players": players, "draft_log": st.session_state.get("draft_log", [
 enable_round8 = st.sidebar.checkbox("Enable optional 8th round", value=False)
 TOTAL_PICKS = DEFAULT_ROUNDS + (1 if enable_round8 else 0)
 
-prev_draft_pos = int(st.session_state.get("draft_pos", 1))
-draft_position = st.sidebar.number_input(
-    "My seat (for 🟢 highlight only)", min_value=1, max_value=num_players,
-    value=min(num_players, prev_draft_pos), step=1
-)
-st.session_state["draft_pos"] = int(draft_position)
-st.sidebar.caption("The board follows whoever is on the clock; this only marks your own turn.")
+st.sidebar.caption("The board follows whoever is on the clock.")
 
 st.sidebar.header("Room Bias (opponent behavior)")
 bias_choice = st.sidebar.selectbox("How aggressively should we anticipate snipes?", ["Off","Conservative","Aggressive"], index=1)
@@ -187,9 +181,6 @@ draft_log = st.session_state.get("draft_log", [])
 # derive team picks and drafted list from the log (single source of truth)
 teams, drafted = draft_state.project(draft_log, players)
 
-# your_name/draft_position are used ONLY to highlight your own turn — the live
-# view otherwise follows the team on the clock.
-your_name = players[int(draft_position) - 1] if players else ""
 
 # ---------------------------------------------------------------------------
 # Draft timer — state + controls
@@ -315,7 +306,7 @@ def recommend(picks_arg, drafted_arg, top_k=15, seat_index=None, overall=None):
         hop_similarity=hop_similarity_data, pair_lookup=pair_lookup,
         num_players=int(num_players),
         overall_pick=overall if overall is not None else overall_pick,
-        your_seat_index=seat_index if seat_index is not None else (int(draft_position) - 1),
+        your_seat_index=seat_index if seat_index is not None else current_seat,
         weights=PICK_WEIGHTS, squash=SQUASH,
         single_pick_categories=LEAGUE.get("single_pick_categories", []),
         workable=WORKABLE,
@@ -403,7 +394,7 @@ def simulate_draft(sim_players, sim_rounds, your_pos, bias_weight, my_weights=No
             if seat == your_pos:
                 ing, cat = sim_agent_pick(my_local, drafted_local, my_weights,
                                           sim_players, overall, seat - 1, greedy=True)
-                reason, team = "your_top_pick", "You"
+                reason, team = "focus_top_pick", "Focus"
             else:
                 persona = seat_persona[seat]
                 ing, cat = sim_agent_pick(rosters[seat], drafted_local,
@@ -568,7 +559,7 @@ def show_ingredient_dialog(ing):
 @st.dialog("Build a style", width="large", on_dismiss=_close_dialogs)
 def show_style_dialog(style):
     st.markdown(f"### 🧪 Build: {style}")
-    st.caption(f"For **{focus_player}**  ·  ✅ you have · 🟢 open · ❌ taken")
+    st.caption(f"For **{focus_player}**  ·  ✅ on roster · 🟢 open · ❌ taken")
     seat = players.index(focus_player) if focus_player in players else 0
     recs = recommend(focus_picks, drafted, top_k=500, seat_index=seat)
     value_of = dict(zip(recs["Ingredient"], recs["Pick Value"]))
@@ -621,8 +612,7 @@ if _has_logo:
     i = 1
 with tb[i]:
     if current_player:
-        turn = ("🟢 YOUR PICK" if current_player == your_name
-                else f"On the clock: {current_player}")
+        turn = f"🟢 On the clock: {current_player}"
         st.caption(f"Round {current_round} · Pick {overall_pick}")
         st.markdown(f"<div class='wr-title'>{turn}</div>", unsafe_allow_html=True)
         # Who's up next (on deck).
@@ -630,7 +620,7 @@ with tb[i]:
         if next_overall <= total_picks_overall:
             _, next_seat = pick_slot(next_overall, int(num_players))
             nxt = players[next_seat]
-            st.caption(f"On deck: **{nxt}**" + (" 🟢" if nxt == your_name else ""))
+            st.caption(f"On deck: **{nxt}**")
     else:
         st.markdown("<div class='wr-title'>✅ Draft complete</div>", unsafe_allow_html=True)
 with tb[i + 1]:
@@ -646,7 +636,7 @@ focus = team_context(focus_records, focus_picks, drafted, style_matrix,
                      required, flex_slots, enable_round8=enable_round8)
 needed_buckets = focus["needed_buckets"]
 
-roster_label = (f"**{focus_player}**" + (" 🟢" if focus_player == your_name else "")
+roster_label = (f"**{focus_player}**"
                 + f"  —  leaning: {focus['likely_style']}  ·  flex left: {focus['flex_remaining']}")
 st.caption(roster_label)
 render_roster_line(focus["slots"])
@@ -779,15 +769,15 @@ with st.expander("🎲 Mock draft simulator", expanded=False):
     c1, c2, c3 = st.columns(3)
     sim_players = c1.number_input("Players", 4, 20, value=int(num_players), step=1, key="sim_players")
     sim_rounds = c2.number_input("Rounds", 1, 10, value=7, step=1, key="sim_rounds")
-    your_pos_sim = c3.number_input("Your position", 1, int(sim_players),
-                                   value=int(draft_position), step=1, key="sim_your_pos")
+    your_pos_sim = c3.number_input("Focus seat", 1, int(sim_players),
+                                   value=1, step=1, key="sim_your_pos")
     sim_seed = st.number_input("Random seed", 0, 10**9, value=42, step=1, key="sim_seed")
     if st.button("Run mock draft", key="run_mock"):
         random.seed(int(sim_seed))
         log, my_local, drafted_local = simulate_draft(
             int(sim_players), int(sim_rounds), int(your_pos_sim), bias_weight)
         st.markdown("#### Simulation Results")
-        st.write(f"**Your picks ({len(my_local)}):** " + ", ".join(my_local))
+        st.write(f"**Focus seat picks ({len(my_local)}):** " + ", ".join(my_local))
         st.markdown("**Pick log** (last 40)")
         st.dataframe(pd.DataFrame(log).tail(40), use_container_width=True, hide_index=True)
         st.markdown("#### Final style viability (top 15)")

@@ -10,11 +10,14 @@ A tool for fantasy brewing competitions with **two modes** that share one engine
 
 ## 🎯 Overview
 
-The Run a Draft mode helps a commissioner run a live snake draft where players
-draft ingredients over multiple rounds to build competitive brewing teams, with
-intelligent recommendations, opponent analysis, and real-time management. The My
-Brewery mode reuses the same scoring for personal recipe exploration and pre-draft
-prep. Both modes are served from a single entry point (`app.py`).
+The Run a Draft mode is a **single-screen "war room"** built to run live on a
+projector for the whole room to watch: it **follows whoever is on the clock**,
+showing that team's roster, roster-aware recommendations, and viable styles side
+by side with the full board — no tabs, no page scroll. The commissioner records
+each pick in one click. Nothing on screen is tied to any one person; every panel
+reflects the team currently drafting (or any team you scout). The My Brewery
+mode reuses the same scoring for personal recipe exploration and pre-draft prep.
+Both modes are served from a single entry point (`app.py`).
 
 ### Draft Rules
 - **7 rounds** (+ optional 8th "Oh Sh*t" round for swaps)
@@ -99,51 +102,63 @@ draft and how to re-tune next season.
 - **`draft_autosave.json`** - Current draft state (auto-saved)
 - **`draft_state.json`** - Shared state for external tools
 
-## 🎮 Features
+## 🖥️ The War Room (Run a Draft)
 
-### 🕐 Draft Timer
-- **Adjustable duration** (1-60 minutes)
-- **Visual countdown** with color-coded warnings
-- **Start/Pause/Reset** controls
-- **Elapsed time tracking**
+The whole draft lives on one screen so nothing important scrolls off during a
+live, projected draft. Every panel is framed around the **team on the clock**
+(or any team you scout) — not around a personal seat.
 
-### 🎯 Draft Management
-- **Undo last pick** - Quick mistake correction
-- **Swap/Trade manager** - Handle trades and Round 8 swaps
-- **Auto-save** - Never lose your draft progress
-- **Player tracking** - Monitor all participants
+**Top bar (always visible):** club logo · the current round/pick and **who's on
+the clock** (by name) · who's **on deck** · a compact **per-pick timer** · a
+**scout selector** ("View team") to inspect any player's board without changing
+whose turn it is · the focus team's roster as category chips.
 
-### 📈 Analytics & Recommendations
+**Three panels (each an independent fixed-height scroll pane):**
+- **📋 Board** — every remaining ingredient grouped by category (with a
+  ⭐ marker on categories the focus team still needs), a live availability
+  line, a fuzzy filter box, an **ingredient look-up** box, and a one-click
+  **Draft** button per ingredient.
+- **⭐ Recommended** — the best available picks **ranked for the focus team's
+  roster** (roster-aware; not a fixed global list), with a filter for "fills a
+  need" or a specific category, and one-click Draft buttons.
+- **📊 Viable Styles** — the styles that roster can still make, each a button
+  that opens the **build planner** (see below).
 
-#### Draft Board
-- **Live ingredient availability** by category
-- **Popularity metrics** (picks, average draft slot)
-- **Quick filtering** to find specific ingredients
-- **Hover effects** for better UX
+**Follows the clock.** As picks are recorded the board advances to the next seat
+automatically — there is no "my seat"; the room simply watches whoever is up.
 
-#### Style Viability
-- **Real-time style scoring** based on your picks
-- **Remaining options** for each beer style
-- **Strategic guidance** for draft direction
+**Phone / compact layout.** A 📱 toggle collapses the three panels into one
+column with a Board / Recommended / Styles segmented switch for small screens.
 
-#### Best Next Picks
-- **Intelligent recommendations** using multiple factors:
-  - Style coverage potential
-  - Ingredient scarcity
-  - Opponent picking tendencies
-  - Category requirements
-- **Opponent-aware** suggestions with bias weighting
+### ℹ️ Info dialogs (pull up more info mid-draft)
+Projector-friendly modal dialogs that take no permanent screen space:
+- **Ingredient details** — from the look-up box: category, drafted/available
+  status, historical popularity, the styles it fits, and still-available
+  substitutes with similarity scores. Drafts the ingredient in one click.
+- **Build a style** — click any style in Viable Styles to see **how to build it
+  from what's left on the board**, per category: ✅ *on roster* · 🟢 *open
+  options* (each one-click draftable) · ❌ *taken (by whom)*.
 
-#### Blocks & Opponent Predictions
-- **Player tendency analysis** - Likely styles and next picks
-- **Block suggestions** - Deny opponent builds
-- **Historical pattern matching** using opponent model
+Both dialogs close cleanly on draft or dismiss.
 
-#### Mock Draft Simulator
-- **Full draft simulation** with customizable scenarios
-- **Opponent AI** based on historical patterns
-- **Different run scenarios** (base malt run, yeast run)
-- **Style viability analysis** of simulated results
+### 🕐 Per-pick timer
+A compact countdown in the top bar that resets and starts for each pick, with
+color-coded warnings as time runs low.
+
+### 🛠️ Tools drawer
+Admin functions stay off-screen in expanders below the board until opened:
+- **Draft management** — undo the last pick; swap / trade / Round-8 swap manager
+- **Detailed recommendations** — the full scored breakdown for the focus team
+- **Blocks & opponent predictions** — likely styles / next picks and block
+  suggestions to deny the focus team's rivals
+- **Mock draft simulator** — run a full persona-driven draft (the same shared
+  engine drives every seat) and inspect the resulting style viability
+- **Results / export** — editable results table and CSV / Excel export
+- **Ingredient similarity finder** — browse hop / yeast / malt substitutes
+
+### 🧪 My Brewery
+A personal sandbox decoupled from any live draft: pick ingredients freely to
+see which styles become viable, what to add next, and hop substitutions.
 
 ## ⚙️ Configuration
 
@@ -152,7 +167,6 @@ draft and how to re-tune next season.
 #### Draft Setup
 - **Number of players** (4-20)
 - **Player names** for each seat
-- **Your draft position** (determines pick order)
 - **Optional 8th round** toggle
 
 #### Room Bias
@@ -172,43 +186,15 @@ draft and how to re-tune next season.
 - **Required categories** - Visual indicators for draft requirements
 - **Feasibility check** - Warns if requirements can't be met
 
-## 🔄 Draft Management
+## 🔄 Draft management (undo / swaps / trades)
 
-### Undo Function
-- **Single-click undo** of the most recent pick
-- **Automatic state sync** across all components
-- **Disabled when no picks** to prevent errors
+In the **Tools drawer** under the board:
 
-### Swap/Trade Manager
-1. **Open manager** - Click "🔄 Manage Swaps/Trades"
-2. **Select pick** - Choose any existing pick to modify
-3. **Choose replacement** - Select from available ingredients
-4. **Execute swap** - Confirm the change
-
-**Use cases:**
-- Round 8 ingredient swaps
-- Trade execution between players
-- Commissioner pick corrections
-
-## 📋 Tabs Overview
-
-### 1. Draft Board
-Main drafting interface with ingredient selection and draft tracking.
-
-### 2. Style Viability
-Real-time analysis of which beer styles remain viable with your current picks.
-
-### 3. Recommendations
-AI-powered suggestions for your next picks based on multiple strategic factors.
-
-### 4. Blocks
-Opponent analysis and suggestions for denying their builds.
-
-### 5. Mock Draft Simulator
-Full draft simulation to test different scenarios and strategies.
-
-### 6. Results / Export
-Team summaries, draft results, and export functionality (CSV/Excel).
+- **Undo** — single-click removal of the most recent pick (press repeatedly to
+  step back); state stays synced across every panel and the autosave file.
+- **Swap / trade / Round-8 swap** — pick any existing selection, choose a
+  replacement from the available ingredients, and confirm. Handles trades,
+  commissioner corrections, and Round-8 ingredient swaps.
 
 ## 🛠️ Customization
 
@@ -260,12 +246,12 @@ Create `opponent_model.json` with historical data:
 - Ensure `draft_autosave.json` can be created/modified
 
 **Timer not updating**
-- Refresh the browser page
+- The timer ticks via a 1-second auto-rerun; if it stalls, refresh the page
 - Check browser console for JavaScript errors
 
-**Hover effects not working**
-- Try refreshing the page
-- Check if browser supports CSS transitions
+**A dialog won't open or re-opens on its own**
+- Dialogs are driven by session flags and close on draft/dismiss; a hard
+  browser refresh clears any stuck state
 
 ### Performance Tips
 - **Large player counts** (15+) may slow recommendations
