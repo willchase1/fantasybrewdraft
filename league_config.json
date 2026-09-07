@@ -10,15 +10,42 @@
     "Adjunct": 1
   },
   "category_aliases": {
-    "Base Malt": ["Base Malt", "Base Malts", "Base Malts and Extracts"],
-    "Hop": ["Hop", "Hops"],
-    "Yeast": ["Yeast", "Yeasts"],
-    "Adjunct": ["Adjunct", "Adjuncts", "Adjuncts/Spices/Fruits"],
-    "Specialty": [
-      "Specialty", "Specialty Malt", "Specialty Malts",
-      "Specialty Malt and Flaked Grains", "Specialty Malts and Flaked Grains",
-      "Flaked Grains", "Flaked/Other Grains"
+    "Base Malt": [
+      "Base Malt",
+      "Base Malts",
+      "Base Malts and Extracts"
     ],
-    "Extra": ["Extra", "Extras"]
+    "Hop": [
+      "Hop",
+      "Hops"
+    ],
+    "Yeast": [
+      "Yeast",
+      "Yeasts"
+    ],
+    "Adjunct": [
+      "Adjunct",
+      "Adjuncts",
+      "Adjuncts/Spices/Fruits"
+    ],
+    "Specialty": [
+      "Specialty",
+      "Specialty Malt",
+      "Specialty Malts",
+      "Specialty Malt and Flaked Grains",
+      "Specialty Malts and Flaked Grains",
+      "Flaked Grains",
+      "Flaked/Other Grains"
+    ],
+    "Extra": [
+      "Extra",
+      "Extras"
+    ]
+  },
+  "similarity_files": {
+    "Hop": "hop_similarity.json",
+    "Yeast": "yeast_similarity.json",
+    "Base Malt": "malt_similarity.json",
+    "Specialty": "malt_similarity.json"
   }
 }

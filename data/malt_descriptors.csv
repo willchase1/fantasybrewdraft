@@ -1,0 +1,84 @@
+name,sheet_category,kind,grain,origin,color_L,diastatic,bready,biscuit_toast,caramel_toffee,dark_fruit,roast_coffee_choc,burnt_acrid,nutty,smoky,grainy_neutral,body_head,sweet,melanoidin_rich
+Amber Malt Extract,Base Malt,extract,barley,none,12,0,2,1,2,0,0,0,1,0,0,0,2,1
+American (or North American) Pilsner,Base Malt,base_pils,barley,US,1.8,1,1,0,0,0,0,0,0,0,3,0,1,0
+American (or North American) Vienna,Base Malt,base_kilned,barley,US,3.5,1,2,2,0,0,0,0,1,0,1,0,1,2
+Belgian Pale,Base Malt,base_pale,barley,BE,3.2,1,3,1,0,0,0,0,1,0,1,0,1,1
+Belgian Pilsner,Base Malt,base_pils,barley,BE,1.7,1,1,0,0,0,0,0,0,0,3,0,1,0
+Dark Malt Extract,Base Malt,extract,barley,none,30,0,1,0,2,1,2,0,0,0,0,0,2,1
+English Pale Ale,Base Malt,base_pale,barley,UK,3.0,1,3,2,0,0,0,0,1,0,1,0,1,1
+Extra Light/Pils Malt Extract,Base Malt,extract,barley,none,2.5,0,1,0,0,0,0,0,0,0,3,0,1,0
+Floor Malted Pilsner,Base Malt,base_pils,barley,CZ,1.8,1,2,0,0,0,0,0,0,0,3,0,1,1
+German Pale Ale,Base Malt,base_pale,barley,DE,2.5,1,2,1,0,0,0,0,0,0,2,0,1,1
+German Pilsner,Base Malt,base_pils,barley,DE,1.8,1,1,0,0,0,0,0,0,0,3,0,1,0
+German Vienna,Base Malt,base_kilned,barley,DE,3.5,1,2,2,0,0,0,0,1,0,1,0,1,2
+Golden Malt Extract,Base Malt,extract,barley,none,5,0,2,1,0,0,0,0,0,0,1,0,2,0
+Golden Promise,Base Malt,base_pale,barley,UK,2.5,1,3,1,0,0,0,0,1,0,1,0,2,1
+Light Malt Extract,Base Malt,extract,barley,none,4,0,2,0,0,0,0,0,0,0,2,0,2,0
+Maris Otter,Base Malt,base_pale,barley,UK,3.0,1,3,2,0,0,0,0,2,0,1,0,1,1
+Munich Malt Extract,Base Malt,extract,barley,none,9,0,3,2,0,0,0,0,1,0,0,0,2,3
+"Munich, Dark",Base Malt,base_kilned,barley,DE,9,1,3,2,0,0,0,0,1,0,0,0,1,3
+"Munich, Light",Base Malt,base_kilned,barley,DE,6,1,3,2,0,0,0,0,1,0,0,0,1,3
+Pale Malt (2 Row),Base Malt,base_pale,barley,US,1.9,1,2,0,0,0,0,0,0,0,2,0,1,0
+Pale Malt (6 Row),Base Malt,base_pale,barley,US,1.9,1,1,0,0,0,0,0,0,0,3,0,0,0
+Pale Malt Extract,Base Malt,extract,barley,none,4,0,2,0,0,0,0,0,0,0,2,0,2,0
+Red X,Base Malt,base_kilned,barley,DE,12,1,2,2,2,0,0,0,1,0,0,0,1,2
+Wheat Malt Extract,Base Malt,extract,wheat,none,4,0,2,0,0,0,0,0,0,0,1,3,1,0
+White Wheat,Base Malt,base_wheat,wheat,US,2.5,1,2,0,0,0,0,0,0,0,1,3,1,0
+Aromatic,Specialty Malt,kilned_specialty,barley,BE,20,1,3,2,0,0,0,0,1,0,0,0,2,3
+"Barley, Flaked",Specialty Malt,flaked_adjunct,barley,none,1.5,0,0,0,0,0,0,0,0,0,2,3,0,0
+"Barley, Raw",Specialty Malt,raw_grain,barley,none,1.5,0,0,0,0,0,0,0,0,0,3,2,0,0
+"Barley, Roasted",Specialty Malt,roast,barley,none,300,0,0,0,0,0,3,2,0,0,0,0,0,0
+"Barley, Torrefied",Specialty Malt,flaked_adjunct,barley,none,1.5,0,0,1,0,0,0,0,0,0,2,3,0,0
+Biscuit Malt,Specialty Malt,kilned_specialty,barley,BE,25,0,2,3,0,0,0,0,1,0,0,0,1,1
+Black Malt,Specialty Malt,roast,barley,none,500,0,0,0,0,0,3,3,0,0,0,0,0,0
+Blackprinze Malt,Specialty Malt,roast,barley,none,450,0,0,0,0,0,3,1,0,0,0,0,0,0
+Brown Malt,Specialty Malt,kilned_specialty,barley,UK,65,0,1,3,0,0,2,0,1,0,0,0,0,1
+Buckwheat,Specialty Malt,alt_grain,buckwheat,none,2,0,0,1,0,0,0,0,2,0,2,1,0,0
+Carafa I,Specialty Malt,roast,barley,DE,340,0,0,0,0,0,3,0,0,0,0,0,0,0
+Carafa II,Specialty Malt,roast,barley,DE,420,0,0,0,0,0,3,0,0,0,0,0,0,0
+Carafa III,Specialty Malt,roast,barley,DE,530,0,0,0,0,0,3,1,0,0,0,0,0,0
+Carafoam,Specialty Malt,dextrine,barley,DE,2,0,0,0,0,0,0,0,0,0,1,3,1,0
+Caramel/Crystal Malt - 10L,Specialty Malt,crystal,barley,none,10,0,0,0,1,0,0,0,0,0,0,1,3,0
+Caramel/Crystal Malt - 20L,Specialty Malt,crystal,barley,none,20,0,0,0,2,0,0,0,0,0,0,1,3,0
+Caramel/Crystal Malt - 30L,Specialty Malt,crystal,barley,none,30,0,0,0,2,0,0,0,0,0,0,1,3,0
+Caramel/Crystal Malt - 40L,Specialty Malt,crystal,barley,none,40,0,0,0,3,0,0,0,0,0,0,1,3,0
+Caramel/Crystal Malt - 60L,Specialty Malt,crystal,barley,none,60,0,0,0,3,1,0,0,0,0,0,1,3,0
+Caramel/Crystal Malt - 80L,Specialty Malt,crystal,barley,none,80,0,0,0,3,2,0,0,0,0,0,1,2,0
+Caramel/Crystal Malt -120L,Specialty Malt,crystal,barley,none,120,0,0,0,2,3,1,0,0,0,0,1,2,0
+Caramunich I,Specialty Malt,crystal,barley,DE,35,0,0,0,3,0,0,0,0,0,0,1,3,1
+Caramunich II,Specialty Malt,crystal,barley,DE,45,0,0,0,3,1,0,0,0,0,0,1,3,1
+Carapils/Dextrine/Carafoam,Specialty Malt,dextrine,barley,none,2,0,0,0,0,0,0,0,0,0,1,3,1,0
+Carared,Specialty Malt,crystal,barley,DE,20,0,0,0,2,0,0,0,0,0,0,1,3,1
+Caravienne,Specialty Malt,crystal,barley,BE,20,0,0,1,2,0,0,0,0,0,0,1,3,1
+Carahell,Specialty Malt,crystal,barley,DE,10,0,0,0,2,0,0,0,0,0,0,1,3,1
+Chit Malt,Specialty Malt,dextrine,barley,none,1.5,0,0,0,0,0,0,0,0,0,2,3,0,0
+Chocolate Malt,Specialty Malt,roast,barley,UK,350,0,0,0,0,0,3,1,1,0,0,0,0,0
+Coffee Malt,Specialty Malt,kilned_specialty,barley,none,150,0,0,2,0,0,3,0,1,0,0,0,0,1
+Cookie Malt (Viking Malt),Specialty Malt,kilned_specialty,barley,none,20,0,2,3,1,0,0,0,1,0,0,0,2,1
+"Corn, Flaked",Specialty Malt,flaked_adjunct,corn,none,1,0,0,0,0,0,0,0,0,0,3,0,1,0
+"Corn, Grits",Specialty Malt,raw_grain,corn,none,1,0,0,0,0,0,0,0,0,0,3,0,1,0
+"Extract, Extra Dark",Specialty Malt,extract,barley,none,60,0,0,0,2,2,2,0,0,0,0,0,2,1
+"Extract, Rye",Specialty Malt,extract,rye,none,6,0,1,0,0,0,0,0,0,0,1,1,1,0
+"Extract, Sorghum",Specialty Malt,extract,sorghum,none,3,0,0,0,0,0,0,0,0,0,2,0,3,0
+Honey Malt,Specialty Malt,kilned_specialty,barley,none,25,0,1,1,2,0,0,0,0,0,0,0,3,2
+Melanoiden Malt,Specialty Malt,kilned_specialty,barley,DE,25,0,3,2,0,0,0,0,0,0,0,0,2,3
+Millet,Specialty Malt,alt_grain,millet,none,2,0,0,0,0,0,0,0,1,0,3,0,1,0
+"Oats, Flaked",Specialty Malt,flaked_adjunct,oat,none,1.5,0,0,0,0,0,0,0,0,0,1,3,1,0
+"Oats, Golden Naked",Specialty Malt,crystal,oat,UK,10,0,0,1,2,0,0,0,2,0,0,2,2,0
+"Oats, Malted",Specialty Malt,flaked_adjunct,oat,none,2,0,1,0,0,0,0,0,0,0,1,3,1,0
+Pale Chocolate Malt,Specialty Malt,roast,barley,UK,220,0,0,1,0,0,3,0,1,0,0,0,0,0
+Peat Smoked Malt,Specialty Malt,smoked,barley,UK,2.5,1,1,0,0,0,0,0,0,3,1,0,0,0
+Quinoa,Specialty Malt,alt_grain,quinoa,none,2,0,0,0,0,0,0,0,2,0,2,0,0,0
+"Rice, Flaked",Specialty Malt,flaked_adjunct,rice,none,1,0,0,0,0,0,0,0,0,0,3,0,0,0
+Rye Malt,Specialty Malt,base_kilned,rye,none,3.5,1,1,0,0,0,0,0,0,0,1,2,0,0
+"Rye, Flaked",Specialty Malt,flaked_adjunct,rye,none,2,0,0,0,0,0,0,0,0,0,1,3,0,0
+Smoked Malt,Specialty Malt,smoked,barley,DE,3,1,2,0,0,0,0,0,0,3,0,0,1,1
+Special B,Specialty Malt,crystal,barley,BE,140,0,0,0,2,3,1,0,1,0,0,1,2,1
+Special Roast,Specialty Malt,kilned_specialty,barley,US,50,0,1,3,0,0,0,0,1,0,0,0,0,1
+Spelt Malt,Specialty Malt,base_wheat,spelt,none,2.5,1,2,0,0,0,0,0,1,0,1,2,0,0
+Toasted Malt,Specialty Malt,kilned_specialty,barley,none,27,0,2,3,0,0,0,0,2,0,0,0,1,1
+Victory,Specialty Malt,kilned_specialty,barley,US,28,0,2,3,0,0,0,0,2,0,0,0,1,1
+"Wheat, Flaked",Specialty Malt,flaked_adjunct,wheat,none,2,0,0,0,0,0,0,0,0,0,1,3,0,0
+"Wheat, Red",Specialty Malt,base_wheat,wheat,US,2.5,1,2,0,0,0,0,0,0,0,1,3,1,0
+"Wheat, Roasted",Specialty Malt,roast,wheat,none,425,0,0,0,0,0,3,1,0,0,0,1,0,0
+"Wheat, Torrified",Specialty Malt,flaked_adjunct,wheat,none,2,0,0,1,0,0,0,0,0,0,1,3,0,0

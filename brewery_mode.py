@@ -28,7 +28,8 @@ def _load():
 
 @st.cache_data
 def _load_hop_similarity():
-    return draft_core._load_optional_json("hop_similarity.json") or {}
+    # Merged hop/yeast/malt lookup from the files named in league_config.json.
+    return draft_core.load_similarity()
 
 
 (
@@ -100,11 +101,12 @@ with tab_recs:
 
 with tab_hops:
     if not hop_similarity:
-        st.info("Add hop_similarity.json to enable substitution suggestions.")
+        st.info("Add similarity files (see scripts/build_similarity.py) to enable substitution suggestions.")
     else:
         your_hops = [ing for ing in sandbox if ing in hop_similarity]
         if not your_hops:
-            st.caption("Add a hop to your selection to see substitutes.")
+            st.caption("Add an ingredient to your selection to see substitutes.")
         for hop in your_hops:
-            alts = [rec.get("hop") for rec in hop_similarity.get(hop, []) if rec.get("hop")]
+            alts = [draft_core._sim_name(rec) for rec in hop_similarity.get(hop, [])
+                    if draft_core._sim_name(rec)]
             st.markdown(f"**{hop}** → " + (", ".join(alts) if alts else "_no data_"))

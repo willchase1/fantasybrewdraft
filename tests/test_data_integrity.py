@@ -26,6 +26,8 @@ def repo_data():
 POST_2025_MATRIX_ADDITIONS = {
     "Columbus/Tomahawk/Zeus",
     "Saflager SH-45 (Thiol Enhancing Dry Lager Yeast)",
+    "Abstrax terpenes (any variety of Quantum, Omni, or BrewGas)",
+    "Abstrax SkyFarm fruit flavors (any)",
 }
 
 

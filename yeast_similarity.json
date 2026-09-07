@@ -1,0 +1,974 @@
+{
+  "Abbey Ale (WLP540, EY1762, BE-256)": [
+    {
+      "ingredient": "Trappist Ale (WLP500, WY1214, B48)",
+      "score": 0.962
+    },
+    {
+      "ingredient": "Belgian Ardennes (WY3522, B45)",
+      "score": 0.883
+    },
+    {
+      "ingredient": "Belgian Ale (WLP570, WY1388)",
+      "score": 0.715
+    },
+    {
+      "ingredient": "Hefewiezen (WLP300, WY3068, G01)",
+      "score": 0.443
+    },
+    {
+      "ingredient": "Farmhouse (WY3726, OYL-217, Dry)",
+      "score": 0.43
+    },
+    {
+      "ingredient": "Saison (WLP565, WY3724)",
+      "score": 0.389
+    },
+    {
+      "ingredient": "English Ale (WLP002, WY1968, S-04, A09)",
+      "score": 0.256
+    },
+    {
+      "ingredient": "London III (WLP013, A38, WY1318)",
+      "score": 0.177
+    }
+  ],
+  "Alt (WLP023, WY1007, G02)": [
+    {
+      "ingredient": "German Ale (WY1007, G02)",
+      "score": 1.0
+    },
+    {
+      "ingredient": "Kolsch (WLP029, WY2565, G03, K-97)",
+      "score": 0.776
+    },
+    {
+      "ingredient": "American Ale (WLP001 [liquid or dry], WY1056, US-05, A07)",
+      "score": 0.678
+    },
+    {
+      "ingredient": "East Coast Ale (WLP008, A15)",
+      "score": 0.535
+    },
+    {
+      "ingredient": "NovaLager (Lalbrew Y055) (Dry)",
+      "score": 0.462
+    },
+    {
+      "ingredient": "Dry English Ale (WLP007, WY1098, A10)",
+      "score": 0.458
+    },
+    {
+      "ingredient": "German Lager (WLP830, WY2124, L13, 34/70)",
+      "score": 0.42
+    },
+    {
+      "ingredient": "Mexican Lager (WLP940, OYL-113, L09)",
+      "score": 0.404
+    }
+  ],
+  "American Ale (WLP001 [liquid or dry], WY1056, US-05, A07)": [
+    {
+      "ingredient": "East Coast Ale (WLP008, A15)",
+      "score": 0.867
+    },
+    {
+      "ingredient": "Alt (WLP023, WY1007, G02)",
+      "score": 0.678
+    },
+    {
+      "ingredient": "German Ale (WY1007, G02)",
+      "score": 0.678
+    },
+    {
+      "ingredient": "Dry English Ale (WLP007, WY1098, A10)",
+      "score": 0.649
+    },
+    {
+      "ingredient": "Kolsch (WLP029, WY2565, G03, K-97)",
+      "score": 0.603
+    },
+    {
+      "ingredient": "Lutra Kveik (OYL-071, OYL-071DRY)",
+      "score": 0.566
+    },
+    {
+      "ingredient": "NovaLager (Lalbrew Y055) (Dry)",
+      "score": 0.522
+    },
+    {
+      "ingredient": "German Lager (WLP830, WY2124, L13, 34/70)",
+      "score": 0.446
+    }
+  ],
+  "Belgian Ale (WLP570, WY1388)": [
+    {
+      "ingredient": "Belgian Ardennes (WY3522, B45)",
+      "score": 0.893
+    },
+    {
+      "ingredient": "Saison (WLP565, WY3724)",
+      "score": 0.747
+    },
+    {
+      "ingredient": "Farmhouse (WY3726, OYL-217, Dry)",
+      "score": 0.724
+    },
+    {
+      "ingredient": "Abbey Ale (WLP540, EY1762, BE-256)",
+      "score": 0.715
+    },
+    {
+      "ingredient": "Trappist Ale (WLP500, WY1214, B48)",
+      "score": 0.683
+    },
+    {
+      "ingredient": "Hefewiezen (WLP300, WY3068, G01)",
+      "score": 0.382
+    },
+    {
+      "ingredient": "Dry English Ale (WLP007, WY1098, A10)",
+      "score": 0.226
+    }
+  ],
+  "Belgian Ardennes (WY3522, B45)": [
+    {
+      "ingredient": "Belgian Ale (WLP570, WY1388)",
+      "score": 0.893
+    },
+    {
+      "ingredient": "Abbey Ale (WLP540, EY1762, BE-256)",
+      "score": 0.883
+    },
+    {
+      "ingredient": "Trappist Ale (WLP500, WY1214, B48)",
+      "score": 0.858
+    },
+    {
+      "ingredient": "Farmhouse (WY3726, OYL-217, Dry)",
+      "score": 0.683
+    },
+    {
+      "ingredient": "Saison (WLP565, WY3724)",
+      "score": 0.646
+    },
+    {
+      "ingredient": "Hefewiezen (WLP300, WY3068, G01)",
+      "score": 0.445
+    },
+    {
+      "ingredient": "Dry English Ale (WLP007, WY1098, A10)",
+      "score": 0.233
+    }
+  ],
+  "Conan (WLP095, OYL-052, A04, LalBrew New England [Dry])": [
+    {
+      "ingredient": "Pomona (Lalbrew Y067) (Dry)",
+      "score": 0.952
+    },
+    {
+      "ingredient": "Verdant IPA (Dry)",
+      "score": 0.792
+    },
+    {
+      "ingredient": "London III (WLP013, A38, WY1318)",
+      "score": 0.6
+    },
+    {
+      "ingredient": "Hornindal Kveik (WLP521, OYL-091)",
+      "score": 0.502
+    },
+    {
+      "ingredient": "East Coast Ale (WLP008, A15)",
+      "score": 0.308
+    },
+    {
+      "ingredient": "American Ale (WLP001 [liquid or dry], WY1056, US-05, A07)",
+      "score": 0.278
+    },
+    {
+      "ingredient": "Hefewiezen (WLP300, WY3068, G01)",
+      "score": 0.24
+    },
+    {
+      "ingredient": "Saflager SH-45 (Thiol Enhancing Dry Lager Yeast)",
+      "score": 0.24
+    }
+  ],
+  "Czech Lager (WLP802, WY2001, L28)": [
+    {
+      "ingredient": "Mexican Lager (WLP940, OYL-113, L09)",
+      "score": 0.917
+    },
+    {
+      "ingredient": "German Lager (WLP830, WY2124, L13, 34/70)",
+      "score": 0.911
+    },
+    {
+      "ingredient": "Munich Lager (WLP838, WY2308, Dry)",
+      "score": 0.811
+    },
+    {
+      "ingredient": "Kolsch (WLP029, WY2565, G03, K-97)",
+      "score": 0.502
+    },
+    {
+      "ingredient": "NovaLager (Lalbrew Y055) (Dry)",
+      "score": 0.457
+    },
+    {
+      "ingredient": "San Fran Lager (WLP810, L05, WY2112)",
+      "score": 0.373
+    },
+    {
+      "ingredient": "American Ale (WLP001 [liquid or dry], WY1056, US-05, A07)",
+      "score": 0.306
+    },
+    {
+      "ingredient": "Alt (WLP023, WY1007, G02)",
+      "score": 0.291
+    }
+  ],
+  "Dry English Ale (WLP007, WY1098, A10)": [
+    {
+      "ingredient": "American Ale (WLP001 [liquid or dry], WY1056, US-05, A07)",
+      "score": 0.649
+    },
+    {
+      "ingredient": "NovaLager (Lalbrew Y055) (Dry)",
+      "score": 0.528
+    },
+    {
+      "ingredient": "Scottish Ale (WLP028, WY1728, A31)",
+      "score": 0.514
+    },
+    {
+      "ingredient": "Kolsch (WLP029, WY2565, G03, K-97)",
+      "score": 0.492
+    },
+    {
+      "ingredient": "Alt (WLP023, WY1007, G02)",
+      "score": 0.458
+    },
+    {
+      "ingredient": "German Ale (WY1007, G02)",
+      "score": 0.458
+    },
+    {
+      "ingredient": "Lutra Kveik (OYL-071, OYL-071DRY)",
+      "score": 0.447
+    },
+    {
+      "ingredient": "German Lager (WLP830, WY2124, L13, 34/70)",
+      "score": 0.371
+    }
+  ],
+  "East Coast Ale (WLP008, A15)": [
+    {
+      "ingredient": "American Ale (WLP001 [liquid or dry], WY1056, US-05, A07)",
+      "score": 0.867
+    },
+    {
+      "ingredient": "Alt (WLP023, WY1007, G02)",
+      "score": 0.535
+    },
+    {
+      "ingredient": "German Ale (WY1007, G02)",
+      "score": 0.535
+    },
+    {
+      "ingredient": "Scottish Ale (WLP028, WY1728, A31)",
+      "score": 0.348
+    },
+    {
+      "ingredient": "Kolsch (WLP029, WY2565, G03, K-97)",
+      "score": 0.332
+    },
+    {
+      "ingredient": "Lutra Kveik (OYL-071, OYL-071DRY)",
+      "score": 0.321
+    },
+    {
+      "ingredient": "Conan (WLP095, OYL-052, A04, LalBrew New England [Dry])",
+      "score": 0.308
+    },
+    {
+      "ingredient": "Dry English Ale (WLP007, WY1098, A10)",
+      "score": 0.308
+    }
+  ],
+  "English Ale (WLP002, WY1968, S-04, A09)": [
+    {
+      "ingredient": "Scottish Ale (WLP028, WY1728, A31)",
+      "score": 0.561
+    },
+    {
+      "ingredient": "London III (WLP013, A38, WY1318)",
+      "score": 0.552
+    },
+    {
+      "ingredient": "Trappist Ale (WLP500, WY1214, B48)",
+      "score": 0.288
+    },
+    {
+      "ingredient": "Abbey Ale (WLP540, EY1762, BE-256)",
+      "score": 0.256
+    },
+    {
+      "ingredient": "San Fran Lager (WLP810, L05, WY2112)",
+      "score": 0.164
+    }
+  ],
+  "Farmhouse (WY3726, OYL-217, Dry)": [
+    {
+      "ingredient": "Saison (WLP565, WY3724)",
+      "score": 0.918
+    },
+    {
+      "ingredient": "Belgian Ale (WLP570, WY1388)",
+      "score": 0.724
+    },
+    {
+      "ingredient": "Belgian Ardennes (WY3522, B45)",
+      "score": 0.683
+    },
+    {
+      "ingredient": "Abbey Ale (WLP540, EY1762, BE-256)",
+      "score": 0.43
+    },
+    {
+      "ingredient": "Trappist Ale (WLP500, WY1214, B48)",
+      "score": 0.413
+    },
+    {
+      "ingredient": "Dry English Ale (WLP007, WY1098, A10)",
+      "score": 0.342
+    },
+    {
+      "ingredient": "Hefewiezen (WLP300, WY3068, G01)",
+      "score": 0.295
+    },
+    {
+      "ingredient": "Philly Sour or Sourvisiae (Dry)",
+      "score": 0.222
+    }
+  ],
+  "German Ale (WY1007, G02)": [
+    {
+      "ingredient": "Alt (WLP023, WY1007, G02)",
+      "score": 1.0
+    },
+    {
+      "ingredient": "Kolsch (WLP029, WY2565, G03, K-97)",
+      "score": 0.776
+    },
+    {
+      "ingredient": "American Ale (WLP001 [liquid or dry], WY1056, US-05, A07)",
+      "score": 0.678
+    },
+    {
+      "ingredient": "East Coast Ale (WLP008, A15)",
+      "score": 0.535
+    },
+    {
+      "ingredient": "NovaLager (Lalbrew Y055) (Dry)",
+      "score": 0.462
+    },
+    {
+      "ingredient": "Dry English Ale (WLP007, WY1098, A10)",
+      "score": 0.458
+    },
+    {
+      "ingredient": "German Lager (WLP830, WY2124, L13, 34/70)",
+      "score": 0.42
+    },
+    {
+      "ingredient": "Mexican Lager (WLP940, OYL-113, L09)",
+      "score": 0.404
+    }
+  ],
+  "German Lager (WLP830, WY2124, L13, 34/70)": [
+    {
+      "ingredient": "Mexican Lager (WLP940, OYL-113, L09)",
+      "score": 0.994
+    },
+    {
+      "ingredient": "Czech Lager (WLP802, WY2001, L28)",
+      "score": 0.911
+    },
+    {
+      "ingredient": "NovaLager (Lalbrew Y055) (Dry)",
+      "score": 0.729
+    },
+    {
+      "ingredient": "Munich Lager (WLP838, WY2308, Dry)",
+      "score": 0.703
+    },
+    {
+      "ingredient": "Kolsch (WLP029, WY2565, G03, K-97)",
+      "score": 0.55
+    },
+    {
+      "ingredient": "American Ale (WLP001 [liquid or dry], WY1056, US-05, A07)",
+      "score": 0.446
+    },
+    {
+      "ingredient": "Alt (WLP023, WY1007, G02)",
+      "score": 0.42
+    },
+    {
+      "ingredient": "German Ale (WY1007, G02)",
+      "score": 0.42
+    }
+  ],
+  "Hefewiezen (WLP300, WY3068, G01)": [
+    {
+      "ingredient": "Trappist Ale (WLP500, WY1214, B48)",
+      "score": 0.512
+    },
+    {
+      "ingredient": "Belgian Ardennes (WY3522, B45)",
+      "score": 0.445
+    },
+    {
+      "ingredient": "Abbey Ale (WLP540, EY1762, BE-256)",
+      "score": 0.443
+    },
+    {
+      "ingredient": "Saison (WLP565, WY3724)",
+      "score": 0.422
+    },
+    {
+      "ingredient": "Belgian Ale (WLP570, WY1388)",
+      "score": 0.382
+    },
+    {
+      "ingredient": "Farmhouse (WY3726, OYL-217, Dry)",
+      "score": 0.295
+    },
+    {
+      "ingredient": "Conan (WLP095, OYL-052, A04, LalBrew New England [Dry])",
+      "score": 0.24
+    },
+    {
+      "ingredient": "Verdant IPA (Dry)",
+      "score": 0.239
+    }
+  ],
+  "Hornindal Kveik (WLP521, OYL-091)": [
+    {
+      "ingredient": "Voss Kveik (A43, OYL-061, Dry)",
+      "score": 0.757
+    },
+    {
+      "ingredient": "Pomona (Lalbrew Y067) (Dry)",
+      "score": 0.543
+    },
+    {
+      "ingredient": "Verdant IPA (Dry)",
+      "score": 0.505
+    },
+    {
+      "ingredient": "Conan (WLP095, OYL-052, A04, LalBrew New England [Dry])",
+      "score": 0.502
+    },
+    {
+      "ingredient": "London III (WLP013, A38, WY1318)",
+      "score": 0.338
+    },
+    {
+      "ingredient": "Lutra Kveik (OYL-071, OYL-071DRY)",
+      "score": 0.287
+    },
+    {
+      "ingredient": "Farmhouse (WY3726, OYL-217, Dry)",
+      "score": 0.188
+    },
+    {
+      "ingredient": "Hefewiezen (WLP300, WY3068, G01)",
+      "score": 0.168
+    }
+  ],
+  "Kolsch (WLP029, WY2565, G03, K-97)": [
+    {
+      "ingredient": "Alt (WLP023, WY1007, G02)",
+      "score": 0.776
+    },
+    {
+      "ingredient": "German Ale (WY1007, G02)",
+      "score": 0.776
+    },
+    {
+      "ingredient": "American Ale (WLP001 [liquid or dry], WY1056, US-05, A07)",
+      "score": 0.603
+    },
+    {
+      "ingredient": "NovaLager (Lalbrew Y055) (Dry)",
+      "score": 0.572
+    },
+    {
+      "ingredient": "German Lager (WLP830, WY2124, L13, 34/70)",
+      "score": 0.55
+    },
+    {
+      "ingredient": "Mexican Lager (WLP940, OYL-113, L09)",
+      "score": 0.541
+    },
+    {
+      "ingredient": "Czech Lager (WLP802, WY2001, L28)",
+      "score": 0.502
+    },
+    {
+      "ingredient": "Dry English Ale (WLP007, WY1098, A10)",
+      "score": 0.492
+    }
+  ],
+  "London III (WLP013, A38, WY1318)": [
+    {
+      "ingredient": "Verdant IPA (Dry)",
+      "score": 0.826
+    },
+    {
+      "ingredient": "Conan (WLP095, OYL-052, A04, LalBrew New England [Dry])",
+      "score": 0.6
+    },
+    {
+      "ingredient": "English Ale (WLP002, WY1968, S-04, A09)",
+      "score": 0.552
+    },
+    {
+      "ingredient": "Scottish Ale (WLP028, WY1728, A31)",
+      "score": 0.517
+    },
+    {
+      "ingredient": "Pomona (Lalbrew Y067) (Dry)",
+      "score": 0.426
+    },
+    {
+      "ingredient": "Hornindal Kveik (WLP521, OYL-091)",
+      "score": 0.338
+    },
+    {
+      "ingredient": "Trappist Ale (WLP500, WY1214, B48)",
+      "score": 0.221
+    },
+    {
+      "ingredient": "Abbey Ale (WLP540, EY1762, BE-256)",
+      "score": 0.177
+    }
+  ],
+  "Lutra Kveik (OYL-071, OYL-071DRY)": [
+    {
+      "ingredient": "Voss Kveik (A43, OYL-061, Dry)",
+      "score": 0.669
+    },
+    {
+      "ingredient": "American Ale (WLP001 [liquid or dry], WY1056, US-05, A07)",
+      "score": 0.566
+    },
+    {
+      "ingredient": "NovaLager (Lalbrew Y055) (Dry)",
+      "score": 0.556
+    },
+    {
+      "ingredient": "Dry English Ale (WLP007, WY1098, A10)",
+      "score": 0.447
+    },
+    {
+      "ingredient": "Kolsch (WLP029, WY2565, G03, K-97)",
+      "score": 0.444
+    },
+    {
+      "ingredient": "Alt (WLP023, WY1007, G02)",
+      "score": 0.396
+    },
+    {
+      "ingredient": "German Ale (WY1007, G02)",
+      "score": 0.396
+    },
+    {
+      "ingredient": "East Coast Ale (WLP008, A15)",
+      "score": 0.321
+    }
+  ],
+  "Mexican Lager (WLP940, OYL-113, L09)": [
+    {
+      "ingredient": "German Lager (WLP830, WY2124, L13, 34/70)",
+      "score": 0.994
+    },
+    {
+      "ingredient": "Czech Lager (WLP802, WY2001, L28)",
+      "score": 0.917
+    },
+    {
+      "ingredient": "Munich Lager (WLP838, WY2308, Dry)",
+      "score": 0.717
+    },
+    {
+      "ingredient": "NovaLager (Lalbrew Y055) (Dry)",
+      "score": 0.7
+    },
+    {
+      "ingredient": "Kolsch (WLP029, WY2565, G03, K-97)",
+      "score": 0.541
+    },
+    {
+      "ingredient": "American Ale (WLP001 [liquid or dry], WY1056, US-05, A07)",
+      "score": 0.429
+    },
+    {
+      "ingredient": "Alt (WLP023, WY1007, G02)",
+      "score": 0.404
+    },
+    {
+      "ingredient": "German Ale (WY1007, G02)",
+      "score": 0.404
+    }
+  ],
+  "Munich Lager (WLP838, WY2308, Dry)": [
+    {
+      "ingredient": "Czech Lager (WLP802, WY2001, L28)",
+      "score": 0.811
+    },
+    {
+      "ingredient": "Mexican Lager (WLP940, OYL-113, L09)",
+      "score": 0.717
+    },
+    {
+      "ingredient": "German Lager (WLP830, WY2124, L13, 34/70)",
+      "score": 0.703
+    },
+    {
+      "ingredient": "San Fran Lager (WLP810, L05, WY2112)",
+      "score": 0.664
+    },
+    {
+      "ingredient": "Scottish Ale (WLP028, WY1728, A31)",
+      "score": 0.447
+    },
+    {
+      "ingredient": "Kolsch (WLP029, WY2565, G03, K-97)",
+      "score": 0.313
+    },
+    {
+      "ingredient": "American Ale (WLP001 [liquid or dry], WY1056, US-05, A07)",
+      "score": 0.213
+    },
+    {
+      "ingredient": "NovaLager (Lalbrew Y055) (Dry)",
+      "score": 0.169
+    }
+  ],
+  "NovaLager (Lalbrew Y055) (Dry)": [
+    {
+      "ingredient": "German Lager (WLP830, WY2124, L13, 34/70)",
+      "score": 0.729
+    },
+    {
+      "ingredient": "Mexican Lager (WLP940, OYL-113, L09)",
+      "score": 0.7
+    },
+    {
+      "ingredient": "Kolsch (WLP029, WY2565, G03, K-97)",
+      "score": 0.572
+    },
+    {
+      "ingredient": "Lutra Kveik (OYL-071, OYL-071DRY)",
+      "score": 0.556
+    },
+    {
+      "ingredient": "Dry English Ale (WLP007, WY1098, A10)",
+      "score": 0.528
+    },
+    {
+      "ingredient": "American Ale (WLP001 [liquid or dry], WY1056, US-05, A07)",
+      "score": 0.522
+    },
+    {
+      "ingredient": "Saflager SH-45 (Thiol Enhancing Dry Lager Yeast)",
+      "score": 0.506
+    },
+    {
+      "ingredient": "Alt (WLP023, WY1007, G02)",
+      "score": 0.462
+    }
+  ],
+  "Philly Sour or Sourvisiae (Dry)": [
+    {
+      "ingredient": "Farmhouse (WY3726, OYL-217, Dry)",
+      "score": 0.222
+    },
+    {
+      "ingredient": "Dry English Ale (WLP007, WY1098, A10)",
+      "score": 0.214
+    },
+    {
+      "ingredient": "Voss Kveik (A43, OYL-061, Dry)",
+      "score": 0.179
+    }
+  ],
+  "Pomona (Lalbrew Y067) (Dry)": [
+    {
+      "ingredient": "Conan (WLP095, OYL-052, A04, LalBrew New England [Dry])",
+      "score": 0.952
+    },
+    {
+      "ingredient": "Verdant IPA (Dry)",
+      "score": 0.747
+    },
+    {
+      "ingredient": "Hornindal Kveik (WLP521, OYL-091)",
+      "score": 0.543
+    },
+    {
+      "ingredient": "London III (WLP013, A38, WY1318)",
+      "score": 0.426
+    },
+    {
+      "ingredient": "Saflager SH-45 (Thiol Enhancing Dry Lager Yeast)",
+      "score": 0.287
+    },
+    {
+      "ingredient": "American Ale (WLP001 [liquid or dry], WY1056, US-05, A07)",
+      "score": 0.222
+    },
+    {
+      "ingredient": "East Coast Ale (WLP008, A15)",
+      "score": 0.216
+    },
+    {
+      "ingredient": "Hefewiezen (WLP300, WY3068, G01)",
+      "score": 0.185
+    }
+  ],
+  "Saflager SH-45 (Thiol Enhancing Dry Lager Yeast)": [
+    {
+      "ingredient": "NovaLager (Lalbrew Y055) (Dry)",
+      "score": 0.506
+    },
+    {
+      "ingredient": "German Lager (WLP830, WY2124, L13, 34/70)",
+      "score": 0.412
+    },
+    {
+      "ingredient": "Mexican Lager (WLP940, OYL-113, L09)",
+      "score": 0.379
+    },
+    {
+      "ingredient": "Pomona (Lalbrew Y067) (Dry)",
+      "score": 0.287
+    },
+    {
+      "ingredient": "Verdant IPA (Dry)",
+      "score": 0.254
+    },
+    {
+      "ingredient": "Conan (WLP095, OYL-052, A04, LalBrew New England [Dry])",
+      "score": 0.24
+    },
+    {
+      "ingredient": "Dry English Ale (WLP007, WY1098, A10)",
+      "score": 0.2
+    },
+    {
+      "ingredient": "Czech Lager (WLP802, WY2001, L28)",
+      "score": 0.173
+    }
+  ],
+  "Saison (WLP565, WY3724)": [
+    {
+      "ingredient": "Farmhouse (WY3726, OYL-217, Dry)",
+      "score": 0.918
+    },
+    {
+      "ingredient": "Belgian Ale (WLP570, WY1388)",
+      "score": 0.747
+    },
+    {
+      "ingredient": "Belgian Ardennes (WY3522, B45)",
+      "score": 0.646
+    },
+    {
+      "ingredient": "Hefewiezen (WLP300, WY3068, G01)",
+      "score": 0.422
+    },
+    {
+      "ingredient": "Abbey Ale (WLP540, EY1762, BE-256)",
+      "score": 0.389
+    },
+    {
+      "ingredient": "Trappist Ale (WLP500, WY1214, B48)",
+      "score": 0.37
+    }
+  ],
+  "San Fran Lager (WLP810, L05, WY2112)": [
+    {
+      "ingredient": "Munich Lager (WLP838, WY2308, Dry)",
+      "score": 0.664
+    },
+    {
+      "ingredient": "Scottish Ale (WLP028, WY1728, A31)",
+      "score": 0.432
+    },
+    {
+      "ingredient": "Mexican Lager (WLP940, OYL-113, L09)",
+      "score": 0.385
+    },
+    {
+      "ingredient": "Czech Lager (WLP802, WY2001, L28)",
+      "score": 0.373
+    },
+    {
+      "ingredient": "Kolsch (WLP029, WY2565, G03, K-97)",
+      "score": 0.357
+    },
+    {
+      "ingredient": "German Lager (WLP830, WY2124, L13, 34/70)",
+      "score": 0.354
+    },
+    {
+      "ingredient": "American Ale (WLP001 [liquid or dry], WY1056, US-05, A07)",
+      "score": 0.269
+    },
+    {
+      "ingredient": "Dry English Ale (WLP007, WY1098, A10)",
+      "score": 0.265
+    }
+  ],
+  "Scottish Ale (WLP028, WY1728, A31)": [
+    {
+      "ingredient": "English Ale (WLP002, WY1968, S-04, A09)",
+      "score": 0.561
+    },
+    {
+      "ingredient": "London III (WLP013, A38, WY1318)",
+      "score": 0.517
+    },
+    {
+      "ingredient": "Dry English Ale (WLP007, WY1098, A10)",
+      "score": 0.514
+    },
+    {
+      "ingredient": "Munich Lager (WLP838, WY2308, Dry)",
+      "score": 0.447
+    },
+    {
+      "ingredient": "San Fran Lager (WLP810, L05, WY2112)",
+      "score": 0.432
+    },
+    {
+      "ingredient": "American Ale (WLP001 [liquid or dry], WY1056, US-05, A07)",
+      "score": 0.401
+    },
+    {
+      "ingredient": "East Coast Ale (WLP008, A15)",
+      "score": 0.348
+    },
+    {
+      "ingredient": "Alt (WLP023, WY1007, G02)",
+      "score": 0.307
+    }
+  ],
+  "Trappist Ale (WLP500, WY1214, B48)": [
+    {
+      "ingredient": "Abbey Ale (WLP540, EY1762, BE-256)",
+      "score": 0.962
+    },
+    {
+      "ingredient": "Belgian Ardennes (WY3522, B45)",
+      "score": 0.858
+    },
+    {
+      "ingredient": "Belgian Ale (WLP570, WY1388)",
+      "score": 0.683
+    },
+    {
+      "ingredient": "Hefewiezen (WLP300, WY3068, G01)",
+      "score": 0.512
+    },
+    {
+      "ingredient": "Farmhouse (WY3726, OYL-217, Dry)",
+      "score": 0.413
+    },
+    {
+      "ingredient": "Saison (WLP565, WY3724)",
+      "score": 0.37
+    },
+    {
+      "ingredient": "English Ale (WLP002, WY1968, S-04, A09)",
+      "score": 0.288
+    },
+    {
+      "ingredient": "London III (WLP013, A38, WY1318)",
+      "score": 0.221
+    }
+  ],
+  "Verdant IPA (Dry)": [
+    {
+      "ingredient": "London III (WLP013, A38, WY1318)",
+      "score": 0.826
+    },
+    {
+      "ingredient": "Conan (WLP095, OYL-052, A04, LalBrew New England [Dry])",
+      "score": 0.792
+    },
+    {
+      "ingredient": "Pomona (Lalbrew Y067) (Dry)",
+      "score": 0.747
+    },
+    {
+      "ingredient": "Hornindal Kveik (WLP521, OYL-091)",
+      "score": 0.505
+    },
+    {
+      "ingredient": "Dry English Ale (WLP007, WY1098, A10)",
+      "score": 0.29
+    },
+    {
+      "ingredient": "Saflager SH-45 (Thiol Enhancing Dry Lager Yeast)",
+      "score": 0.254
+    },
+    {
+      "ingredient": "Hefewiezen (WLP300, WY3068, G01)",
+      "score": 0.239
+    },
+    {
+      "ingredient": "Scottish Ale (WLP028, WY1728, A31)",
+      "score": 0.177
+    }
+  ],
+  "Voss Kveik (A43, OYL-061, Dry)": [
+    {
+      "ingredient": "Hornindal Kveik (WLP521, OYL-091)",
+      "score": 0.757
+    },
+    {
+      "ingredient": "Lutra Kveik (OYL-071, OYL-071DRY)",
+      "score": 0.669
+    },
+    {
+      "ingredient": "American Ale (WLP001 [liquid or dry], WY1056, US-05, A07)",
+      "score": 0.344
+    },
+    {
+      "ingredient": "Dry English Ale (WLP007, WY1098, A10)",
+      "score": 0.298
+    },
+    {
+      "ingredient": "East Coast Ale (WLP008, A15)",
+      "score": 0.25
+    },
+    {
+      "ingredient": "Philly Sour or Sourvisiae (Dry)",
+      "score": 0.179
+    },
+    {
+      "ingredient": "Farmhouse (WY3726, OYL-217, Dry)",
+      "score": 0.178
+    },
+    {
+      "ingredient": "Kolsch (WLP029, WY2565, G03, K-97)",
+      "score": 0.171
+    }
+  ]
+}

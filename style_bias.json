@@ -1,29 +1,30 @@
 {
   "Belgian": {
     "styles": [
-      "Belgian Blonde / Tripel",
-      "Bi\u00e8re de Garde",
-      "Belgian Dubbel",
-      "Belgian Dark Strong",
-      "Saison"
+      "Witbier / Belgian Wheat",
+      "Saison / Bière de Garde",
+      "Belgian Blonde / Tripel / Golden Strong",
+      "Belgian Dubbel / Dark Strong"
     ],
     "weight": 1.5
   },
   "British": {
     "styles": [
-      "Best Bitter / ESB",
-      "British Brown / Mild",
-      "British Strong Ale",
-      "Robust Porter"
+      "Best Bitter / ESB / English Pale",
+      "Mild / Brown Ale",
+      "English Strong / Barleywine / Wee Heavy",
+      "Porter (Brown / Robust / Baltic)",
+      "Stout (Dry / Oatmeal / Sweet / Foreign)"
     ],
     "weight": 1.3
   },
   "Ringer": {
     "styles": [
-      "Specialty Belgian",
-      "Specialty British",
-      "Experimental / Fruit",
-      "Wood-aged Specialty"
+      "Imperial / Pastry Stout",
+      "Smoked & Wood-Aged (Rauchbier / Barrel)",
+      "Kettle Sour / Fruit Sour (Berliner / Gose)",
+      "American Wheat / Fruit & Spice Beer",
+      "Nordic Farmhouse / Kveik (Sahti)"
     ],
     "weight": 1.2
   }

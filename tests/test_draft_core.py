@@ -111,12 +111,16 @@ def test_bucket_for_rules():
 def test_compute_rules_status_wills_2025_team(data, draft_2025):
     will = [r["Ingredient"] for r in draft_2025["draft_log"] if r["Player"] == "Will"]
     rs = dc.compute_rules_status(will, data["i2c"], 7)
-    # Molasses is drafted as an Adjunct but is absent from style_matrix, so it
-    # buckets to Flex — locking this reveals the data gap without changing it.
-    assert rs["counts"] == {"Malt": 1, "Hop": 1, "Yeast": 1, "Adjunct": 0, "Flex": 4}
+    # Will's 2025 team: Dry English yeast, Golden Promise, Fuggle, Molasses
+    # (adjunct) + roasted barley / flaked barley / pale chocolate (flex).
+    # Molasses used to be absent from style_matrix and silently bucketed to
+    # Flex (making a legal roster look infeasible); the 2026 matrix models
+    # every sheet ingredient, so the name-based path now agrees with the
+    # record-based one below.
+    assert rs["counts"] == {"Malt": 1, "Hop": 1, "Yeast": 1, "Adjunct": 1, "Flex": 3}
     assert rs["flex_remaining"] == 0
     assert rs["picks_remaining"] == 0
-    assert rs["feasible"] is False
+    assert rs["feasible"] is True
 
 
 def test_compute_rules_status_feasible_early():
@@ -169,9 +173,39 @@ def test_compute_style_status_sorted_and_scored(data, draft_2025):
     # sorted by Score descending
     assert list(df["Score"]) == sorted(df["Score"], reverse=True)
     top = df.iloc[0]
-    assert top["Style"] == "Stout / Porter"
-    assert int(top["Satisfied Categories"]) == 4
-    assert int(top["Score"]) == 12
+    # Will's 2025 roster (Dry English, Golden Promise, Fuggle, roasted +
+    # flaked barley, molasses, pale chocolate) is a textbook dry/oatmeal stout.
+    # Under the 2026 matrix all five categories are satisfied (molasses now
+    # counts as the adjunct), and every one of the 7 picks is used by the
+    # Stout style. Several dark British styles tie on categories alone; the
+    # Picks Matched / Match tie-breaks are what put Stout on top.
+    assert top["Style"].startswith("Stout")
+    assert int(top["Satisfied Categories"]) == 5
+    assert int(top["Picks Matched"]) == 7
+    assert int(top["Score"]) == 15
+    assert 0.0 < top["Match"] <= 1.0
+    # Porter shares every ingredient but has broader lists -> lower Match.
+    porter = df[df["Style"].str.startswith("Porter")].iloc[0]
+    assert porter["Match"] < top["Match"]
+
+
+def test_compute_style_status_match_prefers_defining_ingredients():
+    """A pick in a narrow category list is stronger evidence for that style
+    than the same pick in a broad list; an off-style pick costs more than any
+    matched pick."""
+    sm = {
+        "Narrow": {"Base Malt": ["A"], "Hop": ["H1", "H2"], "Yeast": ["Y"],
+                   "Adjunct": ["X"], "Specialty": []},
+        "Broad": {"Base Malt": ["A", "B", "C", "D"], "Hop": ["H1", "H2", "H3", "H4"],
+                  "Yeast": ["Y", "Z"], "Adjunct": ["X", "W"], "Specialty": []},
+    }
+    df = dc.compute_style_status(["A", "H1"], ["A", "H1"], sm, REQUIRED, 3)
+    assert df.iloc[0]["Style"] == "Narrow"
+    assert df.iloc[0]["Picks Matched"] == 2
+    # Add an ingredient only Broad uses -> Broad now matches more picks and wins
+    df2 = dc.compute_style_status(["A", "H1", "W"], ["A", "H1", "W"], sm, REQUIRED, 3)
+    assert df2.iloc[0]["Style"] == "Broad"
+    assert df2.iloc[0]["Picks Matched"] == 3
 
 
 # ---------------------------------------------------------------------------

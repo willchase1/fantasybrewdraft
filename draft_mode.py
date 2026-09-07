@@ -70,19 +70,19 @@ def load_data():
 
 @st.cache_data
 def load_hop_similarity_data():
-    """Load hop similarity resources."""
-    hop_sim = {}
+    """Load ingredient similarity resources (hops, yeasts, malts) via league config.
+
+    Returns the merged neighbour lookup plus the dense hop matrix (kept for
+    tooling). The name is historical; the lookup covers every category that
+    ``league_config.json`` names a similarity file for.
+    """
+    sim = draft_core.load_similarity()
     sim_matrix = pd.DataFrame()
-    try:
-        with open("hop_similarity.json") as f:
-            hop_sim = json.load(f)
-    except Exception:
-        pass
     try:
         sim_matrix = pd.read_csv("hop_similarity_matrix.csv", index_col=0)
     except Exception:
         pass
-    return hop_sim, sim_matrix
+    return sim, sim_matrix
 
 
 hop_similarity_data, hop_similarity_matrix = load_hop_similarity_data()
@@ -284,6 +284,11 @@ df_long_all = pd.DataFrame(long_rows).drop_duplicates()
 board_category_of = dict(zip(df_long_all["Ingredient"], df_long_all["Category"]))
 
 
+# Weights / shape constants: code defaults overlaid with any league_config.json
+# overrides (``pick_weights``, ``board_value_weights``, ``squash``).
+PICK_WEIGHTS, BOARD_WEIGHTS, SQUASH = draft_core.scoring_params()
+
+
 def recommend(picks_arg, drafted_arg, top_k=15, seat_index=None, overall=None):
     """Adapter binding the shared next_best_picks to this app's live context."""
     return next_best_picks(
@@ -294,6 +299,7 @@ def recommend(picks_arg, drafted_arg, top_k=15, seat_index=None, overall=None):
         num_players=int(num_players),
         overall_pick=overall if overall is not None else overall_pick,
         your_seat_index=seat_index if seat_index is not None else (int(draft_position) - 1),
+        weights=PICK_WEIGHTS, squash=SQUASH,
     )
 
 
@@ -345,7 +351,8 @@ def sim_agent_pick(roster, drafted_local, weights, sim_players, overall, seat_in
         required, flex_slots, ingredient_to_category, style_bias,
         early_signal=early_signal, hop_similarity=hop_similarity_data,
         pair_lookup=pair_lookup, num_players=sim_players, overall_pick=overall,
-        your_seat_index=seat_index, weights=weights, top_k=top_k,
+        your_seat_index=seat_index, weights={**PICK_WEIGHTS, **(weights or {})},
+        squash=SQUASH, top_k=top_k,
     )
     recs = recs[~recs["Ingredient"].isin(drafted_local)]
     if recs.empty:
@@ -458,7 +465,8 @@ def render_best_available(focus_needed):
     ba = best_available(drafted, ingredients, style_matrix, scarcity_df, required,
                         flex_slots, ingredient_to_category, style_bias,
                         early_signal=early_signal, hop_similarity=hop_similarity_data,
-                        num_players=int(num_players), top_k=40)
+                        num_players=int(num_players), top_k=40,
+                        weights=BOARD_WEIGHTS, squash=SQUASH)
     if cat_filter != "All":
         ba = ba[ba["Category"] == cat_filter]
     if needs_only:
@@ -687,15 +695,16 @@ with st.expander("📤 Results / export", expanded=False):
         except ImportError:
             st.caption("Install `openpyxl` to enable Excel export.")
 
-with st.expander("🌿 Hop similarity finder", expanded=False):
-    search = st.text_input("Search hops", key="hop-search")
+with st.expander("🌿 Ingredient similarity finder (hops · yeasts · malts)", expanded=False):
+    search = st.text_input("Search ingredients", key="hop-search")
     hop_list = sorted(hop_similarity_data.keys())
     if search:
         hop_list = [h for h in hop_list if search.lower() in h.lower()]
     for hop in hop_list:
         label = f"~~{hop}~~" if hop in drafted else hop
         st.markdown(f"**{label}**")
-        similars = [f"~~{rec.get('hop')}~~" if rec.get('hop') in drafted else rec.get('hop')
+        similars = [f"~~{draft_core._sim_name(rec)}~~" if draft_core._sim_name(rec) in drafted
+                    else draft_core._sim_name(rec)
                     for rec in hop_similarity_data.get(hop, [])]
         st.caption("Similar: " + ", ".join(similars) if similars else "No similarity data available.")
 

@@ -40,19 +40,13 @@ def load_data(
     Returns a tuple of:
         ingredients_df, style_matrix, scarcity_df, opponent_model,
         style_bias, ingredient_to_category
-
-    ``scarcity_df`` is the *informational* pre-draft snapshot from
-    scripts/build_scarcity_baseline.py. The engine computes scarcity live
-    (``compute_dynamic_scarcity``) and never reads it; it is optional and an
-    empty frame is returned when absent. The positional slot is kept so
-    existing callers keep working.
     """
     # Required files: fail loud and clear rather than with a raw traceback.
     if not os.path.exists(ingredients_path):
         raise FileNotFoundError(f"Required ingredients file not found: {ingredients_path}")
     ingredients = pd.read_csv(ingredients_path)
     style_matrix = _load_required_json(style_matrix_path, "style matrix")
-    scarcity = pd.DataFrame(_load_optional_json(scarcity_path) or [])
+    scarcity = pd.DataFrame(_load_required_json(scarcity_path, "ingredient scarcity"))
 
     # Optional files: absent or malformed degrades to None (feature off).
     opponent_model = _load_optional_json(opponent_model_path)
@@ -276,34 +270,9 @@ def roster_slots(my_records, enable_round8=False, flex_slots=3,
 
 
 def compute_style_status(my_picks, drafted, style_matrix, required, flex_slots):
-    """Style viability for a roster: which styles can still be built, and which
-    the roster most resembles.
-
-    Columns:
-      Satisfied Categories        - style categories your roster already covers
-      Picks Matched               - how many of your picks the style actually uses
-      Categories with Options Left- categories with at least one undrafted option
-      Match                       - geometric-mean likelihood of your picks under
-                                    the style (naive-Bayes style classifier: a pick
-                                    is 1/|category list| if the style uses it, a
-                                    small floor otherwise), so a roster of
-                                    *defining* ingredients ranks the narrow style
-                                    above a broad one that merely also lists them
-      Score                       - 2*satisfied + options (unchanged legacy scale)
-
-    Sorted by Score, then Picks Matched, then Match, so ``iloc[0]`` is the
-    "likely style" even when several styles tie on categories alone.
-    """
-    import math
     status = []
     drafted_set = set(drafted)
     my_set = set(my_picks)
-    n_my = len(my_set)
-    # Likelihood floor for a pick the style does not use: roughly "one of
-    # everything on the sheet", so an off-style pick costs far more than a
-    # matched pick in even the broadest category list.
-    all_ings = {i for cats in style_matrix.values() for l in cats.values() for i in l}
-    floor_ll = math.log(1.0 / max(len(all_ings), 1))
 
     for style, cats in style_matrix.items():
         cat_choices_remaining = {}
@@ -314,30 +283,15 @@ def compute_style_status(my_picks, drafted, style_matrix, required, flex_slots):
         satisfied = sum(any(ing in my_set for ing in ings) for cat, ings in cats.items())
         options = sum(1 for k, v in cat_choices_remaining.items() if v > 0)
         score = satisfied * 2 + options
-
-        matched, ll = 0, 0.0
-        for ing in my_set:
-            hit = next((len(l) for l in cats.values() if ing in l), None)
-            if hit:
-                matched += 1
-                ll += math.log(1.0 / hit)
-            else:
-                ll += floor_ll
-        match = math.exp(ll / n_my) if n_my else 0.0
-
         status.append(
             {
                 "Style": style,
                 "Satisfied Categories": satisfied,
-                "Picks Matched": matched,
                 "Categories with Options Left": options,
-                "Match": round(match, 4),
                 "Score": score,
             }
         )
-    df = pd.DataFrame(status).sort_values(
-        by=["Score", "Picks Matched", "Match"], ascending=False, kind="mergesort"
-    )
+    df = pd.DataFrame(status).sort_values(by=["Score", "Satisfied Categories"], ascending=False)
     return df
 
 
@@ -354,80 +308,6 @@ DEFAULT_PICK_WEIGHTS = {
     "deny": 0.07,    # value denied to an opponent picking before your next turn
     "pop": 0.03,     # historical popularity prior (tie-breaker)
 }
-
-# Shape constants for the six components (calibrated on the 2025 draft replay,
-# see docs/CALIBRATION.md and scripts/calibrate_weights.py). Squash-type
-# entries are the k in component = x / (x + k): smaller k saturates faster.
-DEFAULT_SQUASH = {
-    "fit": 2.0,        # style coverage count: 2 styles already reads "versatile"
-    "syn": 5.0,        # summed pair counts + hop-blend scores: nearly linear
-    "deny": 2.0,       # opponent pair value x popularity
-    "pop": 1.0,        # early-signal popularity (~0-2)
-    # Fit shape: how much of Fit is "belongs to the style my roster leads
-    # toward" (vs. raw versatility); how much a *signature* ingredient (few
-    # alternatives in its category within that style) is favoured; and the
-    # idf tie-break toward ingredients central to few styles.
-    "fit_align": 0.65,
-    "fit_sig": 0.5,
-    "fit_idf": 0.05,
-    # Urgency shape: baseline urgency for a flex (non-required) pick, and
-    # whether an unmet required slot's urgency scales with spare picks (1.0)
-    # or is constant (0.0). Constant wins on the replay: drafters fill the
-    # required, contested slots first regardless of how many picks remain.
-    "need_flex_floor": 0.0,
-    "need_slack": 0.0,
-    # Scarcity shape: 1.0 -> demand for a required category is the number of
-    # drafters who have not drafted from it yet; 0.0 -> every drafter, always.
-    # Static wins on the replay: after round 1 the table kept taking yeast and
-    # base malt in round 2 as if demand had not moved (median rank 6 vs 29).
-    "scarce_residual": 0.0,
-    # Per close still-available analog, scarcity pressure is divided by
-    # (1 + scarce_sub * n_close). Off by default: on the 2025 replay the
-    # discount lowered every hit-rate metric at any strength (drafters take
-    # the mainstream ingredient that *has* many analogs -- Citra, Crystal 40L,
-    # Maris Otter -- rather than waiting on it). See docs/CALIBRATION.md.
-    "scarce_sub": 0.0,
-}
-
-
-def scoring_params(config=None):
-    """(pick_weights, board_value_weights, squash) with league-config overrides.
-
-    ``league_config.json`` may carry ``pick_weights``, ``board_value_weights``
-    and ``squash`` dicts; any keys given overlay the code defaults so a season
-    can be re-tuned without a code change. Unknown keys are ignored.
-    """
-    if config is None:
-        config = load_league_config()
-
-    def overlay(base, key):
-        over = config.get(key) or {}
-        return {k: float(over.get(k, v)) for k, v in base.items()}
-
-    return (overlay(DEFAULT_PICK_WEIGHTS, "pick_weights"),
-            overlay(BOARD_VALUE_WEIGHTS, "board_value_weights"),
-            overlay(DEFAULT_SQUASH, "squash"))
-
-
-def build_opponent_signals(opponent_model):
-    """(early_signal, pair_lookup) from an opponent_model dict (or None).
-
-    early_signal: {ingredient: Early_Score}; pair_lookup: {(a, b): count},
-    symmetric. This is the single place the model file's shape is interpreted.
-    """
-    early, pairs = {}, defaultdict(int)
-    if not opponent_model:
-        return early, pairs
-    for rec in opponent_model.get("ingredient_popularity", []):
-        ing = rec.get("Ingredient")
-        if ing:
-            early[ing] = float(rec.get("Early_Score", 0.0))
-    for rec in opponent_model.get("top_pairs", []):
-        a, b, c = rec.get("A"), rec.get("B"), int(rec.get("PairCount", 0))
-        if a and b:
-            pairs[(a, b)] += c
-            pairs[(b, a)] += c
-    return early, pairs
 
 
 def compute_style_idf(style_matrix):
@@ -465,89 +345,31 @@ def compute_style_focus(my_picks, style_matrix):
     return {s: v / total for s, v in focus.items()} if total else {}
 
 
-SIMILARITY_CLOSE_THRESHOLD = 0.3  # neighbour score that counts as a "close analog"
-
-
-def _sim_name(rec):
-    """Neighbour name from a similarity record (new ``ingredient`` key, legacy ``hop``)."""
-    return rec.get("ingredient") or rec.get("hop")
-
-
-def load_similarity(config=None, base_dir="."):
-    """Merged ingredient-similarity lookup from the files named in league config.
-
-    ``config["similarity_files"]`` maps a category to a JSON file of shape
-    ``{name: [{"ingredient": other, "score": 0..1}, ...]}`` (see
-    scripts/build_similarity.py). Files may be shared between categories (malt
-    covers Base Malt + Specialty) and missing/malformed files are skipped, so
-    the result is simply sparser. Returns ``{}`` when nothing is available.
-    """
-    if config is None:
-        config = load_league_config()
-    merged = {}
-    seen_paths = set()
-    for _cat, fname in (config.get("similarity_files") or {}).items():
-        path = os.path.join(base_dir, fname)
-        if path in seen_paths:
-            continue
-        seen_paths.add(path)
-        data = _load_optional_json(path)
-        if isinstance(data, dict):
-            merged.update(data)
-    return merged
-
-
 def compute_dynamic_scarcity(available_now, ingredient_to_category,
                              required_categories, num_players=8,
-                             hop_similarity=None, similarity=None,
-                             drafted=None, sub_strength=0.15):
+                             hop_similarity=None):
     """Raw scarcity per available ingredient from live board supply vs. demand.
 
-    pressure = demand / supply for the ingredient's category, where
-
-      supply  = still-available ingredients in that category
-      demand  = for a *required* category, the drafters who plausibly still
-                need one: ``num_players`` minus the number already drafted from
-                that category (when ``drafted`` is given -- a yeast run early
-                makes yeast scarce; once everyone has one, the remaining yeasts
-                are not scarce at all). Non-required (flex) categories carry a
-                nominal demand of a third of the table.
-
-    Close still-available analogs (similarity files: hops, yeasts, malts) cut
-    the pressure -- you can wait, a substitute will still be there.
-
-    Returned as ``1 - exp(-pressure)`` so it lives in [0,1), is ~pressure when
-    small (plentiful board: 0.2 -> 0.18) and saturates smoothly instead of
-    clipping (so substitutes keep mattering under heavy pressure). Caller does
-    not min-max it: when nothing is scarce, nothing looks scarce.
-
-    ``similarity`` is the merged lookup from ``load_similarity``; the legacy
-    ``hop_similarity`` argument is still honoured for hops.
+    Scarcity rises as a category's remaining supply shrinks against the number
+    of drafters who still need it. For hops, many close still-available analogs
+    reduce scarcity (you can wait). Caller normalizes. Not circular, not static.
     """
-    import math
     supply = Counter(ingredient_to_category.get(i, "Unknown") for i in available_now)
-    taken = Counter(ingredient_to_category.get(i, "Unknown") for i in (drafted or []))
     req = set(required_categories)
     raw = {}
     for ing in available_now:
         c = ingredient_to_category.get(ing, "Unknown")
-        if c in req:
-            demand = max(1, num_players - taken.get(c, 0))
-        else:
-            demand = max(1, num_players // 3)
+        demand = num_players if c in req else max(1, num_players // 3)
         pressure = demand / max(supply.get(c, 1), 1)
         sub_factor = 1.0
-        neighbours = None
-        if similarity and ing in similarity:
-            neighbours = similarity[ing]
-        elif hop_similarity and c == "Hop":
-            neighbours = hop_similarity.get(ing, [])
-        if neighbours:
-            close = sum(1 for r in neighbours
-                        if _sim_name(r) in available_now
-                        and r.get("score", 0) >= SIMILARITY_CLOSE_THRESHOLD)
-            sub_factor = 1.0 / (1.0 + sub_strength * close)
-        raw[ing] = 1.0 - math.exp(-pressure * sub_factor)
+        if hop_similarity and c == "Hop":
+            close = sum(1 for r in hop_similarity.get(ing, [])
+                        if r.get("hop") in available_now and r.get("score", 0) >= 0.3)
+            sub_factor = 1.0 / (1.0 + 0.15 * close)
+        # Absolute [0,1]: low for everyone when supply is plentiful (nothing
+        # scarce early), rising as a category depletes. NOT min-maxed downstream,
+        # so the model doesn't invent a "scarcest" pick when none is scarce.
+        raw[ing] = min(1.0, pressure * sub_factor)
     return raw
 
 
@@ -590,13 +412,11 @@ def next_best_picks(
     top_k: int = 15,
     *,
     hop_similarity=None,
-    similarity=None,
     pair_lookup=None,
     num_players: int = 8,
     overall_pick: int = 1,
     your_seat_index: int = 0,
     weights=None,
-    squash=None,
     available_set=None,
 ):
     """Rank available ingredients by a normalized, weighted, explainable score.
@@ -606,22 +426,8 @@ def next_best_picks(
     Value) plus the new per-component columns and a human ``Why`` string. New
     signals (snake urgency, roster synergy, opponent denial, dynamic scarcity)
     are driven by the keyword-only args and degrade gracefully when absent.
-
-    ``scarcity_df`` is accepted for backward compatibility and ignored: scarcity
-    is computed live from the board (``compute_dynamic_scarcity``).
-
-    ``similarity`` (from ``load_similarity``) covers hops, yeasts and malts. It
-    feeds the substitute discount in Scarcity for every category, but the
-    hop-blend term in Synergy on purpose stays hops-only: a second yeast or
-    base malt that resembles one you already hold is redundancy, not synergy.
-    ``hop_similarity`` is the legacy hops-only lookup and is still honoured.
     """
-    if similarity is None and hop_similarity:
-        similarity = hop_similarity
-    elif similarity and hop_similarity:
-        similarity = {**hop_similarity, **similarity}
     weights = {**DEFAULT_PICK_WEIGHTS, **(weights or {})}
-    squash = {**DEFAULT_SQUASH, **(squash or {})}
     drafted_set = set(drafted)
     my_set = set(my_picks)
     if available_set is None:
@@ -643,43 +449,25 @@ def next_best_picks(
 
     coverage = defaultdict(set)
     cat_of_cand = {}
-    list_len = {}  # (style, ingredient) -> size of the category list it sits in
     for ing, cat, style in cand:
         coverage[ing].add(style)
         cat_of_cand[ing] = cat  # category as it appears on the board/matrix
-        list_len[(style, ing)] = len(style_matrix[style][cat])
 
     available_cands = set(coverage)
     idf = compute_style_idf(style_matrix)
     focus = compute_style_focus(my_picks, style_matrix)
-    focus_max = max(focus.values()) if focus else 0.0
-    # Category map must also cover *drafted* ingredients so residual demand
-    # can see what has already left the board.
-    cat_lookup = {**ingredient_to_category, **cat_of_cand}
     scarcity_raw = compute_dynamic_scarcity(
-        available_cands, cat_lookup, required, num_players, similarity=similarity,
-        drafted=drafted if squash["scarce_residual"] else None,
-        sub_strength=squash["scarce_sub"],
+        available_cands, cat_of_cand, required, num_players, hop_similarity
     )
     gap = picks_until_next_turn(overall_pick, num_players, your_seat_index)
 
     needed_buckets = set()
     have_counts = Counter(bucket_for_rules(cat_of_cand.get(i) or
                           ingredient_to_category.get(i, "Specialty")) for i in my_set)
-    required_slots_left = 0
     for cat, n in required.items():
         b = bucket_for_rules(cat)
-        short = n - have_counts.get(b, 0)
-        if short > 0:
+        if have_counts.get(b, 0) < n:
             needed_buckets.add(b)
-            required_slots_left += short
-    total_picks = sum(required.values()) + flex_slots
-    picks_remaining = max(0, total_picks - len(my_set))
-    # Spare picks after reserving one for every unmet required slot. With
-    # slack you can afford a flex pick now and fill the slot later; at zero
-    # slack every remaining pick must go to a required category.
-    slack = max(0, picks_remaining - required_slots_left)
-    need_now = 1.0 / (1.0 + slack) if squash["need_slack"] else 1.0
 
     my_hops = [p for p in my_set if ingredient_to_category.get(p) == "Hop"]
     opp_recent = [x for x in reversed(drafted) if x not in my_set][:3]
@@ -697,58 +485,43 @@ def next_best_picks(
         style_cov = len(styles)
         popularity = float(early_signal.get(ing, 0.0)) if early_signal else 0.0
 
-        # Style fit = versatility x alignment x signature.
-        #   breadth   - styles the ingredient serves, with diminishing returns
-        #   align     - 1.0 if it belongs to the style your roster leads toward,
-        #               proportionally less for styles you lean on less, 0 for
-        #               styles you have nothing in (flat 1.0 on an empty roster)
-        #   signature - few alternatives in its category within that style
-        #               (a Belgian yeast in a Dubbel: 4 options; a base malt:
-        #               10) -- the pick that *defines* the beer is worth more
-        #               than one of many interchangeable ones.
-        breadth = _squash(style_cov, squash["fit"])
-        if focus:
-            align = max(focus.get(s, 0.0) for s in styles) / focus_max
-            best_styles = [s for s in styles if focus.get(s, 0.0) == align * focus_max]
-        else:
-            align = 1.0
-            best_styles = list(styles)
-        sig = max(8.0 / (8.0 + list_len[(s, ing)]) for s in best_styles)
-        a, g = squash["fit_align"], squash["fit_sig"]
-        idf_tiebreak = 1.0 + squash["fit_idf"] * idf.get(ing, 0.0)
-        fit = min(1.0, breadth * ((1 - a) + a * align) * ((1 - g) + g * sig) * idf_tiebreak)
+        # Style fit: versatility (optionality) with diminishing returns, sharpened
+        # toward the styles your roster is already committing to. idf breaks ties
+        # so a signature ingredient edges out an equally-versatile generic one.
+        focus_align = max((focus.get(s, 0.0) for s in styles), default=0.0)
+        breadth = style_cov / (style_cov + 5.0)
+        align_mult = (0.5 + 0.5 * focus_align) if focus else 1.0
+        idf_tiebreak = 1.0 + 0.05 * idf.get(ing, 0.0)
+        fit = min(1.0, breadth * align_mult * idf_tiebreak)
 
         # Scarcity: absolute board pressure (already [0,1]).
         scarce = scarcity_raw.get(ing, 0.0)
 
-        # Urgency: how much waiting costs. For an unmet required slot it grows
-        # as spare picks run out (1/(1+slack): 0.25 with three spare picks,
-        # 1.0 when every remaining pick is spoken for); for any candidate it
-        # also grows with the chance this specific ingredient is sniped before
-        # your next snake turn.
-        need_term = need_now if bucket in needed_buckets else squash["need_flex_floor"]
-        urgency = min(1.0, 0.7 * need_term + 0.3 * _survival_risk(popularity, gap))
+        # Urgency: unmet required slot, amplified by survival risk before your
+        # next snake turn.
+        need_base = 1.0 if bucket in needed_buckets else 0.2
+        urgency = need_base * (0.6 + 0.4 * _survival_risk(popularity, gap))
 
         # Synergy: co-occurrence with your picks + hop-blend affinity.
         s_raw = 0.0
         if pair_lookup:
             for mine in my_set:
                 s_raw += pair_lookup.get((mine, ing), 0)
-        if similarity and bucket == "Hop" and my_hops:
+        if hop_similarity and bucket == "Hop" and my_hops:
             for h in my_hops:
-                for rec in similarity.get(h, []):
-                    if _sim_name(rec) == ing:
+                for rec in hop_similarity.get(h, []):
+                    if rec.get("hop") == ing:
                         s_raw += float(rec.get("score", 0.0))
-        synergy = _squash(s_raw, squash["syn"])
+        synergy = _squash(s_raw, 3.0)
 
         # Denial: value to an opponent picking before your next turn.
         d_raw = 0.0
         if gap > 0 and pair_lookup:
             for r in opp_recent:
                 d_raw += pair_lookup.get((r, ing), 0)
-        denial = _squash(d_raw * popularity, squash["deny"])
+        denial = _squash(d_raw * popularity, 2.0)
 
-        pop = _squash(popularity, squash["pop"])
+        pop = _squash(popularity, 1.0)
 
         contrib = {
             "fit": weights["fit"] * fit,
@@ -810,7 +583,7 @@ BOARD_VALUE_WEIGHTS = {
 def best_available(drafted, ingredients, style_matrix, scarcity_df, required,
                    flex_slots, ingredient_to_category, style_bias,
                    early_signal=None, hop_similarity=None, num_players=8,
-                   top_k=15, similarity=None, weights=None, squash=None):
+                   top_k=15):
     """Rank the best ingredients left on the board, independent of any roster.
 
     A thin wrapper over next_best_picks with an empty roster and the board-value
@@ -820,8 +593,8 @@ def best_available(drafted, ingredients, style_matrix, scarcity_df, required,
     return next_best_picks(
         [], drafted, ingredients, style_matrix, scarcity_df, required, flex_slots,
         ingredient_to_category, style_bias, early_signal=early_signal,
-        hop_similarity=hop_similarity, similarity=similarity, num_players=num_players,
-        weights={**BOARD_VALUE_WEIGHTS, **(weights or {})}, squash=squash, top_k=top_k,
+        hop_similarity=hop_similarity, num_players=num_players,
+        weights=BOARD_VALUE_WEIGHTS, top_k=top_k,
     )
 
 
