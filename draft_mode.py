@@ -27,11 +27,15 @@ from draft_core import (
 
 # Page config is set by the app.py entry point (st.set_page_config must run
 # once, before any other Streamlit command). This module is a navigation page.
-st.header("🍺 Run a Draft")
 
 # --- Global CSS for better UX ---
 st.markdown("""
 <style>
+/* Projector layout: reclaim the big default top gap so the board sits high. */
+.block-container { padding-top: 1.2rem !important; padding-bottom: 1rem !important; }
+[data-testid="stHeader"] { background: transparent; }
+/* Tighten vertical rhythm between stacked elements in the top bar. */
+div[data-testid="stVerticalBlock"] { gap: 0.5rem; }
 /* Compact top-bar clock */
 .wr-clock {
     font-family: 'Courier New', monospace;
@@ -39,6 +43,7 @@ st.markdown("""
     font-weight: bold;
     line-height: 1.1;
 }
+.wr-title { font-size: 26px; font-weight: 800; line-height: 1.0; margin: 0; }
 /* Focus-team roster chip line */
 .wr-roster { font-size: 15px; line-height: 1.9; }
 .wr-chip {
@@ -50,6 +55,9 @@ st.markdown("""
 .wr-chip.open   { background: rgba(255,255,255,0.06); opacity: 0.75; }
 </style>
 """, unsafe_allow_html=True)
+
+# Club branding — shown prominently in the top bar (see below).
+LOGO_PATH = "rhbc_logo_round.png"
 
 @st.cache_data
 def load_data():
@@ -269,6 +277,11 @@ def add_pick(player, ing, cat):
         "Ingredient": ing, "Category": cat,
     })
     save_state({"players": players, "draft_log": st.session_state["draft_log"]})
+    # The clock is per-selection: reset to a full duration and start it running
+    # for the next picker the moment a pick is made.
+    st.session_state.timer_elapsed = 0.0
+    st.session_state.timer_started_at = time.time()
+    st.session_state.timer_running = True
     st.rerun()
 
 
@@ -458,19 +471,18 @@ def render_board(df_long, needed):
 
 
 def render_best_available(focus_needed):
-    fcols = st.columns([2, 1])
-    cat_filter = fcols[0].selectbox("Category", ["All"] + all_categories,
-                                    key="ba_cat_filter", label_visibility="collapsed")
-    needs_only = fcols[1].toggle("Needs", key="ba_needs_only", help="Only ingredients that fill a needed slot")
+    # Single full-width filter (avoids a cramped toggle wrapping to "N e e d s").
+    sel = st.selectbox("Filter", ["All", "⭐ Fills a need"] + all_categories,
+                       key="ba_filter", label_visibility="collapsed")
     ba = best_available(drafted, ingredients, style_matrix, scarcity_df, required,
                         flex_slots, ingredient_to_category, style_bias,
                         early_signal=early_signal, hop_similarity=hop_similarity_data,
                         num_players=int(num_players), top_k=40,
                         weights=BOARD_WEIGHTS, squash=SQUASH)
-    if cat_filter != "All":
-        ba = ba[ba["Category"] == cat_filter]
-    if needs_only:
+    if sel == "⭐ Fills a need":
         ba = ba[ba["Category"].map(lambda c: bucket_for_rules(c) in focus_needed)]
+    elif sel != "All":
+        ba = ba[ba["Category"] == sel]
     ba = ba.head(15)
     if ba.empty:
         st.info("No matching ingredients on the board.")
@@ -494,18 +506,30 @@ def render_styles(focus_picks):
 # ===========================================================================
 # TOP BAR — always visible: clock · whose turn · scout selector · roster
 # ===========================================================================
-tb = st.columns([3, 2, 2])
-with tb[0]:
+_has_logo = os.path.exists(LOGO_PATH)
+tb = st.columns(([0.7, 2.6, 2.3, 2] if _has_logo else [3, 2.3, 2]),
+                gap="small", vertical_alignment="center")
+i = 0
+if _has_logo:
+    tb[0].image(LOGO_PATH, width=76)
+    i = 1
+with tb[i]:
     if current_player:
-        turn = ("🟢 **YOUR PICK**" if current_player == your_name
-                else f"On the clock: **{current_player}**")
-        st.markdown(f"### R{current_round} · P{overall_pick}")
-        st.markdown(turn)
+        turn = ("🟢 YOUR PICK" if current_player == your_name
+                else f"On the clock: {current_player}")
+        st.caption(f"Round {current_round} · Pick {overall_pick}")
+        st.markdown(f"<div class='wr-title'>{turn}</div>", unsafe_allow_html=True)
+        # Who's up next (on deck).
+        next_overall = overall_pick + 1
+        if next_overall <= total_picks_overall:
+            _, next_seat = pick_slot(next_overall, int(num_players))
+            nxt = players[next_seat]
+            st.caption(f"On deck: **{nxt}**" + (" 🟢" if nxt == your_name else ""))
     else:
-        st.markdown("### ✅ Draft complete")
-with tb[1]:
+        st.markdown("<div class='wr-title'>✅ Draft complete</div>", unsafe_allow_html=True)
+with tb[i + 1]:
     render_compact_timer()
-with tb[2]:
+with tb[i + 2]:
     default_idx = players.index(current_player) if current_player in players else 0
     focus_player = st.selectbox("View team", players, index=default_idx, key="focus_player")
 
@@ -516,19 +540,17 @@ focus = team_context(focus_records, focus_picks, drafted, style_matrix,
                      required, flex_slots, enable_round8=enable_round8)
 needed_buckets = focus["needed_buckets"]
 
-roster_label = (f"{focus_player}" + (" 🟢" if focus_player == your_name else "")
+roster_label = (f"**{focus_player}**" + (" 🟢" if focus_player == your_name else "")
                 + f"  —  leaning: {focus['likely_style']}  ·  flex left: {focus['flex_remaining']}")
 st.caption(roster_label)
 render_roster_line(focus["slots"])
 if not focus["feasible"]:
     st.error(f"⚠️ {focus_player} can't fill all required categories with the picks left.")
 
-st.divider()
-
 # ===========================================================================
 # MAIN — 3-column war room (fixed-height scroll panels, no page scroll)
 # ===========================================================================
-PANEL_H = 540
+PANEL_H = 600
 compact = st.session_state.get("compact_mode", False)
 
 df_live = df_long_all[~df_long_all["Ingredient"].isin(drafted)]

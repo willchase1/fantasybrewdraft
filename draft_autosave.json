@@ -1,1 +1,1 @@
-{"players": ["Alice", "Bob", "Cara", "Dan"], "draft_log": [{"Round": 1, "Overall": 1, "Player": "Alice", "Ingredient": "Citra", "Category": "Hop"}]}
+{"players": ["Alice", "Bob", "Cara", "Dan"], "draft_log": [{"Round": 1, "Overall": 1, "Player": "Alice", "Ingredient": "Citra", "Category": "Hop"}, {"Round": 1, "Overall": 2, "Player": "Bob", "Ingredient": "Cascade", "Category": "Hop"}, {"Round": 1, "Overall": 3, "Player": "Cara", "Ingredient": "Saaz", "Category": "Hop"}]}
