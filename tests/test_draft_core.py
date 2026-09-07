@@ -347,7 +347,7 @@ def test_picks_until_next_turn_snake():
 def test_explain_pick_reports_dominant_component():
     why = dc.explain_pick({"fit": 0.25, "scarce": 0.01, "need": 0.2,
                            "syn": 0.0, "deny": 0.0, "pop": 0.0})
-    assert "fits your styles" in why
+    assert why.startswith(dc._WHY_LABELS["fit"])
     assert dc.explain_pick({k: 0.0 for k in dc.DEFAULT_PICK_WEIGHTS}) == "balanced value"
 
 

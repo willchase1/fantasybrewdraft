@@ -555,10 +555,10 @@ def next_best_picks(
 
 
 _WHY_LABELS = {
-    "fit": "fits your styles",
+    "fit": "versatile / on-style",
     "scarce": "scarce now",
     "need": "fills a needed slot",
-    "syn": "pairs with your roster",
+    "syn": "pairs with the roster",
     "deny": "denies an opponent",
     "pop": "popular pick",
 }
@@ -628,6 +628,7 @@ def team_context(records, my_picks, drafted, style_matrix, required, flex_slots,
         "likely_style": likely_style,
         "flex_remaining": status["flex_remaining"],
         "picks_remaining": status["picks_remaining"],
+        "feasible": status["feasible"],
     }
 
 

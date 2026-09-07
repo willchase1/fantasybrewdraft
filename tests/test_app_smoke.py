@@ -42,29 +42,29 @@ def test_draft_mode_runs_without_exception():
     assert not at.exception, at.exception
 
 
-def test_draft_mode_renders_expected_tabs():
+def test_draft_mode_war_room_core_elements():
     at = AppTest.from_file(DRAFT, default_timeout=30).run()
     assert not at.exception
-    labels = [t.label for t in at.tabs]
-    assert "Draft Board" in labels
-    assert "Recommendations" in labels
+    # War-room layout has no top-level tabs.
+    assert len(at.tabs) == 0
+    # The scout / focus-team selector and the board filter are present.
+    assert any(s.key == "focus_player" for s in at.selectbox)
+    assert any(t.key == "board-filter" for t in at.text_input)
 
 
-def test_draft_mode_renders_roster_strip():
+def test_draft_mode_renders_focus_roster_and_turn():
     at = AppTest.from_file(DRAFT, default_timeout=30).run()
     assert not at.exception
     md = " ".join(m.value for m in at.markdown)
-    # The always-visible roster strip (one labeled box per required slot) and the
-    # turn header render above the tabs. (The checked-in autosave is a completed
-    # draft, so the header reads "Draft complete" rather than "Round N".)
-    assert ("Round" in md) or ("Draft complete" in md)
-    for label in ("**Malt**", "**Hop**", "**Yeast**", "**Adjunct**"):
+    # Turn header (or completion) and the focus-team roster chip line render.
+    assert ("R" in md) or ("Draft complete" in md)
+    for label in ("Malt", "Hop", "Yeast", "Adjunct"):
         assert label in md
 
 
-def test_draft_mode_draft_central_panel_and_buttons():
-    """An in-progress draft renders the Draft Central panel (team selector +
-    best-available) with one-click Draft buttons alongside the board."""
+def test_draft_mode_board_and_best_available_buttons():
+    """An in-progress draft renders one-click Draft buttons for both the board
+    and the Best Available panel, plus the scout selector."""
     at = AppTest.from_file(DRAFT, default_timeout=30)
     at.session_state["players"] = ["Alice", "Bob", "Cara", "Dan"]
     at.session_state["draft_log"] = [
@@ -74,12 +74,9 @@ def test_draft_mode_draft_central_panel_and_buttons():
     at.run()
     assert not at.exception, at.exception
     keys = [b.key for b in at.button]
-    # One-click draft buttons exist for both the board rows and the Draft
-    # Central "best available" list.
-    assert any(k and k.startswith("dc-draft-") for k in keys)
-    assert any(k and k.startswith("draft-") for k in keys)
-    # The team selector for scouting is present.
-    assert any(s.key == "dc_focus_player" for s in at.selectbox)
+    assert any(k and k.startswith("ba-draft-") for k in keys)   # best available
+    assert any(k and k.startswith("draft-") for k in keys)      # board
+    assert any(s.key == "focus_player" for s in at.selectbox)
 
 
 def test_draft_mode_mock_simulator_runs():

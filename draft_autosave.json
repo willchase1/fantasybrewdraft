@@ -1,1 +1,1 @@
-{"players": ["t1", "t2", "t3", "t4"], "draft_log": [{"Round": 1, "Overall": 1, "Player": "t1", "Ingredient": "Pale Malt (2 Row)", "Category": "Base Malt"}, {"Round": 1, "Overall": 2, "Player": "t2", "Ingredient": "Belgian Pilsner", "Category": "Base Malt"}, {"Round": 1, "Overall": 3, "Player": "t3", "Ingredient": "Golden Promise", "Category": "Base Malt"}]}
+{"players": ["Alice", "Bob", "Cara", "Dan"], "draft_log": [{"Round": 1, "Overall": 1, "Player": "Alice", "Ingredient": "Citra", "Category": "Hop"}]}
