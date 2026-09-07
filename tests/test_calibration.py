@@ -172,3 +172,45 @@ def test_replay_ranks_average_ties():
     mine = pv["me"]
     rank = 1 + int((pv > mine).sum()) + 0.5 * int((pv == mine).sum() - 1)
     assert rank == 4.0
+
+
+# ---------------------------------------------------------------------------
+# Ubiquitous adjuncts must not out-rank anchor picks
+# ---------------------------------------------------------------------------
+@pytest.fixture(scope="module")
+def ctx26():
+    return cw.load_context(sheet="ingredients_2026.csv")
+
+
+def test_sugars_do_not_lead_an_empty_board(ctx26):
+    """Sept-2026 finding: dextrose / honey / cane sugar sat in 15-18 of 22
+    styles and short filler adjunct lists made them look 'signature', so a bag
+    of dextrose out-ranked every base malt. Guard: on an empty board no adjunct
+    is in the top 20 of recommendations or best-available."""
+    recs = _recs(ctx26, [])
+    top20 = recs.head(20)
+    assert (top20["Category"] != "Adjunct").all(), top20[top20["Category"] == "Adjunct"].index.tolist()
+    # Best-available weights popularity at 0.2 and dextrose *was* a popular
+    # 2022-24 pick (dextrose + German Pilsner is the top historical pair), so
+    # it may legitimately appear mid-list there -- just not at the top.
+    ba = dc.best_available([], ctx26["ingredients"], ctx26["style_matrix"], ctx26["scarcity"],
+                           REQUIRED, 3, ctx26["i2c"], ctx26["style_bias"],
+                           early_signal=ctx26["early"], similarity=ctx26["similarity"],
+                           num_players=9, top_k=10)
+    assert (ba["Category"] != "Adjunct").all()
+    # ...and no adjunct's Fit exceeds the best base malt's Fit.
+    assert recs[recs["Category"] == "Adjunct"]["Fit"].max() < \
+        recs[recs["Category"] == "Base Malt"]["Fit"].max()
+
+
+def test_adjunct_coverage_stays_narrow(ctx26):
+    """Sugars/adjuncts are listed only where characteristic (docs/STYLE_MATRIX.md)."""
+    sm = ctx26["style_matrix"]
+    cov = {}
+    for cats in sm.values():
+        for ing in cats["Adjunct"]:
+            cov[ing] = cov.get(ing, 0) + 1
+    worst = max(cov.items(), key=lambda kv: kv[1])
+    assert worst[1] <= 9, worst
+    for sugar in ["Corn Sugar (Dextrose)", "Honey", "Cane (or Beet) Sugar"]:
+        assert cov[sugar] <= 7, (sugar, cov[sugar])

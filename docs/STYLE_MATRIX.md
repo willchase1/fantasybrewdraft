@@ -29,13 +29,24 @@ structure biased the engine:
 ## Design rules
 
 1. **Fingerprint, not catch-all.** A style lists only ingredients actually used
-   in it. Workhorses (2-row, Pale Malt Extract, US-05, Magnum) appear in many
-   styles by nature; the engine's idf term handles that. Nothing is in every
-   style: the widest ingredients are cane sugar / honey (18 of 22).
+   in it. Workhorses (2-row, Pale Malt Extract, US-05, Magnum, Perle) appear in
+   many styles by nature; the engine's idf term handles that. Nothing is in
+   every style: the widest ingredients are Perle (17 of 22), Magnum and 2-row
+   (15).
 2. **Every style has an Adjunct list** so it can be fully satisfied under the
-   rules. Where the style traditionally has none (Pils, Kölsch) the list is the
-   handful a brewer would plausibly draft without ruining it (dextrose, rice
-   syrup, brewer's crystals, cane sugar).
+   rules — but adjunct lists are **narrow and characteristic**, never "you
+   could add it". Sugars in particular: candi / cane in Belgians, invert
+   (Lyle's), demerara and molasses in British ales, dextrose and rice syrup in
+   lagers and dry IPAs, lactose only in stouts / hazies / milkshake sours,
+   honey only where honey beers are a thing (saison, blonde, wit, Nordic,
+   American wheat, amber). The first cut of this matrix listed cane sugar and
+   honey in 18 styles and dextrose in 15, and the recommender put a bag of
+   dextrose ahead of every base malt on an empty board. Now no adjunct is in
+   more than 8 styles (`tests/test_calibration.py::test_adjunct_coverage_stays_narrow`).
+   Where a style traditionally has no adjunct (Pils, Kölsch, Märzen) the list
+   is the two least-harmful fillers (dextrose + rice syrup / brewer's
+   crystals); the engine treats adjunct lists as neutral for its *signature*
+   term precisely so these short filler lists do not read as "defining".
 3. **Distinct styles only.** Two styles that would share >90 % of their lists are
    merged into one name (Dubbel / Dark Strong; Saison / Bière de Garde; Best
    Bitter / ESB / English Pale). The name lists what's folded in.
@@ -94,15 +105,32 @@ Notable placements for the previously unmodeled ingredients:
 * **Abstrax terpenes** → West Coast IPA, Hazy IPA, American Wheat.
   **Abstrax SkyFarm fruit flavors** → Hazy IPA, Kettle Sour, American Wheat.
 
-**Intentional remainder: none.** Every sheet ingredient is modeled by at least one
-style (`validate_data(...)["in_sheet_not_matrix"] == []`). Sorghum extract,
-mushrooms and truffles are the marginal calls — see above.
+* **September 2026 sheet additions** — hops: Chinook, Nugget, Warrior (West
+  Coast / Cold IPA, Imperial Stout, Barleywine bittering; Chinook also
+  Amber/Brown, Porter, Hazy), Northern Brewer (Kölsch & Alt, Amber & Dark
+  Lager, California-common Amber, Porter, Stout, Strong, Smoked), Cluster
+  (American Lager / Cream Ale, Amber/Brown, Porter, American Wheat), Mt Hood
+  (noble family: Pale Lager, Amber Lager, Kölsch, Hefeweizen, Am. Lager,
+  American Wheat), Willamette (Fuggle family: Bitter, Mild, Porter, Stout,
+  Imperial, Amber/Brown, Am. Lager, American Wheat). Yeasts: Belgian Witbier →
+  Witbier, Kettle Sour, American Wheat; Irish Ale → Stout, Porter, Imperial,
+  Mild/Brown, Strong, Amber/Red, Smoked. Adjuncts: Cinnamon → Pastry Stout,
+  Porter, Dubbel/Dark Strong, Amber/Brown, American Wheat, Smoked & Wood-Aged;
+  Pumpkin → American Wheat / Fruit & Spice, Amber/Brown, Porter, Pastry Stout;
+  Ginger → American Wheat, Saison, Witbier, Kettle Sour; Cranberries → the
+  stone/berry fruit family (Sour, American Wheat, Saison, Witbier, Nordic,
+  Imperial Stout).
+
+**Intentional remainder: none.** Every sheet ingredient (217 as of Sep 2026) is
+modeled by at least one style (`validate_data(...)["in_sheet_not_matrix"] == []`).
+Sorghum extract, mushrooms and truffles are the marginal calls — see above.
 
 ## Effects on the engine
 
-* Style Coverage now ranges 1–18 across 22 styles with a healthy middle
-  (most ingredients in 3–8 styles) instead of the old bimodal shape; Fit's
-  `+5` squash constant is revisited in the calibration workstream.
+* Style Coverage now ranges 1–17 across 22 styles with a healthy middle
+  (most ingredients in 3–8 styles) instead of the old bimodal shape; adjuncts
+  top out at 8. Fit's squash constant was re-tuned to `+2` in the calibration
+  workstream (`docs/CALIBRATION.md`).
 * `compute_style_status` gained **Picks Matched** and **Match** columns and
   uses them as tie-breaks (see its docstring) — with distinct-but-related
   styles (Stout vs Porter vs Imperial Stout) the old `2×satisfied + options`

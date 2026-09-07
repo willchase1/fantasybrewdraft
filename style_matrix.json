@@ -15,6 +15,7 @@
       "Hallertau Tradition",
       "Liberty",
       "Magnum",
+      "Mt Hood",
       "Perle",
       "Saaz",
       "Saphir",
@@ -32,8 +33,6 @@
       "San Fran Lager (WLP810, L05, WY2112)"
     ],
     "Adjunct": [
-      "Brewer's Crystals",
-      "Cane (or Beet) Sugar",
       "Corn Sugar (Dextrose)",
       "Rice Syrup (added \"syrup\" to differentiate from flaked rice in specialty malts)"
     ],
@@ -64,6 +63,8 @@
       "Hallertau Tradition",
       "Liberty",
       "Magnum",
+      "Mt Hood",
+      "Northern Brewer",
       "Perle",
       "Saaz",
       "Saphir",
@@ -81,8 +82,7 @@
     ],
     "Adjunct": [
       "Brewer's Crystals",
-      "Corn Sugar (Dextrose)",
-      "Honey"
+      "Corn Sugar (Dextrose)"
     ],
     "Specialty": [
       "Aromatic",
@@ -115,14 +115,17 @@
     ],
     "Hop": [
       "Cascade",
+      "Cluster",
       "Hallertau Mittelfrueh",
       "Hallertau Tradition",
       "Liberty",
       "Magnum",
+      "Mt Hood",
       "Perle",
       "Saaz",
       "Sorachi Ace",
-      "Tettnang / Tettnanger"
+      "Tettnang / Tettnanger",
+      "Willamette"
     ],
     "Yeast": [
       "American Ale (WLP001 [liquid or dry], WY1056, US-05, A07)",
@@ -137,10 +140,8 @@
     ],
     "Adjunct": [
       "Brewer's Crystals",
-      "Cane (or Beet) Sugar",
       "Chili Peppers",
       "Corn Sugar (Dextrose)",
-      "Honey",
       "Lime Peel/Juice",
       "Rice Syrup (added \"syrup\" to differentiate from flaked rice in specialty malts)"
     ],
@@ -170,6 +171,8 @@
       "Hallertau Tradition",
       "Liberty",
       "Magnum",
+      "Mt Hood",
+      "Northern Brewer",
       "Perle",
       "Saaz",
       "Saphir",
@@ -185,7 +188,6 @@
     ],
     "Adjunct": [
       "Brewer's Crystals",
-      "Cane (or Beet) Sugar",
       "Corn Sugar (Dextrose)"
     ],
     "Specialty": [
@@ -226,9 +228,6 @@
     "Adjunct": [
       "Apricots",
       "Blueberries",
-      "Cane (or Beet) Sugar",
-      "Corn Sugar (Dextrose)",
-      "Honey",
       "Peaches"
     ],
     "Specialty": [
@@ -269,6 +268,7 @@
       "Abbey Ale (WLP540, EY1762, BE-256)",
       "Belgian Ale (WLP570, WY1388)",
       "Belgian Ardennes (WY3522, B45)",
+      "Belgian Witbier (WLP400, WY3944, Imperial B44, LalBrew Wit)",
       "Farmhouse (WY3726, OYL-217, Dry)",
       "Hefewiezen (WLP300, WY3068, G01)",
       "Saison (WLP565, WY3724)"
@@ -277,7 +277,8 @@
       "Apricots",
       "Candi Sugar, Clear",
       "Coriander",
-      "Corn Sugar (Dextrose)",
+      "Cranberries",
+      "Ginger",
       "Grains of Paradise",
       "Grapefruit Peel",
       "Honey",
@@ -336,14 +337,13 @@
     "Adjunct": [
       "Apricots",
       "Blackberries",
-      "Brown Sugar",
       "Candi Sugar, Amber",
       "Candi Sugar, Clear",
-      "Candi Sugar, Dark",
       "Cane (or Beet) Sugar",
       "Coriander",
       "Corn Sugar (Dextrose)",
-      "Demerara Sugar",
+      "Cranberries",
+      "Ginger",
       "Grains of Paradise",
       "Honey",
       "Juniper",
@@ -409,16 +409,13 @@
       "Trappist Ale (WLP500, WY1214, B48)"
     ],
     "Adjunct": [
-      "Brewer's Crystals",
       "Candi Sugar, Amber",
       "Candi Sugar, Clear",
       "Cane (or Beet) Sugar",
       "Coriander",
       "Corn Sugar (Dextrose)",
       "Honey",
-      "Orange Peel, Bitter",
-      "Rice Syrup (added \"syrup\" to differentiate from flaked rice in specialty malts)",
-      "Turbinado Sugar"
+      "Orange Peel, Bitter"
     ],
     "Specialty": [
       "Aromatic",
@@ -468,11 +465,8 @@
       "Candi Sugar, Dark",
       "Cane (or Beet) Sugar",
       "Cherries",
-      "Corn Sugar (Dextrose)",
+      "Cinnamon",
       "Demerara Sugar",
-      "Honey",
-      "Maple Syrup",
-      "Molasses",
       "Turbinado Sugar"
     ],
     "Specialty": [
@@ -530,11 +524,9 @@
     "Adjunct": [
       "Blackberries",
       "Blueberries",
-      "Brown Sugar",
-      "Cane (or Beet) Sugar",
+      "Cranberries",
       "Honey",
       "Juniper",
-      "Maple Syrup",
       "Raspberries"
     ],
     "Specialty": [
@@ -583,6 +575,7 @@
       "Calista",
       "Cascade",
       "Centennial",
+      "Chinook",
       "Citra",
       "Columbus/Tomahawk/Zeus",
       "El Dorado",
@@ -599,6 +592,7 @@
       "Motueka",
       "Nectaron",
       "Nelson Sauvin",
+      "Nugget",
       "Rakau",
       "Riwaka",
       "Sabro",
@@ -606,7 +600,8 @@
       "Sorachi Ace",
       "Strata",
       "Topaz",
-      "Triumph"
+      "Triumph",
+      "Warrior"
     ],
     "Yeast": [
       "American Ale (WLP001 [liquid or dry], WY1056, US-05, A07)",
@@ -622,8 +617,6 @@
     ],
     "Adjunct": [
       "Abstrax terpenes (any variety of Quantum, Omni, or BrewGas)",
-      "Brewer's Crystals",
-      "Cane (or Beet) Sugar",
       "Chili Peppers",
       "Corn Sugar (Dextrose)",
       "Grapefruit Peel",
@@ -666,6 +659,7 @@
       "Azacca",
       "BRU-1",
       "Calista",
+      "Chinook",
       "Citra",
       "Columbus/Tomahawk/Zeus",
       "El Dorado",
@@ -688,7 +682,8 @@
       "Sorachi Ace",
       "Strata",
       "Topaz",
-      "Triumph"
+      "Triumph",
+      "Warrior"
     ],
     "Yeast": [
       "American Ale (WLP001 [liquid or dry], WY1056, US-05, A07)",
@@ -706,7 +701,6 @@
       "Abstrax SkyFarm fruit flavors (any)",
       "Abstrax terpenes (any variety of Quantum, Omni, or BrewGas)",
       "Coconut",
-      "Corn Sugar (Dextrose)",
       "Dragon Fruit",
       "Grapefruit Peel",
       "Guava",
@@ -757,21 +751,29 @@
       "Amarillo",
       "Cascade",
       "Centennial",
+      "Chinook",
       "Citra",
+      "Cluster",
       "Columbus/Tomahawk/Zeus",
       "Liberty",
       "Loral",
       "Magnum",
       "Mosaic",
+      "Mt Hood",
+      "Northern Brewer",
+      "Nugget",
       "Perle",
       "Simcoe",
-      "Triumph"
+      "Triumph",
+      "Warrior",
+      "Willamette"
     ],
     "Yeast": [
       "American Ale (WLP001 [liquid or dry], WY1056, US-05, A07)",
       "Dry English Ale (WLP007, WY1098, A10)",
       "East Coast Ale (WLP008, A15)",
       "English Ale (WLP002, WY1968, S-04, A09)",
+      "Irish Ale (WLP004, WY1084, Imperial A44)",
       "Kolsch (WLP029, WY2565, G03, K-97)",
       "Lutra Kveik (OYL-071, OYL-071DRY)",
       "San Fran Lager (WLP810, L05, WY2112)",
@@ -779,17 +781,13 @@
     ],
     "Adjunct": [
       "Brown Sugar",
-      "Cane (or Beet) Sugar",
+      "Cinnamon",
       "Cocoa Nibs/Beans",
       "Coconut",
       "Coffee (Liquid or Beans)",
-      "Corn Sugar (Dextrose)",
-      "Demerara Sugar",
       "Honey",
-      "Lyle's Golden Syrup (Invert Sugar)",
       "Maple Syrup",
-      "Molasses",
-      "Vanilla (extract or bean)"
+      "Pumpkin"
     ],
     "Specialty": [
       "Aromatic",
@@ -837,7 +835,8 @@
       "East Kent Goldings",
       "Fuggle",
       "Progress",
-      "Styrian Goldings"
+      "Styrian Goldings",
+      "Willamette"
     ],
     "Yeast": [
       "Dry English Ale (WLP007, WY1098, A10)",
@@ -847,11 +846,8 @@
       "Scottish Ale (WLP028, WY1728, A31)"
     ],
     "Adjunct": [
-      "Brewer's Crystals",
-      "Brown Sugar",
       "Cane (or Beet) Sugar",
       "Demerara Sugar",
-      "Honey",
       "Lyle's Golden Syrup (Invert Sugar)",
       "Turbinado Sugar"
     ],
@@ -891,28 +887,25 @@
       "East Kent Goldings",
       "Fuggle",
       "Progress",
-      "Styrian Goldings"
+      "Styrian Goldings",
+      "Willamette"
     ],
     "Yeast": [
       "Dry English Ale (WLP007, WY1098, A10)",
       "East Coast Ale (WLP008, A15)",
       "English Ale (WLP002, WY1968, S-04, A09)",
+      "Irish Ale (WLP004, WY1084, Imperial A44)",
       "London III (WLP013, A38, WY1318)",
       "Scottish Ale (WLP028, WY1728, A31)"
     ],
     "Adjunct": [
-      "Brewer's Crystals",
       "Brown Sugar",
-      "Cane (or Beet) Sugar",
       "Cocoa Nibs/Beans",
       "Coffee (Liquid or Beans)",
       "Demerara Sugar",
-      "Honey",
       "Licorice",
       "Lyle's Golden Syrup (Invert Sugar)",
-      "Molasses",
-      "Turbinado Sugar",
-      "Vanilla (extract or bean)"
+      "Molasses"
     ],
     "Specialty": [
       "Aromatic",
@@ -956,34 +949,36 @@
       "Cascade",
       "Centennial",
       "Challenger",
+      "Chinook",
       "Columbus/Tomahawk/Zeus",
       "East Kent Goldings",
       "Fuggle",
       "Magnum",
+      "Northern Brewer",
+      "Nugget",
       "Progress",
-      "Styrian Goldings"
+      "Styrian Goldings",
+      "Warrior"
     ],
     "Yeast": [
       "American Ale (WLP001 [liquid or dry], WY1056, US-05, A07)",
       "Dry English Ale (WLP007, WY1098, A10)",
       "East Coast Ale (WLP008, A15)",
       "English Ale (WLP002, WY1968, S-04, A09)",
+      "Irish Ale (WLP004, WY1084, Imperial A44)",
       "London III (WLP013, A38, WY1318)",
       "Scottish Ale (WLP028, WY1728, A31)"
     ],
     "Adjunct": [
-      "Brewer's Crystals",
       "Brown Sugar",
       "Cane (or Beet) Sugar",
       "Demerara Sugar",
-      "Honey",
       "Licorice",
       "Lyle's Golden Syrup (Invert Sugar)",
       "Maple Syrup",
       "Molasses",
       "Oak",
-      "Turbinado Sugar",
-      "Vanilla (extract or bean)"
+      "Turbinado Sugar"
     ],
     "Specialty": [
       "Aromatic",
@@ -1027,15 +1022,19 @@
       "Cascade",
       "Centennial",
       "Challenger",
+      "Chinook",
       "Columbus/Tomahawk/Zeus",
       "East Kent Goldings",
       "Fuggle",
       "Hallertau Tradition",
       "Magnum",
+      "Northern Brewer",
+      "Nugget",
       "Perle",
       "Progress",
       "Saaz",
-      "Styrian Goldings"
+      "Styrian Goldings",
+      "Willamette"
     ],
     "Yeast": [
       "American Ale (WLP001 [liquid or dry], WY1056, US-05, A07)",
@@ -1043,6 +1042,7 @@
       "East Coast Ale (WLP008, A15)",
       "English Ale (WLP002, WY1968, S-04, A09)",
       "German Lager (WLP830, WY2124, L13, 34/70)",
+      "Irish Ale (WLP004, WY1084, Imperial A44)",
       "London III (WLP013, A38, WY1318)",
       "Munich Lager (WLP838, WY2308, Dry)",
       "NovaLager (Lalbrew Y055) (Dry)",
@@ -1050,18 +1050,16 @@
     ],
     "Adjunct": [
       "Brown Sugar",
-      "Cane (or Beet) Sugar",
+      "Cinnamon",
       "Cocoa Nibs/Beans",
       "Coconut",
       "Coffee (Liquid or Beans)",
-      "Demerara Sugar",
-      "Honey",
       "Licorice",
       "Lyle's Golden Syrup (Invert Sugar)",
       "Maple Syrup",
-      "Milk Sugar (Lactose)",
       "Molasses",
       "Oak",
+      "Pumpkin",
       "Vanilla (extract or bean)"
     ],
     "Specialty": [
@@ -1115,30 +1113,31 @@
       "Cascade",
       "Centennial",
       "Challenger",
+      "Chinook",
       "Columbus/Tomahawk/Zeus",
       "East Kent Goldings",
       "Fuggle",
       "Magnum",
+      "Northern Brewer",
+      "Nugget",
       "Perle",
       "Progress",
-      "Styrian Goldings"
+      "Styrian Goldings",
+      "Willamette"
     ],
     "Yeast": [
       "American Ale (WLP001 [liquid or dry], WY1056, US-05, A07)",
       "Dry English Ale (WLP007, WY1098, A10)",
       "East Coast Ale (WLP008, A15)",
       "English Ale (WLP002, WY1968, S-04, A09)",
+      "Irish Ale (WLP004, WY1084, Imperial A44)",
       "London III (WLP013, A38, WY1318)",
       "Scottish Ale (WLP028, WY1728, A31)"
     ],
     "Adjunct": [
-      "Brown Sugar",
-      "Cane (or Beet) Sugar",
       "Cocoa Nibs/Beans",
       "Coconut",
       "Coffee (Liquid or Beans)",
-      "Demerara Sugar",
-      "Honey",
       "Licorice",
       "Lyle's Golden Syrup (Invert Sugar)",
       "Milk Sugar (Lactose)",
@@ -1193,20 +1192,26 @@
       "Cascade",
       "Centennial",
       "Challenger",
+      "Chinook",
       "Columbus/Tomahawk/Zeus",
       "East Kent Goldings",
       "Fuggle",
       "Magnum",
+      "Northern Brewer",
+      "Nugget",
       "Perle",
       "Progress",
       "Simcoe",
-      "Styrian Goldings"
+      "Styrian Goldings",
+      "Warrior",
+      "Willamette"
     ],
     "Yeast": [
       "American Ale (WLP001 [liquid or dry], WY1056, US-05, A07)",
       "Dry English Ale (WLP007, WY1098, A10)",
       "East Coast Ale (WLP008, A15)",
       "English Ale (WLP002, WY1968, S-04, A09)",
+      "Irish Ale (WLP004, WY1084, Imperial A44)",
       "London III (WLP013, A38, WY1318)",
       "Scottish Ale (WLP028, WY1728, A31)",
       "Voss Kveik (A43, OYL-061, Dry)"
@@ -1216,22 +1221,19 @@
       "Blueberries",
       "Brown Sugar",
       "Candi Sugar, Dark",
-      "Cane (or Beet) Sugar",
       "Cherries",
       "Chili Peppers",
+      "Cinnamon",
       "Cocoa Nibs/Beans",
       "Coconut",
       "Coffee (Liquid or Beans)",
-      "Corn Sugar (Dextrose)",
-      "Demerara Sugar",
-      "Honey",
       "Licorice",
-      "Lyle's Golden Syrup (Invert Sugar)",
       "Maple Syrup",
       "Milk Sugar (Lactose)",
       "Molasses",
       "Mushrooms",
       "Oak",
+      "Pumpkin",
       "Raspberries",
       "Truffles",
       "Turbinado Sugar",
@@ -1296,6 +1298,7 @@
     ],
     "Yeast": [
       "American Ale (WLP001 [liquid or dry], WY1056, US-05, A07)",
+      "Belgian Witbier (WLP400, WY3944, Imperial B44, LalBrew Wit)",
       "German Ale (WY1007, G02)",
       "Hefewiezen (WLP300, WY3068, G01)",
       "Hornindal Kveik (WLP521, OYL-091)",
@@ -1310,15 +1313,14 @@
       "Apricots",
       "Blackberries",
       "Blueberries",
-      "Cane (or Beet) Sugar",
       "Cherries",
       "Coconut",
       "Coriander",
-      "Corn Sugar (Dextrose)",
+      "Cranberries",
       "Dragon Fruit",
+      "Ginger",
       "Grapefruit Peel",
       "Guava",
-      "Honey",
       "Lemon Peel/Juice",
       "Lime Peel/Juice",
       "Mango",
@@ -1365,6 +1367,7 @@
       "Amarillo",
       "Cascade",
       "Citra",
+      "Cluster",
       "El Dorado",
       "Ella",
       "Hallertau Mittelfrueh",
@@ -1374,15 +1377,18 @@
       "Liberty",
       "Mosaic",
       "Motueka",
+      "Mt Hood",
       "Perle",
       "Rakau",
       "Saaz",
       "Sorachi Ace",
       "Tettnang / Tettnanger",
-      "Topaz"
+      "Topaz",
+      "Willamette"
     ],
     "Yeast": [
       "American Ale (WLP001 [liquid or dry], WY1056, US-05, A07)",
+      "Belgian Witbier (WLP400, WY3944, Imperial B44, LalBrew Wit)",
       "East Coast Ale (WLP008, A15)",
       "German Ale (WY1007, G02)",
       "Hefewiezen (WLP300, WY3068, G01)",
@@ -1398,14 +1404,14 @@
       "Apricots",
       "Blackberries",
       "Blueberries",
-      "Cane (or Beet) Sugar",
       "Cherries",
       "Chili Peppers",
-      "Cocoa Nibs/Beans",
+      "Cinnamon",
       "Coconut",
       "Coriander",
-      "Corn Sugar (Dextrose)",
+      "Cranberries",
       "Dragon Fruit",
+      "Ginger",
       "Grains of Paradise",
       "Grapefruit Peel",
       "Guava",
@@ -1414,13 +1420,13 @@
       "Lemon Peel/Juice",
       "Lime Peel/Juice",
       "Mango",
-      "Milk Sugar (Lactose)",
       "Nectarines",
       "Orange Peel, Bitter",
       "Orange Peel, Sweet",
       "Passion Fruit",
       "Peaches",
       "Pineapple",
+      "Pumpkin",
       "Raspberries",
       "Vanilla (extract or bean)",
       "Watermelon"
@@ -1471,6 +1477,7 @@
       "Hallertau Mittelfrueh",
       "Hallertau Tradition",
       "Magnum",
+      "Northern Brewer",
       "Perle",
       "Progress",
       "Saaz",
@@ -1484,6 +1491,7 @@
       "Dry English Ale (WLP007, WY1098, A10)",
       "English Ale (WLP002, WY1968, S-04, A09)",
       "German Lager (WLP830, WY2124, L13, 34/70)",
+      "Irish Ale (WLP004, WY1084, Imperial A44)",
       "Munich Lager (WLP838, WY2308, Dry)",
       "NovaLager (Lalbrew Y055) (Dry)",
       "San Fran Lager (WLP810, L05, WY2112)",
@@ -1491,15 +1499,13 @@
       "Trappist Ale (WLP500, WY1214, B48)"
     ],
     "Adjunct": [
-      "Brown Sugar",
       "Candi Sugar, Dark",
       "Cherries",
       "Chili Peppers",
+      "Cinnamon",
       "Cocoa Nibs/Beans",
       "Coconut",
       "Coffee (Liquid or Beans)",
-      "Demerara Sugar",
-      "Honey",
       "Licorice",
       "Maple Syrup",
       "Molasses",

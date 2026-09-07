@@ -83,7 +83,7 @@ def test_committed_snapshot_matches_generator():
         os.chdir(cwd)
     assert committed == text
     rows = json.loads(committed)
-    assert len(rows) == 204  # every 2026 sheet ingredient is modelled
+    assert len(rows) == 217  # every 2026 sheet ingredient is modelled
 
 
 def test_load_data_scarcity_file_is_optional(tmp_path):

@@ -203,65 +203,73 @@
     "Ingredient": "Amarillo",
     "Category": "Hop",
     "Style Coverage": 4,
-    "Signature": 0.4,
+    "Signature": 0.2963,
     "Close Substitutes": 8,
-    "Baseline Scarcity": 0.185
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Ariana",
     "Category": "Hop",
     "Style Coverage": 2,
-    "Signature": 0.2222,
+    "Signature": 0.2105,
     "Close Substitutes": 8,
-    "Baseline Scarcity": 0.185
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Azacca",
     "Category": "Hop",
     "Style Coverage": 2,
-    "Signature": 0.2222,
+    "Signature": 0.2105,
     "Close Substitutes": 8,
-    "Baseline Scarcity": 0.185
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "BRU-1",
     "Category": "Hop",
     "Style Coverage": 2,
-    "Signature": 0.2222,
+    "Signature": 0.2105,
     "Close Substitutes": 8,
-    "Baseline Scarcity": 0.185
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Calista",
     "Category": "Hop",
     "Style Coverage": 2,
-    "Signature": 0.2222,
-    "Close Substitutes": 5,
-    "Baseline Scarcity": 0.185
+    "Signature": 0.2105,
+    "Close Substitutes": 6,
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Cascade",
     "Category": "Hop",
     "Style Coverage": 8,
-    "Signature": 0.4706,
+    "Signature": 0.4,
     "Close Substitutes": 8,
-    "Baseline Scarcity": 0.185
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Centennial",
     "Category": "Hop",
     "Style Coverage": 6,
-    "Signature": 0.4706,
+    "Signature": 0.381,
     "Close Substitutes": 8,
-    "Baseline Scarcity": 0.185
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Challenger",
     "Category": "Hop",
     "Style Coverage": 7,
-    "Signature": 0.6154,
+    "Signature": 0.5714,
     "Close Substitutes": 8,
-    "Baseline Scarcity": 0.185
+    "Baseline Scarcity": 0.1618
+  },
+  {
+    "Ingredient": "Chinook",
+    "Category": "Hop",
+    "Style Coverage": 7,
+    "Signature": 0.381,
+    "Close Substitutes": 8,
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Citra",
@@ -269,47 +277,55 @@
     "Style Coverage": 5,
     "Signature": 0.4,
     "Close Substitutes": 8,
-    "Baseline Scarcity": 0.185
+    "Baseline Scarcity": 0.1618
+  },
+  {
+    "Ingredient": "Cluster",
+    "Category": "Hop",
+    "Style Coverage": 3,
+    "Signature": 0.4,
+    "Close Substitutes": 8,
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Columbus/Tomahawk/Zeus",
     "Category": "Hop",
     "Style Coverage": 7,
-    "Signature": 0.4706,
-    "Close Substitutes": 2,
-    "Baseline Scarcity": 0.185
+    "Signature": 0.381,
+    "Close Substitutes": 5,
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "East Kent Goldings",
     "Category": "Hop",
     "Style Coverage": 12,
-    "Signature": 0.6154,
+    "Signature": 0.5714,
     "Close Substitutes": 8,
-    "Baseline Scarcity": 0.185
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "El Dorado",
     "Category": "Hop",
     "Style Coverage": 3,
-    "Signature": 0.3077,
+    "Signature": 0.2759,
     "Close Substitutes": 8,
-    "Baseline Scarcity": 0.185
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Ella",
     "Category": "Hop",
     "Style Coverage": 3,
-    "Signature": 0.3077,
+    "Signature": 0.2759,
     "Close Substitutes": 8,
-    "Baseline Scarcity": 0.185
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Fuggle",
     "Category": "Hop",
     "Style Coverage": 8,
-    "Signature": 0.6154,
-    "Close Substitutes": 7,
-    "Baseline Scarcity": 0.185
+    "Signature": 0.5714,
+    "Close Substitutes": 8,
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Galaxy",
@@ -317,7 +333,7 @@
     "Style Coverage": 3,
     "Signature": 0.4,
     "Close Substitutes": 8,
-    "Baseline Scarcity": 0.185
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Hallertau Mittelfrueh",
@@ -325,7 +341,7 @@
     "Style Coverage": 13,
     "Signature": 0.5714,
     "Close Substitutes": 8,
-    "Baseline Scarcity": 0.185
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Hallertau Tradition",
@@ -333,71 +349,71 @@
     "Style Coverage": 13,
     "Signature": 0.5714,
     "Close Substitutes": 8,
-    "Baseline Scarcity": 0.185
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Idaho 7",
     "Category": "Hop",
     "Style Coverage": 2,
-    "Signature": 0.2222,
+    "Signature": 0.2105,
     "Close Substitutes": 8,
-    "Baseline Scarcity": 0.185
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Kohatu",
     "Category": "Hop",
     "Style Coverage": 3,
-    "Signature": 0.3077,
+    "Signature": 0.2759,
     "Close Substitutes": 8,
-    "Baseline Scarcity": 0.185
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Krush (HBC 586)",
     "Category": "Hop",
     "Style Coverage": 2,
-    "Signature": 0.2222,
+    "Signature": 0.2105,
     "Close Substitutes": 8,
-    "Baseline Scarcity": 0.185
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Lemondrop",
     "Category": "Hop",
     "Style Coverage": 3,
-    "Signature": 0.3077,
+    "Signature": 0.2759,
     "Close Substitutes": 8,
-    "Baseline Scarcity": 0.185
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Liberty",
     "Category": "Hop",
     "Style Coverage": 7,
-    "Signature": 0.4706,
+    "Signature": 0.4444,
     "Close Substitutes": 8,
-    "Baseline Scarcity": 0.185
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Loral",
     "Category": "Hop",
     "Style Coverage": 3,
-    "Signature": 0.4,
+    "Signature": 0.2963,
     "Close Substitutes": 8,
-    "Baseline Scarcity": 0.185
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Lotus",
     "Category": "Hop",
     "Style Coverage": 2,
-    "Signature": 0.2222,
+    "Signature": 0.2105,
     "Close Substitutes": 8,
-    "Baseline Scarcity": 0.185
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Magnum",
     "Category": "Hop",
     "Style Coverage": 15,
     "Signature": 0.5,
-    "Close Substitutes": 0,
-    "Baseline Scarcity": 0.185
+    "Close Substitutes": 2,
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Mosaic",
@@ -405,7 +421,7 @@
     "Style Coverage": 5,
     "Signature": 0.4,
     "Close Substitutes": 8,
-    "Baseline Scarcity": 0.185
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Motueka",
@@ -413,15 +429,23 @@
     "Style Coverage": 5,
     "Signature": 0.4211,
     "Close Substitutes": 8,
-    "Baseline Scarcity": 0.185
+    "Baseline Scarcity": 0.1618
+  },
+  {
+    "Ingredient": "Mt Hood",
+    "Category": "Hop",
+    "Style Coverage": 6,
+    "Signature": 0.4444,
+    "Close Substitutes": 8,
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Nectaron",
     "Category": "Hop",
     "Style Coverage": 2,
-    "Signature": 0.2222,
+    "Signature": 0.2105,
     "Close Substitutes": 8,
-    "Baseline Scarcity": 0.185
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Nelson Sauvin",
@@ -429,7 +453,23 @@
     "Style Coverage": 4,
     "Signature": 0.4211,
     "Close Substitutes": 2,
-    "Baseline Scarcity": 0.185
+    "Baseline Scarcity": 0.1618
+  },
+  {
+    "Ingredient": "Northern Brewer",
+    "Category": "Hop",
+    "Style Coverage": 8,
+    "Signature": 0.4211,
+    "Close Substitutes": 5,
+    "Baseline Scarcity": 0.1618
+  },
+  {
+    "Ingredient": "Nugget",
+    "Category": "Hop",
+    "Style Coverage": 6,
+    "Signature": 0.381,
+    "Close Substitutes": 8,
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Perle",
@@ -437,31 +477,31 @@
     "Style Coverage": 17,
     "Signature": 0.5714,
     "Close Substitutes": 8,
-    "Baseline Scarcity": 0.185
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Progress",
     "Category": "Hop",
     "Style Coverage": 7,
-    "Signature": 0.6154,
+    "Signature": 0.5714,
     "Close Substitutes": 8,
-    "Baseline Scarcity": 0.185
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Rakau",
     "Category": "Hop",
     "Style Coverage": 3,
-    "Signature": 0.3077,
+    "Signature": 0.2759,
     "Close Substitutes": 8,
-    "Baseline Scarcity": 0.185
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Riwaka",
     "Category": "Hop",
     "Style Coverage": 2,
-    "Signature": 0.2222,
+    "Signature": 0.2105,
     "Close Substitutes": 8,
-    "Baseline Scarcity": 0.185
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Saaz",
@@ -469,15 +509,15 @@
     "Style Coverage": 14,
     "Signature": 0.5714,
     "Close Substitutes": 8,
-    "Baseline Scarcity": 0.185
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Sabro",
     "Category": "Hop",
     "Style Coverage": 2,
-    "Signature": 0.2222,
+    "Signature": 0.2105,
     "Close Substitutes": 8,
-    "Baseline Scarcity": 0.185
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Saphir",
@@ -485,31 +525,31 @@
     "Style Coverage": 4,
     "Signature": 0.5714,
     "Close Substitutes": 8,
-    "Baseline Scarcity": 0.185
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Simcoe",
     "Category": "Hop",
     "Style Coverage": 4,
-    "Signature": 0.4211,
+    "Signature": 0.3333,
     "Close Substitutes": 8,
-    "Baseline Scarcity": 0.185
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Sorachi Ace",
     "Category": "Hop",
     "Style Coverage": 5,
-    "Signature": 0.4706,
+    "Signature": 0.4211,
     "Close Substitutes": 8,
-    "Baseline Scarcity": 0.185
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Strata",
     "Category": "Hop",
     "Style Coverage": 2,
-    "Signature": 0.2222,
+    "Signature": 0.2105,
     "Close Substitutes": 8,
-    "Baseline Scarcity": 0.185
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Strisselspalt",
@@ -517,15 +557,15 @@
     "Style Coverage": 8,
     "Signature": 0.5714,
     "Close Substitutes": 8,
-    "Baseline Scarcity": 0.185
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Styrian Goldings",
     "Category": "Hop",
     "Style Coverage": 12,
-    "Signature": 0.6154,
+    "Signature": 0.5714,
     "Close Substitutes": 8,
-    "Baseline Scarcity": 0.185
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Tettnang / Tettnanger",
@@ -533,31 +573,47 @@
     "Style Coverage": 9,
     "Signature": 0.5714,
     "Close Substitutes": 8,
-    "Baseline Scarcity": 0.185
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Topaz",
     "Category": "Hop",
     "Style Coverage": 3,
-    "Signature": 0.3077,
+    "Signature": 0.2759,
     "Close Substitutes": 8,
-    "Baseline Scarcity": 0.185
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Triumph",
     "Category": "Hop",
     "Style Coverage": 3,
-    "Signature": 0.4,
+    "Signature": 0.2963,
     "Close Substitutes": 8,
-    "Baseline Scarcity": 0.185
+    "Baseline Scarcity": 0.1618
+  },
+  {
+    "Ingredient": "Warrior",
+    "Category": "Hop",
+    "Style Coverage": 5,
+    "Signature": 0.381,
+    "Close Substitutes": 4,
+    "Baseline Scarcity": 0.1618
+  },
+  {
+    "Ingredient": "Willamette",
+    "Category": "Hop",
+    "Style Coverage": 8,
+    "Signature": 0.5714,
+    "Close Substitutes": 8,
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Abbey Ale (WLP540, EY1762, BE-256)",
     "Category": "Yeast",
     "Style Coverage": 4,
     "Signature": 0.6667,
-    "Close Substitutes": 6,
-    "Baseline Scarcity": 0.2592
+    "Close Substitutes": 7,
+    "Baseline Scarcity": 0.2452
   },
   {
     "Ingredient": "Alt (WLP023, WY1007, G02)",
@@ -565,31 +621,39 @@
     "Style Coverage": 2,
     "Signature": 0.6154,
     "Close Substitutes": 8,
-    "Baseline Scarcity": 0.2592
+    "Baseline Scarcity": 0.2452
   },
   {
     "Ingredient": "American Ale (WLP001 [liquid or dry], WY1056, US-05, A07)",
     "Category": "Yeast",
     "Style Coverage": 11,
-    "Signature": 0.5714,
+    "Signature": 0.5333,
     "Close Substitutes": 8,
-    "Baseline Scarcity": 0.2592
+    "Baseline Scarcity": 0.2452
   },
   {
     "Ingredient": "Belgian Ale (WLP570, WY1388)",
     "Category": "Yeast",
     "Style Coverage": 4,
     "Signature": 0.6667,
-    "Close Substitutes": 6,
-    "Baseline Scarcity": 0.2592
+    "Close Substitutes": 7,
+    "Baseline Scarcity": 0.2452
   },
   {
     "Ingredient": "Belgian Ardennes (WY3522, B45)",
     "Category": "Yeast",
     "Style Coverage": 4,
     "Signature": 0.6667,
-    "Close Substitutes": 6,
-    "Baseline Scarcity": 0.2592
+    "Close Substitutes": 7,
+    "Baseline Scarcity": 0.2452
+  },
+  {
+    "Ingredient": "Belgian Witbier (WLP400, WY3944, Imperial B44, LalBrew Wit)",
+    "Category": "Yeast",
+    "Style Coverage": 3,
+    "Signature": 0.5333,
+    "Close Substitutes": 7,
+    "Baseline Scarcity": 0.2452
   },
   {
     "Ingredient": "Conan (WLP095, OYL-052, A04, LalBrew New England [Dry])",
@@ -597,7 +661,7 @@
     "Style Coverage": 1,
     "Signature": 0.4444,
     "Close Substitutes": 5,
-    "Baseline Scarcity": 0.2592
+    "Baseline Scarcity": 0.2452
   },
   {
     "Ingredient": "Czech Lager (WLP802, WY2001, L28)",
@@ -605,7 +669,7 @@
     "Style Coverage": 3,
     "Signature": 0.5333,
     "Close Substitutes": 7,
-    "Baseline Scarcity": 0.2592
+    "Baseline Scarcity": 0.2452
   },
   {
     "Ingredient": "Dry English Ale (WLP007, WY1098, A10)",
@@ -613,7 +677,7 @@
     "Style Coverage": 9,
     "Signature": 0.6154,
     "Close Substitutes": 8,
-    "Baseline Scarcity": 0.2592
+    "Baseline Scarcity": 0.2452
   },
   {
     "Ingredient": "East Coast Ale (WLP008, A15)",
@@ -621,23 +685,23 @@
     "Style Coverage": 10,
     "Signature": 0.6154,
     "Close Substitutes": 8,
-    "Baseline Scarcity": 0.2592
+    "Baseline Scarcity": 0.2452
   },
   {
     "Ingredient": "English Ale (WLP002, WY1968, S-04, A09)",
     "Category": "Yeast",
     "Style Coverage": 9,
     "Signature": 0.6154,
-    "Close Substitutes": 2,
-    "Baseline Scarcity": 0.2592
+    "Close Substitutes": 3,
+    "Baseline Scarcity": 0.2452
   },
   {
     "Ingredient": "Farmhouse (WY3726, OYL-217, Dry)",
     "Category": "Yeast",
     "Style Coverage": 3,
     "Signature": 0.6154,
-    "Close Substitutes": 6,
-    "Baseline Scarcity": 0.2592
+    "Close Substitutes": 7,
+    "Baseline Scarcity": 0.2452
   },
   {
     "Ingredient": "German Ale (WY1007, G02)",
@@ -645,7 +709,7 @@
     "Style Coverage": 3,
     "Signature": 0.6154,
     "Close Substitutes": 8,
-    "Baseline Scarcity": 0.2592
+    "Baseline Scarcity": 0.2452
   },
   {
     "Ingredient": "German Lager (WLP830, WY2124, L13, 34/70)",
@@ -653,15 +717,15 @@
     "Style Coverage": 6,
     "Signature": 0.5333,
     "Close Substitutes": 8,
-    "Baseline Scarcity": 0.2592
+    "Baseline Scarcity": 0.2452
   },
   {
     "Ingredient": "Hefewiezen (WLP300, WY3068, G01)",
     "Category": "Yeast",
     "Style Coverage": 4,
     "Signature": 0.8889,
-    "Close Substitutes": 5,
-    "Baseline Scarcity": 0.2592
+    "Close Substitutes": 6,
+    "Baseline Scarcity": 0.2452
   },
   {
     "Ingredient": "Hornindal Kveik (WLP521, OYL-091)",
@@ -669,7 +733,15 @@
     "Style Coverage": 5,
     "Signature": 0.6154,
     "Close Substitutes": 5,
-    "Baseline Scarcity": 0.2592
+    "Baseline Scarcity": 0.2452
+  },
+  {
+    "Ingredient": "Irish Ale (WLP004, WY1084, Imperial A44)",
+    "Category": "Yeast",
+    "Style Coverage": 7,
+    "Signature": 0.5714,
+    "Close Substitutes": 8,
+    "Baseline Scarcity": 0.2452
   },
   {
     "Ingredient": "Kolsch (WLP029, WY2565, G03, K-97)",
@@ -677,15 +749,15 @@
     "Style Coverage": 6,
     "Signature": 0.6154,
     "Close Substitutes": 8,
-    "Baseline Scarcity": 0.2592
+    "Baseline Scarcity": 0.2452
   },
   {
     "Ingredient": "London III (WLP013, A38, WY1318)",
     "Category": "Yeast",
     "Style Coverage": 7,
     "Signature": 0.6154,
-    "Close Substitutes": 6,
-    "Baseline Scarcity": 0.2592
+    "Close Substitutes": 7,
+    "Baseline Scarcity": 0.2452
   },
   {
     "Ingredient": "Lutra Kveik (OYL-071, OYL-071DRY)",
@@ -693,7 +765,7 @@
     "Style Coverage": 10,
     "Signature": 0.6154,
     "Close Substitutes": 8,
-    "Baseline Scarcity": 0.2592
+    "Baseline Scarcity": 0.2452
   },
   {
     "Ingredient": "Mexican Lager (WLP940, OYL-113, L09)",
@@ -701,15 +773,15 @@
     "Style Coverage": 4,
     "Signature": 0.5333,
     "Close Substitutes": 8,
-    "Baseline Scarcity": 0.2592
+    "Baseline Scarcity": 0.2452
   },
   {
     "Ingredient": "Munich Lager (WLP838, WY2308, Dry)",
     "Category": "Yeast",
     "Style Coverage": 4,
     "Signature": 0.5333,
-    "Close Substitutes": 6,
-    "Baseline Scarcity": 0.2592
+    "Close Substitutes": 7,
+    "Baseline Scarcity": 0.2452
   },
   {
     "Ingredient": "NovaLager (Lalbrew Y055) (Dry)",
@@ -717,15 +789,15 @@
     "Style Coverage": 8,
     "Signature": 0.5333,
     "Close Substitutes": 8,
-    "Baseline Scarcity": 0.2592
+    "Baseline Scarcity": 0.2452
   },
   {
     "Ingredient": "Philly Sour or Sourvisiae (Dry)",
     "Category": "Yeast",
     "Style Coverage": 1,
-    "Signature": 0.4706,
+    "Signature": 0.4444,
     "Close Substitutes": 0,
-    "Baseline Scarcity": 0.2592
+    "Baseline Scarcity": 0.2452
   },
   {
     "Ingredient": "Pomona (Lalbrew Y067) (Dry)",
@@ -733,7 +805,7 @@
     "Style Coverage": 1,
     "Signature": 0.4444,
     "Close Substitutes": 4,
-    "Baseline Scarcity": 0.2592
+    "Baseline Scarcity": 0.2452
   },
   {
     "Ingredient": "Saflager SH-45 (Thiol Enhancing Dry Lager Yeast)",
@@ -741,23 +813,23 @@
     "Style Coverage": 3,
     "Signature": 0.5,
     "Close Substitutes": 3,
-    "Baseline Scarcity": 0.2592
+    "Baseline Scarcity": 0.2452
   },
   {
     "Ingredient": "Saison (WLP565, WY3724)",
     "Category": "Yeast",
     "Style Coverage": 3,
     "Signature": 0.6154,
-    "Close Substitutes": 6,
-    "Baseline Scarcity": 0.2592
+    "Close Substitutes": 7,
+    "Baseline Scarcity": 0.2452
   },
   {
     "Ingredient": "San Fran Lager (WLP810, L05, WY2112)",
     "Category": "Yeast",
     "Style Coverage": 6,
     "Signature": 0.6154,
-    "Close Substitutes": 6,
-    "Baseline Scarcity": 0.2592
+    "Close Substitutes": 7,
+    "Baseline Scarcity": 0.2452
   },
   {
     "Ingredient": "Scottish Ale (WLP028, WY1728, A31)",
@@ -765,23 +837,23 @@
     "Style Coverage": 7,
     "Signature": 0.6154,
     "Close Substitutes": 8,
-    "Baseline Scarcity": 0.2592
+    "Baseline Scarcity": 0.2452
   },
   {
     "Ingredient": "Trappist Ale (WLP500, WY1214, B48)",
     "Category": "Yeast",
     "Style Coverage": 3,
     "Signature": 0.6667,
-    "Close Substitutes": 6,
-    "Baseline Scarcity": 0.2592
+    "Close Substitutes": 7,
+    "Baseline Scarcity": 0.2452
   },
   {
     "Ingredient": "Verdant IPA (Dry)",
     "Category": "Yeast",
     "Style Coverage": 1,
     "Signature": 0.4444,
-    "Close Substitutes": 4,
-    "Baseline Scarcity": 0.2592
+    "Close Substitutes": 5,
+    "Baseline Scarcity": 0.2452
   },
   {
     "Ingredient": "Voss Kveik (A43, OYL-061, Dry)",
@@ -789,383 +861,415 @@
     "Style Coverage": 8,
     "Signature": 0.6154,
     "Close Substitutes": 3,
-    "Baseline Scarcity": 0.2592
+    "Baseline Scarcity": 0.2452
   },
   {
     "Ingredient": "Abstrax SkyFarm fruit flavors (any)",
     "Category": "Adjunct",
     "Style Coverage": 3,
-    "Signature": 0.3333,
+    "Signature": 0.3478,
     "Close Substitutes": 0,
-    "Baseline Scarcity": 0.1743
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Abstrax terpenes (any variety of Quantum, Omni, or BrewGas)",
     "Category": "Adjunct",
     "Style Coverage": 3,
-    "Signature": 0.5,
+    "Signature": 0.5714,
     "Close Substitutes": 0,
-    "Baseline Scarcity": 0.1743
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Apricots",
     "Category": "Adjunct",
     "Style Coverage": 5,
-    "Signature": 0.5714,
+    "Signature": 0.7273,
     "Close Substitutes": 0,
-    "Baseline Scarcity": 0.1743
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Blackberries",
     "Category": "Adjunct",
     "Style Coverage": 5,
-    "Signature": 0.5,
+    "Signature": 0.5714,
     "Close Substitutes": 0,
-    "Baseline Scarcity": 0.1743
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Blueberries",
     "Category": "Adjunct",
     "Style Coverage": 5,
-    "Signature": 0.5714,
+    "Signature": 0.7273,
     "Close Substitutes": 0,
-    "Baseline Scarcity": 0.1743
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Brewer's Crystals",
     "Category": "Adjunct",
-    "Style Coverage": 9,
-    "Signature": 0.7273,
+    "Style Coverage": 3,
+    "Signature": 0.8,
     "Close Substitutes": 0,
-    "Baseline Scarcity": 0.1743
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Brown Sugar",
     "Category": "Adjunct",
-    "Style Coverage": 11,
+    "Style Coverage": 6,
     "Signature": 0.5333,
     "Close Substitutes": 0,
-    "Baseline Scarcity": 0.1743
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Candi Sugar, Amber",
     "Category": "Adjunct",
     "Style Coverage": 3,
-    "Signature": 0.4444,
+    "Signature": 0.5333,
     "Close Substitutes": 0,
-    "Baseline Scarcity": 0.1743
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Candi Sugar, Clear",
     "Category": "Adjunct",
     "Style Coverage": 4,
-    "Signature": 0.4444,
+    "Signature": 0.5333,
     "Close Substitutes": 0,
-    "Baseline Scarcity": 0.1743
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Candi Sugar, Dark",
     "Category": "Adjunct",
-    "Style Coverage": 4,
-    "Signature": 0.4,
+    "Style Coverage": 3,
+    "Signature": 0.4706,
     "Close Substitutes": 0,
-    "Baseline Scarcity": 0.1743
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Cane (or Beet) Sugar",
     "Category": "Adjunct",
-    "Style Coverage": 18,
-    "Signature": 0.7273,
+    "Style Coverage": 5,
+    "Signature": 0.6667,
     "Close Substitutes": 0,
-    "Baseline Scarcity": 0.1743
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Cherries",
     "Category": "Adjunct",
     "Style Coverage": 5,
-    "Signature": 0.4,
+    "Signature": 0.4706,
     "Close Substitutes": 0,
-    "Baseline Scarcity": 0.1743
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Chili Peppers",
     "Category": "Adjunct",
     "Style Coverage": 5,
-    "Signature": 0.5333,
+    "Signature": 0.6154,
     "Close Substitutes": 0,
-    "Baseline Scarcity": 0.1743
+    "Baseline Scarcity": 0.1618
+  },
+  {
+    "Ingredient": "Cinnamon",
+    "Category": "Adjunct",
+    "Style Coverage": 6,
+    "Signature": 0.5,
+    "Close Substitutes": 0,
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Cocoa Nibs/Beans",
     "Category": "Adjunct",
-    "Style Coverage": 7,
-    "Signature": 0.4,
+    "Style Coverage": 6,
+    "Signature": 0.5333,
     "Close Substitutes": 0,
-    "Baseline Scarcity": 0.1743
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Coconut",
     "Category": "Adjunct",
     "Style Coverage": 8,
-    "Signature": 0.4,
+    "Signature": 0.5,
     "Close Substitutes": 0,
-    "Baseline Scarcity": 0.1743
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Coffee (Liquid or Beans)",
     "Category": "Adjunct",
     "Style Coverage": 6,
-    "Signature": 0.4,
+    "Signature": 0.5333,
     "Close Substitutes": 0,
-    "Baseline Scarcity": 0.1743
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Coriander",
     "Category": "Adjunct",
     "Style Coverage": 5,
-    "Signature": 0.4444,
+    "Signature": 0.5333,
     "Close Substitutes": 0,
-    "Baseline Scarcity": 0.1743
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Corn Sugar (Dextrose)",
     "Category": "Adjunct",
-    "Style Coverage": 15,
-    "Signature": 0.7273,
+    "Style Coverage": 7,
+    "Signature": 0.8,
     "Close Substitutes": 0,
-    "Baseline Scarcity": 0.1743
+    "Baseline Scarcity": 0.1618
+  },
+  {
+    "Ingredient": "Cranberries",
+    "Category": "Adjunct",
+    "Style Coverage": 5,
+    "Signature": 0.5714,
+    "Close Substitutes": 0,
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Demerara Sugar",
     "Category": "Adjunct",
-    "Style Coverage": 10,
-    "Signature": 0.5333,
+    "Style Coverage": 4,
+    "Signature": 0.6667,
     "Close Substitutes": 0,
-    "Baseline Scarcity": 0.1743
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Dragon Fruit",
     "Category": "Adjunct",
     "Style Coverage": 3,
-    "Signature": 0.3333,
+    "Signature": 0.3478,
     "Close Substitutes": 0,
-    "Baseline Scarcity": 0.1743
+    "Baseline Scarcity": 0.1618
+  },
+  {
+    "Ingredient": "Ginger",
+    "Category": "Adjunct",
+    "Style Coverage": 4,
+    "Signature": 0.3636,
+    "Close Substitutes": 0,
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Grains of Paradise",
     "Category": "Adjunct",
     "Style Coverage": 3,
-    "Signature": 0.381,
+    "Signature": 0.3636,
     "Close Substitutes": 0,
-    "Baseline Scarcity": 0.1743
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Grapefruit Peel",
     "Category": "Adjunct",
     "Style Coverage": 5,
-    "Signature": 0.5,
+    "Signature": 0.5714,
     "Close Substitutes": 0,
-    "Baseline Scarcity": 0.1743
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Guava",
     "Category": "Adjunct",
     "Style Coverage": 3,
-    "Signature": 0.3333,
+    "Signature": 0.3478,
     "Close Substitutes": 0,
-    "Baseline Scarcity": 0.1743
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Honey",
     "Category": "Adjunct",
-    "Style Coverage": 18,
-    "Signature": 0.7273,
+    "Style Coverage": 6,
+    "Signature": 0.5714,
     "Close Substitutes": 0,
-    "Baseline Scarcity": 0.1743
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Juniper",
     "Category": "Adjunct",
     "Style Coverage": 3,
-    "Signature": 0.5,
+    "Signature": 0.5714,
     "Close Substitutes": 0,
-    "Baseline Scarcity": 0.1743
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Lemon Peel/Juice",
     "Category": "Adjunct",
     "Style Coverage": 4,
-    "Signature": 0.381,
+    "Signature": 0.3636,
     "Close Substitutes": 0,
-    "Baseline Scarcity": 0.1743
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Licorice",
     "Category": "Adjunct",
     "Style Coverage": 6,
-    "Signature": 0.4,
+    "Signature": 0.5333,
     "Close Substitutes": 0,
-    "Baseline Scarcity": 0.1743
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Lime Peel/Juice",
     "Category": "Adjunct",
     "Style Coverage": 4,
-    "Signature": 0.5333,
+    "Signature": 0.6154,
     "Close Substitutes": 0,
-    "Baseline Scarcity": 0.1743
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Lyle's Golden Syrup (Invert Sugar)",
     "Category": "Adjunct",
-    "Style Coverage": 7,
-    "Signature": 0.5333,
+    "Style Coverage": 5,
+    "Signature": 0.6667,
     "Close Substitutes": 0,
-    "Baseline Scarcity": 0.1743
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Mango",
     "Category": "Adjunct",
     "Style Coverage": 3,
-    "Signature": 0.3333,
+    "Signature": 0.3478,
     "Close Substitutes": 0,
-    "Baseline Scarcity": 0.1743
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Maple Syrup",
     "Category": "Adjunct",
-    "Style Coverage": 7,
+    "Style Coverage": 5,
     "Signature": 0.5,
     "Close Substitutes": 0,
-    "Baseline Scarcity": 0.1743
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Milk Sugar (Lactose)",
     "Category": "Adjunct",
-    "Style Coverage": 6,
-    "Signature": 0.4,
+    "Style Coverage": 4,
+    "Signature": 0.5,
     "Close Substitutes": 0,
-    "Baseline Scarcity": 0.1743
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Molasses",
     "Category": "Adjunct",
-    "Style Coverage": 8,
-    "Signature": 0.4,
+    "Style Coverage": 6,
+    "Signature": 0.5333,
     "Close Substitutes": 0,
-    "Baseline Scarcity": 0.1743
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Mushrooms",
     "Category": "Adjunct",
     "Style Coverage": 2,
-    "Signature": 0.3333,
+    "Signature": 0.3636,
     "Close Substitutes": 0,
-    "Baseline Scarcity": 0.1743
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Nectarines",
     "Category": "Adjunct",
     "Style Coverage": 4,
-    "Signature": 0.3333,
+    "Signature": 0.3478,
     "Close Substitutes": 0,
-    "Baseline Scarcity": 0.1743
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Oak",
     "Category": "Adjunct",
     "Style Coverage": 5,
-    "Signature": 0.4,
+    "Signature": 0.4706,
     "Close Substitutes": 0,
-    "Baseline Scarcity": 0.1743
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Orange Peel, Bitter",
     "Category": "Adjunct",
     "Style Coverage": 5,
-    "Signature": 0.4444,
+    "Signature": 0.5333,
     "Close Substitutes": 0,
-    "Baseline Scarcity": 0.1743
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Orange Peel, Sweet",
     "Category": "Adjunct",
     "Style Coverage": 5,
-    "Signature": 0.5,
+    "Signature": 0.5714,
     "Close Substitutes": 0,
-    "Baseline Scarcity": 0.1743
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Passion Fruit",
     "Category": "Adjunct",
     "Style Coverage": 3,
-    "Signature": 0.3333,
+    "Signature": 0.3478,
     "Close Substitutes": 0,
-    "Baseline Scarcity": 0.1743
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Peaches",
     "Category": "Adjunct",
     "Style Coverage": 6,
-    "Signature": 0.5714,
+    "Signature": 0.7273,
     "Close Substitutes": 0,
-    "Baseline Scarcity": 0.1743
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Pineapple",
     "Category": "Adjunct",
     "Style Coverage": 3,
-    "Signature": 0.3333,
+    "Signature": 0.3478,
     "Close Substitutes": 0,
-    "Baseline Scarcity": 0.1743
+    "Baseline Scarcity": 0.1618
+  },
+  {
+    "Ingredient": "Pumpkin",
+    "Category": "Adjunct",
+    "Style Coverage": 4,
+    "Signature": 0.5,
+    "Close Substitutes": 0,
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Raspberries",
     "Category": "Adjunct",
     "Style Coverage": 6,
-    "Signature": 0.5,
+    "Signature": 0.5714,
     "Close Substitutes": 0,
-    "Baseline Scarcity": 0.1743
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Rice Syrup (added \"syrup\" to differentiate from flaked rice in specialty malts)",
     "Category": "Adjunct",
-    "Style Coverage": 4,
-    "Signature": 0.6667,
+    "Style Coverage": 3,
+    "Signature": 0.8,
     "Close Substitutes": 0,
-    "Baseline Scarcity": 0.1743
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Truffles",
     "Category": "Adjunct",
     "Style Coverage": 2,
-    "Signature": 0.3333,
+    "Signature": 0.3636,
     "Close Substitutes": 0,
-    "Baseline Scarcity": 0.1743
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Turbinado Sugar",
     "Category": "Adjunct",
-    "Style Coverage": 7,
-    "Signature": 0.5333,
+    "Style Coverage": 5,
+    "Signature": 0.6667,
     "Close Substitutes": 0,
-    "Baseline Scarcity": 0.1743
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Vanilla (extract or bean)",
     "Category": "Adjunct",
-    "Style Coverage": 10,
-    "Signature": 0.4,
+    "Style Coverage": 7,
+    "Signature": 0.5,
     "Close Substitutes": 0,
-    "Baseline Scarcity": 0.1743
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Watermelon",
     "Category": "Adjunct",
     "Style Coverage": 3,
-    "Signature": 0.3333,
+    "Signature": 0.3478,
     "Close Substitutes": 0,
-    "Baseline Scarcity": 0.1743
+    "Baseline Scarcity": 0.1618
   },
   {
     "Ingredient": "Aromatic",

@@ -29,8 +29,8 @@ White Wheat,Ella,"San Fran Lager (WLP810, L05, WY2112)",Chili Peppers,"Oats, Mal
 ,Strisselspalt,Verdant IPA (Dry),Pineapple,Carahell
 ,Galaxy,"Voss Kveik (A43, OYL-061, Dry)",Coconut,Peat Smoked Malt
 ,Styrian Goldings,Saflager SH-45 (Thiol Enhancing Dry Lager Yeast),Raspberries,Caramel/Crystal Malt - 10L
-,Hallertau Mittelfrueh,,Coffee (Liquid or Beans),Quinoa
-,Tettnang / Tettnanger,,"Rice Syrup (added ""syrup"" to differentiate from flaked rice in specialty malts)",Caramel/Crystal Malt - 20L
+,Hallertau Mittelfrueh,"Belgian Witbier (WLP400, WY3944, Imperial B44, LalBrew Wit)",Coffee (Liquid or Beans),Quinoa
+,Tettnang / Tettnanger,"Irish Ale (WLP004, WY1084, Imperial A44)","Rice Syrup (added ""syrup"" to differentiate from flaked rice in specialty malts)",Caramel/Crystal Malt - 20L
 ,Hallertau Tradition,,Corn Sugar (Dextrose),"Rice, Flaked"
 ,Topaz,,Truffles,Caramel/Crystal Malt - 30L
 ,Idaho 7,,Coriander,Rye Malt
@@ -43,13 +43,13 @@ White Wheat,Ella,"San Fran Lager (WLP810, L05, WY2112)",Chili Peppers,"Oats, Mal
 ,Lotus,,Grapefruit Peel,Caramel/Crystal Malt -120L
 ,Magnum,,Guava,Special Roast
 ,Mosaic,,Honey,Caramunich I
-,,,Juniper,Spelt Malt
-,,,Lemon Peel/Juice,Caramunich II
-,,,Licorice,Toasted Malt
-,,,,Carapils/Dextrine/Carafoam
-,,,,Victory
-,,,,Carared
-,,,,"Wheat, Flaked"
+,Chinook,,Juniper,Spelt Malt
+,Willamette,,Lemon Peel/Juice,Caramunich II
+,Nugget,,Licorice,Toasted Malt
+,Northern Brewer,,Cinnamon,Carapils/Dextrine/Carafoam
+,Cluster,,Cranberries,Victory
+,Mt Hood,,Ginger,Carared
+,Warrior,,Pumpkin,"Wheat, Flaked"
 ,,,,Caravienne
 ,,,,"Wheat, Red"
 ,,,,Chit Malt

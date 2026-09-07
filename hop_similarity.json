@@ -2,1465 +2,1711 @@
   "Amarillo": [
     {
       "ingredient": "Centennial",
-      "score": 0.764
+      "score": 0.773
     },
     {
       "ingredient": "Cascade",
-      "score": 0.738
+      "score": 0.749
     },
     {
       "ingredient": "Citra",
-      "score": 0.697
+      "score": 0.709
     },
     {
       "ingredient": "Azacca",
-      "score": 0.677
+      "score": 0.69
     },
     {
       "ingredient": "Motueka",
-      "score": 0.67
+      "score": 0.683
     },
     {
       "ingredient": "Triumph",
-      "score": 0.665
+      "score": 0.678
     },
     {
       "ingredient": "Kohatu",
-      "score": 0.663
+      "score": 0.677
     },
     {
       "ingredient": "Galaxy",
-      "score": 0.646
+      "score": 0.659
     }
   ],
   "Ariana": [
     {
       "ingredient": "Mosaic",
-      "score": 0.539
+      "score": 0.557
     },
     {
       "ingredient": "Lotus",
-      "score": 0.534
+      "score": 0.552
     },
     {
       "ingredient": "Sorachi Ace",
-      "score": 0.439
+      "score": 0.461
     },
     {
       "ingredient": "Amarillo",
-      "score": 0.429
+      "score": 0.451
     },
     {
       "ingredient": "Centennial",
-      "score": 0.411
+      "score": 0.433
     },
     {
       "ingredient": "Citra",
-      "score": 0.387
+      "score": 0.411
     },
     {
       "ingredient": "Lemondrop",
-      "score": 0.382
+      "score": 0.406
     },
     {
       "ingredient": "Azacca",
-      "score": 0.363
+      "score": 0.388
     }
   ],
   "Azacca": [
     {
       "ingredient": "Citra",
-      "score": 0.806
+      "score": 0.813
     },
     {
       "ingredient": "Idaho 7",
-      "score": 0.795
+      "score": 0.803
     },
     {
       "ingredient": "Galaxy",
-      "score": 0.79
+      "score": 0.798
     },
     {
       "ingredient": "Krush (HBC 586)",
-      "score": 0.787
+      "score": 0.795
     },
     {
       "ingredient": "Kohatu",
-      "score": 0.773
+      "score": 0.782
     },
     {
       "ingredient": "BRU-1",
-      "score": 0.738
+      "score": 0.748
     },
     {
       "ingredient": "Motueka",
-      "score": 0.694
+      "score": 0.706
     },
     {
       "ingredient": "Lotus",
-      "score": 0.679
+      "score": 0.692
     }
   ],
   "BRU-1": [
     {
       "ingredient": "Galaxy",
-      "score": 0.901
+      "score": 0.905
     },
     {
       "ingredient": "Nectaron",
-      "score": 0.817
+      "score": 0.824
     },
     {
       "ingredient": "Triumph",
-      "score": 0.806
+      "score": 0.814
     },
     {
       "ingredient": "Krush (HBC 586)",
-      "score": 0.754
+      "score": 0.764
     },
     {
       "ingredient": "Azacca",
-      "score": 0.738
+      "score": 0.748
     },
     {
       "ingredient": "Citra",
-      "score": 0.701
+      "score": 0.713
     },
     {
       "ingredient": "Idaho 7",
-      "score": 0.688
+      "score": 0.7
     },
     {
       "ingredient": "Rakau",
-      "score": 0.636
+      "score": 0.651
     }
   ],
   "Calista": [
     {
       "ingredient": "Nectaron",
-      "score": 0.635
+      "score": 0.649
     },
     {
       "ingredient": "Rakau",
-      "score": 0.529
+      "score": 0.547
     },
     {
       "ingredient": "BRU-1",
-      "score": 0.415
+      "score": 0.437
     },
     {
       "ingredient": "Galaxy",
-      "score": 0.386
+      "score": 0.41
     },
     {
       "ingredient": "Triumph",
-      "score": 0.368
+      "score": 0.393
     },
     {
       "ingredient": "Krush (HBC 586)",
-      "score": 0.285
+      "score": 0.313
     },
     {
       "ingredient": "El Dorado",
-      "score": 0.202
+      "score": 0.233
     },
     {
       "ingredient": "Citra",
-      "score": 0.201
+      "score": 0.232
     }
   ],
   "Cascade": [
     {
       "ingredient": "Centennial",
-      "score": 0.89
+      "score": 0.895
     },
     {
       "ingredient": "Amarillo",
-      "score": 0.738
+      "score": 0.749
     },
     {
       "ingredient": "Loral",
-      "score": 0.726
+      "score": 0.737
     },
     {
       "ingredient": "Saphir",
-      "score": 0.622
+      "score": 0.636
     },
     {
       "ingredient": "Lemondrop",
-      "score": 0.498
+      "score": 0.517
     },
     {
       "ingredient": "Liberty",
-      "score": 0.485
+      "score": 0.505
+    },
+    {
+      "ingredient": "Chinook",
+      "score": 0.47
     },
     {
       "ingredient": "Motueka",
-      "score": 0.401
-    },
-    {
-      "ingredient": "Kohatu",
-      "score": 0.365
+      "score": 0.425
     }
   ],
   "Centennial": [
     {
       "ingredient": "Cascade",
-      "score": 0.89
+      "score": 0.895
     },
     {
       "ingredient": "Amarillo",
-      "score": 0.764
+      "score": 0.773
+    },
+    {
+      "ingredient": "Chinook",
+      "score": 0.646
     },
     {
       "ingredient": "Loral",
-      "score": 0.543
+      "score": 0.561
     },
     {
       "ingredient": "Kohatu",
-      "score": 0.529
+      "score": 0.547
     },
     {
       "ingredient": "Lemondrop",
-      "score": 0.431
+      "score": 0.453
     },
     {
       "ingredient": "Ariana",
-      "score": 0.411
+      "score": 0.433
     },
     {
       "ingredient": "Simcoe",
-      "score": 0.372
-    },
-    {
-      "ingredient": "Azacca",
-      "score": 0.369
+      "score": 0.396
     }
   ],
   "Challenger": [
     {
+      "ingredient": "Northern Brewer",
+      "score": 0.758
+    },
+    {
       "ingredient": "Progress",
-      "score": 0.628
+      "score": 0.643
     },
     {
       "ingredient": "Perle",
-      "score": 0.582
+      "score": 0.599
     },
     {
       "ingredient": "Styrian Goldings",
-      "score": 0.553
+      "score": 0.571
     },
     {
       "ingredient": "Hallertau Tradition",
-      "score": 0.547
+      "score": 0.565
+    },
+    {
+      "ingredient": "Cluster",
+      "score": 0.564
     },
     {
       "ingredient": "East Kent Goldings",
-      "score": 0.521
+      "score": 0.54
     },
     {
-      "ingredient": "Saaz",
-      "score": 0.493
-    },
-    {
-      "ingredient": "Loral",
-      "score": 0.436
-    },
-    {
-      "ingredient": "Tettnang / Tettnanger",
-      "score": 0.419
+      "ingredient": "Mt Hood",
+      "score": 0.525
     }
   ],
   "Citra": [
     {
       "ingredient": "Krush (HBC 586)",
-      "score": 0.931
+      "score": 0.933
     },
     {
       "ingredient": "Riwaka",
-      "score": 0.877
+      "score": 0.882
     },
     {
       "ingredient": "Galaxy",
-      "score": 0.829
+      "score": 0.836
     },
     {
       "ingredient": "Azacca",
-      "score": 0.806
+      "score": 0.813
     },
     {
       "ingredient": "Lotus",
-      "score": 0.782
+      "score": 0.79
     },
     {
       "ingredient": "Nectaron",
-      "score": 0.781
+      "score": 0.79
     },
     {
       "ingredient": "Triumph",
-      "score": 0.771
+      "score": 0.78
     },
     {
       "ingredient": "Motueka",
-      "score": 0.748
+      "score": 0.758
     }
   ],
   "Columbus/Tomahawk/Zeus": [
     {
+      "ingredient": "Chinook",
+      "score": 0.741
+    },
+    {
       "ingredient": "Simcoe",
-      "score": 0.574
+      "score": 0.591
+    },
+    {
+      "ingredient": "Nugget",
+      "score": 0.438
     },
     {
       "ingredient": "Idaho 7",
-      "score": 0.372
+      "score": 0.396
+    },
+    {
+      "ingredient": "Warrior",
+      "score": 0.395
     },
     {
       "ingredient": "Topaz",
-      "score": 0.256
+      "score": 0.285
     },
     {
       "ingredient": "Mosaic",
-      "score": 0.205
+      "score": 0.236
     },
     {
       "ingredient": "Centennial",
-      "score": 0.204
-    },
-    {
-      "ingredient": "Strata",
-      "score": 0.195
-    },
-    {
-      "ingredient": "Magnum",
-      "score": 0.171
+      "score": 0.235
     }
   ],
   "East Kent Goldings": [
     {
       "ingredient": "Tettnang / Tettnanger",
-      "score": 0.843
+      "score": 0.849
     },
     {
       "ingredient": "Styrian Goldings",
-      "score": 0.841
+      "score": 0.847
     },
     {
       "ingredient": "Hallertau Mittelfrueh",
-      "score": 0.803
+      "score": 0.81
+    },
+    {
+      "ingredient": "Mt Hood",
+      "score": 0.805
+    },
+    {
+      "ingredient": "Willamette",
+      "score": 0.77
     },
     {
       "ingredient": "Hallertau Tradition",
-      "score": 0.693
+      "score": 0.705
     },
     {
       "ingredient": "Strisselspalt",
-      "score": 0.687
+      "score": 0.699
     },
     {
       "ingredient": "Liberty",
-      "score": 0.608
-    },
-    {
-      "ingredient": "Saaz",
-      "score": 0.584
-    },
-    {
-      "ingredient": "Fuggle",
-      "score": 0.559
+      "score": 0.624
     }
   ],
   "El Dorado": [
     {
       "ingredient": "BRU-1",
-      "score": 0.579
+      "score": 0.595
     },
     {
       "ingredient": "Krush (HBC 586)",
-      "score": 0.545
+      "score": 0.563
     },
     {
       "ingredient": "Galaxy",
-      "score": 0.491
+      "score": 0.511
     },
     {
       "ingredient": "Nectaron",
-      "score": 0.435
+      "score": 0.457
     },
     {
       "ingredient": "Rakau",
-      "score": 0.435
+      "score": 0.457
     },
     {
       "ingredient": "Triumph",
-      "score": 0.415
+      "score": 0.438
     },
     {
       "ingredient": "Topaz",
-      "score": 0.354
+      "score": 0.379
     },
     {
       "ingredient": "Idaho 7",
-      "score": 0.345
+      "score": 0.37
     }
   ],
   "Ella": [
     {
       "ingredient": "Perle",
-      "score": 0.575
+      "score": 0.591
     },
     {
       "ingredient": "Loral",
-      "score": 0.57
+      "score": 0.587
     },
     {
       "ingredient": "BRU-1",
-      "score": 0.513
+      "score": 0.532
+    },
+    {
+      "ingredient": "Mt Hood",
+      "score": 0.457
     },
     {
       "ingredient": "Tettnang / Tettnanger",
-      "score": 0.412
+      "score": 0.434
     },
     {
       "ingredient": "Liberty",
-      "score": 0.396
+      "score": 0.42
     },
     {
       "ingredient": "Azacca",
-      "score": 0.383
+      "score": 0.407
     },
     {
       "ingredient": "Hallertau Mittelfrueh",
-      "score": 0.365
-    },
-    {
-      "ingredient": "Idaho 7",
-      "score": 0.333
+      "score": 0.39
     }
   ],
   "Fuggle": [
     {
+      "ingredient": "Willamette",
+      "score": 0.815
+    },
+    {
       "ingredient": "Progress",
-      "score": 0.742
+      "score": 0.752
     },
     {
       "ingredient": "Styrian Goldings",
-      "score": 0.619
+      "score": 0.634
     },
     {
       "ingredient": "East Kent Goldings",
-      "score": 0.559
+      "score": 0.576
     },
     {
       "ingredient": "Challenger",
-      "score": 0.396
+      "score": 0.42
     },
     {
       "ingredient": "Saaz",
-      "score": 0.391
+      "score": 0.415
     },
     {
       "ingredient": "Hallertau Mittelfrueh",
-      "score": 0.366
+      "score": 0.391
     },
     {
       "ingredient": "Hallertau Tradition",
-      "score": 0.345
-    },
-    {
-      "ingredient": "Tettnang / Tettnanger",
-      "score": 0.23
+      "score": 0.37
     }
   ],
   "Galaxy": [
     {
       "ingredient": "BRU-1",
-      "score": 0.901
+      "score": 0.905
     },
     {
       "ingredient": "Triumph",
-      "score": 0.886
+      "score": 0.89
     },
     {
       "ingredient": "Nectaron",
-      "score": 0.841
+      "score": 0.847
     },
     {
       "ingredient": "Citra",
-      "score": 0.829
+      "score": 0.836
     },
     {
       "ingredient": "Krush (HBC 586)",
-      "score": 0.819
+      "score": 0.826
     },
     {
       "ingredient": "Azacca",
-      "score": 0.79
+      "score": 0.798
     },
     {
       "ingredient": "Idaho 7",
-      "score": 0.676
+      "score": 0.689
     },
     {
       "ingredient": "Amarillo",
-      "score": 0.646
+      "score": 0.659
     }
   ],
   "Hallertau Mittelfrueh": [
     {
       "ingredient": "Tettnang / Tettnanger",
-      "score": 0.958
+      "score": 0.959
+    },
+    {
+      "ingredient": "Mt Hood",
+      "score": 0.89
     },
     {
       "ingredient": "Hallertau Tradition",
-      "score": 0.877
+      "score": 0.882
     },
     {
       "ingredient": "East Kent Goldings",
-      "score": 0.803
+      "score": 0.81
     },
     {
       "ingredient": "Liberty",
-      "score": 0.792
+      "score": 0.8
     },
     {
       "ingredient": "Strisselspalt",
-      "score": 0.788
+      "score": 0.796
     },
     {
       "ingredient": "Perle",
-      "score": 0.751
+      "score": 0.76
     },
     {
       "ingredient": "Styrian Goldings",
-      "score": 0.744
-    },
-    {
-      "ingredient": "Saaz",
-      "score": 0.672
+      "score": 0.754
     }
   ],
   "Hallertau Tradition": [
     {
       "ingredient": "Hallertau Mittelfrueh",
-      "score": 0.877
+      "score": 0.882
+    },
+    {
+      "ingredient": "Mt Hood",
+      "score": 0.862
     },
     {
       "ingredient": "Tettnang / Tettnanger",
-      "score": 0.837
+      "score": 0.843
     },
     {
       "ingredient": "Perle",
-      "score": 0.826
+      "score": 0.833
     },
     {
       "ingredient": "Saaz",
-      "score": 0.719
+      "score": 0.73
     },
     {
       "ingredient": "East Kent Goldings",
-      "score": 0.693
+      "score": 0.705
     },
     {
       "ingredient": "Strisselspalt",
-      "score": 0.655
+      "score": 0.668
     },
     {
       "ingredient": "Progress",
-      "score": 0.634
-    },
-    {
-      "ingredient": "Styrian Goldings",
-      "score": 0.621
+      "score": 0.648
     }
   ],
   "Idaho 7": [
     {
       "ingredient": "Azacca",
-      "score": 0.795
+      "score": 0.803
     },
     {
       "ingredient": "Simcoe",
-      "score": 0.775
+      "score": 0.784
     },
     {
       "ingredient": "Kohatu",
-      "score": 0.714
+      "score": 0.725
     },
     {
       "ingredient": "BRU-1",
-      "score": 0.688
+      "score": 0.7
     },
     {
       "ingredient": "Galaxy",
-      "score": 0.676
+      "score": 0.689
     },
     {
       "ingredient": "Triumph",
-      "score": 0.66
+      "score": 0.673
     },
     {
       "ingredient": "Rakau",
-      "score": 0.657
+      "score": 0.671
     },
     {
       "ingredient": "Mosaic",
-      "score": 0.607
+      "score": 0.623
     }
   ],
   "Kohatu": [
     {
       "ingredient": "Azacca",
-      "score": 0.773
+      "score": 0.782
     },
     {
       "ingredient": "Idaho 7",
-      "score": 0.714
+      "score": 0.725
     },
     {
       "ingredient": "Simcoe",
-      "score": 0.705
+      "score": 0.716
     },
     {
       "ingredient": "Motueka",
-      "score": 0.669
+      "score": 0.682
     },
     {
       "ingredient": "Amarillo",
-      "score": 0.663
+      "score": 0.677
     },
     {
       "ingredient": "Riwaka",
-      "score": 0.617
+      "score": 0.632
     },
     {
       "ingredient": "Citra",
-      "score": 0.563
+      "score": 0.58
     },
     {
-      "ingredient": "Centennial",
-      "score": 0.529
+      "ingredient": "Chinook",
+      "score": 0.562
     }
   ],
   "Krush (HBC 586)": [
     {
       "ingredient": "Citra",
-      "score": 0.931
+      "score": 0.933
     },
     {
       "ingredient": "Nectaron",
-      "score": 0.831
+      "score": 0.838
     },
     {
       "ingredient": "Galaxy",
-      "score": 0.819
+      "score": 0.826
     },
     {
       "ingredient": "Azacca",
-      "score": 0.787
+      "score": 0.795
     },
     {
       "ingredient": "Riwaka",
-      "score": 0.772
+      "score": 0.78
     },
     {
       "ingredient": "BRU-1",
-      "score": 0.754
+      "score": 0.764
     },
     {
       "ingredient": "Triumph",
-      "score": 0.725
+      "score": 0.736
     },
     {
       "ingredient": "Lotus",
-      "score": 0.695
+      "score": 0.707
     }
   ],
   "Lemondrop": [
     {
       "ingredient": "Sorachi Ace",
-      "score": 0.587
+      "score": 0.604
     },
     {
       "ingredient": "Saphir",
-      "score": 0.516
-    },
-    {
-      "ingredient": "Cascade",
-      "score": 0.498
+      "score": 0.535
     },
     {
       "ingredient": "Motueka",
-      "score": 0.498
+      "score": 0.518
+    },
+    {
+      "ingredient": "Cascade",
+      "score": 0.517
     },
     {
       "ingredient": "Strisselspalt",
-      "score": 0.434
+      "score": 0.456
     },
     {
       "ingredient": "Centennial",
-      "score": 0.431
+      "score": 0.453
     },
     {
       "ingredient": "Amarillo",
-      "score": 0.382
+      "score": 0.406
     },
     {
       "ingredient": "Ariana",
-      "score": 0.382
+      "score": 0.406
     }
   ],
   "Liberty": [
     {
       "ingredient": "Strisselspalt",
-      "score": 0.855
+      "score": 0.861
     },
     {
       "ingredient": "Saphir",
-      "score": 0.852
+      "score": 0.858
     },
     {
       "ingredient": "Tettnang / Tettnanger",
-      "score": 0.83
+      "score": 0.837
     },
     {
       "ingredient": "Hallertau Mittelfrueh",
-      "score": 0.792
+      "score": 0.8
+    },
+    {
+      "ingredient": "Mt Hood",
+      "score": 0.789
     },
     {
       "ingredient": "Loral",
-      "score": 0.771
+      "score": 0.78
     },
     {
       "ingredient": "East Kent Goldings",
-      "score": 0.608
+      "score": 0.624
     },
     {
       "ingredient": "Styrian Goldings",
-      "score": 0.592
-    },
-    {
-      "ingredient": "Hallertau Tradition",
-      "score": 0.578
+      "score": 0.608
     }
   ],
   "Loral": [
     {
       "ingredient": "Liberty",
-      "score": 0.771
+      "score": 0.78
     },
     {
       "ingredient": "Cascade",
-      "score": 0.726
+      "score": 0.737
     },
     {
       "ingredient": "Saphir",
-      "score": 0.717
+      "score": 0.728
     },
     {
       "ingredient": "Strisselspalt",
-      "score": 0.613
+      "score": 0.628
     },
     {
       "ingredient": "Perle",
-      "score": 0.595
+      "score": 0.61
     },
     {
       "ingredient": "Ella",
-      "score": 0.57
+      "score": 0.587
     },
     {
       "ingredient": "Tettnang / Tettnanger",
-      "score": 0.557
+      "score": 0.574
     },
     {
       "ingredient": "Centennial",
-      "score": 0.543
+      "score": 0.561
     }
   ],
   "Lotus": [
     {
       "ingredient": "Sabro",
-      "score": 0.806
+      "score": 0.814
     },
     {
       "ingredient": "Citra",
-      "score": 0.782
+      "score": 0.79
     },
     {
       "ingredient": "Krush (HBC 586)",
-      "score": 0.695
+      "score": 0.707
     },
     {
       "ingredient": "Azacca",
-      "score": 0.679
+      "score": 0.692
     },
     {
       "ingredient": "Riwaka",
-      "score": 0.657
+      "score": 0.67
     },
     {
       "ingredient": "Sorachi Ace",
-      "score": 0.638
+      "score": 0.652
     },
     {
       "ingredient": "Motueka",
-      "score": 0.609
+      "score": 0.624
     },
     {
       "ingredient": "Galaxy",
-      "score": 0.56
+      "score": 0.577
     }
   ],
   "Magnum": [
     {
+      "ingredient": "Warrior",
+      "score": 0.87
+    },
+    {
+      "ingredient": "Nugget",
+      "score": 0.586
+    },
+    {
       "ingredient": "Columbus/Tomahawk/Zeus",
-      "score": 0.171
+      "score": 0.203
     }
   ],
   "Mosaic": [
     {
       "ingredient": "Simcoe",
-      "score": 0.798
+      "score": 0.806
     },
     {
       "ingredient": "Strata",
-      "score": 0.689
+      "score": 0.701
     },
     {
       "ingredient": "Idaho 7",
-      "score": 0.607
+      "score": 0.623
     },
     {
       "ingredient": "Azacca",
-      "score": 0.563
+      "score": 0.58
     },
     {
       "ingredient": "Ariana",
-      "score": 0.539
+      "score": 0.557
     },
     {
       "ingredient": "Kohatu",
-      "score": 0.494
+      "score": 0.514
     },
     {
       "ingredient": "Amarillo",
-      "score": 0.403
+      "score": 0.426
     },
     {
       "ingredient": "BRU-1",
-      "score": 0.346
+      "score": 0.372
     }
   ],
   "Motueka": [
     {
       "ingredient": "Riwaka",
-      "score": 0.815
+      "score": 0.822
     },
     {
       "ingredient": "Citra",
-      "score": 0.748
+      "score": 0.758
     },
     {
       "ingredient": "Azacca",
-      "score": 0.694
+      "score": 0.706
     },
     {
       "ingredient": "Triumph",
-      "score": 0.69
+      "score": 0.702
     },
     {
       "ingredient": "Amarillo",
-      "score": 0.67
+      "score": 0.683
     },
     {
       "ingredient": "Kohatu",
-      "score": 0.669
+      "score": 0.682
     },
     {
       "ingredient": "Galaxy",
-      "score": 0.618
+      "score": 0.633
     },
     {
       "ingredient": "Lotus",
-      "score": 0.609
+      "score": 0.624
     }
   ],
   "Nectaron": [
     {
       "ingredient": "Galaxy",
-      "score": 0.841
+      "score": 0.847
     },
     {
       "ingredient": "Krush (HBC 586)",
-      "score": 0.831
+      "score": 0.838
     },
     {
       "ingredient": "BRU-1",
-      "score": 0.817
+      "score": 0.824
     },
     {
       "ingredient": "Citra",
-      "score": 0.781
+      "score": 0.79
     },
     {
       "ingredient": "Triumph",
-      "score": 0.722
+      "score": 0.733
     },
     {
       "ingredient": "Calista",
-      "score": 0.635
+      "score": 0.649
     },
     {
       "ingredient": "Rakau",
-      "score": 0.614
+      "score": 0.629
     },
     {
       "ingredient": "Riwaka",
-      "score": 0.606
+      "score": 0.621
     }
   ],
   "Nelson Sauvin": [
     {
       "ingredient": "Azacca",
-      "score": 0.34
+      "score": 0.366
     },
     {
       "ingredient": "BRU-1",
-      "score": 0.317
+      "score": 0.344
     },
     {
       "ingredient": "Galaxy",
-      "score": 0.263
+      "score": 0.291
     },
     {
       "ingredient": "Idaho 7",
-      "score": 0.23
+      "score": 0.26
     },
     {
       "ingredient": "Nectaron",
-      "score": 0.202
+      "score": 0.233
     },
     {
       "ingredient": "Ella",
-      "score": 0.194
+      "score": 0.225
     },
     {
       "ingredient": "Krush (HBC 586)",
-      "score": 0.188
+      "score": 0.219
     },
     {
       "ingredient": "Topaz",
-      "score": 0.169
+      "score": 0.201
     }
   ],
   "Perle": [
     {
       "ingredient": "Hallertau Tradition",
-      "score": 0.826
+      "score": 0.833
     },
     {
       "ingredient": "Hallertau Mittelfrueh",
-      "score": 0.751
+      "score": 0.76
     },
     {
       "ingredient": "Tettnang / Tettnanger",
-      "score": 0.701
+      "score": 0.713
+    },
+    {
+      "ingredient": "Mt Hood",
+      "score": 0.695
     },
     {
       "ingredient": "Loral",
-      "score": 0.595
+      "score": 0.61
     },
     {
       "ingredient": "Challenger",
-      "score": 0.582
+      "score": 0.599
     },
     {
       "ingredient": "Ella",
-      "score": 0.575
+      "score": 0.591
     },
     {
       "ingredient": "Liberty",
-      "score": 0.574
-    },
-    {
-      "ingredient": "Progress",
-      "score": 0.573
+      "score": 0.59
     }
   ],
   "Progress": [
     {
       "ingredient": "Fuggle",
-      "score": 0.742
+      "score": 0.752
     },
     {
       "ingredient": "Hallertau Tradition",
-      "score": 0.634
+      "score": 0.648
     },
     {
       "ingredient": "Challenger",
-      "score": 0.628
+      "score": 0.643
+    },
+    {
+      "ingredient": "Willamette",
+      "score": 0.621
     },
     {
       "ingredient": "Perle",
-      "score": 0.573
+      "score": 0.59
     },
     {
       "ingredient": "East Kent Goldings",
-      "score": 0.522
+      "score": 0.541
     },
     {
       "ingredient": "Hallertau Mittelfrueh",
-      "score": 0.477
+      "score": 0.497
     },
     {
-      "ingredient": "Styrian Goldings",
-      "score": 0.456
-    },
-    {
-      "ingredient": "Saaz",
-      "score": 0.41
+      "ingredient": "Northern Brewer",
+      "score": 0.494
     }
   ],
   "Rakau": [
     {
       "ingredient": "Idaho 7",
-      "score": 0.657
+      "score": 0.671
     },
     {
       "ingredient": "BRU-1",
-      "score": 0.636
+      "score": 0.651
     },
     {
       "ingredient": "Nectaron",
-      "score": 0.614
+      "score": 0.629
     },
     {
       "ingredient": "Galaxy",
-      "score": 0.583
+      "score": 0.599
     },
     {
       "ingredient": "Triumph",
-      "score": 0.53
+      "score": 0.549
     },
     {
       "ingredient": "Calista",
-      "score": 0.529
+      "score": 0.547
     },
     {
       "ingredient": "El Dorado",
-      "score": 0.435
+      "score": 0.457
     },
     {
       "ingredient": "Simcoe",
-      "score": 0.429
+      "score": 0.451
     }
   ],
   "Riwaka": [
     {
       "ingredient": "Citra",
-      "score": 0.877
+      "score": 0.882
     },
     {
       "ingredient": "Motueka",
-      "score": 0.815
+      "score": 0.822
     },
     {
       "ingredient": "Krush (HBC 586)",
-      "score": 0.772
+      "score": 0.78
     },
     {
       "ingredient": "Azacca",
-      "score": 0.665
+      "score": 0.678
     },
     {
       "ingredient": "Lotus",
-      "score": 0.657
+      "score": 0.67
     },
     {
       "ingredient": "Kohatu",
-      "score": 0.617
+      "score": 0.632
     },
     {
       "ingredient": "Nectaron",
-      "score": 0.606
+      "score": 0.621
     },
     {
       "ingredient": "Galaxy",
-      "score": 0.596
+      "score": 0.612
     }
   ],
   "Saaz": [
     {
+      "ingredient": "Mt Hood",
+      "score": 0.829
+    },
+    {
       "ingredient": "Styrian Goldings",
-      "score": 0.778
+      "score": 0.787
     },
     {
       "ingredient": "Hallertau Tradition",
-      "score": 0.719
+      "score": 0.73
     },
     {
       "ingredient": "Tettnang / Tettnanger",
-      "score": 0.706
+      "score": 0.717
     },
     {
       "ingredient": "Hallertau Mittelfrueh",
-      "score": 0.672
+      "score": 0.685
     },
     {
       "ingredient": "East Kent Goldings",
-      "score": 0.584
+      "score": 0.601
+    },
+    {
+      "ingredient": "Willamette",
+      "score": 0.55
     },
     {
       "ingredient": "Challenger",
-      "score": 0.493
-    },
-    {
-      "ingredient": "Perle",
-      "score": 0.463
-    },
-    {
-      "ingredient": "Liberty",
-      "score": 0.45
+      "score": 0.513
     }
   ],
   "Sabro": [
     {
       "ingredient": "Lotus",
-      "score": 0.806
+      "score": 0.814
     },
     {
       "ingredient": "Sorachi Ace",
-      "score": 0.588
+      "score": 0.604
     },
     {
       "ingredient": "Galaxy",
-      "score": 0.579
+      "score": 0.596
     },
     {
       "ingredient": "Azacca",
-      "score": 0.558
+      "score": 0.575
     },
     {
       "ingredient": "Triumph",
-      "score": 0.532
+      "score": 0.55
     },
     {
       "ingredient": "BRU-1",
-      "score": 0.531
+      "score": 0.549
     },
     {
       "ingredient": "Citra",
-      "score": 0.528
+      "score": 0.546
     },
     {
       "ingredient": "Krush (HBC 586)",
-      "score": 0.498
+      "score": 0.518
     }
   ],
   "Saphir": [
     {
       "ingredient": "Liberty",
-      "score": 0.852
+      "score": 0.858
     },
     {
       "ingredient": "Strisselspalt",
-      "score": 0.742
+      "score": 0.752
     },
     {
       "ingredient": "Loral",
-      "score": 0.717
+      "score": 0.728
     },
     {
       "ingredient": "Tettnang / Tettnanger",
-      "score": 0.662
+      "score": 0.675
     },
     {
       "ingredient": "Hallertau Mittelfrueh",
-      "score": 0.629
+      "score": 0.644
     },
     {
       "ingredient": "Cascade",
-      "score": 0.622
+      "score": 0.636
+    },
+    {
+      "ingredient": "Mt Hood",
+      "score": 0.611
     },
     {
       "ingredient": "Lemondrop",
-      "score": 0.516
-    },
-    {
-      "ingredient": "Hallertau Tradition",
-      "score": 0.498
+      "score": 0.535
     }
   ],
   "Simcoe": [
     {
       "ingredient": "Mosaic",
-      "score": 0.798
+      "score": 0.806
     },
     {
       "ingredient": "Idaho 7",
-      "score": 0.775
+      "score": 0.784
     },
     {
       "ingredient": "Kohatu",
-      "score": 0.705
+      "score": 0.716
+    },
+    {
+      "ingredient": "Chinook",
+      "score": 0.677
     },
     {
       "ingredient": "Azacca",
-      "score": 0.657
+      "score": 0.67
     },
     {
       "ingredient": "Columbus/Tomahawk/Zeus",
-      "score": 0.574
+      "score": 0.591
     },
     {
       "ingredient": "Topaz",
-      "score": 0.532
+      "score": 0.55
     },
     {
       "ingredient": "Strata",
-      "score": 0.478
-    },
-    {
-      "ingredient": "Rakau",
-      "score": 0.429
+      "score": 0.498
     }
   ],
   "Sorachi Ace": [
     {
       "ingredient": "Lotus",
-      "score": 0.638
-    },
-    {
-      "ingredient": "Sabro",
-      "score": 0.588
+      "score": 0.652
     },
     {
       "ingredient": "Lemondrop",
-      "score": 0.587
+      "score": 0.604
+    },
+    {
+      "ingredient": "Sabro",
+      "score": 0.604
     },
     {
       "ingredient": "Motueka",
-      "score": 0.542
+      "score": 0.56
     },
     {
       "ingredient": "Ariana",
-      "score": 0.439
+      "score": 0.461
     },
     {
       "ingredient": "Triumph",
-      "score": 0.402
+      "score": 0.425
     },
     {
       "ingredient": "Centennial",
-      "score": 0.369
+      "score": 0.394
     },
     {
-      "ingredient": "Cascade",
-      "score": 0.341
+      "ingredient": "Chinook",
+      "score": 0.383
     }
   ],
   "Strata": [
     {
       "ingredient": "Mosaic",
-      "score": 0.689
+      "score": 0.701
     },
     {
       "ingredient": "Idaho 7",
-      "score": 0.54
+      "score": 0.558
     },
     {
       "ingredient": "Azacca",
-      "score": 0.492
+      "score": 0.512
     },
     {
       "ingredient": "Simcoe",
-      "score": 0.478
+      "score": 0.498
     },
     {
       "ingredient": "BRU-1",
-      "score": 0.4
+      "score": 0.423
     },
     {
       "ingredient": "Galaxy",
-      "score": 0.393
+      "score": 0.416
     },
     {
       "ingredient": "Krush (HBC 586)",
-      "score": 0.387
+      "score": 0.411
     },
     {
       "ingredient": "Citra",
-      "score": 0.359
+      "score": 0.384
     }
   ],
   "Strisselspalt": [
     {
       "ingredient": "Liberty",
-      "score": 0.855
+      "score": 0.861
     },
     {
       "ingredient": "Tettnang / Tettnanger",
-      "score": 0.823
+      "score": 0.83
     },
     {
       "ingredient": "Hallertau Mittelfrueh",
-      "score": 0.788
+      "score": 0.796
     },
     {
       "ingredient": "Saphir",
-      "score": 0.742
+      "score": 0.752
+    },
+    {
+      "ingredient": "Mt Hood",
+      "score": 0.736
     },
     {
       "ingredient": "East Kent Goldings",
-      "score": 0.687
+      "score": 0.699
     },
     {
       "ingredient": "Hallertau Tradition",
-      "score": 0.655
+      "score": 0.668
     },
     {
       "ingredient": "Loral",
-      "score": 0.613
-    },
-    {
-      "ingredient": "Perle",
-      "score": 0.543
+      "score": 0.628
     }
   ],
   "Styrian Goldings": [
     {
       "ingredient": "East Kent Goldings",
-      "score": 0.841
+      "score": 0.847
+    },
+    {
+      "ingredient": "Mt Hood",
+      "score": 0.799
+    },
+    {
+      "ingredient": "Willamette",
+      "score": 0.791
     },
     {
       "ingredient": "Tettnang / Tettnanger",
-      "score": 0.782
+      "score": 0.79
     },
     {
       "ingredient": "Saaz",
-      "score": 0.778
+      "score": 0.787
     },
     {
       "ingredient": "Hallertau Mittelfrueh",
-      "score": 0.744
+      "score": 0.754
     },
     {
       "ingredient": "Hallertau Tradition",
-      "score": 0.621
+      "score": 0.636
     },
     {
       "ingredient": "Fuggle",
-      "score": 0.619
-    },
-    {
-      "ingredient": "Liberty",
-      "score": 0.592
-    },
-    {
-      "ingredient": "Challenger",
-      "score": 0.553
+      "score": 0.634
     }
   ],
   "Tettnang / Tettnanger": [
     {
       "ingredient": "Hallertau Mittelfrueh",
-      "score": 0.958
+      "score": 0.959
+    },
+    {
+      "ingredient": "Mt Hood",
+      "score": 0.932
     },
     {
       "ingredient": "East Kent Goldings",
-      "score": 0.843
+      "score": 0.849
     },
     {
       "ingredient": "Hallertau Tradition",
-      "score": 0.837
+      "score": 0.843
     },
     {
       "ingredient": "Liberty",
-      "score": 0.83
+      "score": 0.837
     },
     {
       "ingredient": "Strisselspalt",
-      "score": 0.823
+      "score": 0.83
     },
     {
       "ingredient": "Styrian Goldings",
-      "score": 0.782
+      "score": 0.79
     },
     {
       "ingredient": "Saaz",
-      "score": 0.706
-    },
-    {
-      "ingredient": "Perle",
-      "score": 0.701
+      "score": 0.717
     }
   ],
   "Topaz": [
     {
       "ingredient": "Idaho 7",
-      "score": 0.587
+      "score": 0.603
     },
     {
       "ingredient": "Simcoe",
-      "score": 0.532
+      "score": 0.55
     },
     {
       "ingredient": "Azacca",
-      "score": 0.497
+      "score": 0.516
     },
     {
       "ingredient": "Kohatu",
-      "score": 0.358
+      "score": 0.383
     },
     {
       "ingredient": "El Dorado",
-      "score": 0.354
+      "score": 0.379
+    },
+    {
+      "ingredient": "Chinook",
+      "score": 0.365
     },
     {
       "ingredient": "Rakau",
-      "score": 0.332
+      "score": 0.358
     },
     {
       "ingredient": "BRU-1",
-      "score": 0.327
-    },
-    {
-      "ingredient": "Ella",
-      "score": 0.326
+      "score": 0.353
     }
   ],
   "Triumph": [
     {
       "ingredient": "Galaxy",
-      "score": 0.886
+      "score": 0.89
     },
     {
       "ingredient": "BRU-1",
-      "score": 0.806
+      "score": 0.814
     },
     {
       "ingredient": "Citra",
-      "score": 0.771
+      "score": 0.78
     },
     {
       "ingredient": "Krush (HBC 586)",
-      "score": 0.725
+      "score": 0.736
     },
     {
       "ingredient": "Nectaron",
-      "score": 0.722
+      "score": 0.733
     },
     {
       "ingredient": "Motueka",
-      "score": 0.69
+      "score": 0.702
     },
     {
       "ingredient": "Amarillo",
-      "score": 0.665
+      "score": 0.678
     },
     {
       "ingredient": "Azacca",
-      "score": 0.664
+      "score": 0.677
+    }
+  ],
+  "Chinook": [
+    {
+      "ingredient": "Columbus/Tomahawk/Zeus",
+      "score": 0.741
+    },
+    {
+      "ingredient": "Simcoe",
+      "score": 0.677
+    },
+    {
+      "ingredient": "Centennial",
+      "score": 0.646
+    },
+    {
+      "ingredient": "Kohatu",
+      "score": 0.562
+    },
+    {
+      "ingredient": "Idaho 7",
+      "score": 0.522
+    },
+    {
+      "ingredient": "Cascade",
+      "score": 0.47
+    },
+    {
+      "ingredient": "Azacca",
+      "score": 0.405
+    },
+    {
+      "ingredient": "Sorachi Ace",
+      "score": 0.383
+    }
+  ],
+  "Cluster": [
+    {
+      "ingredient": "Challenger",
+      "score": 0.564
+    },
+    {
+      "ingredient": "Willamette",
+      "score": 0.514
+    },
+    {
+      "ingredient": "Progress",
+      "score": 0.446
+    },
+    {
+      "ingredient": "Northern Brewer",
+      "score": 0.436
+    },
+    {
+      "ingredient": "Perle",
+      "score": 0.41
+    },
+    {
+      "ingredient": "Styrian Goldings",
+      "score": 0.367
+    },
+    {
+      "ingredient": "East Kent Goldings",
+      "score": 0.354
+    },
+    {
+      "ingredient": "Mt Hood",
+      "score": 0.339
+    }
+  ],
+  "Mt Hood": [
+    {
+      "ingredient": "Tettnang / Tettnanger",
+      "score": 0.932
+    },
+    {
+      "ingredient": "Hallertau Mittelfrueh",
+      "score": 0.89
+    },
+    {
+      "ingredient": "Hallertau Tradition",
+      "score": 0.862
+    },
+    {
+      "ingredient": "Saaz",
+      "score": 0.829
+    },
+    {
+      "ingredient": "East Kent Goldings",
+      "score": 0.805
+    },
+    {
+      "ingredient": "Styrian Goldings",
+      "score": 0.799
+    },
+    {
+      "ingredient": "Liberty",
+      "score": 0.789
+    },
+    {
+      "ingredient": "Strisselspalt",
+      "score": 0.736
+    }
+  ],
+  "Northern Brewer": [
+    {
+      "ingredient": "Challenger",
+      "score": 0.758
+    },
+    {
+      "ingredient": "Nugget",
+      "score": 0.586
+    },
+    {
+      "ingredient": "Progress",
+      "score": 0.494
+    },
+    {
+      "ingredient": "Cluster",
+      "score": 0.436
+    },
+    {
+      "ingredient": "Fuggle",
+      "score": 0.36
+    },
+    {
+      "ingredient": "Styrian Goldings",
+      "score": 0.258
+    },
+    {
+      "ingredient": "Perle",
+      "score": 0.25
+    },
+    {
+      "ingredient": "Hallertau Tradition",
+      "score": 0.247
+    }
+  ],
+  "Nugget": [
+    {
+      "ingredient": "Warrior",
+      "score": 0.639
+    },
+    {
+      "ingredient": "Magnum",
+      "score": 0.586
+    },
+    {
+      "ingredient": "Northern Brewer",
+      "score": 0.586
+    },
+    {
+      "ingredient": "Challenger",
+      "score": 0.502
+    },
+    {
+      "ingredient": "Columbus/Tomahawk/Zeus",
+      "score": 0.438
+    },
+    {
+      "ingredient": "Perle",
+      "score": 0.389
+    },
+    {
+      "ingredient": "Topaz",
+      "score": 0.341
+    },
+    {
+      "ingredient": "Hallertau Tradition",
+      "score": 0.339
+    }
+  ],
+  "Warrior": [
+    {
+      "ingredient": "Magnum",
+      "score": 0.87
+    },
+    {
+      "ingredient": "Nugget",
+      "score": 0.639
+    },
+    {
+      "ingredient": "Columbus/Tomahawk/Zeus",
+      "score": 0.395
+    },
+    {
+      "ingredient": "Topaz",
+      "score": 0.316
+    },
+    {
+      "ingredient": "Chinook",
+      "score": 0.256
+    },
+    {
+      "ingredient": "Azacca",
+      "score": 0.189
+    },
+    {
+      "ingredient": "Simcoe",
+      "score": 0.161
+    }
+  ],
+  "Willamette": [
+    {
+      "ingredient": "Fuggle",
+      "score": 0.815
+    },
+    {
+      "ingredient": "Styrian Goldings",
+      "score": 0.791
+    },
+    {
+      "ingredient": "East Kent Goldings",
+      "score": 0.77
+    },
+    {
+      "ingredient": "Progress",
+      "score": 0.621
+    },
+    {
+      "ingredient": "Hallertau Mittelfrueh",
+      "score": 0.604
+    },
+    {
+      "ingredient": "Mt Hood",
+      "score": 0.587
+    },
+    {
+      "ingredient": "Tettnang / Tettnanger",
+      "score": 0.555
+    },
+    {
+      "ingredient": "Saaz",
+      "score": 0.55
     }
   ]
 }

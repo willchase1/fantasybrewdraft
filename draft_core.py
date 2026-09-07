@@ -708,12 +708,20 @@ def next_best_picks(
         #               than one of many interchangeable ones.
         breadth = _squash(style_cov, squash["fit"])
         if focus:
-            align = max(focus.get(s, 0.0) for s in styles) / focus_max
-            best_styles = [s for s in styles if focus.get(s, 0.0) == align * focus_max]
+            best = max(focus.get(s, 0.0) for s in styles)
+            align = best / focus_max
+            best_styles = [s for s in styles if focus.get(s, 0.0) == best]
         else:
             align = 1.0
             best_styles = list(styles)
-        sig = max(8.0 / (8.0 + list_len[(s, ing)]) for s in best_styles)
+        # Signature applies to the categories whose lists *define* a style.
+        # Adjunct lists are "what a brewer of this style would tolerate" and
+        # are short precisely where adjuncts matter least (a Pils lists two
+        # sugars), so for adjuncts the term is neutral instead of inverted.
+        if bucket == "Adjunct":
+            sig = 0.5
+        else:
+            sig = max(8.0 / (8.0 + list_len[(s, ing)]) for s in best_styles)
         a, g = squash["fit_align"], squash["fit_sig"]
         idf_tiebreak = 1.0 + squash["fit_idf"] * idf.get(ing, 0.0)
         fit = min(1.0, breadth * ((1 - a) + a * align) * ((1 - g) + g * sig) * idf_tiebreak)

@@ -24,12 +24,13 @@ the 2025 draft is a clean holdout.
 |---|---|---|---|---|---|---|
 | **Before** — 2025 matrix, old hop file, old engine, old weights | 0.05 | 0.21 | 0.30 | 0.133 | 29 | 10 |
 | New matrix + similarity, old engine, old weights | 0.10 | 0.24 | 0.37 | 0.191 | 27 | 0 |
-| **After** — new matrix + similarity, new engine, calibrated defaults | 0.13 | 0.30 | 0.37 | 0.213 | 26 | 0 |
-| (rejected) coordinate-ascent optimum, in-sample | 0.16 | 0.32 | 0.40 | 0.241 | 23 | 0 |
+| New matrix + similarity, new engine, calibrated defaults | 0.13 | 0.30 | 0.37 | 0.213 | 26 | 0 |
+| **After** — + Sep-2026 sheet additions, narrow adjunct lists, adjunct-neutral signature | 0.13 | 0.30 | 0.38 | 0.220 | 26 | 0 |
+| (rejected) coordinate-ascent optimum, in-sample | 0.17 | 0.32 | 0.40 | 0.248 | 23 | 0 |
 
 "Unlisted" = picks the model could not even rank because no style contained
 them (the 64-ingredient gap fixed in `docs/STYLE_MATRIX.md`). By round, the
-calibrated model has median rank **10 in R1 and 6 in R2** (the anchor picks),
+calibrated model has median rank **8 in R1 and 6 in R2** (the anchor picks),
 then 25–46 in R3–R7 where drafters choose among ~50 specialty malts and ~45
 adjuncts for a style — that part is idiosyncratic and no weight setting helps
 much. 13 of 63 picks rank in the top 3 (German Pilsner, English Ale, Golden
@@ -37,7 +38,7 @@ Promise, Fuggle, EKG, Saaz, Tettnang, Munich Dark, US-05, Molasses, Coconut…).
 
 ### Why the "optimum" was rejected
 
-Coordinate ascent over weights and shape constants reaches MRR 0.241, but on
+Coordinate ascent over weights and shape constants reaches MRR ~0.24–0.25, but on
 three train/test splits by player it beat the untuned defaults on only two and
 lost on one. With 63 observations, differences under ~0.02 MRR are noise
 (one pick moving from rank 2 to rank 1 is +0.008). We therefore kept only
@@ -71,9 +72,31 @@ from `league_config.json` (`pick_weights`, `board_value_weights`, `squash`);
 | Scarcity transform | `min(1, pressure)` | `1 − e^(−pressure)` | smooth; substitutes keep mattering under heavy pressure instead of being clipped away |
 | Scarcity demand | static (`num_players`) | option `scarce_residual` (**off**) | residual demand ("who still needs a yeast") is principled but predicts worse (MRR 0.213 → 0.162): the table kept drafting yeast/malt in R2 as if demand had not moved |
 | Substitute discount | hops only, 0.15 per close analog | all categories, `scarce_sub` (**0 = off**) | at any strength the discount lowered every metric (0.204 → 0.158 at 0.15): drafters take the mainstream ingredient that *has* many analogs. Hop-blend **synergy** from the similarity files is kept (+0.003 MRR) |
+| Fit signature for adjuncts | as other categories | **neutral (0.5)** | Sep 2026: short filler adjunct lists (a Pils lists two sugars) made dextrose look "defining" (Fit 0.74 vs 0.67 for German Pilsner) and it ranked #2 on an empty board. Adjunct lists describe tolerance, not identity; with narrow sugar membership in the matrix as well, the first adjunct now appears at #52 and MRR rose 0.213 → 0.220. Guarded by `test_sugars_do_not_lead_an_empty_board` |
 
 `compute_style_status` also gained *Picks Matched* and *Match* tie-breaks (see
 `docs/STYLE_MATRIX.md`).
+
+### Sugar over-counting (Sep 2026)
+
+Symptom found in testing: Corn Sugar (Dextrose) #2 and Honey #4 among
+recommendations on an empty 2026 board, Dextrose #1 in best-available. Two
+causes, two fixes:
+
+1. **Data.** Sugars were listed wherever they *could* be used (cane sugar and
+   honey in 18 of 22 styles). The matrix now lists sugars only where they are
+   characteristic (see `docs/STYLE_MATRIX.md`, rule 2): dextrose 15 → 7 styles,
+   honey 18 → 6, cane 18 → 5, no adjunct above 8. Honey and cane fell to
+   ranks 61 and 68 from this alone.
+2. **Engine.** Dextrose stayed at #7 because the *signature* term rewards short
+   category lists, and the lager styles' two-item filler adjunct lists are the
+   shortest lists in the matrix. Signature is now neutral for the Adjunct
+   category. Dextrose → #52; it still appears mid-list in best-available (#17)
+   through the popularity prior, which is correct — dextrose + German Pilsner is
+   the most common 2022–24 pair.
+
+Re-running the coordinate ascent after these changes reproduces the earlier
+picture (in-sample 0.248 via `fit_idf 0`, `pop 0.5` — noise-level, not adopted).
 
 ## How to re-tune next season
 

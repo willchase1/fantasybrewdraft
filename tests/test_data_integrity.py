@@ -28,6 +28,12 @@ POST_2025_MATRIX_ADDITIONS = {
     "Saflager SH-45 (Thiol Enhancing Dry Lager Yeast)",
     "Abstrax terpenes (any variety of Quantum, Omni, or BrewGas)",
     "Abstrax SkyFarm fruit flavors (any)",
+    # 2026 sheet revision (Sep 2026)
+    "Chinook", "Cluster", "Mt Hood", "Northern Brewer", "Nugget", "Warrior",
+    "Willamette",
+    "Belgian Witbier (WLP400, WY3944, Imperial B44, LalBrew Wit)",
+    "Irish Ale (WLP004, WY1084, Imperial A44)",
+    "Cinnamon", "Cranberries", "Ginger", "Pumpkin",
 }
 
 

@@ -29,3 +29,5 @@ name,family,ferment_type,attenuation_mid,flocculation,temp_mid_f,esters,phenols,
 "Trappist Ale (WLP500, WY1214, B48)",belgian,ale,76,2,68,3,2,0,2,1,0,0,0
 "Verdant IPA (Dry)",british,ale,78,2,68,2,0,1,1,1,3,0,0
 "Voss Kveik (A43, OYL-061, Dry)",kveik,kveik,78,3,95,2,0,2,0,1,0,0,0
+"Belgian Witbier (WLP400, WY3944, Imperial B44, LalBrew Wit)",belgian,ale,75,1,70,2,3,0,1,2,2,1,0
+"Irish Ale (WLP004, WY1084, Imperial A44)",british,ale,72,2,66,1,0,2,2,1,0,0,0
