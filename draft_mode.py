@@ -97,6 +97,16 @@ def load_hop_similarity_data():
 
 hop_similarity_data, hop_similarity_matrix = load_hop_similarity_data()
 
+
+@st.cache_data
+def load_descriptors_data():
+    """Curated spec-sheet tables (data/*_descriptors.csv) for ingredient_profile().
+    Display-only; keyed by category, malt shared across Base/Specialty."""
+    return draft_core.load_descriptors(load_league_config())
+
+
+DESCRIPTORS = load_descriptors_data()
+
 # --- Persist draft state locally (the log is the single source of truth) ---
 def load_state():
     """Load persisted draft ({players, draft_log}) via draft_state."""
@@ -551,6 +561,12 @@ def show_ingredient_dialog(ing):
         st.caption(f"{cat} · drafted by **{detail['drafted_by']}**")
     else:
         st.caption(f"{cat} · available")
+    # Spec-sheet one-liner (hop AA/notes, malt color/form, yeast temp/attenuation,
+    # adjunct type/notes). None for anything without a descriptor row.
+    prof = draft_core.ingredient_profile(ing, DESCRIPTORS,
+                                         board_category=board_category_of.get(ing))
+    if prof and prof.get("summary"):
+        st.markdown(f"**{prof['summary']}**")
     p = detail["popularity"]
     if p:
         st.caption(f"Historically picked {p.get('Picks', 0)}× · "
