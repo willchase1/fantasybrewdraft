@@ -213,13 +213,6 @@ def reset_draft_timer():
     st.session_state.timer_started_at = time.time()
 
 
-elapsed = st.session_state.timer_elapsed + (
-    time.time() - st.session_state.timer_started_at if st.session_state.timer_running else 0.0
-)
-remaining = max(0, int(st.session_state.timer_duration - elapsed))
-if remaining == 0 and st.session_state.timer_running:
-    st.session_state.timer_running = False
-
 # ---------------------------------------------------------------------------
 # Draft management functions
 # ---------------------------------------------------------------------------
@@ -414,7 +407,17 @@ def simulate_draft(sim_players, sim_rounds, your_pos, bias_weight, my_weights=No
 # ---------------------------------------------------------------------------
 # Render helpers
 # ---------------------------------------------------------------------------
+@st.fragment(run_every="1s")
 def render_compact_timer():
+    # Self-contained tick: this fragment (and ONLY this fragment) reruns each
+    # second via run_every, so the board, panels, and any open dialog are never
+    # interrupted mid-render. Recompute the clock fresh on every tick.
+    elapsed = st.session_state.timer_elapsed + (
+        time.time() - st.session_state.timer_started_at
+        if st.session_state.timer_running else 0.0)
+    remaining = max(0, int(st.session_state.timer_duration - elapsed))
+    if remaining == 0 and st.session_state.timer_running:
+        st.session_state.timer_running = False
     color = "#e74c3c" if remaining <= 10 else ("#f39c12" if remaining <= 30 else "#2ecc71")
     run = st.session_state.timer_running
     st.markdown(
@@ -483,6 +486,9 @@ def render_best_available(focus_player, focus_picks, focus_needed):
                        key="ba_filter", label_visibility="collapsed")
     focus_seat = players.index(focus_player) if focus_player in players else 0
     recs = recommend(focus_picks, drafted, top_k=40, seat_index=focus_seat)
+    # One row per ingredient — never render the same ingredient twice (also keeps
+    # the per-row Draft button keys unique).
+    recs = recs.drop_duplicates(subset="Ingredient", keep="first")
     if sel == "⭐ Fills a need":
         recs = recs[recs["Category"].map(lambda c: bucket_for_rules(c) in focus_needed)]
     elif sel != "All":
@@ -851,7 +857,6 @@ if st.session_state.get("open_ingredient"):
 elif st.session_state.get("open_style"):
     show_style_dialog(st.session_state["open_style"])
 
-# Keep the timer ticking while running and the draft is live.
-if st.session_state.get("timer_running") and current_player:
-    time.sleep(1)
-    st.rerun()
+# The timer now ticks itself via @st.fragment(run_every="1s") in the top bar —
+# no whole-app sleep/rerun loop (that loop was racing the board render and
+# dialogs, causing ghost-duplicated rows and modals that wouldn't close).
