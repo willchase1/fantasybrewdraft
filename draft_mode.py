@@ -470,24 +470,29 @@ def render_board(df_long, needed):
                     add_pick(current_player, ing, cat)
 
 
-def render_best_available(focus_needed):
+def render_best_available(focus_player, focus_picks, focus_needed):
+    # Roster-aware: rank toward the focus team's emerging build (need, synergy,
+    # and style focus all active) rather than a generic global board list.
+    if current_player and focus_player == current_player:
+        st.caption(f"Ranked for **{focus_player}**'s build")
+    elif current_player:
+        st.caption(f"Ranked for **{focus_player}** · drafting acts for **{current_player}**")
+    else:
+        st.caption(f"Ranked for **{focus_player}**")
     # Single full-width filter (avoids a cramped toggle wrapping to "N e e d s").
     sel = st.selectbox("Filter", ["All", "⭐ Fills a need"] + all_categories,
                        key="ba_filter", label_visibility="collapsed")
-    ba = best_available(drafted, ingredients, style_matrix, scarcity_df, required,
-                        flex_slots, ingredient_to_category, style_bias,
-                        early_signal=early_signal, hop_similarity=hop_similarity_data,
-                        num_players=int(num_players), top_k=40,
-                        weights=BOARD_WEIGHTS, squash=SQUASH)
+    focus_seat = players.index(focus_player) if focus_player in players else 0
+    recs = recommend(focus_picks, drafted, top_k=40, seat_index=focus_seat)
     if sel == "⭐ Fills a need":
-        ba = ba[ba["Category"].map(lambda c: bucket_for_rules(c) in focus_needed)]
+        recs = recs[recs["Category"].map(lambda c: bucket_for_rules(c) in focus_needed)]
     elif sel != "All":
-        ba = ba[ba["Category"] == sel]
-    ba = ba.head(15)
-    if ba.empty:
+        recs = recs[recs["Category"] == sel]
+    recs = recs.head(15)
+    if recs.empty:
         st.info("No matching ingredients on the board.")
         return
-    for _, r in ba.iterrows():
+    for _, r in recs.iterrows():
         ing, cat = r["Ingredient"], r["Category"]
         star = "⭐ " if bucket_for_rules(cat) in focus_needed else ""
         cols = st.columns([6, 2])
@@ -557,8 +562,8 @@ df_live = df_long_all[~df_long_all["Ingredient"].isin(drafted)]
 
 if compact:
     st.toggle("📱 Phone layout", key="compact_mode")
-    view = st.segmented_control("View", ["📋 Board", "⭐ Best Available", "📊 Styles"],
-                                default="⭐ Best Available", key="wr_view")
+    view = st.segmented_control("View", ["📋 Board", "⭐ Recommended", "📊 Styles"],
+                                default="⭐ Recommended", key="wr_view")
     filt = st.text_input("Filter", key="board-filter", placeholder="Filter ingredients…",
                          label_visibility="collapsed")
     df_live_f = df_live[df_live["Ingredient"].str.contains(filt, case=False)] if filt else df_live
@@ -567,7 +572,7 @@ if compact:
     elif view == "📊 Styles":
         render_styles(focus_picks)
     else:
-        render_best_available(needed_buckets)
+        render_best_available(focus_player, focus_picks, needed_buckets)
 else:
     left, mid, right = st.columns([2, 1.4, 1.2], gap="medium")
     with left:
@@ -580,11 +585,9 @@ else:
         with st.container(height=PANEL_H):
             render_board(df_live_f, needed_buckets)
     with mid:
-        st.subheader("⭐ Best Available")
-        if current_player and focus_player != current_player:
-            st.caption(f"Drafting acts for **{current_player}** (on the clock).")
+        st.subheader("⭐ Recommended")
         with st.container(height=PANEL_H):
-            render_best_available(needed_buckets)
+            render_best_available(focus_player, focus_picks, needed_buckets)
     with right:
         st.subheader(f"📊 Viable Styles")
         with st.container(height=PANEL_H):
