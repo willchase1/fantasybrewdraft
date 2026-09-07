@@ -29,7 +29,11 @@ def _load_optional_json(path):
 
 
 def load_data(
-    ingredients_path: str = "ingredients_2026.csv",
+    # Default pins the frozen 2025 sheet on purpose: it's the stable baseline the
+    # characterization tests lock against. The live app is NOT on 2025 — every
+    # real caller (draft_mode/brewery_mode/pythonista_tool) passes the current
+    # season from league_config.json ("ingredients_2026.csv").
+    ingredients_path: str = "ingredients_2025.csv",
     style_matrix_path: str = "style_matrix.json",
     scarcity_path: str = "ingredient_scarcity.json",
     opponent_model_path: str = "opponent_model.json",
@@ -1052,6 +1056,198 @@ def team_context(records, my_picks, drafted, style_matrix, required, flex_slots,
         "picks_remaining": status["picks_remaining"],
         "feasible": status["feasible"],
     }
+
+
+# --- Ingredient profiles (display-only; nothing here feeds Pick Value) ------
+# Axis -> friendly phrase. Brewer's judgement; see docs/INGREDIENT_PROFILES.md.
+AXIS_LABELS = {
+    # hops
+    "citrus": "citrus", "tropical": "tropical fruit", "stone_fruit": "stone fruit",
+    "berry": "berry", "melon_candy": "melon/candy", "floral": "floral",
+    "herbal": "herbal", "spicy": "spicy", "pine_resin": "pine/resin",
+    "earthy": "earthy", "woody": "woody", "grassy": "grassy", "dank": "dank",
+    "coconut_cream": "coconut/cream", "wine_gooseberry": "white wine/gooseberry",
+    "clean_bitter": "clean bittering",
+    # malts
+    "bready": "bready", "biscuit_toast": "biscuit/toast", "caramel_toffee": "caramel/toffee",
+    "dark_fruit": "dark fruit", "roast_coffee_choc": "roast/coffee/chocolate",
+    "burnt_acrid": "burnt/acrid", "nutty": "nutty", "smoky": "smoky",
+    "grainy_neutral": "grainy/neutral", "body_head": "body & head",
+    "sweet": "sweet", "melanoidin_rich": "rich/melanoidin",
+    # yeasts
+    "esters": "estery/fruity", "phenols": "phenolic (clove/pepper)",
+    "clean_neutral": "clean", "malt_forward": "malt-forward", "dry_crisp": "dry/crisp",
+    "haze_bio": "hazy/juicy", "sour": "sour", "lager_sulfur": "lager sulfur",
+}
+PROFILE_NOTE_THRESHOLD = 2   # axis score (0-3) needed to be mentioned
+PROFILE_NOTE_MAX = 3         # projector-legible
+_HOP_PURPOSE = {"bittering": "Bittering", "aroma": "Aroma", "dual": "Dual-purpose"}
+_YEAST_TYPE = {"ale": "Ale", "lager": "Lager", "hybrid": "Hybrid (ale/lager)", "kveik": "Kveik"}
+_MALT_FORM = {
+    "base_pils": "base malt (pilsner)", "base_pale": "base malt (pale)",
+    "base_kilned": "base malt (kilned)", "base_wheat": "base malt (wheat/spelt)",
+    "extract": "extract", "crystal": "crystal/caramel malt", "roast": "roasted malt",
+    "kilned_specialty": "kilned specialty malt", "dextrine": "dextrine malt",
+    "flaked_adjunct": "flaked grain", "raw_grain": "raw grain", "smoked": "smoked malt",
+    "alt_grain": "alternative grain",
+}
+_ORIGIN = {"US": "USA", "DE": "Germany", "UK": "UK", "NZ": "New Zealand", "AU": "Australia",
+           "CZ": "Czechia", "FR": "France", "SI": "Slovenia", "BE": "Belgium", "none": None}
+_FLOC = {1: "low flocculation", 2: "medium flocculation", 3: "high flocculation"}
+
+
+def _profile_key(name):
+    """Loose match: case/space-insensitive, strain codes in (...) / [...] dropped."""
+    import re
+    s = re.sub(r"\s*[\(\[].*?[\)\]]", "", str(name))
+    return re.sub(r"\s+", " ", s).strip().casefold()
+
+
+def load_descriptors(config=None, base_dir="."):
+    """{category: {name: row}} from the CSVs named in ``config["descriptor_files"]``.
+
+    Values are the raw CSV strings; ``ingredient_profile`` interprets them.
+    Files may be shared between categories (malt covers Base Malt +
+    Specialty) and missing files are skipped (``{}`` for that category).
+    """
+    import csv
+    if config is None:
+        config = load_league_config()
+    cache, out = {}, {}
+    for cat, fname in (config.get("descriptor_files") or {}).items():
+        path = os.path.join(base_dir, fname)
+        if path not in cache:
+            rows = {}
+            if os.path.exists(path):
+                with open(path, newline="", encoding="utf-8") as f:
+                    for r in csv.DictReader(f):
+                        if r.get("name"):
+                            rows[r["name"]] = dict(r)
+            cache[path] = rows
+        out[cat] = cache[path]
+    return out
+
+
+def validate_descriptors(ingredients_df, descriptors, category_aliases=None):
+    """{category: [sheet ingredients with no descriptor row]} -- the profile
+    coverage gate (mirrors ``validate_data``). Only categories that have a
+    descriptor table configured are checked; adjuncts have none."""
+    if category_aliases is None:
+        category_aliases = load_league_config()["category_aliases"]
+    gaps = {}
+    for cat, rows in descriptors.items():
+        names = set()
+        for col in category_aliases.get(cat, [cat]):
+            if col in ingredients_df.columns:
+                names |= set(ingredients_df[col].dropna().astype(str).str.strip())
+        keys = {_profile_key(n) for n in rows}
+        missing = sorted(n for n in names if n not in rows and _profile_key(n) not in keys)
+        if missing:
+            gaps[cat] = missing
+    return gaps
+
+
+def _num(v, default=None):
+    try:
+        return float(v)
+    except (TypeError, ValueError):
+        return default
+
+
+def _fmt_num(x):
+    return f"{x:g}" if x is not None else None
+
+
+def _profile_notes(row, axes):
+    scored = [(a, _num(row.get(a), 0.0)) for a in axes if a in row]
+    scored = [(a, v) for a, v in scored if v >= PROFILE_NOTE_THRESHOLD]
+    scored.sort(key=lambda t: (-t[1], axes.index(t[0])))
+    return [AXIS_LABELS.get(a, a.replace("_", " ")) for a, _ in scored[:PROFILE_NOTE_MAX]]
+
+
+_HOP_AXES = ["citrus", "tropical", "stone_fruit", "berry", "melon_candy", "floral", "herbal",
+             "spicy", "pine_resin", "earthy", "woody", "grassy", "dank", "coconut_cream",
+             "wine_gooseberry", "clean_bitter"]
+_MALT_AXES = ["bready", "biscuit_toast", "caramel_toffee", "dark_fruit", "roast_coffee_choc",
+              "burnt_acrid", "nutty", "smoky", "grainy_neutral", "body_head", "sweet",
+              "melanoidin_rich"]
+_YEAST_AXES = ["esters", "phenols", "clean_neutral", "malt_forward", "dry_crisp", "haze_bio",
+               "sour", "lager_sulfur"]
+
+
+def _lookup_row(ing, table):
+    if ing in table:
+        return table[ing]
+    key = _profile_key(ing)
+    for name, row in table.items():
+        if _profile_key(name) == key:
+            return row
+    return None
+
+
+def ingredient_profile(ing, descriptors, board_category=None):
+    """Brewer-facing spec sheet for one ingredient, pre-formatted for display.
+
+    ``descriptors`` is ``load_descriptors()``'s output. ``board_category``
+    (the sheet/matrix category) narrows the search; without it every table is
+    tried. Returns ``None`` when no descriptor row matches (adjuncts, or a
+    new sheet ingredient without a row -- see ``validate_descriptors``).
+
+    Hop   -> {kind, usage, alpha, origin, notes, summary}
+    Malt  -> {kind, color, form, grain, origin, diastatic, notes, summary}
+    Yeast -> {kind, type, attenuation, temp, flocculation, family, notes, summary}
+
+    Every value is a display string (units included) or a list of strings;
+    ``summary`` is the one-liner the modal shows. Nothing here feeds scoring.
+    """
+    cats = [board_category] if board_category in descriptors else list(descriptors)
+    row, cat = None, None
+    for c in cats:
+        row = _lookup_row(ing, descriptors.get(c, {}))
+        if row:
+            cat = c
+            break
+    if row is None:
+        return None
+
+    def join(parts):
+        return " · ".join(p for p in parts if p)
+
+    if cat == "Hop" or "alpha_mid" in row:
+        lo, hi, mid = _num(row.get("alpha_lo")), _num(row.get("alpha_hi")), _num(row.get("alpha_mid"))
+        alpha = (f"{_fmt_num(lo)}–{_fmt_num(hi)}% AA" if lo is not None and hi is not None
+                 else (f"{_fmt_num(mid)}% AA" if mid is not None else None))
+        usage = _HOP_PURPOSE.get(str(row.get("purpose", "")).lower(), None)
+        notes = _profile_notes(row, _HOP_AXES)
+        origin = _ORIGIN.get(row.get("origin"), row.get("origin"))
+        return {"kind": "Hop", "usage": usage, "alpha": alpha, "origin": origin,
+                "notes": notes, "summary": join([usage, alpha, ", ".join(notes)])}
+
+    if cat == "Yeast" or "attenuation_mid" in row:
+        att = _num(row.get("attenuation_mid"))
+        lo, hi, mid = _num(row.get("temp_lo_f")), _num(row.get("temp_hi_f")), _num(row.get("temp_mid_f"))
+        temp = (f"{_fmt_num(lo)}–{_fmt_num(hi)} °F" if lo is not None and hi is not None
+                else (f"~{_fmt_num(mid)} °F" if mid is not None else None))
+        ytype = _YEAST_TYPE.get(str(row.get("ferment_type", "")).lower(), None)
+        floc = _FLOC.get(int(_num(row.get("flocculation"), 0) or 0))
+        notes = _profile_notes(row, _YEAST_AXES)
+        attenuation = f"{_fmt_num(att)}% attenuation" if att is not None else None
+        family = str(row.get("family", "")).replace("_", " ") or None
+        return {"kind": "Yeast", "type": ytype, "attenuation": attenuation, "temp": temp,
+                "flocculation": floc, "family": family, "notes": notes,
+                "summary": join([ytype, attenuation, temp, ", ".join(notes)])}
+
+    # malt / grain / extract
+    color = _num(row.get("color_L"))
+    color_s = f"{_fmt_num(color)} °L" if color is not None else None
+    form = _MALT_FORM.get(str(row.get("kind", "")), str(row.get("kind", "")).replace("_", " ") or None)
+    grain = str(row.get("grain", "")) or None
+    diastatic = bool(int(_num(row.get("diastatic"), 0) or 0))
+    notes = _profile_notes(row, _MALT_AXES)
+    origin = _ORIGIN.get(row.get("origin"), row.get("origin"))
+    return {"kind": "Malt", "color": color_s, "form": form, "grain": grain, "origin": origin,
+            "diastatic": diastatic, "notes": notes,
+            "summary": join([color_s, form, ", ".join(notes)])}
 
 
 def _owner_map(teams):

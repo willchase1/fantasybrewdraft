@@ -1,33 +1,33 @@
-name,family,ferment_type,attenuation_mid,flocculation,temp_mid_f,esters,phenols,clean_neutral,malt_forward,dry_crisp,haze_bio,sour,lager_sulfur
-"Abbey Ale (WLP540, EY1762, BE-256)",belgian,ale,76,2,68,2,2,0,2,1,0,0,0
-"Alt (WLP023, WY1007, G02)",german_ale,ale,75,1,60,1,0,3,1,2,0,0,0
-"American Ale (WLP001 [liquid or dry], WY1056, US-05, A07)",american,ale,76,2,68,1,0,3,1,2,0,0,0
-"Belgian Ale (WLP570, WY1388)",belgian,ale,78,1,70,2,2,0,1,3,0,0,0
-"Belgian Ardennes (WY3522, B45)",belgian,ale,74,2,70,2,2,0,1,2,0,0,0
-"Conan (WLP095, OYL-052, A04, LalBrew New England [Dry])",american,ale,77,2,68,2,0,1,1,1,3,0,0
-"Czech Lager (WLP802, WY2001, L28)",lager,lager,75,2,52,0,0,3,2,2,0,0,2
-"Dry English Ale (WLP007, WY1098, A10)",british,ale,78,3,66,1,0,2,1,3,0,0,0
-"East Coast Ale (WLP008, A15)",american,ale,72,1,68,1,0,2,1,1,0,0,0
-"English Ale (WLP002, WY1968, S-04, A09)",british,ale,68,3,66,2,0,0,3,0,0,0,0
-"Farmhouse (WY3726, OYL-217, Dry)",belgian_farmhouse,ale,80,2,74,2,2,0,0,3,0,0,0
-"German Ale (WY1007, G02)",german_ale,ale,75,1,60,1,0,3,1,2,0,0,0
-"German Lager (WLP830, WY2124, L13, 34/70)",lager,lager,76,2,52,0,0,3,1,2,0,0,1
-"Hefewiezen (WLP300, WY3068, G01)",german_ale,ale,74,1,68,3,3,0,1,1,2,0,0
-"Hornindal Kveik (WLP521, OYL-091)",kveik,kveik,78,2,90,3,0,1,0,1,2,0,0
-"Kolsch (WLP029, WY2565, G03, K-97)",german_ale,hybrid,75,2,62,1,0,3,1,2,0,0,1
-"London III (WLP013, A38, WY1318)",british,ale,73,2,68,2,0,1,2,0,2,0,0
-"Lutra Kveik (OYL-071, OYL-071DRY)",kveik,kveik,78,2,78,0,0,3,0,2,0,0,0
-"Mexican Lager (WLP940, OYL-113, L09)",lager,lager,74,2,52,0,0,3,1,2,0,0,1
-"Munich Lager (WLP838, WY2308, Dry)",lager,lager,73,3,52,0,0,3,3,1,0,0,1
-"NovaLager (Lalbrew Y055) (Dry)",lager,hybrid,80,2,60,0,0,3,0,3,0,0,0
-"Philly Sour or Sourvisiae (Dry)",sour,ale,78,2,72,2,0,1,0,2,0,3,0
-"Pomona (Lalbrew Y067) (Dry)",american,ale,78,2,68,2,0,1,0,1,3,0,0
-"Saflager SH-45 (Thiol Enhancing Dry Lager Yeast)",lager,lager,80,2,55,0,0,2,0,3,3,0,0
-"Saison (WLP565, WY3724)",belgian_farmhouse,ale,78,1,75,2,3,0,0,3,0,0,0
-"San Fran Lager (WLP810, L05, WY2112)",lager,hybrid,68,3,60,1,0,2,2,1,0,0,0
-"Scottish Ale (WLP028, WY1728, A31)",british,ale,72,2,62,1,0,2,3,1,0,0,0
-"Trappist Ale (WLP500, WY1214, B48)",belgian,ale,76,2,68,3,2,0,2,1,0,0,0
-"Verdant IPA (Dry)",british,ale,78,2,68,2,0,1,1,1,3,0,0
-"Voss Kveik (A43, OYL-061, Dry)",kveik,kveik,78,3,95,2,0,2,0,1,0,0,0
-"Belgian Witbier (WLP400, WY3944, Imperial B44, LalBrew Wit)",belgian,ale,75,1,70,2,3,0,1,2,2,1,0
-"Irish Ale (WLP004, WY1084, Imperial A44)",british,ale,72,2,66,1,0,2,2,1,0,0,0
+name,family,ferment_type,attenuation_mid,flocculation,temp_mid_f,temp_lo_f,temp_hi_f,esters,phenols,clean_neutral,malt_forward,dry_crisp,haze_bio,sour,lager_sulfur
+"Abbey Ale (WLP540, EY1762, BE-256)",belgian,ale,76,2,68,66,72,2,2,0,2,1,0,0,0
+"Alt (WLP023, WY1007, G02)",german_ale,ale,75,1,60,55,68,1,0,3,1,2,0,0,0
+"American Ale (WLP001 [liquid or dry], WY1056, US-05, A07)",american,ale,76,2,68,64,72,1,0,3,1,2,0,0,0
+"Belgian Ale (WLP570, WY1388)",belgian,ale,78,1,70,66,75,2,2,0,1,3,0,0,0
+"Belgian Ardennes (WY3522, B45)",belgian,ale,74,2,70,65,76,2,2,0,1,2,0,0,0
+"Conan (WLP095, OYL-052, A04, LalBrew New England [Dry])",american,ale,77,2,68,65,72,2,0,1,1,1,3,0,0
+"Czech Lager (WLP802, WY2001, L28)",lager,lager,75,2,52,48,56,0,0,3,2,2,0,0,2
+"Dry English Ale (WLP007, WY1098, A10)",british,ale,78,3,66,64,70,1,0,2,1,3,0,0,0
+"East Coast Ale (WLP008, A15)",american,ale,72,1,68,65,70,1,0,2,1,1,0,0,0
+"English Ale (WLP002, WY1968, S-04, A09)",british,ale,68,3,66,64,70,2,0,0,3,0,0,0,0
+"Farmhouse (WY3726, OYL-217, Dry)",belgian_farmhouse,ale,80,2,74,70,80,2,2,0,0,3,0,0,0
+"German Ale (WY1007, G02)",german_ale,ale,75,1,60,55,68,1,0,3,1,2,0,0,0
+"German Lager (WLP830, WY2124, L13, 34/70)",lager,lager,76,2,52,48,56,0,0,3,1,2,0,0,1
+"Hefewiezen (WLP300, WY3068, G01)",german_ale,ale,74,1,68,64,72,3,3,0,1,1,2,0,0
+"Hornindal Kveik (WLP521, OYL-091)",kveik,kveik,78,2,90,72,98,3,0,1,0,1,2,0,0
+"Kolsch (WLP029, WY2565, G03, K-97)",german_ale,hybrid,75,2,62,58,66,1,0,3,1,2,0,0,1
+"London III (WLP013, A38, WY1318)",british,ale,73,2,68,64,72,2,0,1,2,0,2,0,0
+"Lutra Kveik (OYL-071, OYL-071DRY)",kveik,kveik,78,2,78,68,95,0,0,3,0,2,0,0,0
+"Mexican Lager (WLP940, OYL-113, L09)",lager,lager,74,2,52,50,55,0,0,3,1,2,0,0,1
+"Munich Lager (WLP838, WY2308, Dry)",lager,lager,73,3,52,48,55,0,0,3,3,1,0,0,1
+NovaLager (Lalbrew Y055) (Dry),lager,hybrid,80,2,60,50,68,0,0,3,0,3,0,0,0
+Philly Sour or Sourvisiae (Dry),sour,ale,78,2,72,68,77,2,0,1,0,2,0,3,0
+Pomona (Lalbrew Y067) (Dry),american,ale,78,2,68,64,72,2,0,1,0,1,3,0,0
+Saflager SH-45 (Thiol Enhancing Dry Lager Yeast),lager,lager,80,2,55,50,59,0,0,2,0,3,3,0,0
+"Saison (WLP565, WY3724)",belgian_farmhouse,ale,78,1,75,68,85,2,3,0,0,3,0,0,0
+"San Fran Lager (WLP810, L05, WY2112)",lager,hybrid,68,3,60,58,65,1,0,2,2,1,0,0,0
+"Scottish Ale (WLP028, WY1728, A31)",british,ale,72,2,62,58,66,1,0,2,3,1,0,0,0
+"Trappist Ale (WLP500, WY1214, B48)",belgian,ale,76,2,68,65,72,3,2,0,2,1,0,0,0
+Verdant IPA (Dry),british,ale,78,2,68,64,73,2,0,1,1,1,3,0,0
+"Voss Kveik (A43, OYL-061, Dry)",kveik,kveik,78,3,95,77,104,2,0,2,0,1,0,0,0
+"Belgian Witbier (WLP400, WY3944, Imperial B44, LalBrew Wit)",belgian,ale,75,1,70,65,74,2,3,0,1,2,2,1,0
+"Irish Ale (WLP004, WY1084, Imperial A44)",british,ale,72,2,66,62,68,1,0,2,2,1,0,0,0

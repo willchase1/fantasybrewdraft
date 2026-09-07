@@ -78,7 +78,7 @@ SPECS = {
         "sheet_columns": ["Hop"],
         "categorical": {"origin": 0.6, "purpose": 1.0},
         "continuous": {"alpha_mid": (_lin(2.0, 17.0), 1.0)},
-        "ignore": [],
+        "ignore": ["alpha_lo", "alpha_hi"],  # display-only (ingredient_profile)
         "out": "hop_similarity",
     },
     "yeast": {
@@ -90,7 +90,7 @@ SPECS = {
             "temp_mid_f": (_lin(48.0, 98.0), 1.5),
             "flocculation": (_lin(1.0, 3.0), 0.7),
         },
-        "ignore": [],
+        "ignore": ["temp_lo_f", "temp_hi_f"],  # display-only (ingredient_profile)
         "out": "yeast_similarity",
     },
     "malt": {
