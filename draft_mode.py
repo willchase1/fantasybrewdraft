@@ -236,6 +236,9 @@ total_picks_overall = TOTAL_PICKS * int(num_players)
 overall_pick = len(draft_log) + 1
 current_round, current_seat = pick_slot(overall_pick, int(num_players))
 current_player = players[current_seat] if overall_pick <= total_picks_overall else None
+# Draft over → nobody's on the clock, so halt the timer (no countdown, no ticking).
+if current_player is None:
+    st.session_state.timer_running = False
 
 ingredient_popularity = {}
 early_signal = {}
@@ -407,28 +410,35 @@ def simulate_draft(sim_players, sim_rounds, your_pos, bias_weight, my_weights=No
 # ---------------------------------------------------------------------------
 # Render helpers
 # ---------------------------------------------------------------------------
-@st.fragment(run_every="1s")
 def render_compact_timer():
-    # Self-contained tick: this fragment (and ONLY this fragment) reruns each
-    # second via run_every, so the board, panels, and any open dialog are never
-    # interrupted mid-render. Recompute the clock fresh on every tick.
+    # Rendered inside a fragment whose run_every is armed only while the clock is
+    # actually counting (see call site), so the tick — and ONLY this fragment —
+    # reruns each second without touching the board or any open dialog, and stops
+    # entirely when paused or when the draft is over. Recompute fresh each tick.
     elapsed = st.session_state.timer_elapsed + (
         time.time() - st.session_state.timer_started_at
         if st.session_state.timer_running else 0.0)
     remaining = max(0, int(st.session_state.timer_duration - elapsed))
     if remaining == 0 and st.session_state.timer_running:
+        # Hit zero — stop, then rerun the whole app so run_every disarms.
         st.session_state.timer_running = False
+        st.rerun()
     color = "#e74c3c" if remaining <= 10 else ("#f39c12" if remaining <= 30 else "#2ecc71")
     run = st.session_state.timer_running
     st.markdown(
         f"<div class='wr-clock' style='color:{color};'>⏱ {remaining//60:02d}:{remaining%60:02d}"
         f" {'▶' if run else '⏸'}</div>", unsafe_allow_html=True)
+    # Controls do a full app rerun (not just a fragment rerun) so the call site
+    # re-evaluates run_every and (dis)arms the tick to match the new run state.
     b = st.columns(3)
     if run:
-        b[0].button("⏸", on_click=pause_draft_timer, key="t_pause", use_container_width=True, help="Pause")
+        if b[0].button("⏸", key="t_pause", use_container_width=True, help="Pause"):
+            pause_draft_timer(); st.rerun()
     else:
-        b[0].button("▶", on_click=start_draft_timer, key="t_start", use_container_width=True, help="Start")
-    b[1].button("↺", on_click=reset_draft_timer, key="t_reset", use_container_width=True, help="Reset")
+        if b[0].button("▶", key="t_start", use_container_width=True, help="Start"):
+            start_draft_timer(); st.rerun()
+    if b[1].button("↺", key="t_reset", use_container_width=True, help="Reset"):
+        reset_draft_timer(); st.rerun()
     with b[2].popover("⚙", use_container_width=True):
         mins = st.number_input("Duration (min)", 1, 60,
                                value=max(1, int(round(st.session_state.timer_duration / 60))),
@@ -643,7 +653,10 @@ with tb[i]:
     else:
         st.markdown("<div class='wr-title'>✅ Draft complete</div>", unsafe_allow_html=True)
 with tb[i + 1]:
-    render_compact_timer()
+    # Arm the 1-second self-tick only while the clock is genuinely running with a
+    # player on the clock; otherwise the fragment renders once and stays put.
+    _tick = "1s" if (current_player and st.session_state.timer_running) else None
+    st.fragment(run_every=_tick)(render_compact_timer)()
 with tb[i + 2]:
     default_idx = players.index(current_player) if current_player in players else 0
     focus_player = st.selectbox("View team", players, index=default_idx, key="focus_player")
