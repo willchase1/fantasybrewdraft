@@ -1,0 +1,385 @@
+{
+  "Pale Lager (Pils / Helles / Czech)": {
+    "Base Malt": [],
+    "Hop": [],
+    "Yeast": [],
+    "Adjunct": [
+      "Brewer's Crystals",
+      "Cane (or Beet) Sugar",
+      "Honey",
+      "Lemon Peel/Juice",
+      "Lime Peel/Juice"
+    ],
+    "Specialty": []
+  },
+  "Amber & Dark Lager (Märzen / Dunkel / Bock)": {
+    "Base Malt": [],
+    "Hop": [],
+    "Yeast": [],
+    "Adjunct": [
+      "Cane (or Beet) Sugar",
+      "Cocoa Nibs/Beans",
+      "Honey",
+      "Maple Syrup",
+      "Molasses",
+      "Rice Syrup (added \"syrup\" to differentiate from flaked rice in specialty malts)"
+    ],
+    "Specialty": []
+  },
+  "American & Mexican Lager / Cream Ale": {
+    "Base Malt": [],
+    "Hop": [],
+    "Yeast": [],
+    "Adjunct": [
+      "Cane (or Beet) Sugar",
+      "Coriander",
+      "Grapefruit Peel",
+      "Honey",
+      "Lemon Peel/Juice",
+      "Mango",
+      "Watermelon"
+    ],
+    "Specialty": []
+  },
+  "Kölsch & Altbier": {
+    "Base Malt": [],
+    "Hop": [],
+    "Yeast": [
+      "American Ale (WLP001 [liquid or dry], WY1056, US-05, A07)",
+      "NovaLager (Lalbrew Y055) (Dry)"
+    ],
+    "Adjunct": [
+      "Cane (or Beet) Sugar",
+      "Coriander",
+      "Honey",
+      "Lemon Peel/Juice",
+      "Orange Peel, Sweet",
+      "Rice Syrup (added \"syrup\" to differentiate from flaked rice in specialty malts)"
+    ],
+    "Specialty": []
+  },
+  "Hefeweizen / Dunkelweizen": {
+    "Base Malt": [],
+    "Hop": [
+      "Liberty",
+      "Mt Hood",
+      "Strisselspalt"
+    ],
+    "Yeast": [
+      "Belgian Witbier (WLP400, WY3944, Imperial B44, LalBrew Wit)",
+      "German Ale (WY1007, G02)"
+    ],
+    "Adjunct": [
+      "Cane (or Beet) Sugar",
+      "Cherries",
+      "Coriander",
+      "Corn Sugar (Dextrose)",
+      "Honey",
+      "Mango",
+      "Orange Peel, Sweet",
+      "Raspberries",
+      "Vanilla (extract or bean)"
+    ],
+    "Specialty": []
+  },
+  "Witbier / Belgian Wheat": {
+    "Base Malt": [],
+    "Hop": [],
+    "Yeast": [],
+    "Adjunct": [
+      "Abstrax SkyFarm fruit flavors (any)",
+      "Blueberries",
+      "Cane (or Beet) Sugar",
+      "Corn Sugar (Dextrose)",
+      "Juniper",
+      "Mango",
+      "Passion Fruit",
+      "Vanilla (extract or bean)"
+    ],
+    "Specialty": []
+  },
+  "Saison / Bière de Garde": {
+    "Base Malt": [],
+    "Hop": [],
+    "Yeast": [],
+    "Adjunct": [
+      "Blueberries",
+      "Brown Sugar",
+      "Candi Sugar, Dark",
+      "Cherries",
+      "Chili Peppers",
+      "Demerara Sugar",
+      "Grapefruit Peel",
+      "Guava",
+      "Lime Peel/Juice",
+      "Mango",
+      "Oak",
+      "Passion Fruit",
+      "Pineapple"
+    ],
+    "Specialty": []
+  },
+  "Belgian Blonde / Tripel / Golden Strong": {
+    "Base Malt": [],
+    "Hop": [],
+    "Yeast": [],
+    "Adjunct": [
+      "Apricots",
+      "Brewer's Crystals",
+      "Demerara Sugar",
+      "Ginger",
+      "Grains of Paradise",
+      "Lemon Peel/Juice",
+      "Passion Fruit",
+      "Peaches",
+      "Rice Syrup (added \"syrup\" to differentiate from flaked rice in specialty malts)",
+      "Turbinado Sugar"
+    ],
+    "Specialty": []
+  },
+  "Belgian Dubbel / Dark Strong": {
+    "Base Malt": [],
+    "Hop": [],
+    "Yeast": [],
+    "Adjunct": [
+      "Blackberries",
+      "Cocoa Nibs/Beans",
+      "Coffee (Liquid or Beans)",
+      "Corn Sugar (Dextrose)",
+      "Honey",
+      "Licorice",
+      "Maple Syrup",
+      "Molasses",
+      "Oak",
+      "Raspberries",
+      "Vanilla (extract or bean)"
+    ],
+    "Specialty": []
+  },
+  "Nordic Farmhouse / Kveik (Sahti)": {
+    "Base Malt": [],
+    "Hop": [],
+    "Yeast": [],
+    "Adjunct": [
+      "Apricots",
+      "Brown Sugar",
+      "Cane (or Beet) Sugar",
+      "Cherries",
+      "Coriander",
+      "Ginger",
+      "Grains of Paradise",
+      "Maple Syrup",
+      "Molasses",
+      "Oak",
+      "Peaches"
+    ],
+    "Specialty": []
+  },
+  "American Pale Ale / West Coast & Cold IPA": {
+    "Base Malt": [],
+    "Hop": [],
+    "Yeast": [],
+    "Adjunct": [
+      "Abstrax SkyFarm fruit flavors (any)",
+      "Brewer's Crystals",
+      "Cane (or Beet) Sugar",
+      "Guava",
+      "Honey",
+      "Lemon Peel/Juice",
+      "Lime Peel/Juice",
+      "Mango",
+      "Passion Fruit",
+      "Pineapple"
+    ],
+    "Specialty": []
+  },
+  "Hazy / New England IPA": {
+    "Base Malt": [],
+    "Hop": [],
+    "Yeast": [],
+    "Adjunct": [
+      "Apricots",
+      "Blackberries",
+      "Blueberries",
+      "Cane (or Beet) Sugar",
+      "Corn Sugar (Dextrose)",
+      "Honey",
+      "Lemon Peel/Juice",
+      "Lime Peel/Juice",
+      "Raspberries"
+    ],
+    "Specialty": []
+  },
+  "American Amber / Red / Brown": {
+    "Base Malt": [],
+    "Hop": [],
+    "Yeast": [],
+    "Adjunct": [
+      "Cane (or Beet) Sugar",
+      "Chili Peppers",
+      "Corn Sugar (Dextrose)",
+      "Demerara Sugar",
+      "Licorice",
+      "Lyle's Golden Syrup (Invert Sugar)",
+      "Molasses",
+      "Oak",
+      "Vanilla (extract or bean)"
+    ],
+    "Specialty": []
+  },
+  "Best Bitter / ESB / English Pale": {
+    "Base Malt": [],
+    "Hop": [],
+    "Yeast": [],
+    "Adjunct": [
+      "Brewer's Crystals",
+      "Brown Sugar",
+      "Corn Sugar (Dextrose)",
+      "Honey",
+      "Molasses",
+      "Orange Peel, Bitter"
+    ],
+    "Specialty": []
+  },
+  "Mild / Brown Ale": {
+    "Base Malt": [],
+    "Hop": [],
+    "Yeast": [],
+    "Adjunct": [
+      "Cane (or Beet) Sugar",
+      "Cinnamon",
+      "Coconut",
+      "Honey",
+      "Maple Syrup",
+      "Oak",
+      "Turbinado Sugar",
+      "Vanilla (extract or bean)"
+    ],
+    "Specialty": []
+  },
+  "English Strong / Barleywine / Wee Heavy": {
+    "Base Malt": [],
+    "Hop": [],
+    "Yeast": [],
+    "Adjunct": [
+      "Candi Sugar, Dark",
+      "Cherries",
+      "Cinnamon",
+      "Cocoa Nibs/Beans",
+      "Coconut",
+      "Coffee (Liquid or Beans)",
+      "Honey"
+    ],
+    "Specialty": [
+      "Barley, Roasted",
+      "Black Malt"
+    ]
+  },
+  "Porter (Brown / Robust / Baltic)": {
+    "Base Malt": [],
+    "Hop": [],
+    "Yeast": [],
+    "Adjunct": [
+      "Candi Sugar, Dark",
+      "Cane (or Beet) Sugar",
+      "Cherries",
+      "Chili Peppers",
+      "Demerara Sugar",
+      "Milk Sugar (Lactose)",
+      "Mushrooms",
+      "Raspberries",
+      "Truffles",
+      "Turbinado Sugar"
+    ],
+    "Specialty": []
+  },
+  "Stout (Dry / Oatmeal / Sweet / Foreign)": {
+    "Base Malt": [],
+    "Hop": [],
+    "Yeast": [],
+    "Adjunct": [
+      "Blackberries",
+      "Brown Sugar",
+      "Candi Sugar, Dark",
+      "Cane (or Beet) Sugar",
+      "Cherries",
+      "Chili Peppers",
+      "Cinnamon",
+      "Demerara Sugar",
+      "Honey",
+      "Maple Syrup",
+      "Mushrooms",
+      "Oak",
+      "Pumpkin",
+      "Truffles",
+      "Turbinado Sugar"
+    ],
+    "Specialty": []
+  },
+  "Imperial / Pastry Stout": {
+    "Base Malt": [],
+    "Hop": [],
+    "Yeast": [],
+    "Adjunct": [
+      "Apricots",
+      "Cane (or Beet) Sugar",
+      "Corn Sugar (Dextrose)",
+      "Demerara Sugar",
+      "Ginger",
+      "Honey",
+      "Lyle's Golden Syrup (Invert Sugar)"
+    ],
+    "Specialty": []
+  },
+  "Kettle Sour / Fruit Sour (Berliner / Gose)": {
+    "Base Malt": [],
+    "Hop": [],
+    "Yeast": [],
+    "Adjunct": [
+      "Abstrax terpenes (any variety of Quantum, Omni, or BrewGas)",
+      "Cane (or Beet) Sugar",
+      "Chili Peppers",
+      "Cinnamon",
+      "Corn Sugar (Dextrose)",
+      "Grains of Paradise",
+      "Honey",
+      "Juniper",
+      "Pumpkin"
+    ],
+    "Specialty": []
+  },
+  "American Wheat / Fruit & Spice Beer": {
+    "Base Malt": [],
+    "Hop": [],
+    "Yeast": [],
+    "Adjunct": [
+      "Brown Sugar",
+      "Cane (or Beet) Sugar",
+      "Cocoa Nibs/Beans",
+      "Coffee (Liquid or Beans)",
+      "Corn Sugar (Dextrose)",
+      "Maple Syrup",
+      "Milk Sugar (Lactose)",
+      "Oak"
+    ],
+    "Specialty": []
+  },
+  "Smoked & Wood-Aged (Rauchbier / Barrel)": {
+    "Base Malt": [],
+    "Hop": [],
+    "Yeast": [],
+    "Adjunct": [
+      "Blackberries",
+      "Brown Sugar",
+      "Cane (or Beet) Sugar",
+      "Demerara Sugar",
+      "Ginger",
+      "Honey",
+      "Milk Sugar (Lactose)",
+      "Pumpkin",
+      "Raspberries",
+      "Turbinado Sugar"
+    ],
+    "Specialty": []
+  }
+}

@@ -264,3 +264,98 @@ def test_config_defaults_name_single_pick_categories():
     from config import DEFAULTS, load_league_config
     assert DEFAULTS["single_pick_categories"] == ["Yeast"]
     assert load_league_config(os.path.join(HERE, "league_config.json"))["single_pick_categories"] == ["Yeast"]
+
+
+# ---------------------------------------------------------------------------
+# Workable tier: "what might work" when the characteristic options are gone
+# ---------------------------------------------------------------------------
+@pytest.fixture(scope="module")
+def workable():
+    return dc.load_workable(base_dir=HERE)
+
+
+KOLSCH = ["German Pilsner", "Hallertau Mittelfrueh", "Kolsch (WLP029, WY2565, G03, K-97)"]
+KOLSCH_SUGARS = ["Corn Sugar (Dextrose)", "Brewer's Crystals"]  # its characteristic adjuncts
+STOUT = ["Maris Otter", "East Kent Goldings", "Dry English Ale (WLP007, WY1098, A10)",
+         "Barley, Roasted"]
+
+
+def test_workable_file_shape_and_disjoint(ctx26, workable):
+    sm = ctx26["style_matrix"]
+    assert set(workable) == set(sm)
+    on_sheet = ctx26["available"]
+    n = 0
+    for style, cats in workable.items():
+        assert list(cats) == list(sm[style])
+        for cat, ings in cats.items():
+            assert not set(ings) & set(sm[style][cat]), (style, cat)  # never both tiers
+            assert set(ings) <= on_sheet, (style, cat, set(ings) - on_sheet)
+            n += len(ings)
+    assert n > 150
+    assert all(workable[s]["Adjunct"] for s in workable)  # every style has adjunct fallbacks
+
+
+def test_stranded_kolsch_gets_workable_adjuncts_with_reason(ctx26, workable):
+    r = _recs(ctx26, KOLSCH, drafted=KOLSCH + KOLSCH_SUGARS, workable=workable).reset_index()
+    top = r.head(4)
+    assert (top["Category"] == "Adjunct").all()
+    assert top["Why"].str.startswith("might work for Kölsch").all(), top["Why"].tolist()
+    assert set(top["Ingredient"]) <= set(workable["Kölsch & Altbier"]["Adjunct"])
+
+
+def test_workable_stays_in_reserve_while_characteristic_is_available(ctx26, workable):
+    r = _recs(ctx26, KOLSCH, workable=workable)
+    adj = r[r["Category"] == "Adjunct"]
+    assert adj.index[0] == "Corn Sugar (Dextrose)"
+    assert adj.iloc[0]["Why"].startswith("fits Kölsch")
+    # Only one of the two gone -> the remaining characteristic option still leads.
+    r2 = _recs(ctx26, KOLSCH, drafted=KOLSCH + ["Corn Sugar (Dextrose)"], workable=workable)
+    assert r2[r2["Category"] == "Adjunct"].index[0] == "Brewer's Crystals"
+
+
+def test_workable_twist_on_a_finished_build(ctx26, workable):
+    full = KOLSCH + ["Corn Sugar (Dextrose)"]
+    r = _recs(ctx26, full, workable=workable)
+    adj = r[r["Category"] == "Adjunct"].head(3)
+    assert adj["Why"].str.startswith("might work for Kölsch").all()
+    assert not r.head(5)["Why"].str.contains("Kettle Sour").any()  # flex deepens the style
+
+
+def test_stranded_stout_and_no_workable_file(ctx26, workable):
+    gone = STOUT + ["Milk Sugar (Lactose)", "Coffee (Liquid or Beans)", "Cocoa Nibs/Beans",
+                    "Vanilla (extract or bean)", "Molasses",
+                    "Lyle's Golden Syrup (Invert Sugar)", "Licorice", "Coconut"]
+    r = _recs(ctx26, STOUT, drafted=gone, workable=workable)
+    adj = r[r["Category"] == "Adjunct"].head(3)
+    assert adj["Why"].str.startswith("might work for Stout").all()
+    # Without the file, nothing says "might work" and the engine still runs.
+    r0 = _recs(ctx26, STOUT, drafted=gone)
+    assert not r0["Why"].str.contains("might work").any()
+    r1 = _recs(ctx26, STOUT, drafted=gone, workable=workable, squash={"workable_weight": 0.0})
+    assert not r1["Why"].str.contains("might work").any()
+
+
+def test_focus_likelihood_prefers_style_with_defining_pick(ctx26):
+    sm = ctx26["style_matrix"]
+    f = dc.compute_style_focus(STOUT, sm)
+    assert max(f, key=f.get).startswith("Stout")
+    f2 = dc.compute_style_focus(KOLSCH, sm)
+    assert max(f2, key=f2.get) == "Kölsch & Altbier"
+    # Legacy count mode still works and is flatter.
+    fc = dc.compute_style_focus(KOLSCH, sm, mode="count")
+    assert max(fc.values()) < max(f2.values())
+
+
+def test_style_status_counts_workable_options_and_picks(ctx26, workable):
+    sm = ctx26["style_matrix"]
+    board_gone = KOLSCH + KOLSCH_SUGARS
+    without = dc.compute_style_status(KOLSCH, board_gone, sm, REQUIRED, 3).set_index("Style")
+    with_w = dc.compute_style_status(KOLSCH, board_gone, sm, REQUIRED, 3,
+                                     workable=workable).set_index("Style")
+    k = "Kölsch & Altbier"
+    assert without.loc[k, "Categories with Options Left"] == 4   # adjunct exhausted
+    assert with_w.loc[k, "Categories with Options Left"] == 5    # workable adjuncts remain
+    roster = KOLSCH + ["Honey"]
+    st = dc.compute_style_status(roster, roster, sm, REQUIRED, 3, workable=workable)
+    assert st.iloc[0]["Style"] == k
+    assert st.set_index("Style").loc[k, "Picks Matched"] == 3.9  # honey at 0.9

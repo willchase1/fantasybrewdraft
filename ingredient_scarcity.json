@@ -1298,8 +1298,8 @@
   {
     "Ingredient": "Barley, Roasted",
     "Category": "Specialty",
-    "Style Coverage": 5,
-    "Signature": 0.2759,
+    "Style Coverage": 4,
+    "Signature": 0.2581,
     "Close Substitutes": 8,
     "Baseline Scarcity": 0.0504
   },
@@ -1339,7 +1339,7 @@
     "Ingredient": "Brown Malt",
     "Category": "Specialty",
     "Style Coverage": 7,
-    "Signature": 0.2759,
+    "Signature": 0.2857,
     "Close Substitutes": 8,
     "Baseline Scarcity": 0.0504
   },
@@ -1619,7 +1619,7 @@
     "Ingredient": "Peat Smoked Malt",
     "Category": "Specialty",
     "Style Coverage": 4,
-    "Signature": 0.2759,
+    "Signature": 0.2857,
     "Close Substitutes": 8,
     "Baseline Scarcity": 0.0504
   },

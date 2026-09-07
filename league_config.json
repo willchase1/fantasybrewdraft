@@ -12,6 +12,7 @@
   "single_pick_categories": [
     "Yeast"
   ],
+  "style_matrix_workable_path": "style_matrix_workable.json",
   "category_aliases": {
     "Base Malt": [
       "Base Malt",

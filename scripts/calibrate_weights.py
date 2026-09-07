@@ -66,12 +66,14 @@ def load_context(sheet="ingredients_2025.csv", style_matrix_path="style_matrix.j
             ingredients_path=sheet, style_matrix_path=style_matrix_path)
         sim = dc.load_similarity() if use_similarity else None
         cfg = load_league_config()
+        workable = dc.load_workable(cfg)
     finally:
         os.chdir(cwd)
     early, pairs = dc.build_opponent_signals(opp)
     return {
         "ingredients": ings, "style_matrix": sm, "scarcity": sc, "style_bias": sb,
         "i2c": i2c, "similarity": sim, "early": early, "pairs": pairs,
+        "workable": workable,
         "required": cfg["required_categories"], "flex_slots": cfg["flex_slots"],
         "available": dc.build_available_set(ings, cfg["category_aliases"]),
     }
@@ -105,6 +107,7 @@ def replay(ctx, players, log, weights=None, squash=None, players_subset=None):
                 similarity=ctx["similarity"], pair_lookup=ctx["pairs"],
                 num_players=n, overall_pick=overall, your_seat_index=seat[p],
                 weights=weights, squash=squash, available_set=ctx["available"],
+                workable=ctx.get("workable"),
             )
             pv = recs.set_index("Ingredient")["Pick Value"]
             if ing in pv.index:
@@ -170,6 +173,9 @@ def random_squash(rng):
         "need_slack": rng.choice([0.0, 1.0]),
         "scarce_residual": rng.choice([0.0, 1.0]),
         "scarce_sub": rng.choice([0.0, 0.0, 0.05, 0.15]),
+        "focus_ll": rng.choice([0.0, 1.0, 1.0]),
+        "focus_damp": rng.choice([0.0, 2.0, 4.0, 8.0]),
+        "workable_weight": rng.choice([0.0, 0.5, 0.9]),
     }
 
 

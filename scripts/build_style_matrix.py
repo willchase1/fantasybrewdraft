@@ -20,9 +20,27 @@ Design rules (see docs/STYLE_MATRIX.md):
     the engine's idf term is what rewards signature ingredients over them.
   * Names must match the ingredient sheet exactly (validated below).
 
+Two tiers
+---------
+``style_matrix.json``          *characteristic* -- the ingredients that define
+                               a style. Drives Fit, the likely-style classifier
+                               and style viability.
+``style_matrix_workable.json`` *workable* -- what a competent brewer would reach
+                               for when the characteristic options are gone, or
+                               as a deliberate twist on a finished style (a honey
+                               Kolsch, a cherry stout). Same shape; disjoint from
+                               the characteristic lists. The engine gives it
+                               partial credit (draft_core DEFAULT_SQUASH
+                               ``workable_weight``), so it only surfaces once the
+                               defining options are off the board -- the "no
+                               perfect style available" situation the draft is
+                               built around. Adjunct-heavy by design; other
+                               categories are filled only where a style's
+                               characteristic list is tiny.
+
 Usage
 -----
-    python scripts/build_style_matrix.py                # writes style_matrix.json
+    python scripts/build_style_matrix.py                # writes both files
     python scripts/build_style_matrix.py --check        # validate only, exit 1 on drift
     python scripts/build_style_matrix.py --sheet ingredients_2026.csv --out style_matrix.json
 
@@ -430,7 +448,7 @@ def build_styles() -> dict:
         "Adjunct": _u(SUGARS_UK_DARK, "Turbinado Sugar", "Cane (or Beet) Sugar",
                       "Maple Syrup", "Licorice", "Oak"),
         "Specialty": _u(CRYSTAL_MID, "Caramel/Crystal Malt -120L", "Special B",
-                        BISCUITY, "Brown Malt", SMOKED, "Barley, Roasted",
+                        BISCUITY, "Brown Malt", SMOKED,
                         "Pale Chocolate Malt", "Chocolate Malt", "Aromatic",
                         "Melanoiden Malt", "Wheat, Torrified", EXTRA_DARK),
     }
@@ -550,6 +568,138 @@ def build_styles() -> dict:
 # ---------------------------------------------------------------------------
 # Validation against the ingredient sheet
 # ---------------------------------------------------------------------------
+def build_workable(styles: dict) -> dict:
+    """Second-tier ("might work") lists per style. Same shape as the matrix.
+
+    Rule of thumb for an entry: if the characteristic options were all drafted,
+    would an experienced club brewer still make a good beer of this style with
+    it? Entries already characteristic for the style are dropped automatically.
+    """
+    FRUIT_SOFT = ["Apricots", "Peaches", "Raspberries", "Blueberries", "Cherries"]
+    TROPICAL = ["Mango", "Passion Fruit", "Pineapple", "Guava"]
+    W = {}
+
+    W["Pale Lager (Pils / Helles / Czech)"] = {
+        "Adjunct": ["Brewer's Crystals", "Honey", "Cane (or Beet) Sugar",
+                    "Lemon Peel/Juice", "Lime Peel/Juice"],
+    }
+    W["Amber & Dark Lager (Märzen / Dunkel / Bock)"] = {
+        "Adjunct": ["Honey", RICE_SYRUP, "Cane (or Beet) Sugar", "Molasses",
+                    "Maple Syrup", "Cocoa Nibs/Beans"],
+    }
+    W["American & Mexican Lager / Cream Ale"] = {
+        "Adjunct": ["Honey", "Cane (or Beet) Sugar", "Lemon Peel/Juice",
+                    "Grapefruit Peel", "Watermelon", "Mango", "Coriander"],
+    }
+    W["Kölsch & Altbier"] = {
+        "Adjunct": ["Honey", "Cane (or Beet) Sugar", RICE_SYRUP, "Lemon Peel/Juice",
+                    "Orange Peel, Sweet", "Coriander"],
+        "Yeast": [Y["us"], Y["nova"]],
+    }
+    W["Hefeweizen / Dunkelweizen"] = {
+        "Adjunct": ["Honey", "Cane (or Beet) Sugar", "Corn Sugar (Dextrose)",
+                    "Vanilla (extract or bean)", "Coriander", "Orange Peel, Sweet",
+                    "Cherries", "Raspberries", "Mango"],
+        "Hop": ["Liberty", "Mt Hood", "Strisselspalt"],
+        "Yeast": [Y["wit"], Y["gerale"]],
+    }
+    W["Witbier / Belgian Wheat"] = {
+        "Adjunct": [SKYFARM, "Passion Fruit", "Mango", "Blueberries",
+                    "Vanilla (extract or bean)", "Cane (or Beet) Sugar",
+                    "Corn Sugar (Dextrose)", "Juniper"],
+    }
+    W["Saison / Bière de Garde"] = {
+        "Adjunct": TROPICAL + ["Chili Peppers", "Lime Peel/Juice", "Grapefruit Peel",
+                               "Oak", "Blueberries", "Cherries", "Brown Sugar",
+                               "Demerara Sugar", "Candi Sugar, Dark"],
+    }
+    W["Belgian Blonde / Tripel / Golden Strong"] = {
+        "Adjunct": ["Turbinado Sugar", "Demerara Sugar", RICE_SYRUP,
+                    "Brewer's Crystals", "Lemon Peel/Juice", "Grains of Paradise",
+                    "Apricots", "Peaches", "Passion Fruit", "Ginger"],
+    }
+    W["Belgian Dubbel / Dark Strong"] = {
+        "Adjunct": ["Honey", "Maple Syrup", "Molasses", "Cocoa Nibs/Beans",
+                    "Coffee (Liquid or Beans)", "Vanilla (extract or bean)",
+                    "Licorice", "Oak", "Corn Sugar (Dextrose)", "Blackberries",
+                    "Raspberries"],
+    }
+    W["Nordic Farmhouse / Kveik (Sahti)"] = {
+        "Adjunct": ["Cane (or Beet) Sugar", "Brown Sugar", "Maple Syrup",
+                    "Molasses", "Coriander", "Grains of Paradise", "Ginger",
+                    "Cherries", "Apricots", "Peaches", "Oak"],
+    }
+    W["American Pale Ale / West Coast & Cold IPA"] = {
+        "Adjunct": ["Cane (or Beet) Sugar", "Honey", "Brewer's Crystals", SKYFARM]
+                   + TROPICAL + ["Lemon Peel/Juice", "Lime Peel/Juice"],
+    }
+    W["Hazy / New England IPA"] = {
+        "Adjunct": ["Corn Sugar (Dextrose)", "Cane (or Beet) Sugar", "Honey",
+                    "Apricots", "Raspberries", "Blueberries", "Blackberries",
+                    "Lime Peel/Juice", "Lemon Peel/Juice"],
+    }
+    W["American Amber / Red / Brown"] = {
+        "Adjunct": ["Cane (or Beet) Sugar", "Corn Sugar (Dextrose)", "Demerara Sugar",
+                    "Lyle's Golden Syrup (Invert Sugar)", "Molasses",
+                    "Vanilla (extract or bean)", "Licorice", "Chili Peppers", "Oak"],
+    }
+    W["Best Bitter / ESB / English Pale"] = {
+        "Adjunct": ["Honey", "Brown Sugar", "Molasses", "Brewer's Crystals",
+                    "Orange Peel, Bitter", "Corn Sugar (Dextrose)"],
+    }
+    W["Mild / Brown Ale"] = {
+        "Adjunct": ["Turbinado Sugar", "Cane (or Beet) Sugar", "Honey", "Maple Syrup",
+                    "Vanilla (extract or bean)", "Cinnamon", "Oak", "Coconut"],
+    }
+    W["English Strong / Barleywine / Wee Heavy"] = {
+        "Adjunct": ["Honey", "Cinnamon", "Cherries", "Coffee (Liquid or Beans)",
+                    "Cocoa Nibs/Beans", "Candi Sugar, Dark", "Coconut"],
+        "Specialty": ["Barley, Roasted", "Black Malt"],  # the wee-heavy pinch
+    }
+    W["Porter (Brown / Robust / Baltic)"] = {
+        "Adjunct": ["Demerara Sugar", "Cane (or Beet) Sugar", "Turbinado Sugar",
+                    "Candi Sugar, Dark", "Cherries", "Chili Peppers", LACTOSE,
+                    "Raspberries"] + UMAMI,
+    }
+    W["Stout (Dry / Oatmeal / Sweet / Foreign)"] = {
+        "Adjunct": ["Brown Sugar", "Demerara Sugar", "Turbinado Sugar",
+                    "Cane (or Beet) Sugar", "Honey", "Maple Syrup", "Oak",
+                    "Cherries", "Blackberries", "Chili Peppers", "Cinnamon",
+                    "Pumpkin", "Candi Sugar, Dark"] + UMAMI,
+    }
+    W["Imperial / Pastry Stout"] = {
+        "Adjunct": ["Demerara Sugar", "Cane (or Beet) Sugar", "Corn Sugar (Dextrose)",
+                    "Honey", "Lyle's Golden Syrup (Invert Sugar)", "Ginger",
+                    "Apricots"],
+    }
+    W["Kettle Sour / Fruit Sour (Berliner / Gose)"] = {
+        "Adjunct": ["Honey", "Cane (or Beet) Sugar", "Corn Sugar (Dextrose)",
+                    "Grains of Paradise", "Juniper", "Chili Peppers", "Cinnamon",
+                    "Pumpkin", TERPENES],
+    }
+    W["American Wheat / Fruit & Spice Beer"] = {
+        "Adjunct": ["Cane (or Beet) Sugar", "Corn Sugar (Dextrose)", LACTOSE,
+                    "Cocoa Nibs/Beans", "Coffee (Liquid or Beans)", "Maple Syrup",
+                    "Brown Sugar", "Oak"],
+    }
+    W["Smoked & Wood-Aged (Rauchbier / Barrel)"] = {
+        "Adjunct": ["Brown Sugar", "Demerara Sugar", "Turbinado Sugar", "Honey",
+                    "Cane (or Beet) Sugar", LACTOSE, "Blackberries", "Raspberries",
+                    "Pumpkin", "Ginger"],
+    }
+
+    out = {}
+    for style, cats in styles.items():
+        entry = {}
+        for cat in CATEGORIES:
+            chars = set(cats[cat])
+            entry[cat] = _u([i for i in W.get(style, {}).get(cat, []) if i not in chars])
+        out[style] = entry
+    unknown = set(W) - set(styles)
+    assert not unknown, f"workable lists for unknown styles: {sorted(unknown)}"
+    return out
+
+
 def validate(styles: dict, sheet_path: str) -> tuple[list, list]:
     """Return (in_matrix_not_sheet, in_sheet_not_matrix) using draft_core."""
     import pandas as pd
@@ -569,6 +719,7 @@ def main(argv=None) -> int:
     ap.add_argument("--sheet", default=None,
                     help="ingredient sheet CSV (default: league_config ingredients_path)")
     ap.add_argument("--out", default=os.path.join(ROOT, "style_matrix.json"))
+    ap.add_argument("--out-workable", default=os.path.join(ROOT, "style_matrix_workable.json"))
     ap.add_argument("--check", action="store_true",
                     help="validate and compare with --out; exit 1 on drift")
     args = ap.parse_args(argv)
@@ -578,33 +729,38 @@ def main(argv=None) -> int:
         args.sheet = os.path.join(ROOT, load_league_config()["ingredients_path"])
 
     styles = build_styles()
+    workable = build_workable(styles)
     orphans, unmodeled = validate(styles, args.sheet)
-    if orphans:
+    w_orphans, _ = validate(workable, args.sheet)
+    if orphans or w_orphans:
         print("ERROR: style matrix references ingredients not on the sheet:")
-        for o in orphans:
+        for o in orphans + w_orphans:
             print("  ", o)
         return 1
-    text = render(styles)
+    outputs = {args.out: render(styles), args.out_workable: render(workable)}
     n_ing = len({i for c in styles.values() for l in c.values() for i in l})
+    n_w = sum(len(l) for c in workable.values() for l in c.values())
     print(f"{len(styles)} styles, {n_ing} distinct ingredients modeled, "
-          f"{len(unmodeled)} sheet ingredients unmodeled")
+          f"{len(unmodeled)} sheet ingredients unmodeled, {n_w} workable entries")
     for u in unmodeled:
         print("   unmodeled:", u)
 
     if args.check:
-        if not os.path.exists(args.out):
-            print(f"ERROR: {args.out} missing")
-            return 1
-        with open(args.out, encoding="utf-8") as f:
-            if f.read() != text:
-                print(f"ERROR: {args.out} differs from generator output; re-run without --check")
+        for path, text in outputs.items():
+            if not os.path.exists(path):
+                print(f"ERROR: {path} missing")
                 return 1
-        print("OK: style_matrix.json is up to date")
+            with open(path, encoding="utf-8") as f:
+                if f.read() != text:
+                    print(f"ERROR: {path} differs from generator output; re-run without --check")
+                    return 1
+        print("OK: style_matrix.json and style_matrix_workable.json are up to date")
         return 0
 
-    with open(args.out, "w", encoding="utf-8") as f:
-        f.write(text)
-    print(f"wrote {args.out}")
+    for path, text in outputs.items():
+        with open(path, "w", encoding="utf-8") as f:
+            f.write(text)
+        print(f"wrote {path}")
     return 0
 
 

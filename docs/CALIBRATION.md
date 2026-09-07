@@ -27,11 +27,12 @@ the 2025 draft is a clean holdout.
 | New matrix + similarity, new engine, calibrated defaults | 0.13 | 0.30 | 0.37 | 0.213 | 26 | 0 |
 | **After** — + Sep-2026 sheet additions, narrow adjunct lists, adjunct-neutral signature | 0.13 | 0.30 | 0.38 | 0.220 | 26 | 0 |
 | **After** — + single-pick redundancy demotion (second yeast) | 0.13 | 0.30 | 0.38 | 0.223 | 22 | 0 |
+| **After** — + likelihood-based style focus, workable tier loaded | 0.14 | 0.30 | 0.40 | 0.237 | 16 | 0 |
 | (rejected) coordinate-ascent optimum, in-sample | 0.17 | 0.32 | 0.40 | 0.248 | 23 | 0 |
 
 "Unlisted" = picks the model could not even rank because no style contained
 them (the 64-ingredient gap fixed in `docs/STYLE_MATRIX.md`). By round, the
-calibrated model has median rank **8 in R1 and 6 in R2** (the anchor picks),
+calibrated model has median rank **8 in R1 and 12 in R2** (the anchor picks),
 then 25–46 in R3–R7 where drafters choose among ~50 specialty malts and ~45
 adjuncts for a style — that part is idiosyncratic and no weight setting helps
 much. 13 of 63 picks rank in the top 3 (German Pilsner, English Ale, Golden
@@ -77,8 +78,46 @@ from `league_config.json` (`pick_weights`, `board_value_weights`, `squash`);
 
 | Redundancy (single-pick categories) | — | Pick Value × `redundant_mult` (**0.25**) for a candidate whose bucket is in `league_config.single_pick_categories` (`["Yeast"]`) and already filled | Flex phase: with every required slot met, `need` is flat and mainstream yeasts floated back to #2/#6 on Fit + popularity. A second yeast is co-pitching — legal but rare — so it is demoted, not hidden (`Why` = "redundant · already have a yeast"; first yeast now #181 of 213). No 2025 roster took a second yeast, so the replay only improves: MRR 0.220 → 0.223, median rank 26 → 22. Guarded by `test_second_yeast_is_demoted_not_hidden` |
 
+| Style focus | category-hit count, share-normalised | **naive-Bayes likelihood** (`focus_ll`): a pick is 1/(|list|+`focus_damp`) where the style lists it, 1/(N+damp) where it does not; `focus_damp` **2** | A Kölsch roster's focus was two-thirds "Smoked & Wood-Aged" just because both list German Pilsner and Hallertau; likelihood focus lets the *defining* pick (the yeast) decide. MRR 0.223 → 0.237, median rank 22 → 16. Damping keeps hit-vs-miss dominant so a narrow style that lacks your defining pick cannot out-score a broad one that has it (the roasted-barley-in-Wee-Heavy case, also fixed in the data) |
+| Workable tier | — | `style_matrix_workable.json`; alignment credit `workable_weight` **0.9**, gated by characteristic options still on the board; focus credit `focus_workable` **0.5** on the union list | The "no perfect style" case: a Kölsch roster with dextrose and brewer's crystals gone now gets Honey / Coriander / Orange Peel "might work for Kölsch" instead of Coconut "fits Kettle Sour"; a finished Kölsch's flex adjuncts are its workable twists. Breadth ignores workable membership (no sugar creep). Replay unchanged with the file loaded (0.237 vs 0.237). Guarded by the `test_stranded_*` / `test_workable_*` tests |
+
 `compute_style_status` also gained *Picks Matched* and *Match* tie-breaks (see
-`docs/STYLE_MATRIX.md`).
+`docs/STYLE_MATRIX.md`), and counts workable options / picks at `workable_weight`.
+
+### Workable tier (Sep 2026)
+
+Motivation (Will): the draft's whole art is what to do when the perfect style
+is not on the board, or when the style is done and three flex picks remain. A
+new brewer needs "an interesting way forward that might work", with the
+reasoning visible.
+
+Mechanics in `next_best_picks(..., workable=load_workable())`:
+
+1. **Alignment.** A candidate's Fit alignment is normally its best
+   characteristic membership among the styles the roster leads toward. If a
+   *workable* membership in a better-aligned style beats that, it is used at
+   `workable_weight` × gate, and the `Why` becomes "might work for <style>".
+2. **Gate.** gate = 1 when the roster already holds a characteristic pick in
+   that category for that style (twist on a finished build) or none of them is
+   still available; otherwise 1/(1 + still-available characteristic options).
+   Without the gate, `workable_weight` 0.9 cost the replay 0.234 → 0.223; with
+   it the replay is unchanged.
+3. **Breadth** counts characteristic styles only. Counting workable membership
+   re-inflated dextrose/honey exactly as in the sugar fix.
+4. **Focus** (`compute_style_focus`) counts a workable roster pick at
+   `focus_workable` (0.5) over the *union* list length, so a two-item workable
+   list can never read as "defining".
+5. `compute_style_status` counts workable options as options left and workable
+   picks as matched at `workable_weight`.
+
+What was tried and rejected: `workable_weight` 0.5 ungated (pivots such as
+"Coconut · fits Kettle Sour" outranked "Honey · might work for Kölsch"), 0.9
+ungated (replay −0.011), `focus_damp` 8 (neighbour styles too flat: Coconut
+beat Brewer's Crystals while the latter was still available), workable in
+breadth (sugar creep).
+
+`Why` strings now name the style: "fits Kölsch & Altbier", "might work for
+Stout". `draft_core.short_style()` trims the long names.
 
 ### Single-pick categories (Sep 2026)
 

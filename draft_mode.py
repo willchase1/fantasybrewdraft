@@ -302,6 +302,8 @@ board_category_of = dict(zip(df_long_all["Ingredient"], df_long_all["Category"])
 # Weights / shape constants: code defaults overlaid with any league_config.json
 # overrides (``pick_weights``, ``board_value_weights``, ``squash``).
 PICK_WEIGHTS, BOARD_WEIGHTS, SQUASH = draft_core.scoring_params()
+# Second-tier ("might work") style membership; {} when the file is absent.
+WORKABLE = draft_core.load_workable(LEAGUE)
 
 
 def recommend(picks_arg, drafted_arg, top_k=15, seat_index=None, overall=None):
@@ -316,6 +318,7 @@ def recommend(picks_arg, drafted_arg, top_k=15, seat_index=None, overall=None):
         your_seat_index=seat_index if seat_index is not None else (int(draft_position) - 1),
         weights=PICK_WEIGHTS, squash=SQUASH,
         single_pick_categories=LEAGUE.get("single_pick_categories", []),
+        workable=WORKABLE,
     )
 
 
@@ -370,6 +373,7 @@ def sim_agent_pick(roster, drafted_local, weights, sim_players, overall, seat_in
         your_seat_index=seat_index, weights={**PICK_WEIGHTS, **(weights or {})},
         squash=SQUASH, top_k=top_k,
         single_pick_categories=LEAGUE.get("single_pick_categories", []),
+        workable=WORKABLE,
     )
     recs = recs[~recs["Ingredient"].isin(drafted_local)]
     if recs.empty:
@@ -509,7 +513,8 @@ def render_best_available(focus_player, focus_picks, focus_needed):
 
 def render_styles(focus_picks):
     st.caption("Click a style to see how to build it from the board.")
-    viab = compute_style_status(focus_picks, drafted, style_matrix, required, flex_slots)
+    viab = compute_style_status(focus_picks, drafted, style_matrix, required, flex_slots,
+                                workable=WORKABLE, workable_weight=SQUASH["workable_weight"])
     for _, r in viab.head(15).iterrows():
         style = r["Style"]
         matched = int(r.get("Picks Matched", 0))
@@ -751,7 +756,8 @@ with st.expander("🛡️ Blocks & opponent predictions", expanded=False):
         picks_p = teams.get(p, [])
         style_guess = "N/A"
         if picks_p:
-            viab_p = compute_style_status(picks_p, drafted, style_matrix, required, flex_slots)
+            viab_p = compute_style_status(picks_p, drafted, style_matrix, required, flex_slots,
+                                          workable=WORKABLE, workable_weight=SQUASH["workable_weight"])
             if not viab_p.empty:
                 style_guess = viab_p.iloc[0]["Style"]
         recs_p = recommend(picks_p, drafted, top_k=3, seat_index=players.index(p))
@@ -785,7 +791,8 @@ with st.expander("🎲 Mock draft simulator", expanded=False):
         st.markdown("**Pick log** (last 40)")
         st.dataframe(pd.DataFrame(log).tail(40), use_container_width=True, hide_index=True)
         st.markdown("#### Final style viability (top 15)")
-        viab_sim = compute_style_status(my_local, drafted_local, style_matrix, required, flex_slots).head(15)
+        viab_sim = compute_style_status(my_local, drafted_local, style_matrix, required, flex_slots,
+                                        workable=WORKABLE, workable_weight=SQUASH["workable_weight"]).head(15)
         st.dataframe(viab_sim, use_container_width=True, hide_index=True)
 
 with st.expander("📤 Results / export", expanded=False):

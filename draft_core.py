@@ -275,7 +275,8 @@ def roster_slots(my_records, enable_round8=False, flex_slots=3,
     return slots
 
 
-def compute_style_status(my_picks, drafted, style_matrix, required, flex_slots):
+def compute_style_status(my_picks, drafted, style_matrix, required, flex_slots,
+                         workable=None, workable_weight=None):
     """Style viability for a roster: which styles can still be built, and which
     the roster most resembles.
 
@@ -293,8 +294,16 @@ def compute_style_status(my_picks, drafted, style_matrix, required, flex_slots):
 
     Sorted by Score, then Picks Matched, then Match, so ``iloc[0]`` is the
     "likely style" even when several styles tie on categories alone.
+
+    ``workable`` (second-tier lists, see ``load_workable``): a category whose
+    characteristic options are gone still counts as having options if a
+    workable one is on the board; a workable roster pick counts as matched at
+    ``workable_weight`` of a characteristic one (both categories satisfied and
+    the likelihood term).
     """
     import math
+    if workable_weight is None:
+        workable_weight = DEFAULT_SQUASH["workable_weight"]
     status = []
     drafted_set = set(drafted)
     my_set = set(my_picks)
@@ -306,21 +315,32 @@ def compute_style_status(my_picks, drafted, style_matrix, required, flex_slots):
     floor_ll = math.log(1.0 / max(len(all_ings), 1))
 
     for style, cats in style_matrix.items():
+        wcats = (workable or {}).get(style, {})
         cat_choices_remaining = {}
+        satisfied = 0.0
         for cat, ing_list in cats.items():
+            wlist = wcats.get(cat, []) if workable_weight > 0 else []
             remaining_ing = [ing for ing in ing_list if ing not in drafted_set or ing in my_set]
-            cat_choices_remaining[cat] = len(remaining_ing)
+            remaining_w = [ing for ing in wlist if ing not in drafted_set or ing in my_set]
+            cat_choices_remaining[cat] = len(remaining_ing) + len(remaining_w)
+            if any(ing in my_set for ing in ing_list):
+                satisfied += 1.0
+            elif any(ing in my_set for ing in wlist):
+                satisfied += workable_weight
 
-        satisfied = sum(any(ing in my_set for ing in ings) for cat, ings in cats.items())
         options = sum(1 for k, v in cat_choices_remaining.items() if v > 0)
         score = satisfied * 2 + options
 
-        matched, ll = 0, 0.0
+        matched, ll = 0.0, 0.0
         for ing in my_set:
             hit = next((len(l) for l in cats.values() if ing in l), None)
+            whit = next((len(l) for l in wcats.values() if ing in l), None) if workable_weight > 0 else None
             if hit:
-                matched += 1
+                matched += 1.0
                 ll += math.log(1.0 / hit)
+            elif whit:
+                matched += workable_weight
+                ll += math.log(workable_weight / whit)
             else:
                 ll += floor_ll
         match = math.exp(ll / n_my) if n_my else 0.0
@@ -392,6 +412,29 @@ DEFAULT_SQUASH = {
     # Value multiplied by this. Demotes co-pitching to the tail of the list
     # without hiding it (it is legal, just rare). 1.0 disables.
     "redundant_mult": 0.25,
+    # Credit for second-tier ("workable") style membership relative to
+    # characteristic membership in Fit alignment and style focus. Full credit
+    # applies only when the style's characteristic options in that category
+    # are off the board, or the roster already holds one (a twist on a
+    # finished build); otherwise it is divided by (1 + options still
+    # available), so "might work" never outranks "is the style" while the
+    # real thing can still be drafted. 0 ignores the workable file entirely.
+    "workable_weight": 0.9,
+    # Style focus: 1.0 -> likelihood-based (a style missing your defining pick
+    # drops sharply); 0.0 -> legacy category-hit count. focus_floor is the
+    # "not listed" likelihood denominator; 0 = the number of ingredients in the
+    # matrix (one of everything on the sheet), which must exceed the broadest
+    # category list or a narrow style that *lacks* your defining pick can
+    # out-score the broad style that has it.
+    "focus_ll": 1.0,
+    "focus_floor": 0.0,
+    # Damping added to every list length in the likelihood (1/(|list|+k)) so
+    # that hit-vs-miss dominates and list narrowness is a secondary signal.
+    "focus_damp": 2.0,
+    # Weight of a *workable* roster pick when deciding which style the roster
+    # leads toward (deliberately below workable_weight: a workable hit in a
+    # short list must not out-vote a characteristic hit in a long one).
+    "focus_workable": 0.5,
 }
 
 
@@ -455,17 +498,64 @@ def compute_style_idf(style_matrix):
     return {ing: math.log(n_styles / c) for ing, c in doc_count.items() if c > 0}
 
 
-def compute_style_focus(my_picks, style_matrix):
+def compute_style_focus(my_picks, style_matrix, workable=None, workable_weight=0.5,
+                        mode="likelihood", miss_floor=None, damp=8.0):
     """Normalized weight per style reflecting how invested your roster is in it.
 
-    Empty picks -> empty dict (flat: no style preference yet).
+    ``mode="likelihood"`` (default): each style's weight is the naive-Bayes
+    likelihood of the roster -- a pick is 1/|category list| when the style
+    lists it (x ``workable_weight`` when only workable), and 1/``miss_floor``
+    when it does not. A style that misses the *defining* pick (the yeast in a
+    Kölsch roster) falls far behind one that has it, even if both share the
+    generic base malt and hop -- which is what "the style I'm building" means.
+
+    ``mode="count"``: the older category-hit count (1.0 characteristic,
+    ``workable_weight`` workable), retained for comparison.
+
+    Normalised to sum to 1. Empty picks -> empty dict (no preference yet).
     """
+    import math
     my_set = set(my_picks)
+    if miss_floor is None:
+        miss_floor = float(max(1, len({i for c in style_matrix.values()
+                                       for l in c.values() for i in l})))
     focus = {}
     for style, cats in style_matrix.items():
-        hits = sum(1 for ings in cats.values() if any(i in my_set for i in ings))
-        if hits:
-            focus[style] = hits
+        wcats = (workable or {}).get(style, {})
+        if mode == "count":
+            hits = 0.0
+            for cat, ings in cats.items():
+                if any(i in my_set for i in ings):
+                    hits += 1.0
+                elif any(i in my_set for i in wcats.get(cat, [])):
+                    hits += workable_weight
+            if hits:
+                focus[style] = hits
+            continue
+        if not my_set:
+            continue
+        ll = 0.0
+        for ing in my_set:
+            hit = next((len(l) for l in cats.values() if ing in l), None)
+            if hit:
+                ll += math.log(1.0 / (hit + damp))
+                continue
+            whit = None
+            if workable_weight:
+                for cat, wl in wcats.items():
+                    if ing in wl:
+                        # union of both tiers for that category, so a short
+                        # workable list cannot look "defining"
+                        whit = len(cats.get(cat, [])) + len(wl)
+                        break
+            if whit:
+                ll += math.log(workable_weight / (whit + damp))
+            else:
+                ll += math.log(1.0 / (miss_floor + damp))
+        focus[style] = ll
+    if mode != "count" and focus:
+        top = max(focus.values())
+        focus = {s: math.exp(v - top) for s, v in focus.items()}
     total = sum(focus.values())
     return {s: v / total for s, v in focus.items()} if total else {}
 
@@ -500,6 +590,20 @@ def load_similarity(config=None, base_dir="."):
         if isinstance(data, dict):
             merged.update(data)
     return merged
+
+
+def load_workable(config=None, base_dir="."):
+    """Second-tier ("workable") style membership, same shape as the style matrix.
+
+    Generated by scripts/build_style_matrix.py into the file named by
+    ``config["style_matrix_workable_path"]``. Optional: ``{}`` when absent.
+    """
+    if config is None:
+        config = load_league_config()
+    path = os.path.join(base_dir, config.get("style_matrix_workable_path")
+                        or "style_matrix_workable.json")
+    data = _load_optional_json(path)
+    return data if isinstance(data, dict) else {}
 
 
 def compute_dynamic_scarcity(available_now, ingredient_to_category,
@@ -604,6 +708,7 @@ def next_best_picks(
     squash=None,
     available_set=None,
     single_pick_categories=None,
+    workable=None,
 ):
     """Rank available ingredients by a normalized, weighted, explainable score.
 
@@ -615,6 +720,12 @@ def next_best_picks(
 
     ``scarcity_df`` is accepted for backward compatibility and ignored: scarcity
     is computed live from the board (``compute_dynamic_scarcity``).
+
+    ``workable`` (from ``load_workable``): second-tier style membership. A
+    workable ingredient earns ``squash["workable_weight"]`` of a characteristic
+    one in Fit, so it surfaces for a style once the defining options are gone
+    (or as a twist on a finished build) and its ``Why`` says "workable for
+    <style>". ``Style Coverage`` still counts characteristic styles only.
 
     ``single_pick_categories`` (default: league config, e.g. ``["Yeast"]``):
     once the roster satisfies such a category, further candidates from it are
@@ -664,9 +775,27 @@ def next_best_picks(
         cat_of_cand[ing] = cat  # category as it appears on the board/matrix
         list_len[(style, ing)] = len(style_matrix[style][cat])
 
+    # Second tier: styles where a candidate is merely *workable*.
+    w_weight = squash["workable_weight"] if workable else 0.0
+    workable_of = defaultdict(set)
+    if w_weight > 0:
+        for style, cats in workable.items():
+            if style not in style_matrix:
+                continue
+            for cat, ings in cats.items():
+                for ing in ings:
+                    if ing in coverage and style not in coverage[ing]:
+                        workable_of[ing].add(style)
+
     available_cands = set(coverage)
     idf = compute_style_idf(style_matrix)
-    focus = compute_style_focus(my_picks, style_matrix)
+    n_modeled = len({i for c in style_matrix.values() for l in c.values() for i in l})
+    focus = compute_style_focus(
+        my_picks, style_matrix, workable, min(w_weight, squash["focus_workable"]),
+        mode="likelihood" if squash["focus_ll"] else "count",
+        miss_floor=squash["focus_floor"] or float(max(n_modeled, 1)),
+        damp=squash["focus_damp"],
+    )
     focus_max = max(focus.values()) if focus else 0.0
     # Category map must also cover *drafted* ingredients so residual demand
     # can see what has already left the board.
@@ -725,11 +854,31 @@ def next_best_picks(
         #               (a Belgian yeast in a Dubbel: 4 options; a base malt:
         #               10) -- the pick that *defines* the beer is worth more
         #               than one of many interchangeable ones.
+        wstyles = workable_of.get(ing, set())
+        # Breadth counts characteristic styles only: workable membership is a
+        # fallback, not versatility (counting it re-inflates ubiquitous sugars).
         breadth = _squash(style_cov, squash["fit"])
+        via_workable = None
         if focus:
             best = max(focus.get(s, 0.0) for s in styles)
-            align = best / focus_max
             best_styles = [s for s in styles if focus.get(s, 0.0) == best]
+            # A workable membership in a style the roster leads toward can beat
+            # a characteristic membership in a style it barely touches.
+            best_styles.sort(key=lambda s: (-focus.get(s, 0.0), s))
+            if wstyles:
+                wbest_style = max(wstyles, key=lambda s: (focus.get(s, 0.0), s))
+                # Gate: characteristic options for this category in that style
+                # still on the board (and not already covered by the roster)
+                # keep the workable tier in reserve.
+                char_list = style_matrix[wbest_style].get(cat, [])
+                covered = any(p in char_list for p in my_set)
+                n_char_avail = 0 if covered else sum(
+                    1 for c in char_list if c in available_cands)
+                gate = 1.0 / (1.0 + n_char_avail)
+                wbest = focus.get(wbest_style, 0.0) * w_weight * gate
+                if wbest > best:
+                    best, via_workable = wbest, wbest_style
+            align = best / focus_max
         else:
             align = 1.0
             best_styles = list(styles)
@@ -737,7 +886,7 @@ def next_best_picks(
         # Adjunct lists are "what a brewer of this style would tolerate" and
         # are short precisely where adjuncts matter least (a Pils lists two
         # sugars), so for adjuncts the term is neutral instead of inverted.
-        if bucket == "Adjunct":
+        if bucket == "Adjunct" or via_workable:
             sig = 0.5
         else:
             sig = max(8.0 / (8.0 + list_len[(s, ing)]) for s in best_styles)
@@ -786,7 +935,9 @@ def next_best_picks(
             "pop": weights["pop"] * pop,
         }
         pick_value = sum(contrib.values())
-        why = explain_pick(contrib)
+        why = explain_pick(contrib, style=(best_styles[0] if focus and best_styles else None))
+        if via_workable:
+            why = f"might work for {short_style(via_workable)}"
         if bucket in redundant_buckets:
             # Already holding one from a single-pick category: demote, don't hide.
             pick_value *= squash["redundant_mult"]
@@ -823,10 +974,22 @@ _WHY_LABELS = {
 }
 
 
-def explain_pick(contrib, threshold=0.02, top_n=2):
-    """Human 'why' string: the 1-2 dominant weighted contributions."""
+def short_style(name):
+    """'Kettle Sour / Fruit Sour (Berliner / Gose)' -> 'Kettle Sour'."""
+    return str(name).split(" (")[0].split(" / ")[0].strip()
+
+
+def explain_pick(contrib, threshold=0.02, top_n=2, style=None):
+    """Human 'why' string: the 1-2 dominant weighted contributions.
+
+    ``style`` names the style the Fit term aligned to (once the roster has a
+    direction), so "on-style" says *which* style.
+    """
     ranked = sorted(contrib.items(), key=lambda kv: kv[1], reverse=True)
-    parts = [_WHY_LABELS.get(k, k) for k, v in ranked if v > threshold][:top_n]
+    labels = dict(_WHY_LABELS)
+    if style:
+        labels["fit"] = f"fits {short_style(style)}"
+    parts = [labels.get(k, k) for k, v in ranked if v > threshold][:top_n]
     return " · ".join(parts) if parts else "balanced value"
 
 

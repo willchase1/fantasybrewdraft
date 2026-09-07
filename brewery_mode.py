@@ -41,6 +41,7 @@ def _load_hop_similarity():
     ingredient_to_category,
 ) = _load()
 hop_similarity = _load_hop_similarity()
+workable = draft_core.load_workable()  # "might work" tier; {} if absent
 
 # Opponent popularity is a draft-strategy signal; in the brewery it stays off so
 # recommendations reflect brewing merit (style coverage + scarcity) only.
@@ -87,7 +88,8 @@ tab_styles, tab_recs, tab_hops = st.tabs(
 
 with tab_styles:
     st.caption("Styles you could still build with your current ingredients.")
-    viab = compute_style_status(sandbox, drafted, style_matrix, required, flex_slots)
+    viab = compute_style_status(sandbox, drafted, style_matrix, required, flex_slots,
+                                workable=workable)
     st.dataframe(viab, use_container_width=True)
 
 with tab_recs:
@@ -95,7 +97,7 @@ with tab_recs:
     recs = next_best_picks(
         sandbox, drafted, ingredients, style_matrix, scarcity_df, required,
         flex_slots, ingredient_to_category, style_bias,
-        early_signal=early_signal, bias_weight=0.0, top_k=15,
+        early_signal=early_signal, bias_weight=0.0, top_k=15, workable=workable,
     )
     st.dataframe(recs, use_container_width=True)
 
