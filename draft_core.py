@@ -1064,7 +1064,7 @@ def _owner_map(teams):
 
 
 def style_build_plan(style, style_matrix, focus_picks, drafted, teams=None,
-                     value_of=None):
+                     value_of=None, workable=None):
     """How a team could build ``style`` from the current board.
 
     Returns a list (in style-matrix category order) of dicts:
@@ -1074,38 +1074,60 @@ def style_build_plan(style, style_matrix, focus_picks, drafted, teams=None,
                    when a ``value_of`` {ingredient: score} map is supplied
       taken      - [(ingredient, player_or_None)] this style wants but that are
                    gone to someone else
+      workable   - second-tier "might work" options still on the board, when a
+                   ``workable`` matrix (``load_workable``) is supplied; excludes
+                   anything already characteristic for the category, best-first
     Pure/read-only: pairs with show_style_dialog in the UI.
     """
     my = set(focus_picks)
     drafted_set = set(drafted)
     owner = _owner_map(teams)
+    char = style_matrix.get(style, {})
+    wk = (workable or {}).get(style, {})
+    # Category order: characteristic first, then any workable-only categories.
+    cats = list(char.keys()) + [c for c in wk if c not in char]
     plan = []
-    for cat, ings in style_matrix.get(style, {}).items():
+    for cat in cats:
+        ings = char.get(cat, [])
+        char_set = set(ings)
         have = [i for i in ings if i in my]
         available = [i for i in ings if i not in drafted_set]
         if value_of:
             available.sort(key=lambda i: value_of.get(i, 0.0), reverse=True)
         taken = [(i, owner.get(i)) for i in ings
                  if i in drafted_set and i not in my]
+        workable_opts = [i for i in wk.get(cat, [])
+                         if i not in char_set and i not in drafted_set]
+        if value_of:
+            workable_opts.sort(key=lambda i: value_of.get(i, 0.0), reverse=True)
         plan.append({"category": cat, "have": have,
-                     "available": available, "taken": taken})
+                     "available": available, "taken": taken,
+                     "workable": workable_opts})
     return plan
 
 
 def ingredient_detail(ing, style_matrix, drafted, teams=None, similarity=None,
-                      popularity=None, available_set=None, board_category=None):
+                      popularity=None, available_set=None, board_category=None,
+                      workable=None):
     """Read-only detail view for a single ingredient.
 
-    Returns {ingredient, category, styles, drafted_by, similar, popularity}:
-      styles     - styles whose recipe lists this ingredient
-      drafted_by - the player who took it, or None if still available
-      similar    - [{ingredient, score, available}] neighbours from the
-                   similarity data (available = still on the board)
-      popularity - the ingredient's opponent-model record (or None)
+    Returns {ingredient, category, styles, workable_styles, drafted_by,
+    similar, popularity}:
+      styles          - styles whose characteristic recipe lists this ingredient
+      workable_styles - styles where it's only a second-tier "might work" fit
+                        (from a ``workable`` matrix), excluding ``styles``
+      drafted_by      - the player who took it, or None if still available
+      similar         - [{ingredient, score, available}] neighbours from the
+                        similarity data (available = still on the board)
+      popularity      - the ingredient's opponent-model record (or None)
     """
     drafted_set = set(drafted)
     styles = [s for s, cats in style_matrix.items()
               if any(ing in lst for lst in cats.values())]
+    char_styles = set(styles)
+    workable_styles = [s for s, cats in (workable or {}).items()
+                       if s not in char_styles
+                       and any(ing in lst for lst in cats.values())]
     category = board_category
     if category is None:
         for cats in style_matrix.values():
@@ -1133,6 +1155,7 @@ def ingredient_detail(ing, style_matrix, drafted, teams=None, similarity=None,
         "ingredient": ing,
         "category": category,
         "styles": styles,
+        "workable_styles": workable_styles,
         "drafted_by": drafted_by,
         "similar": similar,
         "popularity": (popularity or {}).get(ing),

@@ -375,6 +375,33 @@ def test_ingredient_detail_available_when_undrafted(data):
     assert d["drafted_by"] is None
 
 
+def test_style_build_plan_surfaces_workable_tier():
+    """A workable matrix adds a per-category 'might work' list, excluding options
+    already characteristic for that category and anything already drafted."""
+    sm = {"Kolsch": {"Adjunct": ["Dextrose"]}}
+    wk = {"Kolsch": {"Adjunct": ["Honey", "Coriander", "Dextrose"]}}
+    plan = {row["category"]: row for row in
+            dc.style_build_plan("Kolsch", sm, [], drafted=["Coriander"],
+                                workable=wk)}
+    row = plan["Adjunct"]
+    assert row["available"] == ["Dextrose"]          # characteristic, on board
+    assert "Honey" in row["workable"]                # workable, on board
+    assert "Dextrose" not in row["workable"]         # already characteristic
+    assert "Coriander" not in row["workable"]        # drafted -> off the board
+
+
+def test_ingredient_detail_workable_styles_exclude_characteristic():
+    """workable_styles lists styles where an ingredient is only a 'might work'
+    fit, never styles where it's already characteristic."""
+    sm = {"Stout": {"Specialty": ["Roasted Barley"]}}
+    wk = {"English Strong": {"Specialty": ["Roasted Barley"]},
+          "Stout": {"Adjunct": ["Roasted Barley"]}}  # also workable in Stout
+    d = dc.ingredient_detail("Roasted Barley", sm, drafted=[], teams={},
+                             workable=wk)
+    assert d["styles"] == ["Stout"]
+    assert d["workable_styles"] == ["English Strong"]  # Stout excluded (characteristic)
+
+
 def test_next_best_picks_urgency_prioritizes_needed_category(data, opp_signals):
     """With a hop already in hand, an unmet required category (Yeast) should
     surface a Yeast candidate above hops in the top few via the urgency term."""

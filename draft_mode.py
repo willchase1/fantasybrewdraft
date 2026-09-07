@@ -528,7 +528,7 @@ def show_ingredient_dialog(ing):
         ing, style_matrix, drafted, teams=teams, similarity=hop_similarity_data,
         popularity=ingredient_popularity,
         available_set=set(df_long_all["Ingredient"]),
-        board_category=board_category_of.get(ing))
+        board_category=board_category_of.get(ing), workable=WORKABLE)
     st.markdown(f"### {ing}")
     cat = detail["category"] or "—"
     if detail["drafted_by"]:
@@ -541,6 +541,8 @@ def show_ingredient_dialog(ing):
                    f"avg slot {round(float(p.get('Avg_Slot', 0)), 1)}")
     st.markdown("**Fits styles:** " + (", ".join(detail["styles"])
                 if detail["styles"] else "_not modeled in any style_"))
+    if detail.get("workable_styles"):
+        st.caption("🟡 Might also work for: " + ", ".join(detail["workable_styles"]))
     subs = [s for s in detail["similar"] if s["available"]]
     if subs:
         st.markdown("**Similar & still available:**")
@@ -559,18 +561,18 @@ def show_ingredient_dialog(ing):
 @st.dialog("Build a style", width="large", on_dismiss=_close_dialogs)
 def show_style_dialog(style):
     st.markdown(f"### 🧪 Build: {style}")
-    st.caption(f"For **{focus_player}**  ·  ✅ on roster · 🟢 open · ❌ taken")
+    st.caption(f"For **{focus_player}**  ·  ✅ on roster · 🟢 open · 🟡 might work · ❌ taken")
     seat = players.index(focus_player) if focus_player in players else 0
     recs = recommend(focus_picks, drafted, top_k=500, seat_index=seat)
     value_of = dict(zip(recs["Ingredient"], recs["Pick Value"]))
     plan = style_build_plan(style, style_matrix, focus_picks, drafted,
-                            teams=teams, value_of=value_of)
+                            teams=teams, value_of=value_of, workable=WORKABLE)
     for row in plan:
         cat = row["category"]
         st.markdown(f"**{cat}**")
         if row["have"]:
             st.markdown("✅ " + ", ".join(row["have"]))
-        open_opts = row["available"]  # excludes your own picks (already drafted)
+        open_opts = row["available"]  # excludes the focus team's own picks (drafted)
         for ing in open_opts[:6]:
             c = st.columns([6, 2])
             c[0].markdown(f"🟢 {ing}")
@@ -580,7 +582,18 @@ def show_style_dialog(style):
                 add_pick(current_player, ing, board_category_of.get(ing, cat))
         if len(open_opts) > 6:
             st.caption(f"+{len(open_opts) - 6} more available")
-        if not row["have"] and not open_opts:
+        # Second-tier "might work" fallbacks — only surfaced when characteristic
+        # options are thin, so they don't clutter a well-stocked category.
+        workable_opts = row.get("workable", [])
+        if workable_opts and len(open_opts) < 4:
+            for ing in workable_opts[:4]:
+                c = st.columns([6, 2])
+                c[0].markdown(f"🟡 {ing}")
+                if current_player and c[1].button("Draft", key=f"sbp-wk-draft-{cat}-{ing}",
+                                                  use_container_width=True):
+                    st.session_state.pop("open_style", None)
+                    add_pick(current_player, ing, board_category_of.get(ing, cat))
+        if not row["have"] and not open_opts and not workable_opts:
             st.caption("❌ none left on the board")
         if row["taken"]:
             st.caption("❌ taken: " + ", ".join(f"{i} ({p or '?'})"
