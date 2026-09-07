@@ -515,10 +515,18 @@ def render_styles(focus_picks):
         matched = int(r.get("Picks Matched", 0))
         label = f"{style}  ·  matched {matched}" if matched else style
         if st.button(label, key=f"style-{style}", use_container_width=True):
-            show_style_dialog(style)
+            st.session_state["open_style"] = style
+            st.session_state.pop("open_ingredient", None)
+            st.rerun()
 
 
-@st.dialog("Ingredient")
+def _close_dialogs():
+    """Clear modal flags so no rerun (draft, dismiss, or timer tick) reopens them."""
+    st.session_state.pop("open_ingredient", None)
+    st.session_state.pop("open_style", None)
+
+
+@st.dialog("Ingredient", on_dismiss=_close_dialogs)
 def show_ingredient_dialog(ing):
     detail = ingredient_detail(
         ing, style_matrix, drafted, teams=teams, similarity=hop_similarity_data,
@@ -548,10 +556,11 @@ def show_ingredient_dialog(ing):
         st.caption("No similarity data for this ingredient.")
     if current_player and ing not in set(drafted):
         if st.button(f"➕ Draft {ing} for {current_player}", use_container_width=True):
+            st.session_state.pop("open_ingredient", None)
             add_pick(current_player, ing, board_category_of.get(ing, cat))
 
 
-@st.dialog("Build a style", width="large")
+@st.dialog("Build a style", width="large", on_dismiss=_close_dialogs)
 def show_style_dialog(style):
     st.markdown(f"### 🧪 Build: {style}")
     st.caption(f"For **{focus_player}**  ·  ✅ you have · 🟢 open · ❌ taken")
@@ -571,6 +580,7 @@ def show_style_dialog(style):
             c[0].markdown(f"🟢 {ing}")
             if current_player and c[1].button("Draft", key=f"sbp-draft-{cat}-{ing}",
                                               use_container_width=True):
+                st.session_state.pop("open_style", None)
                 add_pick(current_player, ing, board_category_of.get(ing, cat))
         if len(open_opts) > 6:
             st.caption(f"+{len(open_opts) - 6} more available")
@@ -589,7 +599,9 @@ def render_ingredient_lookup():
     look = lu[0].selectbox("ℹ️ Look up ingredient", names, key="ing_lookup",
                            label_visibility="collapsed")
     if lu[1].button("View", key="ing_lookup_btn", use_container_width=True) and look != "—":
-        show_ingredient_dialog(look)
+        st.session_state["open_ingredient"] = look
+        st.session_state.pop("open_style", None)
+        st.rerun()
 
 
 # ===========================================================================
@@ -819,6 +831,15 @@ with st.expander("🌿 Ingredient similarity finder (hops · yeasts · malts)", 
                     else draft_core._sim_name(rec)
                     for rec in hop_similarity_data.get(hop, [])]
         st.caption("Similar: " + ", ".join(similars) if similars else "No similarity data available.")
+
+# --- Modal dispatch --------------------------------------------------------
+# Flag-driven so a dialog persists across the timer's periodic reruns and closes
+# deterministically when its flag is cleared (on draft or dismiss). Only one is
+# ever open at a time.
+if st.session_state.get("open_ingredient"):
+    show_ingredient_dialog(st.session_state["open_ingredient"])
+elif st.session_state.get("open_style"):
+    show_style_dialog(st.session_state["open_style"])
 
 # Keep the timer ticking while running and the draft is live.
 if st.session_state.get("timer_running") and current_player:
