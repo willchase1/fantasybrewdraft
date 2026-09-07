@@ -867,6 +867,91 @@ def team_context(records, my_picks, drafted, style_matrix, required, flex_slots,
     }
 
 
+def _owner_map(teams):
+    """{ingredient: player} from a teams projection (first owner wins)."""
+    owner = {}
+    for player, picks in (teams or {}).items():
+        for ing in picks:
+            owner.setdefault(ing, player)
+    return owner
+
+
+def style_build_plan(style, style_matrix, focus_picks, drafted, teams=None,
+                     value_of=None):
+    """How a team could build ``style`` from the current board.
+
+    Returns a list (in style-matrix category order) of dicts:
+      category   - the style category ("Base Malt", "Hop", ...)
+      have       - the focus team's own picks that this style uses
+      available  - style options still on the board (not drafted), best-first
+                   when a ``value_of`` {ingredient: score} map is supplied
+      taken      - [(ingredient, player_or_None)] this style wants but that are
+                   gone to someone else
+    Pure/read-only: pairs with show_style_dialog in the UI.
+    """
+    my = set(focus_picks)
+    drafted_set = set(drafted)
+    owner = _owner_map(teams)
+    plan = []
+    for cat, ings in style_matrix.get(style, {}).items():
+        have = [i for i in ings if i in my]
+        available = [i for i in ings if i not in drafted_set]
+        if value_of:
+            available.sort(key=lambda i: value_of.get(i, 0.0), reverse=True)
+        taken = [(i, owner.get(i)) for i in ings
+                 if i in drafted_set and i not in my]
+        plan.append({"category": cat, "have": have,
+                     "available": available, "taken": taken})
+    return plan
+
+
+def ingredient_detail(ing, style_matrix, drafted, teams=None, similarity=None,
+                      popularity=None, available_set=None, board_category=None):
+    """Read-only detail view for a single ingredient.
+
+    Returns {ingredient, category, styles, drafted_by, similar, popularity}:
+      styles     - styles whose recipe lists this ingredient
+      drafted_by - the player who took it, or None if still available
+      similar    - [{ingredient, score, available}] neighbours from the
+                   similarity data (available = still on the board)
+      popularity - the ingredient's opponent-model record (or None)
+    """
+    drafted_set = set(drafted)
+    styles = [s for s, cats in style_matrix.items()
+              if any(ing in lst for lst in cats.values())]
+    category = board_category
+    if category is None:
+        for cats in style_matrix.values():
+            for cat, lst in cats.items():
+                if ing in lst:
+                    category = cat
+                    break
+            if category:
+                break
+    drafted_by = _owner_map(teams).get(ing) if teams else (
+        ing if ing in drafted_set else None)
+    if ing not in drafted_set:
+        drafted_by = None
+    similar = []
+    for rec in (similarity or {}).get(ing, []):
+        name = _sim_name(rec)
+        if not name:
+            continue
+        avail = name not in drafted_set and (
+            available_set is None or name in available_set)
+        similar.append({"ingredient": name,
+                        "score": float(rec.get("score", 0.0)),
+                        "available": avail})
+    return {
+        "ingredient": ing,
+        "category": category,
+        "styles": styles,
+        "drafted_by": drafted_by,
+        "similar": similar,
+        "popularity": (popularity or {}).get(ing),
+    }
+
+
 def block_picks(
     drafted,
     my_picks,

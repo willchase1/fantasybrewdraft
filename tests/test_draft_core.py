@@ -325,6 +325,56 @@ def test_team_context_empty_roster_style_tbd(data):
     assert ctx["needed_buckets"] == {"Malt", "Hop", "Yeast", "Adjunct"}
 
 
+# ---------------------------------------------------------------------------
+# Info views: style_build_plan + ingredient_detail
+# ---------------------------------------------------------------------------
+def test_style_build_plan_partitions_have_available_taken(data):
+    sm = data["style_matrix"]
+    style = next(iter(sm))
+    cat0, ings0 = next(iter(sm[style].items()))
+    mine, other = ings0[0], ings0[1]
+    focus_picks = [mine]
+    drafted = [mine, other]
+    teams = {"Me": [mine], "Rival": [other]}
+    plan = {row["category"]: row for row in
+            dc.style_build_plan(style, sm, focus_picks, drafted, teams=teams)}
+    row = plan[cat0]
+    assert mine in row["have"]
+    assert mine not in row["available"] and other not in row["available"]  # both drafted
+    assert (other, "Rival") in row["taken"]
+
+
+def test_style_build_plan_orders_available_by_value(data):
+    sm = data["style_matrix"]
+    style = next(s for s, cats in sm.items() if len(cats.get("Hop", [])) >= 3)
+    hops = sm[style]["Hop"]
+    value_of = {h: i for i, h in enumerate(hops)}  # last hop = highest value
+    plan = {row["category"]: row for row in
+            dc.style_build_plan(style, sm, [], [], value_of=value_of)}
+    avail = plan["Hop"]["available"]
+    assert avail[0] == hops[-1]  # highest value first
+
+
+def test_ingredient_detail_styles_similar_and_owner(data):
+    sm = data["style_matrix"]
+    sim = {"Citra": [{"ingredient": "Mosaic", "score": 0.8},
+                     {"ingredient": "Galaxy", "score": 0.7}]}
+    teams = {"Bob": ["Citra"]}
+    d = dc.ingredient_detail("Citra", sm, drafted=["Citra", "Mosaic"], teams=teams,
+                             similarity=sim, available_set={"Galaxy"})
+    assert d["drafted_by"] == "Bob"
+    assert d["styles"] and all("Citra" in
+        [i for c in sm[s].values() for i in c] for s in d["styles"])
+    sim_map = {s["ingredient"]: s["available"] for s in d["similar"]}
+    assert sim_map["Mosaic"] is False   # drafted -> unavailable
+    assert sim_map["Galaxy"] is True    # in available_set, not drafted
+
+
+def test_ingredient_detail_available_when_undrafted(data):
+    d = dc.ingredient_detail("Citra", data["style_matrix"], drafted=[], teams={})
+    assert d["drafted_by"] is None
+
+
 def test_next_best_picks_urgency_prioritizes_needed_category(data, opp_signals):
     """With a hop already in hand, an unmet required category (Yeast) should
     surface a Yeast candidate above hops in the top few via the urgency term."""

@@ -21,6 +21,8 @@ from draft_core import (
     next_best_picks,
     best_available,
     team_context,
+    style_build_plan,
+    ingredient_detail,
     block_picks,
     pick_slot,
 )
@@ -504,8 +506,88 @@ def render_best_available(focus_player, focus_picks, focus_needed):
 
 
 def render_styles(focus_picks):
+    st.caption("Click a style to see how to build it from the board.")
     viab = compute_style_status(focus_picks, drafted, style_matrix, required, flex_slots)
-    st.dataframe(viab.head(15), use_container_width=True, hide_index=True)
+    for _, r in viab.head(15).iterrows():
+        style = r["Style"]
+        matched = int(r.get("Picks Matched", 0))
+        label = f"{style}  ·  matched {matched}" if matched else style
+        if st.button(label, key=f"style-{style}", use_container_width=True):
+            show_style_dialog(style)
+
+
+@st.dialog("Ingredient")
+def show_ingredient_dialog(ing):
+    detail = ingredient_detail(
+        ing, style_matrix, drafted, teams=teams, similarity=hop_similarity_data,
+        popularity=ingredient_popularity,
+        available_set=set(df_long_all["Ingredient"]),
+        board_category=board_category_of.get(ing))
+    st.markdown(f"### {ing}")
+    cat = detail["category"] or "—"
+    if detail["drafted_by"]:
+        st.caption(f"{cat} · drafted by **{detail['drafted_by']}**")
+    else:
+        st.caption(f"{cat} · available")
+    p = detail["popularity"]
+    if p:
+        st.caption(f"Historically picked {p.get('Picks', 0)}× · "
+                   f"avg slot {round(float(p.get('Avg_Slot', 0)), 1)}")
+    st.markdown("**Fits styles:** " + (", ".join(detail["styles"])
+                if detail["styles"] else "_not modeled in any style_"))
+    subs = [s for s in detail["similar"] if s["available"]]
+    if subs:
+        st.markdown("**Similar & still available:**")
+        st.markdown("\n".join(f"- {s['ingredient']}  ·  {s['score']:.2f}"
+                              for s in subs[:8]))
+    elif detail["similar"]:
+        st.caption("All close substitutes are already drafted.")
+    else:
+        st.caption("No similarity data for this ingredient.")
+    if current_player and ing not in set(drafted):
+        if st.button(f"➕ Draft {ing} for {current_player}", use_container_width=True):
+            add_pick(current_player, ing, board_category_of.get(ing, cat))
+
+
+@st.dialog("Build a style", width="large")
+def show_style_dialog(style):
+    st.markdown(f"### 🧪 Build: {style}")
+    st.caption(f"For **{focus_player}**  ·  ✅ you have · 🟢 open · ❌ taken")
+    seat = players.index(focus_player) if focus_player in players else 0
+    recs = recommend(focus_picks, drafted, top_k=500, seat_index=seat)
+    value_of = dict(zip(recs["Ingredient"], recs["Pick Value"]))
+    plan = style_build_plan(style, style_matrix, focus_picks, drafted,
+                            teams=teams, value_of=value_of)
+    for row in plan:
+        cat = row["category"]
+        st.markdown(f"**{cat}**")
+        if row["have"]:
+            st.markdown("✅ " + ", ".join(row["have"]))
+        open_opts = row["available"]  # excludes your own picks (already drafted)
+        for ing in open_opts[:6]:
+            c = st.columns([6, 2])
+            c[0].markdown(f"🟢 {ing}")
+            if current_player and c[1].button("Draft", key=f"sbp-draft-{cat}-{ing}",
+                                              use_container_width=True):
+                add_pick(current_player, ing, board_category_of.get(ing, cat))
+        if len(open_opts) > 6:
+            st.caption(f"+{len(open_opts) - 6} more available")
+        if not row["have"] and not open_opts:
+            st.caption("❌ none left on the board")
+        if row["taken"]:
+            st.caption("❌ taken: " + ", ".join(f"{i} ({p or '?'})"
+                                                for i, p in row["taken"][:6]))
+        st.divider()
+
+
+def render_ingredient_lookup():
+    """Searchable 'look up any ingredient' control that opens the detail dialog."""
+    lu = st.columns([3, 1])
+    names = ["—"] + sorted(df_long_all["Ingredient"].tolist())
+    look = lu[0].selectbox("ℹ️ Look up ingredient", names, key="ing_lookup",
+                           label_visibility="collapsed")
+    if lu[1].button("View", key="ing_lookup_btn", use_container_width=True) and look != "—":
+        show_ingredient_dialog(look)
 
 
 # ===========================================================================
@@ -564,6 +646,7 @@ if compact:
     st.toggle("📱 Phone layout", key="compact_mode")
     view = st.segmented_control("View", ["📋 Board", "⭐ Recommended", "📊 Styles"],
                                 default="⭐ Recommended", key="wr_view")
+    render_ingredient_lookup()
     filt = st.text_input("Filter", key="board-filter", placeholder="Filter ingredients…",
                          label_visibility="collapsed")
     df_live_f = df_live[df_live["Ingredient"].str.contains(filt, case=False)] if filt else df_live
@@ -579,6 +662,8 @@ else:
         head = st.columns([3, 1])
         head[0].subheader("📋 Board")
         head[1].toggle("📱", key="compact_mode", help="Phone / single-column layout")
+        with left:
+            render_ingredient_lookup()
         filt = left.text_input("Filter", key="board-filter", placeholder="Filter ingredients…",
                                label_visibility="collapsed")
         df_live_f = df_live[df_live["Ingredient"].str.contains(filt, case=False)] if filt else df_live

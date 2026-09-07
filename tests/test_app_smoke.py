@@ -79,6 +79,19 @@ def test_draft_mode_board_and_best_available_buttons():
     assert any(s.key == "focus_player" for s in at.selectbox)
 
 
+def test_draft_mode_info_triggers_render():
+    """The ingredient look-up box and per-style build-plan buttons render."""
+    at = AppTest.from_file(DRAFT, default_timeout=30)
+    at.session_state["players"] = ["Alice", "Bob", "Cara", "Dan"]
+    at.session_state["draft_log"] = [
+        {"Round": 1, "Overall": 1, "Player": "Alice", "Ingredient": "Citra", "Category": "Hop"},
+    ]
+    at.run()
+    assert not at.exception, at.exception
+    assert any(s.key == "ing_lookup" for s in at.selectbox)
+    assert any((b.key or "").startswith("style-") for b in at.button)
+
+
 def test_draft_mode_mock_simulator_runs():
     """The persona-based mock draft simulator runs a full draft without error
     and produces a pick log."""
