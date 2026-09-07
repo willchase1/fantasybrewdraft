@@ -29,7 +29,7 @@ def _load_optional_json(path):
 
 
 def load_data(
-    ingredients_path: str = "ingredients_2025.csv",
+    ingredients_path: str = "ingredients_2026.csv",
     style_matrix_path: str = "style_matrix.json",
     scarcity_path: str = "ingredient_scarcity.json",
     opponent_model_path: str = "opponent_model.json",
