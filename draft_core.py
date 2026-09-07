@@ -1078,6 +1078,9 @@ AXIS_LABELS = {
     "esters": "estery/fruity", "phenols": "phenolic (clove/pepper)",
     "clean_neutral": "clean", "malt_forward": "malt-forward", "dry_crisp": "dry/crisp",
     "haze_bio": "hazy/juicy", "sour": "sour", "lager_sulfur": "lager sulfur",
+    # adjuncts (shared axes above, plus)
+    "melon": "melon", "spice_warm": "warm spice", "pepper_heat": "chili heat",
+    "vanilla": "vanilla", "boozy": "boozy/rich",
 }
 PROFILE_NOTE_THRESHOLD = 2   # axis score (0-3) needed to be mentioned
 PROFILE_NOTE_MAX = 3         # projector-legible
@@ -1094,6 +1097,12 @@ _MALT_FORM = {
 _ORIGIN = {"US": "USA", "DE": "Germany", "UK": "UK", "NZ": "New Zealand", "AU": "Australia",
            "CZ": "Czechia", "FR": "France", "SI": "Slovenia", "BE": "Belgium", "none": None}
 _FLOC = {1: "low flocculation", 2: "medium flocculation", 3: "high flocculation"}
+_ADJUNCT_TYPE = {"fruit": "Fruit", "citrus_peel": "Citrus", "sugar": "Sugar", "syrup": "Syrup",
+                 "spice": "Spice", "herb": "Herb", "roast": "Roast", "wood": "Wood",
+                 "nut": "Nut", "dairy_sugar": "Lactose", "fungus": "Fungus",
+                 "extract": "Flavoring", "other": "Adjunct"}
+_ADJUNCT_USAGE = {"flavoring": "flavoring", "fermentable": "fermentable",
+                  "both": "fermentable + flavor"}
 
 
 def _profile_key(name):
@@ -1173,6 +1182,9 @@ _MALT_AXES = ["bready", "biscuit_toast", "caramel_toffee", "dark_fruit", "roast_
               "melanoidin_rich"]
 _YEAST_AXES = ["esters", "phenols", "clean_neutral", "malt_forward", "dry_crisp", "haze_bio",
                "sour", "lager_sulfur"]
+_ADJUNCT_AXES = ["citrus", "berry", "stone_fruit", "tropical", "melon", "floral", "herbal",
+                 "spice_warm", "pepper_heat", "vanilla", "roast_coffee_choc", "coconut_cream",
+                 "woody", "earthy", "sour", "sweet", "dark_fruit", "boozy"]
 
 
 def _lookup_row(ing, table):
@@ -1193,9 +1205,10 @@ def ingredient_profile(ing, descriptors, board_category=None):
     tried. Returns ``None`` when no descriptor row matches (adjuncts, or a
     new sheet ingredient without a row -- see ``validate_descriptors``).
 
-    Hop   -> {kind, usage, alpha, origin, notes, summary}
-    Malt  -> {kind, color, form, grain, origin, diastatic, notes, summary}
-    Yeast -> {kind, type, attenuation, temp, flocculation, family, notes, summary}
+    Hop     -> {kind, usage, alpha, origin, notes, summary}
+    Malt    -> {kind, color, form, grain, origin, diastatic, notes, summary}
+    Yeast   -> {kind, type, attenuation, temp, flocculation, family, notes, summary}
+    Adjunct -> {kind, type, form, usage, fermentable, origin, notes, summary}
 
     Every value is a display string (units included) or a list of strings;
     ``summary`` is the one-liner the modal shows. Nothing here feeds scoring.
@@ -1236,6 +1249,17 @@ def ingredient_profile(ing, descriptors, board_category=None):
         return {"kind": "Yeast", "type": ytype, "attenuation": attenuation, "temp": temp,
                 "flocculation": floc, "family": family, "notes": notes,
                 "summary": join([ytype, attenuation, temp, ", ".join(notes)])}
+
+    if cat == "Adjunct" or "usage" in row:
+        typ = _ADJUNCT_TYPE.get(str(row.get("type", "")).lower(), "Adjunct")
+        usage = _ADJUNCT_USAGE.get(str(row.get("usage", "")).lower(), None)
+        ferment = bool(int(_num(row.get("fermentable"), 0) or 0))
+        form = str(row.get("form", "")).replace("_", " ") or None
+        origin = _ORIGIN.get(row.get("origin"), row.get("origin"))
+        notes = _profile_notes(row, _ADJUNCT_AXES)
+        return {"kind": "Adjunct", "type": typ, "form": form, "usage": usage,
+                "fermentable": ferment, "origin": origin, "notes": notes,
+                "summary": join([typ, usage, ", ".join(notes)])}
 
     # malt / grain / extract
     color = _num(row.get("color_L"))

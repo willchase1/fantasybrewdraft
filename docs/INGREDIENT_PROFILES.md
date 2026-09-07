@@ -17,17 +17,28 @@ feeds `Pick Value`.
 | Hop   | `usage` (Bittering / Aroma / Dual-purpose), `alpha` (range, or midpoint if no range), `origin`, `notes` | `Dual-purpose · 4.5–7% AA · citrus, floral` |
 | Malt  | `color` (°L ≈ SRM), `form` (base malt (pale) / crystal/caramel malt / roasted malt / flaked grain / extract …), `grain`, `origin`, `diastatic` (bool), `notes` | `140 °L · crystal/caramel malt · dark fruit, caramel/toffee, sweet` |
 | Yeast | `type` (Ale / Lager / Hybrid / Kveik), `attenuation`, `temp` (range °F), `flocculation`, `family`, `notes` | `Ale · 78% attenuation · 68–85 °F · phenolic (clove/pepper), dry/crisp, estery/fruity` |
+| Adjunct | `type` (Fruit / Citrus / Sugar / Syrup / Spice / Herb / Roast / Wood / Nut / Lactose / Fungus / Flavoring), `form`, `usage` (fermentable / flavoring / fermentable + flavor), `fermentable` (bool), `origin`, `notes` | `Fruit · fermentable + flavor · tropical fruit, sweet` · `Sugar · fermentable` · `Lactose · flavoring · sweet` · `Oak · Wood · flavoring · woody, vanilla, boozy/rich` |
 
 `summary` is the one-liner for the modal / board rows; the individual fields
 are there if the UI wants a table. Returns `None` for anything without a
-descriptor row (all adjuncts today — `data/adjunct_descriptors.csv` is the
-natural extension).
+descriptor row. As of the adjunct table (`data/adjunct_descriptors.csv`, 51
+rows) every 2026 and 2025 sheet ingredient has a profile.
 
 ## Data
 
 `league_config.json` → `descriptor_files` names the tables per category
-(malt covers Base Malt + Specialty); `config.DEFAULTS` mirrors it. The same
-tables drive `scripts/build_similarity.py`. Two **display-only** column pairs
+(malt covers Base Malt + Specialty; adjuncts have their own); `config.DEFAULTS`
+mirrors it. The hop / yeast / malt tables also drive
+`scripts/build_similarity.py`; the adjunct table is **display-only** — it is
+not in that script's `SPECS`, so adjunct substitution/similarity is a future
+round (a `substitutes` column would live there).
+
+Adjunct schema: `name, type, form, usage, fermentable, origin, <axes>`. `usage`
+is the branch marker (no other table has it). `fermentable` is 1 for sugars,
+syrups and fruit, 0 for lactose (unfermentable; body and sweetness) and all
+flavorings. Axes reuse the shared keys (`citrus, berry, stone_fruit, tropical,
+floral, herbal, earthy, woody, sweet, dark_fruit, roast_coffee_choc,
+coconut_cream, sour`) plus `melon, spice_warm, pepper_heat, vanilla, boozy`. Two **display-only** column pairs
 were added for the profiles — `alpha_lo`/`alpha_hi` (hops) and
 `temp_lo_f`/`temp_hi_f` (yeasts), typical published ranges — and are listed
 in the similarity generator's `ignore` list, so the similarity files are
@@ -67,6 +78,12 @@ Brewer's-judgement choices worth knowing:
   `lager_sulfur` → "lager sulfur", `clean_neutral` → "clean". A yeast can
   legitimately show both "estery/fruity" and "clean" (Voss: orange esters,
   otherwise neutral).
+* Adjuncts: `spice_warm` → "warm spice", `pepper_heat` → "chili heat",
+  `boozy` → "boozy/rich". Neutral sugars (dextrose, cane, clear candi, rice
+  syrup) score `boozy` 1 on purpose so their summary is just
+  `Sugar · fermentable` — "boozy/rich" would read as a flavor, and their real
+  effect is drying the beer out and raising ABV. Dark candi, molasses and oak
+  earn it.
 * Threshold 2 rather than 1 keeps notes to what a brewer would actually
   taste; a 1 is "a hint of", which is noise on a projector.
 

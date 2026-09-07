@@ -37,6 +37,13 @@ SYN = {
     },
 }
 SYN["Specialty"] = SYN["Base Malt"]
+SYN["Adjunct"] = {
+    "Testberry": {"name": "Testberry", "type": "fruit", "form": "puree", "usage": "both",
+                  "fermentable": "1", "origin": "none", "berry": "3", "sour": "2",
+                  "sweet": "2", "citrus": "1", "boozy": "0"},
+    "Lac-Test": {"name": "Lac-Test", "type": "dairy_sugar", "form": "powder",
+                 "usage": "flavoring", "fermentable": "0", "origin": "none", "sweet": "3"},
+}
 
 
 def test_hop_profile():
@@ -70,10 +77,21 @@ def test_malt_profile():
     assert p["summary"] == "40 °L · crystal/caramel malt · caramel/toffee, dark fruit, sweet"
 
 
+def test_adjunct_profile():
+    p = dc.ingredient_profile("Testberry", SYN, "Adjunct")
+    assert p["kind"] == "Adjunct" and p["type"] == "Fruit" and p["form"] == "puree"
+    assert p["usage"] == "fermentable + flavor" and p["fermentable"] is True
+    assert p["notes"] == ["berry", "sour", "sweet"]  # 3 first, then 2s in axis order
+    assert p["summary"] == "Fruit · fermentable + flavor · berry, sour, sweet"
+    q = dc.ingredient_profile("lac-test", SYN)   # no hint: found via the usage column
+    assert q["type"] == "Lactose" and q["usage"] == "flavoring" and q["fermentable"] is False
+    assert q["summary"] == "Lactose · flavoring · sweet"
+
+
 def test_unknown_ingredient_and_empty_tables():
     assert dc.ingredient_profile("Nope", SYN) is None
     assert dc.ingredient_profile("Testra", {}) is None
-    assert dc.ingredient_profile("Testra", SYN, "Adjunct") is not None  # unknown hint -> search all
+    assert dc.ingredient_profile("Testra", SYN, "Extra") is not None  # unknown hint -> search all
 
 
 def test_notes_threshold_and_cap():
@@ -95,7 +113,7 @@ def descriptors():
 
 
 def test_load_descriptors_shape(descriptors):
-    assert set(descriptors) == {"Hop", "Yeast", "Base Malt", "Specialty"}
+    assert set(descriptors) == {"Hop", "Yeast", "Base Malt", "Specialty", "Adjunct"}
     assert descriptors["Base Malt"] is descriptors["Specialty"]  # shared file, loaded once
     assert "Citra" in descriptors["Hop"] and "Maris Otter" in descriptors["Base Malt"]
     assert DEFAULTS["descriptor_files"]["Hop"] == "data/hop_descriptors.csv"
@@ -108,14 +126,14 @@ def test_load_descriptors_missing_file_is_empty(tmp_path):
 
 
 @pytest.mark.parametrize("sheet", ["ingredients_2026.csv", "ingredients_2025.csv"])
-def test_every_sheet_hop_malt_yeast_has_a_profile(descriptors, sheet):
+def test_every_sheet_ingredient_has_a_profile(descriptors, sheet):
     """The coverage gate: a new-ingredient year cannot silently lose profiles."""
     df = pd.read_csv(os.path.join(HERE, sheet))
     cfg = load_league_config(os.path.join(HERE, "league_config.json"))
     gaps = dc.validate_descriptors(df, descriptors, cfg["category_aliases"])
     assert gaps == {}, gaps
     for col, cat in [("Hop", "Hop"), ("Yeast", "Yeast"), ("Base Malt", "Base Malt"),
-                     ("Specialty Malt", "Specialty")]:
+                     ("Specialty Malt", "Specialty"), ("Adjunct", "Adjunct")]:
         for name in df[col].dropna():
             p = dc.ingredient_profile(name, descriptors, cat)
             assert p and p["summary"], name
@@ -140,4 +158,8 @@ def test_real_profiles_read_sensibly(descriptors):
     choc = dc.ingredient_profile("Chocolate Malt", descriptors, "Specialty")
     assert choc["color"] == "350 °L" and choc["form"] == "roasted malt"
     assert choc["notes"][0] == "roast/coffee/chocolate"
-    assert dc.ingredient_profile("Honey", descriptors, "Adjunct") is None  # no adjunct table
+    honey = dc.ingredient_profile("Honey", descriptors, "Adjunct")
+    assert honey and honey["summary"] == "Syrup · fermentable + flavor · floral, sweet"
+    lactose = dc.ingredient_profile("Milk Sugar (Lactose)", descriptors, "Adjunct")
+    assert lactose["type"] == "Lactose" and lactose["fermentable"] is False
+    assert dc.ingredient_profile("corn sugar", descriptors)["summary"] == "Sugar · fermentable"

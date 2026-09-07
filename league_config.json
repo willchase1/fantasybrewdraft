@@ -50,7 +50,8 @@
     "Hop": "data/hop_descriptors.csv",
     "Yeast": "data/yeast_descriptors.csv",
     "Base Malt": "data/malt_descriptors.csv",
-    "Specialty": "data/malt_descriptors.csv"
+    "Specialty": "data/malt_descriptors.csv",
+    "Adjunct": "data/adjunct_descriptors.csv"
   },
   "similarity_files": {
     "Hop": "hop_similarity.json",

@@ -1,0 +1,52 @@
+name,type,form,usage,fermentable,origin,citrus,berry,stone_fruit,tropical,melon,floral,herbal,spice_warm,pepper_heat,vanilla,roast_coffee_choc,coconut_cream,woody,earthy,sour,sweet,dark_fruit,boozy
+Cane (or Beet) Sugar,sugar,granulated,fermentable,1,none,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1
+Corn Sugar (Dextrose),sugar,granulated,fermentable,1,none,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1
+"Candi Sugar, Amber",sugar,rocks/syrup,both,1,BE,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,1,2
+"Candi Sugar, Clear",sugar,rocks/syrup,fermentable,1,BE,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1
+"Candi Sugar, Dark",sugar,rocks/syrup,both,1,BE,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,2,3,2
+Brown Sugar,sugar,granulated,both,1,none,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,1,1
+Turbinado Sugar,sugar,granulated,both,1,none,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,1,1
+Demerara Sugar,sugar,granulated,both,1,none,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,1,1
+Molasses,syrup,syrup,both,1,none,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,2,3,1
+Maple Syrup,syrup,syrup,both,1,none,0,0,0,0,0,0,0,1,0,1,0,0,2,0,0,2,0,1
+Honey,syrup,liquid,both,1,none,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,2,0,1
+"Rice Syrup (added ""syrup"" to differentiate from flaked rice in specialty malts)",syrup,syrup,fermentable,1,none,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1
+Lyle's Golden Syrup (Invert Sugar),syrup,syrup,both,1,UK,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,1
+Brewer's Crystals,sugar,granulated,fermentable,1,none,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1
+Milk Sugar (Lactose),dairy_sugar,powder,flavoring,0,none,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,3,0,0
+Apricots,fruit,puree,both,1,none,0,0,3,0,0,1,0,0,0,0,0,0,0,0,1,2,0,0
+Mango,fruit,puree,both,1,none,0,0,1,3,0,0,0,0,0,0,0,0,0,0,0,2,0,0
+Blackberries,fruit,puree,both,1,none,0,3,0,0,0,0,0,0,0,0,0,0,0,1,1,1,2,0
+Blueberries,fruit,puree,both,1,none,0,3,0,0,0,1,0,0,0,0,0,0,0,0,1,2,0,0
+Cherries,fruit,puree,both,1,none,0,1,2,0,0,0,0,0,0,0,0,0,0,0,2,1,3,0
+Nectarines,fruit,puree,both,1,none,0,0,3,0,0,1,0,0,0,0,0,0,0,0,1,2,0,0
+Peaches,fruit,puree,both,1,none,0,0,3,0,0,1,0,0,0,0,0,0,0,0,0,2,0,0
+Pineapple,fruit,puree,both,1,none,1,0,0,3,0,0,0,0,0,0,0,0,0,0,2,2,0,0
+Raspberries,fruit,puree,both,1,none,0,3,0,0,0,1,0,0,0,0,0,0,0,0,2,1,0,0
+Passion Fruit,fruit,puree,both,1,none,1,0,0,3,0,1,0,0,0,0,0,0,0,0,2,1,0,0
+Dragon Fruit,fruit,puree,both,1,none,0,1,0,2,1,0,0,0,0,0,0,0,0,0,0,1,0,0
+Guava,fruit,puree,both,1,none,0,0,0,3,0,1,0,0,0,0,0,0,0,0,1,2,0,0
+Watermelon,fruit,juice,both,1,none,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,2,0,0
+Cranberries,fruit,whole/puree,both,1,none,0,2,0,0,0,0,0,0,0,0,0,0,0,0,3,0,1,0
+Pumpkin,fruit,puree,both,1,none,0,0,0,0,0,0,0,2,0,0,0,0,0,2,0,1,0,0
+Lime Peel/Juice,citrus_peel,zest/juice,flavoring,0,none,3,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0
+Lemon Peel/Juice,citrus_peel,zest/juice,flavoring,0,none,3,0,0,0,0,1,0,0,0,0,0,0,0,0,2,0,0,0
+Grapefruit Peel,citrus_peel,zest,flavoring,0,none,3,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0
+"Orange Peel, Bitter",citrus_peel,dried peel,flavoring,0,none,3,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0
+"Orange Peel, Sweet",citrus_peel,dried peel,flavoring,0,none,3,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0
+Coriander,spice,seed,flavoring,0,none,2,0,0,0,0,1,1,2,0,0,0,0,0,0,0,0,0,0
+Cinnamon,spice,stick/ground,flavoring,0,none,0,0,0,0,0,0,0,3,0,0,0,0,1,0,0,1,0,0
+Ginger,spice,fresh root,flavoring,0,none,1,0,0,0,0,0,0,2,2,0,0,0,0,0,0,0,0,0
+Grains of Paradise,spice,seed,flavoring,0,none,1,0,0,0,0,1,0,2,2,0,0,0,1,0,0,0,0,0
+Juniper,herb,berry/branch,flavoring,0,none,1,0,0,0,0,0,2,1,0,0,0,0,2,1,0,0,0,0
+Licorice,herb,root/stick,flavoring,0,none,0,0,0,0,0,0,2,1,0,0,0,0,0,1,0,2,0,0
+Chili Peppers,spice,fresh/dried,flavoring,0,none,0,0,0,1,0,0,0,0,3,0,0,0,0,1,0,0,0,0
+Vanilla (extract or bean),spice,bean/extract,flavoring,0,none,0,0,0,0,0,1,0,0,0,3,0,1,0,0,0,2,0,0
+Cocoa Nibs/Beans,roast,nib,flavoring,0,none,0,0,0,0,0,0,0,0,0,0,3,0,0,1,0,0,1,0
+Coffee (Liquid or Beans),roast,bean/cold brew,flavoring,0,none,0,0,0,0,0,0,0,0,0,0,3,0,0,1,0,0,0,0
+Coconut,nut,toasted flakes,flavoring,0,none,0,0,0,1,0,0,0,0,0,0,0,3,0,0,0,2,0,0
+Oak,wood,cubes/spiral,flavoring,0,none,0,0,0,0,0,0,0,0,0,2,0,0,3,0,0,0,0,2
+Mushrooms,fungus,dried,flavoring,0,none,0,0,0,0,0,0,0,0,0,0,0,0,1,3,0,0,0,0
+Truffles,fungus,shaved/oil,flavoring,0,none,0,0,0,0,0,0,0,0,0,0,0,0,1,3,0,0,0,0
+"Abstrax terpenes (any variety of Quantum, Omni, or BrewGas)",extract,liquid,flavoring,0,US,2,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Abstrax SkyFarm fruit flavors (any),extract,liquid,flavoring,0,US,1,2,1,2,0,0,0,0,0,0,0,0,0,0,0,1,0,0

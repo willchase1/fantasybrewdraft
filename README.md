@@ -75,10 +75,11 @@ a `--check` mode that fails if the committed output has drifted.
   in `league_config.json`).
 
 ### Optional Files
-- **`data/{hop,yeast,malt}_descriptors.csv`** - Curated spec + flavor-axis
-  tables (`league_config.json` → `descriptor_files`). Source for the
-  similarity files *and* for `draft_core.ingredient_profile()`, the
-  pre-formatted spec sheet the ingredient modal shows (`docs/INGREDIENT_PROFILES.md`).
+- **`data/{hop,yeast,malt,adjunct}_descriptors.csv`** - Curated spec + flavor-axis
+  tables (`league_config.json` → `descriptor_files`). Hop/yeast/malt are the
+  source for the similarity files; all four feed
+  `draft_core.ingredient_profile()`, the pre-formatted spec sheet the
+  ingredient modal shows (`docs/INGREDIENT_PROFILES.md`).
 - **`hop_similarity.json`, `yeast_similarity.json`, `malt_similarity.json`**
   (+ `*_matrix.csv`) - Ingredient similarity from the curated descriptor tables
   in `data/`, built by `scripts/build_similarity.py`. Named in
@@ -222,9 +223,9 @@ Team summaries, draft results, and export functionality (CSV/Excel).
 2. Add the ingredient to the right style families (and, if it is a sensible
    fallback for other styles, their `build_workable()` lists) in
    `scripts/build_style_matrix.py`, then `python scripts/build_style_matrix.py`
-3. Add a descriptor row in `data/<hop|yeast|malt>_descriptors.csv` (specs +
-   0–3 flavor axes; also feeds the modal's profile), then
-   `python scripts/build_similarity.py`
+3. Add a descriptor row in `data/<hop|yeast|malt|adjunct>_descriptors.csv`
+   (specs + 0–3 flavor axes; feeds the modal's profile), then
+   `python scripts/build_similarity.py` (hop/yeast/malt only)
 4. `python scripts/build_scarcity_baseline.py`; run `pytest` (the data-integrity
    tests enforce that every style ingredient is on the sheet and vice versa)
 5. Refresh data using "Reload data files" button
